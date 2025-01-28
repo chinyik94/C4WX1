@@ -1,0 +1,6 @@
+@C4WX1.API_HostAddress = http://localhost:5224
+
+GET {{C4WX1.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

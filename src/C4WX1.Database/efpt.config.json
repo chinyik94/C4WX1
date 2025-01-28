@@ -1,0 +1,2564 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "THCC_C4WDEVContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "C4WX1.Database",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "public.Activity",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.AMTQuestion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.APIAccessKey",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.APIMonitor",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.APIOrder",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.APIOrderAllergy",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.APIOrderDiagnosis",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.APIOrderMedication",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.APIOrderTask",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.APNSNotification",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Activity",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_AMTQuestion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_APIAccessKey",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_APIMonitor",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_APIOrder",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_APIOrderAllergy",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_APIOrderDiagnosis",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_APIOrderMedication",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_APIOrderTask",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_APNSNotification",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingInvoice",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingInvoiceConsumable",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingInvoiceService",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingPackage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingPackageInformation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingPackageRequest",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingProposal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingProposalService",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_BillingService",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Branch",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_C4WDeviceToken",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlan",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanDetail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanStatus",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanSub",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanSubActivity",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanSubCPGoals",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanSubGoal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanSubIntervention",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanSubProblemList",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CarePlanSubProblemListGoal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CareReport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CareReportConfig",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CareReportRehabilitation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CareReportSocialSupport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CareReportSystemInfo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Chat",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Code",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CodeType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_CPGoals",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Diagnosis",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_DischargeSummaryReport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_DischargeSummaryReportAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Disease",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_DiseaseInfo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_DiseaseSubInfo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_DiseaseVitalSignType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EBASDEPQuestion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Enquiry",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EnquiryAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EnquiryConfig",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EnquiryEscPerson",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EnquiryLanguage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EnquirySCM",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EnquiryServicesRequired",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Event",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EventUser",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_EventUserLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ExternalDoctor",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_GeoFencing",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Group",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_GroupRole",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ICAWoundCare",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_InitialCareAssessment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_InitialCareAssessmentAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_InitialCareAssessmentSpecialInstruction",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_InitialCareAssessmentVitalSign",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Intervention",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Item",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ItemStock",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_LoginDevice",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_MailSettings",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_MedicationVitalSignType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_MobileAppVersioning",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_MultiDisciplinaryMeeting",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_MultiDisciplinaryMeetingDetail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_NotificationChat",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_NotificationEvent",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_NotificationMessageTemplates",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Notifications",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_NotificationTask",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_NotificationVitalSignDetails",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_NutritionTask",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_NutritionTaskReference",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Otp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Package",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Patient",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientAccessLine",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientAdditionalInfo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientAMT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientAMTAnswer",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientBradenScale",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientClinician",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientDrugAllergy",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientEBASDEP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientEBASDEPAnswer",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientFamilyHistory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientGCS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientImmunisation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientLanguage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientMBI",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientMedicalHistory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientMedication",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientMedicationConsume",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientMedicationConsumeAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientMedicationSupply",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientMFS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientMMSE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientNutrition",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientOtherAllergy",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientPackage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientProfile",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientRAF",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientReferral",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientReferralService",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientSocialSupport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientSpecialIndicator",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWound",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundDraft",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundReviewBy",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundVisit",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundVisitAppearance",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundVisitCleansingItem",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundVisitClinician",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundVisitTreatment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundVisitTreatmentList",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_PatientWoundVisitTreatmentObjectives",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ProblemList",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ProblemListGoal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Receipt",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ReceiptForInvoice",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_RegisteredDevice",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_RegisteredDeviceV2",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ResidentAssessmentCategory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Role",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ScheduledTasks",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ServiceForBilling",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ServiceForBillingCost",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_ServiceSkillset",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_SyncPatientLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_SyncWoundLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_SyncWoundVisitLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_SysConfig",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_SystemForDisease",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Task",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TaskFileAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TaskServicesRequired",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TaskSpecificDate",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TaskUser",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TaskUserLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TaskUserLogAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TD_WoundAssessmentFactor",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TeleconsultationRecording",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TeleconsultationReport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Thresholds",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TreatmentListItem",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_TreatmentTOL",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Types",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UploadFile",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserAddress",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserBranch",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserCategory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserCategoryRole",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserLanguage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserOrganization",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserRole",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_Users",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserSkillset",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_UserUserType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_VitalSignDetails",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_VitalSignRelationships",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_VitalSigns",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_VitalSignTypes",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_VitalSignTypeThreshold",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Audit_WoundConsolidatedEmail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.AuditTrail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingInvoice",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingInvoiceConsumable",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingInvoiceService",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingPackage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingPackageInformation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingPackageRequest",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingProposal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingProposalService",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.BillingService",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Branch",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.C4WDeviceToken",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.C4WImage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlan",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanDetail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanStatus",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanSub",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanSubActivity",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanSubCPGoals",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanSubGoal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanSubIntervention",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanSubProblemList",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CarePlanSubProblemListGoal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CareReport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CareReportConfig",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CareReportRehabilitation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CareReportSocialSupport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CareReportSystemInfo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Chat",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Code",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CodeType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.CPGoals",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Diagnosis",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.DischargeSummaryReport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.DischargeSummaryReportAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Disease",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.DiseaseInfo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.DiseaseSubInfo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.DiseaseVitalSignType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EBASDEPQuestion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EmailLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Enquiry",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EnquiryAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EnquiryConfig",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EnquiryEscPerson",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EnquiryLanguage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EnquirySCM",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EnquiryServicesRequired",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ErrorLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Event",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EventUser",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EventUserLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ExternalDoctor",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Facility",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.GeoFencing",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Group",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.GroupRole",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ICAWoundCare",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.InitialCareAssessment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.InitialCareAssessmentAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.InitialCareAssessmentSpecialInstruction",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.InitialCareAssessmentVitalSign",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.IntegrationApiRequestLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Intervention",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Item",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ItemStock",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Language",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.LoginDevice",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.MailSettings",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.MailSettingsMsgToUserType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.MedicationVitalSignType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.MobileAppVersioning",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.MultiDisciplinaryMeeting",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.MultiDisciplinaryMeetingDetail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.NotificationChat",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.NotificationEvent",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.NotificationMessageTemplates",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Notifications",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.NotificationTask",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.NotificationVitalSignDetails",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.NutritionTask",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.NutritionTaskReference",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Otp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Package",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Patient",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientAccessLine",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientAdditionalInfo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientAMT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientAMTAnswer",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientBradenScale",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientClinician",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientDrugAllergy",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientEBASDEP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientEBASDEPAnswer",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientFacility",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientFamilyHistory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientGCS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientImmunisation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientLanguage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientMBI",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientMedicalHistory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientMedication",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientMedicationConsume",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientMedicationConsumeAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientMedicationSupply",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientMFS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientMMSE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientNutrition",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientOtherAllergy",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientPackage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientProfile",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientRAF",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientReferral",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientReferralService",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientSocialSupport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientSpecialIndicator",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWound",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundDraft",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundDraftTreatmentList",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundDraftTreatmentObjectives",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundReviewBy",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundVisit",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundVisitAppearance",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundVisitCleansingItem",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundVisitClinician",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundVisitTreatment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundVisitTreatmentList",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.PatientWoundVisitTreatmentObjectives",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ProblemList",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ProblemListGoal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Receipt",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ReceiptForInvoice",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.RecentView",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.RegisteredDevice",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.RegisteredDeviceV2",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ResidentAssessmentCategory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Resource",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Role",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ScheduledTasks",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ServiceForBilling",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ServiceForBillingCost",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.ServiceSkillset",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.SyncPatientLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.SyncWoundLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.SyncWoundVisitLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.SysConfig",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.SystemForDisease",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Task",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TaskFileAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TaskServicesRequired",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TaskSpecificDate",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TaskUser",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TaskUserLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TaskUserLogAttachment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TD_WoundAssessmentFactor",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TeleconsultationRecording",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TeleconsultationReport",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Thresholds",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TreatmentListItem",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TreatmentTOL",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Types",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UploadFile",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserAddress",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserBranch",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserCategory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserCategoryFacility",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserCategoryParentChild",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserCategoryRole",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserLanguage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserOrganization",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserRole",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Users",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserSkillset",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UserUserType",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.UUIDLog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.VitalSignDetails",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.VitalSignRelationships",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.VitalSigns",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.VitalSignTypes",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.VitalSignTypeThreshold",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.WoundConsolidatedEmail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.WoundUserCategoryParentChild",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.vw_AmtAssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_AmtCarePlanSetup",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_AssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_BradenScaleAssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_BradenScaleCarePlanSetup",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_CarePlanSetup",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_CarePlanSystemDisease",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_DiseaseCarePlanSetup",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_Doctors",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_EbasDepAssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_FalangaScores",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_FalangaScores_WoundDraft",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_GcsAssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_MbiAssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_MedicalHistoryCarePlanSetup",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_MfsAssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_MmseAssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_NursingDiagnosesCarePlanSetup",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_OralCarePlanSetup",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_PatientAllLatestVitalSigns",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_PatientBilling",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_PatientDisease",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_PatientLatestVitalSigns",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_PatientWound",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_PatientWoundImageDownload",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_PushScores",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_RafAssessmentDue",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_RafCarePlanSetup",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_Teleconsultation",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.vw_UserRoles",
+         "ObjectType": 3
+      },
+      {
+         "Name": "public.fn_calculateAge",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanAccessPatient",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanAccessPatientDashboard",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanAccessPatientForIca",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanAccessUserCategory",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanAccessUserDashboard",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteActivity",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteBranch",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteCarePlanSubGoal",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteCodetable",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteCPGoals",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteDisease",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteDiseaseSubinfo",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteExternalDoctor",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteIntervention",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteNutritionReference",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteProblemList",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_CanDeleteSystemForDisease",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_ConvertYYYYMMDDHHMMSS",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_getwoundinfectionstatus_wounddraft",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_HasDuplicateDiseaseName",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_IsWoundAssessmentCompleted",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_RecurrenceDayValueFromBits",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_RecurrenceMonthDayOccurrence",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_RecurrenceMonthlyDays",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_RecurrenceNearestMonthDay",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_RecurrenceWeeklyDays",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpAddVitalSignThresholdDefaultIfEmpty",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpCreatePatient",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpCreatePatientWound",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpDeleteTaskWithEmptyStatus",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpGetNotificationAnalysis",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpGetNotificationAnalysis_Count",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpGetNotificationAnalysis_CountUnread",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpGetNotificationAnalysis_List",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_spGetPatientList",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_spGetPatientListAPI",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_spGetPushScore",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpGetWoundInfectionStatus",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpGetWoundInfectionStatusDetails",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpInsertAlertNotification",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpInsertAlertNotificationBatch",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpIsConflictUserTask",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_Split",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpPostTaskRecurrenceData",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpRptActualVsTarget",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpRptProductivity",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpRptVisitDetail",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpRptVisitSummary",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpUpdateCodeTableResource",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_SpUpdateTreatmentListItemStatus",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.fn_VitalSignScore",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Activity_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_AMTQuestion_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_APIAccessKey_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_APIMonitor_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_APIOrder_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_APIOrderAllergy_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_APIOrderDiagnosis_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_APIOrderMedication_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_APIOrderTask_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_APNSNotification_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingInvoice_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingInvoiceConsumable_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingInvoiceService_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingPackage_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingPackageInformation_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingPackageRequest_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingProposal_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingProposalService_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_BillingService_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Branch_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_C4WDeviceToken_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlan_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanDetail_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanStatus_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanSub_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanSubActivity_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanSubCPGoals_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanSubGoal_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanSubIntervention_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanSubProblemList_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CarePlanSubProblemListGoal_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CareReport_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CareReportConfig_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CareReportRehabilitation_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CareReportSocialSupport_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CareReportSystemInfo_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Chat_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Code_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CodeType_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_CPGoals_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Diagnosis_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_DischargeSummaryReport_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_DischargeSummaryReportAttachment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Disease_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_DiseaseInfo_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_DiseaseSubInfo_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_DiseaseVitalSignType_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EBASDEPQuestion_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Enquiry_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EnquiryAttachment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EnquiryConfig_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EnquiryEscPerson_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EnquiryLanguage_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EnquirySCM_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EnquiryServicesRequired_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Event_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EventUser_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_EventUserLog_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ExternalDoctor_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_GeoFencing_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Group_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_GroupRole_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ICAWoundCare_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_InitialCareAssessment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_InitialCareAssessmentAttachment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_InitialCareAssessmentSpecialInstruction_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_InitialCareAssessmentVitalSign_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Intervention_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Item_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ItemStock_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_LoginDevice_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_MailSettings_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_MedicationVitalSignType_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_MobileAppVersioning_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_MultiDisciplinaryMeeting_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_MultiDisciplinaryMeetingDetail_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_NotificationChat_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_NotificationEvent_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_NotificationMessageTemplates_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Notifications_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_NotificationTask_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_NotificationVitalSignDetails_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_NutritionTask_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_NutritionTaskReference_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Otp_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Package_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Patient_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientAccessLine_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientAdditionalInfo_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientAMT_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientAMTAnswer_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientAttachment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientBradenScale_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientClinician_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientDrugAllergy_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientEBASDEP_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientEBASDEPAnswer_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientFamilyHistory_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientGCS_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientImmunisation_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientLanguage_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientMBI_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientMedicalHistory_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientMedication_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientMedicationConsume_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientMedicationConsumeAttachment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientMedicationSupply_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientMFS_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientMMSE_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientNutrition_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientOtherAllergy_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientPackage_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientProfile_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientRAF_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientReferral_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientReferralService_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientSocialSupport_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientSpecialIndicator_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWound_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundDraft_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundReviewBy_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundVisit_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundVisitAppearance_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundVisitCleansingItem_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundVisitClinician_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundVisitTreatment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundVisitTreatmentList_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_PatientWoundVisitTreatmentObjectives_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ProblemList_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ProblemListGoal_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Receipt_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ReceiptForInvoice_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_RegisteredDevice_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_RegisteredDeviceV2_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ResidentAssessmentCategory_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Role_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ScheduledTasks_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ServiceForBilling_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ServiceForBillingCost_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_ServiceSkillset_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_SyncPatientLog_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_SyncWoundLog_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_SyncWoundVisitLog_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_SysConfig_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_SystemForDisease_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Task_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TaskFileAttachment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TaskServicesRequired_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TaskSpecificDate_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TaskUser_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TaskUserLog_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TaskUserLogAttachment_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TD_WoundAssessmentFactor_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TeleconsultationRecording_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TeleconsultationReport_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Thresholds_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TreatmentListItem_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_TreatmentTOL_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Types_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UploadFile_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserAddress_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserBranch_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserCategory_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserCategoryRole_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserLanguage_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserOrganization_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserRole_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_Users_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserSkillset_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserType_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_UserUserType_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_VitalSignDetails_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_VitalSignRelationships_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_VitalSigns_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_VitalSignTypes_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_VitalSignTypeThreshold_func",
+         "ObjectType": 1
+      },
+      {
+         "Name": "public.tr_WoundConsolidatedEmail_func",
+         "ObjectType": 1
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": true,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}
