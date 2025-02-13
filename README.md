@@ -14,3 +14,4 @@ This Web Service aims to resolve the following:
 - FastEndpoints
 - Serilog
 - Dapper
+- CsvHelper

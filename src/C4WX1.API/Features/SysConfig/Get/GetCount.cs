@@ -1,5 +1,4 @@
-﻿using C4WX1.API.Features.Activity.Get;
-using C4WX1.Database.Models;
+﻿using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
@@ -10,9 +9,9 @@ namespace C4WX1.API.Features.SysConfig.Get
     {
         public GetSysConfigCountSummary()
         {
-            Summary = $"Get {nameof(SysConfig)} count";
-            Description = $"Get the number of {nameof(SysConfig)}s";
-            Responses[200] = $"Number of {nameof(SysConfig)}s retrieved successfully";
+            Summary = "Get SysConfig Count";
+            Description = "Get the number of SysConfigs";
+            Responses[200] = "Number of SysConfigs retrieved successfully";
         }
     }
 

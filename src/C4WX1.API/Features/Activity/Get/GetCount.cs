@@ -1,6 +1,7 @@
 ﻿using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.Activity.Get
 {
@@ -8,7 +9,7 @@ namespace C4WX1.API.Features.Activity.Get
     {
         public GetActivityCountSummary()
         {
-            Summary = $"Get {nameof(Activity)} count";
+            Summary = "Get Activity Count";
             Description = "Get the number of activities";
             Responses[200] = "Number of activities retrieved successfully";
         }
@@ -23,7 +24,7 @@ namespace C4WX1.API.Features.Activity.Get
             Summary(new GetActivityCountSummary());
         }
 
-        public override async System.Threading.Tasks.Task HandleAsync(CancellationToken ct)
+        public override async Task HandleAsync(CancellationToken ct)
         {
             var count = await dbContext.Activity.CountAsync(a => !a.IsDeleted, ct);
             await SendAsync(count, cancellation: ct);

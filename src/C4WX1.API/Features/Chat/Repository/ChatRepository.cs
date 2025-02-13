@@ -1,11 +1,12 @@
-﻿using Dapper;
+﻿using C4WX1.API.Features.Chat.Dtos;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
-namespace C4WX1.API.Features.Chat.Shared
+namespace C4WX1.API.Features.Chat.Repository
 {
     public class ChatRepository(
-        IConfiguration configuration): IChatRepository
+        IConfiguration configuration) : IChatRepository
     {
         private const string GetLatestListSql =
             """
@@ -151,12 +152,12 @@ namespace C4WX1.API.Features.Chat.Shared
             LIMIT @count;
             """;
 
-        public async Task<IEnumerable<ChatDto>> GetLatestListAsync(GetChatListRequestDto req, CancellationToken ct = default)
+        public async Task<IEnumerable<ChatDto>> GetLatestListAsync(GetChatListDto req, CancellationToken ct = default)
         {
             using var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection"));
             var latestDtoDict = new Dictionary<int, ChatDto>();
             await connection
-                .QueryAsync<ChatDto, ChatUserDto, ChatPatientDto, ChatDto, ChatDto> (
+                .QueryAsync<ChatDto, ChatUserDto, ChatPatientDto, ChatDto, ChatDto>(
                     GetLatestListSql,
                     (chat, chatUser, chatPatient, comment) =>
                     {
@@ -214,7 +215,7 @@ namespace C4WX1.API.Features.Chat.Shared
             return latestDtos;
         }
 
-        public async Task<IEnumerable<ChatDto>> GetPreviousListAsync(GetChatListRequestDto req, CancellationToken ct = default)
+        public async Task<IEnumerable<ChatDto>> GetPreviousListAsync(GetChatListDto req, CancellationToken ct = default)
         {
             using var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection"));
             var previousDtoDict = new Dictionary<int, ChatDto>();

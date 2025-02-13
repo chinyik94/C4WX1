@@ -56,7 +56,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("AMTQuestionId");
 
-                    b.ToTable("AMTQuestion", t =>
+                    b.ToTable("AMTQuestion", null, t =>
                         {
                             t.HasTrigger("tr_AMTQuestion");
                         });
@@ -101,7 +101,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex(new[] { "TokenCode", "ExpiryDate", "CreatedDate" }, "idx_APIAccessKey3");
 
-                    b.ToTable("APIAccessKey", t =>
+                    b.ToTable("APIAccessKey", null, t =>
                         {
                             t.HasTrigger("tr_APIAccessKey");
                         });
@@ -132,7 +132,7 @@ namespace C4WX1.Database.Migrations
                     b.HasKey("MonitorID")
                         .HasName("PK_MonitorID");
 
-                    b.ToTable("APIMonitor", t =>
+                    b.ToTable("APIMonitor", null, t =>
                         {
                             t.HasTrigger("tr_APIMonitor");
                         });
@@ -221,7 +221,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("APIOrderId");
 
-                    b.ToTable("APIOrder", t =>
+                    b.ToTable("APIOrder", null, t =>
                         {
                             t.HasTrigger("tr_APIOrder");
                         });
@@ -271,7 +271,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("APIOrderID_FK");
 
-                    b.ToTable("APIOrderAllergy", t =>
+                    b.ToTable("APIOrderAllergy", null, t =>
                         {
                             t.HasTrigger("tr_APIOrderAllergy");
                         });
@@ -315,7 +315,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("APIOrderID_FK");
 
-                    b.ToTable("APIOrderDiagnosis", t =>
+                    b.ToTable("APIOrderDiagnosis", null, t =>
                         {
                             t.HasTrigger("tr_APIOrderDiagnosis");
                         });
@@ -398,7 +398,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("APIOrderID_FK");
 
-                    b.ToTable("APIOrderMedication", t =>
+                    b.ToTable("APIOrderMedication", null, t =>
                         {
                             t.HasTrigger("tr_APIOrderMedication");
                         });
@@ -471,7 +471,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("APIOrderID_FK");
 
-                    b.ToTable("APIOrderTask", t =>
+                    b.ToTable("APIOrderTask", null, t =>
                         {
                             t.HasTrigger("tr_APIOrderTask");
                         });
@@ -507,7 +507,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("APNSNotification", t =>
+                    b.ToTable("APNSNotification", null, t =>
                         {
                             t.HasTrigger("tr_APNSNotification");
                         });
@@ -555,7 +555,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ProblemListID_FK");
 
-                    b.ToTable("Activity", t =>
+                    b.ToTable("Activity", null, t =>
                         {
                             t.HasTrigger("tr_Activity");
                         });
@@ -601,7 +601,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CreatedBy_FK");
 
-                    b.ToTable("AuditTrail");
+                    b.ToTable("AuditTrail", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_AMTQuestion", b =>
@@ -641,7 +641,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_AMTQuestion");
+                    b.ToTable("Audit_AMTQuestion", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_APIAccessKey", b =>
@@ -680,7 +680,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_APIAccessKey");
+                    b.ToTable("Audit_APIAccessKey", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_APIMonitor", b =>
@@ -711,7 +711,7 @@ namespace C4WX1.Database.Migrations
                         .HasColumnType("character(36)")
                         .IsFixedLength();
 
-                    b.ToTable("Audit_APIMonitor");
+                    b.ToTable("Audit_APIMonitor", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_APIOrder", b =>
@@ -801,7 +801,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_APIOrder");
+                    b.ToTable("Audit_APIOrder", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_APIOrderAllergy", b =>
@@ -850,7 +850,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_APIOrderAllergy");
+                    b.ToTable("Audit_APIOrderAllergy", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_APIOrderDiagnosis", b =>
@@ -893,7 +893,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_APIOrderDiagnosis");
+                    b.ToTable("Audit_APIOrderDiagnosis", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_APIOrderMedication", b =>
@@ -975,7 +975,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_APIOrderMedication");
+                    b.ToTable("Audit_APIOrderMedication", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_APIOrderTask", b =>
@@ -1047,7 +1047,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("TaskTypeID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_APIOrderTask");
+                    b.ToTable("Audit_APIOrderTask", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_APNSNotification", b =>
@@ -1084,7 +1084,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_APNSNotification");
+                    b.ToTable("Audit_APNSNotification", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Activity", b =>
@@ -1129,7 +1129,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("ProblemListID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Activity");
+                    b.ToTable("Audit_Activity", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingInvoice", b =>
@@ -1223,7 +1223,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<short>("Version")
                         .HasColumnType("smallint");
 
-                    b.ToTable("Audit_BillingInvoice");
+                    b.ToTable("Audit_BillingInvoice", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingInvoiceConsumable", b =>
@@ -1267,7 +1267,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.ToTable("Audit_BillingInvoiceConsumable");
+                    b.ToTable("Audit_BillingInvoiceConsumable", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingInvoiceService", b =>
@@ -1317,7 +1317,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal>("UnitCost")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.ToTable("Audit_BillingInvoiceService");
+                    b.ToTable("Audit_BillingInvoiceService", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingPackage", b =>
@@ -1384,7 +1384,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("Validity")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_BillingPackage");
+                    b.ToTable("Audit_BillingPackage", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingPackageInformation", b =>
@@ -1422,7 +1422,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("Session")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_BillingPackageInformation");
+                    b.ToTable("Audit_BillingPackageInformation", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingPackageRequest", b =>
@@ -1523,7 +1523,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal>("TotalPackageAmount")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.ToTable("Audit_BillingPackageRequest");
+                    b.ToTable("Audit_BillingPackageRequest", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingProposal", b =>
@@ -1609,7 +1609,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<short>("Version")
                         .HasColumnType("smallint");
 
-                    b.ToTable("Audit_BillingProposal");
+                    b.ToTable("Audit_BillingProposal", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingProposalService", b =>
@@ -1679,7 +1679,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("Visit")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_BillingProposalService");
+                    b.ToTable("Audit_BillingProposalService", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_BillingService", b =>
@@ -1735,7 +1735,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<bool>("Weekend")
                         .HasColumnType("boolean");
 
-                    b.ToTable("Audit_BillingService");
+                    b.ToTable("Audit_BillingService", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Branch", b =>
@@ -1804,7 +1804,7 @@ namespace C4WX1.Database.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(10)");
 
-                    b.ToTable("Audit_Branch");
+                    b.ToTable("Audit_Branch", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_C4WDeviceToken", b =>
@@ -1852,7 +1852,7 @@ namespace C4WX1.Database.Migrations
                         .IsUnicode(false)
                         .HasColumnType("text");
 
-                    b.ToTable("Audit_C4WDeviceToken");
+                    b.ToTable("Audit_C4WDeviceToken", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CPGoals", b =>
@@ -1892,7 +1892,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_CPGoals");
+                    b.ToTable("Audit_CPGoals", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlan", b =>
@@ -1957,7 +1957,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.ToTable("Audit_CarePlan");
+                    b.ToTable("Audit_CarePlan", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanDetail", b =>
@@ -1986,7 +1986,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("SystemID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CarePlanDetail");
+                    b.ToTable("Audit_CarePlanDetail", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanStatus", b =>
@@ -2024,7 +2024,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_CarePlanStatus");
+                    b.ToTable("Audit_CarePlanStatus", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanSub", b =>
@@ -2081,7 +2081,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("SubCarePlanName")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CarePlanSub");
+                    b.ToTable("Audit_CarePlanSub", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanSubActivity", b =>
@@ -2101,7 +2101,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("CarePlanSubID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CarePlanSubActivity");
+                    b.ToTable("Audit_CarePlanSubActivity", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanSubCPGoals", b =>
@@ -2121,7 +2121,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("CarePlanSubID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CarePlanSubCPGoals");
+                    b.ToTable("Audit_CarePlanSubCPGoals", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanSubGoal", b =>
@@ -2175,7 +2175,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("ScoreTypeID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CarePlanSubGoal");
+                    b.ToTable("Audit_CarePlanSubGoal", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanSubIntervention", b =>
@@ -2195,7 +2195,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("InterventionID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CarePlanSubIntervention");
+                    b.ToTable("Audit_CarePlanSubIntervention", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanSubProblemList", b =>
@@ -2235,7 +2235,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("TypeOfGoal")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CarePlanSubProblemList");
+                    b.ToTable("Audit_CarePlanSubProblemList", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CarePlanSubProblemListGoal", b =>
@@ -2277,7 +2277,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("ScoreTypeID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CarePlanSubProblemListGoal");
+                    b.ToTable("Audit_CarePlanSubProblemListGoal", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CareReport", b =>
@@ -2694,7 +2694,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CareReport");
+                    b.ToTable("Audit_CareReport", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CareReportConfig", b =>
@@ -2737,7 +2737,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserTypeID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CareReportConfig");
+                    b.ToTable("Audit_CareReportConfig", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CareReportRehabilitation", b =>
@@ -2846,7 +2846,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
 
-                    b.ToTable("Audit_CareReportRehabilitation");
+                    b.ToTable("Audit_CareReportRehabilitation", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CareReportSocialSupport", b =>
@@ -2884,7 +2884,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientSocialSupportID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CareReportSocialSupport");
+                    b.ToTable("Audit_CareReportSocialSupport", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CareReportSystemInfo", b =>
@@ -2951,7 +2951,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("SecondaryDoctorUserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_CareReportSystemInfo");
+                    b.ToTable("Audit_CareReportSystemInfo", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Chat", b =>
@@ -2998,7 +2998,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("PatientID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Chat");
+                    b.ToTable("Audit_Chat", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Code", b =>
@@ -3084,7 +3084,7 @@ namespace C4WX1.Database.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(15)");
 
-                    b.ToTable("Audit_Code");
+                    b.ToTable("Audit_Code", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_CodeType", b =>
@@ -3124,7 +3124,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_CodeType");
+                    b.ToTable("Audit_CodeType", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Diagnosis", b =>
@@ -3161,7 +3161,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_Diagnosis");
+                    b.ToTable("Audit_Diagnosis", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_DischargeSummaryReport", b =>
@@ -3217,7 +3217,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VisitedBy_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_DischargeSummaryReport");
+                    b.ToTable("Audit_DischargeSummaryReport", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_DischargeSummaryReportAttachment", b =>
@@ -3261,7 +3261,7 @@ namespace C4WX1.Database.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(50)");
 
-                    b.ToTable("Audit_DischargeSummaryReportAttachment");
+                    b.ToTable("Audit_DischargeSummaryReportAttachment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Disease", b =>
@@ -3317,7 +3317,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("SystemID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Disease");
+                    b.ToTable("Audit_Disease", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_DiseaseInfo", b =>
@@ -3357,7 +3357,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_DiseaseInfo");
+                    b.ToTable("Audit_DiseaseInfo", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_DiseaseSubInfo", b =>
@@ -3397,7 +3397,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_DiseaseSubInfo");
+                    b.ToTable("Audit_DiseaseSubInfo", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_DiseaseVitalSignType", b =>
@@ -3435,7 +3435,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("VitalSignTypeID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_DiseaseVitalSignType");
+                    b.ToTable("Audit_DiseaseVitalSignType", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EBASDEPQuestion", b =>
@@ -3475,7 +3475,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_EBASDEPQuestion");
+                    b.ToTable("Audit_EBASDEPQuestion", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Enquiry", b =>
@@ -3610,7 +3610,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserOrganizationID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Enquiry");
+                    b.ToTable("Audit_Enquiry", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EnquiryAttachment", b =>
@@ -3658,7 +3658,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.ToTable("Audit_EnquiryAttachment");
+                    b.ToTable("Audit_EnquiryAttachment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EnquiryConfig", b =>
@@ -3708,7 +3708,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("SCMID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_EnquiryConfig");
+                    b.ToTable("Audit_EnquiryConfig", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EnquiryEscPerson", b =>
@@ -3728,7 +3728,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_EnquiryEscPerson");
+                    b.ToTable("Audit_EnquiryEscPerson", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EnquiryLanguage", b =>
@@ -3748,7 +3748,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("EnquiryID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_EnquiryLanguage");
+                    b.ToTable("Audit_EnquiryLanguage", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EnquirySCM", b =>
@@ -3768,7 +3768,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_EnquirySCM");
+                    b.ToTable("Audit_EnquirySCM", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EnquiryServicesRequired", b =>
@@ -3788,7 +3788,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("EnquiryID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_EnquiryServicesRequired");
+                    b.ToTable("Audit_EnquiryServicesRequired", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Event", b =>
@@ -3843,7 +3843,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserCategory_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Event");
+                    b.ToTable("Audit_Event", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EventUser", b =>
@@ -3886,7 +3886,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
-                    b.ToTable("Audit_EventUser");
+                    b.ToTable("Audit_EventUser", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_EventUserLog", b =>
@@ -3930,7 +3930,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_EventUserLog");
+                    b.ToTable("Audit_EventUserLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ExternalDoctor", b =>
@@ -3981,7 +3981,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_ExternalDoctor");
+                    b.ToTable("Audit_ExternalDoctor", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_GeoFencing", b =>
@@ -4024,7 +4024,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_GeoFencing");
+                    b.ToTable("Audit_GeoFencing", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Group", b =>
@@ -4061,7 +4061,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_Group");
+                    b.ToTable("Audit_Group", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_GroupRole", b =>
@@ -4086,7 +4086,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("RoleId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_GroupRole");
+                    b.ToTable("Audit_GroupRole", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ICAWoundCare", b =>
@@ -4106,7 +4106,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("InitialCareAssessmentID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_ICAWoundCare");
+                    b.ToTable("Audit_ICAWoundCare", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_InitialCareAssessment", b =>
@@ -4788,7 +4788,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("painOnSetDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_InitialCareAssessment");
+                    b.ToTable("Audit_InitialCareAssessment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_InitialCareAssessmentAttachment", b =>
@@ -4838,7 +4838,7 @@ namespace C4WX1.Database.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(50)");
 
-                    b.ToTable("Audit_InitialCareAssessmentAttachment");
+                    b.ToTable("Audit_InitialCareAssessmentAttachment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_InitialCareAssessmentSpecialInstruction", b =>
@@ -4887,7 +4887,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_InitialCareAssessmentSpecialInstruction");
+                    b.ToTable("Audit_InitialCareAssessmentSpecialInstruction", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_InitialCareAssessmentVitalSign", b =>
@@ -4910,7 +4910,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("VitalSignID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_InitialCareAssessmentVitalSign");
+                    b.ToTable("Audit_InitialCareAssessmentVitalSign", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Intervention", b =>
@@ -4950,7 +4950,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_Intervention");
+                    b.ToTable("Audit_Intervention", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Item", b =>
@@ -5002,7 +5002,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.ToTable("Audit_Item");
+                    b.ToTable("Audit_Item", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ItemStock", b =>
@@ -5040,7 +5040,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_ItemStock");
+                    b.ToTable("Audit_ItemStock", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_LoginDevice", b =>
@@ -5073,7 +5073,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_LoginDevice");
+                    b.ToTable("Audit_LoginDevice", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_MailSettings", b =>
@@ -5131,7 +5131,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_MailSettings");
+                    b.ToTable("Audit_MailSettings", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_MedicationVitalSignType", b =>
@@ -5169,7 +5169,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("VitalSignTypeID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_MedicationVitalSignType");
+                    b.ToTable("Audit_MedicationVitalSignType", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_MobileAppVersioning", b =>
@@ -5217,7 +5217,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.ToTable("Audit_MobileAppVersioning");
+                    b.ToTable("Audit_MobileAppVersioning", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_MultiDisciplinaryMeeting", b =>
@@ -5263,7 +5263,7 @@ namespace C4WX1.Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.ToTable("Audit_MultiDisciplinaryMeeting");
+                    b.ToTable("Audit_MultiDisciplinaryMeeting", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_MultiDisciplinaryMeetingDetail", b =>
@@ -5312,7 +5312,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("MultiDisciplinaryMeetingID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_MultiDisciplinaryMeetingDetail");
+                    b.ToTable("Audit_MultiDisciplinaryMeetingDetail", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_NotificationChat", b =>
@@ -5341,7 +5341,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("NotificationId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_NotificationChat");
+                    b.ToTable("Audit_NotificationChat", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_NotificationEvent", b =>
@@ -5370,7 +5370,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("NotificationId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_NotificationEvent");
+                    b.ToTable("Audit_NotificationEvent", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_NotificationMessageTemplates", b =>
@@ -5407,7 +5407,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("updatedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_NotificationMessageTemplates");
+                    b.ToTable("Audit_NotificationMessageTemplates", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_NotificationTask", b =>
@@ -5436,7 +5436,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TaskID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_NotificationTask");
+                    b.ToTable("Audit_NotificationTask", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_NotificationVitalSignDetails", b =>
@@ -5465,7 +5465,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("updatedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_NotificationVitalSignDetails");
+                    b.ToTable("Audit_NotificationVitalSignDetails", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Notifications", b =>
@@ -5505,7 +5505,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("userId")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Notifications");
+                    b.ToTable("Audit_Notifications", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_NutritionTask", b =>
@@ -5594,7 +5594,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
-                    b.ToTable("Audit_NutritionTask");
+                    b.ToTable("Audit_NutritionTask", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_NutritionTaskReference", b =>
@@ -5637,7 +5637,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("Value")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_NutritionTaskReference");
+                    b.ToTable("Audit_NutritionTaskReference", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Otp", b =>
@@ -5665,7 +5665,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Otp");
+                    b.ToTable("Audit_Otp", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Package", b =>
@@ -5705,7 +5705,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_Package");
+                    b.ToTable("Audit_Package", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Patient", b =>
@@ -5972,7 +5972,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.ToTable("Audit_Patient");
+                    b.ToTable("Audit_Patient", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientAMT", b =>
@@ -6023,7 +6023,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignDetailId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientAMT");
+                    b.ToTable("Audit_PatientAMT", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientAMTAnswer", b =>
@@ -6046,7 +6046,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientAMTID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientAMTAnswer");
+                    b.ToTable("Audit_PatientAMTAnswer", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientAccessLine", b =>
@@ -6112,7 +6112,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientAccessLineID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientAccessLine");
+                    b.ToTable("Audit_PatientAccessLine", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientAdditionalInfo", b =>
@@ -6232,7 +6232,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientAdditionalInfoID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientAdditionalInfo");
+                    b.ToTable("Audit_PatientAdditionalInfo", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientAttachment", b =>
@@ -6279,7 +6279,7 @@ namespace C4WX1.Database.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(50)");
 
-                    b.ToTable("Audit_PatientAttachment");
+                    b.ToTable("Audit_PatientAttachment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientBradenScale", b =>
@@ -6338,7 +6338,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignDetailID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientBradenScale");
+                    b.ToTable("Audit_PatientBradenScale", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientClinician", b =>
@@ -6388,7 +6388,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientClinician");
+                    b.ToTable("Audit_PatientClinician", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientDrugAllergy", b =>
@@ -6435,7 +6435,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("ReferID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientDrugAllergy");
+                    b.ToTable("Audit_PatientDrugAllergy", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientEBASDEP", b =>
@@ -6486,7 +6486,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignDetailId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientEBASDEP");
+                    b.ToTable("Audit_PatientEBASDEP", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientEBASDEPAnswer", b =>
@@ -6509,7 +6509,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientEBASDEPID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientEBASDEPAnswer");
+                    b.ToTable("Audit_PatientEBASDEPAnswer", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientFamilyHistory", b =>
@@ -6563,7 +6563,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("YearDiagnose")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientFamilyHistory");
+                    b.ToTable("Audit_PatientFamilyHistory", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientGCS", b =>
@@ -6613,7 +6613,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignDetailID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientGCS");
+                    b.ToTable("Audit_PatientGCS", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientImmunisation", b =>
@@ -6665,7 +6665,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("text");
 
-                    b.ToTable("Audit_PatientImmunisation");
+                    b.ToTable("Audit_PatientImmunisation", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientLanguage", b =>
@@ -6685,7 +6685,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientLanguage");
+                    b.ToTable("Audit_PatientLanguage", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientMBI", b =>
@@ -6756,7 +6756,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignDetailID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientMBI");
+                    b.ToTable("Audit_PatientMBI", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientMFS", b =>
@@ -6815,7 +6815,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignDetailID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientMFS");
+                    b.ToTable("Audit_PatientMFS", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientMMSE", b =>
@@ -6916,7 +6916,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignDetailID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientMMSE");
+                    b.ToTable("Audit_PatientMMSE", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientMedicalHistory", b =>
@@ -6960,7 +6960,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientMedicalHistoryID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientMedicalHistory");
+                    b.ToTable("Audit_PatientMedicalHistory", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientMedication", b =>
@@ -7002,7 +7002,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<bool?>("SelfAdminister")
                         .HasColumnType("boolean");
 
-                    b.ToTable("Audit_PatientMedication");
+                    b.ToTable("Audit_PatientMedication", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientMedicationConsume", b =>
@@ -7113,7 +7113,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_PatientMedicationConsume");
+                    b.ToTable("Audit_PatientMedicationConsume", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientMedicationConsumeAttachment", b =>
@@ -7160,7 +7160,7 @@ namespace C4WX1.Database.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(50)");
 
-                    b.ToTable("Audit_PatientMedicationConsumeAttachment");
+                    b.ToTable("Audit_PatientMedicationConsumeAttachment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientMedicationSupply", b =>
@@ -7180,7 +7180,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("SupplyID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientMedicationSupply");
+                    b.ToTable("Audit_PatientMedicationSupply", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientNutrition", b =>
@@ -7291,7 +7291,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal?>("WaterPerDay")
                         .HasColumnType("decimal(4, 0)");
 
-                    b.ToTable("Audit_PatientNutrition");
+                    b.ToTable("Audit_PatientNutrition", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientOtherAllergy", b =>
@@ -7341,7 +7341,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("ReferID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientOtherAllergy");
+                    b.ToTable("Audit_PatientOtherAllergy", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientPackage", b =>
@@ -7361,7 +7361,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientPackage");
+                    b.ToTable("Audit_PatientPackage", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientProfile", b =>
@@ -7451,7 +7451,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_PatientProfile");
+                    b.ToTable("Audit_PatientProfile", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientRAF", b =>
@@ -7528,7 +7528,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("VitalSignDetailID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientRAF");
+                    b.ToTable("Audit_PatientRAF", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientReferral", b =>
@@ -7597,7 +7597,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("SecondaryNurseID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientReferral");
+                    b.ToTable("Audit_PatientReferral", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientReferralService", b =>
@@ -7617,7 +7617,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("ServiceID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientReferralService");
+                    b.ToTable("Audit_PatientReferralService", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientSocialSupport", b =>
@@ -7705,7 +7705,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_PatientSocialSupport");
+                    b.ToTable("Audit_PatientSocialSupport", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientSpecialIndicator", b =>
@@ -7725,7 +7725,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientSpecialIndicator");
+                    b.ToTable("Audit_PatientSpecialIndicator", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWound", b =>
@@ -7813,7 +7813,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("WoundStatusID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientWound");
+                    b.ToTable("Audit_PatientWound", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundDraft", b =>
@@ -8097,7 +8097,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal?>("woundOverlaysImageDistance")
                         .HasColumnType("decimal(5, 2)");
 
-                    b.ToTable("Audit_PatientWoundDraft");
+                    b.ToTable("Audit_PatientWoundDraft", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundReviewBy", b =>
@@ -8141,7 +8141,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientWoundReviewBy");
+                    b.ToTable("Audit_PatientWoundReviewBy", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundVisit", b =>
@@ -8576,7 +8576,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal?>("woundOverlaysImageDistance")
                         .HasColumnType("decimal(5, 2)");
 
-                    b.ToTable("Audit_PatientWoundVisit");
+                    b.ToTable("Audit_PatientWoundVisit", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundVisitAppearance", b =>
@@ -8596,7 +8596,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientWoundVisitID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientWoundVisitAppearance");
+                    b.ToTable("Audit_PatientWoundVisitAppearance", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundVisitCleansingItem", b =>
@@ -8616,7 +8616,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientWoundVisitID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientWoundVisitCleansingItem");
+                    b.ToTable("Audit_PatientWoundVisitCleansingItem", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundVisitClinician", b =>
@@ -8657,7 +8657,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientWoundVisitClinician");
+                    b.ToTable("Audit_PatientWoundVisitClinician", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundVisitTreatment", b =>
@@ -8701,7 +8701,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientWoundVisitTreatment");
+                    b.ToTable("Audit_PatientWoundVisitTreatment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundVisitTreatmentList", b =>
@@ -8743,7 +8743,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TListItemID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientWoundVisitTreatmentList");
+                    b.ToTable("Audit_PatientWoundVisitTreatmentList", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_PatientWoundVisitTreatmentObjectives", b =>
@@ -8763,7 +8763,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("PatientWoundVisitID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_PatientWoundVisitTreatmentObjectives");
+                    b.ToTable("Audit_PatientWoundVisitTreatmentObjectives", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ProblemList", b =>
@@ -8809,7 +8809,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("TypeOfGoal")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_ProblemList");
+                    b.ToTable("Audit_ProblemList", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ProblemListGoal", b =>
@@ -8842,7 +8842,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("ScoreTypeID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_ProblemListGoal");
+                    b.ToTable("Audit_ProblemListGoal", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Receipt", b =>
@@ -8925,7 +8925,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal>("TotalAmt")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.ToTable("Audit_Receipt");
+                    b.ToTable("Audit_Receipt", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ReceiptForInvoice", b =>
@@ -8951,7 +8951,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("ReceiptID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_ReceiptForInvoice");
+                    b.ToTable("Audit_ReceiptForInvoice", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_RegisteredDevice", b =>
@@ -8981,7 +8981,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_RegisteredDevice");
+                    b.ToTable("Audit_RegisteredDevice", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_RegisteredDeviceV2", b =>
@@ -9059,7 +9059,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.ToTable("Audit_RegisteredDeviceV2");
+                    b.ToTable("Audit_RegisteredDeviceV2", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ResidentAssessmentCategory", b =>
@@ -9131,7 +9131,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("ResidentAssessmentCategoryID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_ResidentAssessmentCategory");
+                    b.ToTable("Audit_ResidentAssessmentCategory", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Role", b =>
@@ -9177,7 +9177,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Role");
+                    b.ToTable("Audit_Role", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ScheduledTasks", b =>
@@ -9246,7 +9246,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<bool>("Weekday")
                         .HasColumnType("boolean");
 
-                    b.ToTable("Audit_ScheduledTasks");
+                    b.ToTable("Audit_ScheduledTasks", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ServiceForBilling", b =>
@@ -9299,7 +9299,7 @@ namespace C4WX1.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.ToTable("Audit_ServiceForBilling");
+                    b.ToTable("Audit_ServiceForBilling", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ServiceForBillingCost", b =>
@@ -9340,7 +9340,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal>("UnitCost")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.ToTable("Audit_ServiceForBillingCost");
+                    b.ToTable("Audit_ServiceForBillingCost", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_ServiceSkillset", b =>
@@ -9360,7 +9360,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("SkillsetID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_ServiceSkillset");
+                    b.ToTable("Audit_ServiceSkillset", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_SyncPatientLog", b =>
@@ -9398,7 +9398,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<bool>("SyncResult")
                         .HasColumnType("boolean");
 
-                    b.ToTable("Audit_SyncPatientLog");
+                    b.ToTable("Audit_SyncPatientLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_SyncWoundLog", b =>
@@ -9439,7 +9439,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("WoundID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_SyncWoundLog");
+                    b.ToTable("Audit_SyncWoundLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_SyncWoundVisitLog", b =>
@@ -9477,7 +9477,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<bool>("SyncResult")
                         .HasColumnType("boolean");
 
-                    b.ToTable("Audit_SyncWoundVisitLog");
+                    b.ToTable("Audit_SyncWoundVisitLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_SysConfig", b =>
@@ -9512,7 +9512,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_SysConfig");
+                    b.ToTable("Audit_SysConfig", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_SystemForDisease", b =>
@@ -9554,7 +9554,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("SystemID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_SystemForDisease");
+                    b.ToTable("Audit_SystemForDisease", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TD_WoundAssessmentFactor", b =>
@@ -9574,7 +9574,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TD_WoundAssessmentID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TD_WoundAssessmentFactor");
+                    b.ToTable("Audit_TD_WoundAssessmentFactor", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Task", b =>
@@ -9688,7 +9688,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("recurrenceDailyHourly")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Task");
+                    b.ToTable("Audit_Task", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TaskFileAttachment", b =>
@@ -9728,7 +9728,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TaskID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TaskFileAttachment");
+                    b.ToTable("Audit_TaskFileAttachment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TaskServicesRequired", b =>
@@ -9748,7 +9748,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TaskID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TaskServicesRequired");
+                    b.ToTable("Audit_TaskServicesRequired", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TaskSpecificDate", b =>
@@ -9786,7 +9786,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TaskSpecificDateID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TaskSpecificDate");
+                    b.ToTable("Audit_TaskSpecificDate", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TaskUser", b =>
@@ -9830,7 +9830,7 @@ namespace C4WX1.Database.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(20)");
 
-                    b.ToTable("Audit_TaskUser");
+                    b.ToTable("Audit_TaskUser", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TaskUserLog", b =>
@@ -9888,7 +9888,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TaskUserLog");
+                    b.ToTable("Audit_TaskUserLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TaskUserLogAttachment", b =>
@@ -9928,7 +9928,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TaskUserLogID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TaskUserLogAttachment");
+                    b.ToTable("Audit_TaskUserLogAttachment", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TeleconsultationRecording", b =>
@@ -9979,7 +9979,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_TeleconsultationRecording");
+                    b.ToTable("Audit_TeleconsultationRecording", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TeleconsultationReport", b =>
@@ -10029,7 +10029,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TeleReportID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TeleconsultationReport");
+                    b.ToTable("Audit_TeleconsultationReport", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Thresholds", b =>
@@ -10113,7 +10113,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("updatedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_Thresholds");
+                    b.ToTable("Audit_Thresholds", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TreatmentListItem", b =>
@@ -10172,7 +10172,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TListTypeID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TreatmentListItem");
+                    b.ToTable("Audit_TreatmentListItem", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_TreatmentTOL", b =>
@@ -10192,7 +10192,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("TreatmentTOLID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_TreatmentTOL");
+                    b.ToTable("Audit_TreatmentTOL", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Types", b =>
@@ -10229,7 +10229,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("updated")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_Types");
+                    b.ToTable("Audit_Types", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UploadFile", b =>
@@ -10272,7 +10272,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UploadFileId")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UploadFile");
+                    b.ToTable("Audit_UploadFile", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserAddress", b =>
@@ -10324,7 +10324,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserLocationID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserAddress");
+                    b.ToTable("Audit_UserAddress", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserBranch", b =>
@@ -10344,7 +10344,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserBranch");
+                    b.ToTable("Audit_UserBranch", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserCategory", b =>
@@ -10387,7 +10387,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserCategoryOrganizationID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserCategory");
+                    b.ToTable("Audit_UserCategory", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserCategoryRole", b =>
@@ -10411,7 +10411,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserCategoryID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserCategoryRole");
+                    b.ToTable("Audit_UserCategoryRole", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserLanguage", b =>
@@ -10431,7 +10431,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserLanguage");
+                    b.ToTable("Audit_UserLanguage", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserOrganization", b =>
@@ -10451,7 +10451,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserOrganization");
+                    b.ToTable("Audit_UserOrganization", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserRole", b =>
@@ -10476,7 +10476,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserId_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserRole");
+                    b.ToTable("Audit_UserRole", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserSkillset", b =>
@@ -10496,7 +10496,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserSkillset");
+                    b.ToTable("Audit_UserSkillset", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserType", b =>
@@ -10539,7 +10539,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserTypeID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserType");
+                    b.ToTable("Audit_UserType", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_UserUserType", b =>
@@ -10559,7 +10559,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("UserTypeID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_UserUserType");
+                    b.ToTable("Audit_UserUserType", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_Users", b =>
@@ -10718,7 +10718,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserOrganizationID_FK")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_Users");
+                    b.ToTable("Audit_Users", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_VitalSignDetails", b =>
@@ -10747,7 +10747,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("vitalSignTypeId")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_VitalSignDetails");
+                    b.ToTable("Audit_VitalSignDetails", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_VitalSignRelationships", b =>
@@ -10773,7 +10773,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("vitalSignTypeId")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_VitalSignRelationships");
+                    b.ToTable("Audit_VitalSignRelationships", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_VitalSignTypeThreshold", b =>
@@ -10844,7 +10844,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<decimal?>("ews_min_7")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.ToTable("Audit_VitalSignTypeThreshold");
+                    b.ToTable("Audit_VitalSignTypeThreshold", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_VitalSignTypes", b =>
@@ -10881,7 +10881,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("updatedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_VitalSignTypes");
+                    b.ToTable("Audit_VitalSignTypes", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_VitalSigns", b =>
@@ -10924,7 +10924,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<DateTime?>("updatedDate")
                         .HasColumnType("datetime");
 
-                    b.ToTable("Audit_VitalSigns");
+                    b.ToTable("Audit_VitalSigns", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Audit_WoundConsolidatedEmail", b =>
@@ -10965,7 +10965,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int>("WoundConsolidatedEmailID")
                         .HasColumnType("integer");
 
-                    b.ToTable("Audit_WoundConsolidatedEmail");
+                    b.ToTable("Audit_WoundConsolidatedEmail", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.BillingInvoice", b =>
@@ -11065,7 +11065,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("BillingInvoice", t =>
+                    b.ToTable("BillingInvoice", null, t =>
                         {
                             t.HasTrigger("tr_BillingInvoice");
                         });
@@ -11112,7 +11112,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ItemID_FK");
 
-                    b.ToTable("BillingInvoiceConsumable", t =>
+                    b.ToTable("BillingInvoiceConsumable", null, t =>
                         {
                             t.HasTrigger("tr_BillingInvoiceConsumable");
                         });
@@ -11167,7 +11167,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ServiceID_FK");
 
-                    b.ToTable("BillingInvoiceService", t =>
+                    b.ToTable("BillingInvoiceService", null, t =>
                         {
                             t.HasTrigger("tr_BillingInvoiceService");
                         });
@@ -11235,7 +11235,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("BillingServiceID");
 
-                    b.ToTable("BillingPackage", t =>
+                    b.ToTable("BillingPackage", null, t =>
                         {
                             t.HasTrigger("tr_BillingPackage");
                         });
@@ -11269,7 +11269,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("BillingPackageID", "BillingServiceID");
 
-                    b.ToTable("BillingPackageInformation", t =>
+                    b.ToTable("BillingPackageInformation", null, t =>
                         {
                             t.HasTrigger("tr_BillingPackageInformation");
                         });
@@ -11370,7 +11370,7 @@ namespace C4WX1.Database.Migrations
                     b.HasKey("PackageRequestID")
                         .HasName("PK_PackageRequestID");
 
-                    b.ToTable("BillingPackageRequest", t =>
+                    b.ToTable("BillingPackageRequest", null, t =>
                         {
                             t.HasTrigger("tr_BillingPackageRequest");
                         });
@@ -11463,7 +11463,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("BillingProposal", t =>
+                    b.ToTable("BillingProposal", null, t =>
                         {
                             t.HasTrigger("tr_BillingProposal");
                         });
@@ -11536,7 +11536,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ServiceID_FK");
 
-                    b.ToTable("BillingProposalService", t =>
+                    b.ToTable("BillingProposalService", null, t =>
                         {
                             t.HasTrigger("tr_BillingProposalService");
                         });
@@ -11594,7 +11594,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CategoryID_FK");
 
-                    b.ToTable("BillingService", t =>
+                    b.ToTable("BillingService", null, t =>
                         {
                             t.HasTrigger("tr_BillingService");
                         });
@@ -11664,7 +11664,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CurrencyID_FK");
 
-                    b.ToTable("Branch", t =>
+                    b.ToTable("Branch", null, t =>
                         {
                             t.HasTrigger("tr_Branch");
                         });
@@ -11711,7 +11711,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("C4WDeviceTokenId");
 
-                    b.ToTable("C4WDeviceToken", t =>
+                    b.ToTable("C4WDeviceToken", null, t =>
                         {
                             t.HasTrigger("tr_C4WDeviceToken");
                         });
@@ -11774,7 +11774,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("C4WImageId");
 
-                    b.ToTable("C4WImage");
+                    b.ToTable("C4WImage", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.CPGoals", b =>
@@ -11812,7 +11812,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("DiseaseID_FK");
 
-                    b.ToTable("CPGoals", t =>
+                    b.ToTable("CPGoals", null, t =>
                         {
                             t.HasTrigger("tr_CPGoals");
                         });
@@ -11884,7 +11884,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("CarePlan", t =>
+                    b.ToTable("CarePlan", null, t =>
                         {
                             t.HasTrigger("tr_CarePlan");
                         });
@@ -11919,7 +11919,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("SystemID_FK");
 
-                    b.ToTable("CarePlanDetail", t =>
+                    b.ToTable("CarePlanDetail", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanDetail");
                         });
@@ -11954,7 +11954,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("CarePlanStatusID");
 
-                    b.ToTable("CarePlanStatus", t =>
+                    b.ToTable("CarePlanStatus", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanStatus");
                         });
@@ -12015,7 +12015,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CarePlanID_FK");
 
-                    b.ToTable("CarePlanSub", t =>
+                    b.ToTable("CarePlanSub", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanSub");
                         });
@@ -12033,7 +12033,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ActivityID_FK");
 
-                    b.ToTable("CarePlanSubActivity", t =>
+                    b.ToTable("CarePlanSubActivity", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanSubActivity");
                         });
@@ -12051,7 +12051,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CPGoalsID_FK");
 
-                    b.ToTable("CarePlanSubCPGoals", t =>
+                    b.ToTable("CarePlanSubCPGoals", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanSubCPGoals");
                         });
@@ -12108,7 +12108,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("DiseaseID_FK");
 
-                    b.ToTable("CarePlanSubGoal", t =>
+                    b.ToTable("CarePlanSubGoal", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanSubGoal");
                         });
@@ -12126,7 +12126,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("InterventionID_FK");
 
-                    b.ToTable("CarePlanSubIntervention", t =>
+                    b.ToTable("CarePlanSubIntervention", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanSubIntervention");
                         });
@@ -12169,7 +12169,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ProblemListID_FK");
 
-                    b.ToTable("CarePlanSubProblemList", t =>
+                    b.ToTable("CarePlanSubProblemList", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanSubProblemList");
                         });
@@ -12218,7 +12218,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ScoreTypeID");
 
-                    b.ToTable("CarePlanSubProblemListGoal", t =>
+                    b.ToTable("CarePlanSubProblemListGoal", null, t =>
                         {
                             t.HasTrigger("tr_CarePlanSubProblemListGoal");
                         });
@@ -12680,7 +12680,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignID_FK");
 
-                    b.ToTable("CareReport", t =>
+                    b.ToTable("CareReport", null, t =>
                         {
                             t.HasTrigger("tr_CareReport");
                         });
@@ -12724,7 +12724,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserTypeID_FK");
 
-                    b.ToTable("CareReportConfig", t =>
+                    b.ToTable("CareReportConfig", null, t =>
                         {
                             t.HasTrigger("tr_CareReportConfig");
                         });
@@ -12832,7 +12832,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("CareReportRehabilitationID");
 
-                    b.ToTable("CareReportRehabilitation", t =>
+                    b.ToTable("CareReportRehabilitation", null, t =>
                         {
                             t.HasTrigger("tr_CareReportRehabilitation");
                         });
@@ -12873,7 +12873,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientSocialSupportID_FK");
 
-                    b.ToTable("CareReportSocialSupport", t =>
+                    b.ToTable("CareReportSocialSupport", null, t =>
                         {
                             t.HasTrigger("tr_CareReportSocialSupport");
                         });
@@ -12947,7 +12947,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("SecondaryDoctorUserID_FK");
 
-                    b.ToTable("CareReportSystemInfo", t =>
+                    b.ToTable("CareReportSystemInfo", null, t =>
                         {
                             t.HasTrigger("tr_CareReportSystemInfo");
                         });
@@ -12999,7 +12999,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("Chat", t =>
+                    b.ToTable("Chat", null, t =>
                         {
                             t.HasTrigger("tr_Chat");
                         });
@@ -13088,7 +13088,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("MedicationGroupID_FK");
 
-                    b.ToTable("Code", t =>
+                    b.ToTable("Code", null, t =>
                         {
                             t.HasTrigger("tr_Code");
                         });
@@ -13127,7 +13127,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("CodeTypeId");
 
-                    b.ToTable("CodeType", t =>
+                    b.ToTable("CodeType", null, t =>
                         {
                             t.HasTrigger("tr_CodeType");
                         });
@@ -13164,7 +13164,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("DiagnosisID");
 
-                    b.ToTable("Diagnosis", t =>
+                    b.ToTable("Diagnosis", null, t =>
                         {
                             t.HasTrigger("tr_Diagnosis");
                         });
@@ -13219,7 +13219,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("DischargeSummaryReportId");
 
-                    b.ToTable("DischargeSummaryReport", t =>
+                    b.ToTable("DischargeSummaryReport", null, t =>
                         {
                             t.HasTrigger("tr_DischargeSummaryReport");
                         });
@@ -13264,7 +13264,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("DischargeSummaryReportID_FK");
 
-                    b.ToTable("DischargeSummaryReportAttachment", t =>
+                    b.ToTable("DischargeSummaryReportAttachment", null, t =>
                         {
                             t.HasTrigger("tr_DischargeSummaryReportAttachment");
                         });
@@ -13321,7 +13321,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("SystemID_FK");
 
-                    b.ToTable("Disease", t =>
+                    b.ToTable("Disease", null, t =>
                         {
                             t.HasTrigger("tr_Disease");
                         });
@@ -13363,7 +13363,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("DiseaseID_FK");
 
-                    b.ToTable("DiseaseInfo", t =>
+                    b.ToTable("DiseaseInfo", null, t =>
                         {
                             t.HasTrigger("tr_DiseaseInfo");
                         });
@@ -13405,7 +13405,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("DiseaseID_FK");
 
-                    b.ToTable("DiseaseSubInfo", t =>
+                    b.ToTable("DiseaseSubInfo", null, t =>
                         {
                             t.HasTrigger("tr_DiseaseSubInfo");
                         });
@@ -13446,7 +13446,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignTypeID_FK");
 
-                    b.ToTable("DiseaseVitalSignType", t =>
+                    b.ToTable("DiseaseVitalSignType", null, t =>
                         {
                             t.HasTrigger("tr_DiseaseVitalSignType");
                         });
@@ -13485,7 +13485,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("EBASDEPQuestionId");
 
-                    b.ToTable("EBASDEPQuestion", t =>
+                    b.ToTable("EBASDEPQuestion", null, t =>
                         {
                             t.HasTrigger("tr_EBASDEPQuestion");
                         });
@@ -13557,7 +13557,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("EmailLogId");
 
-                    b.ToTable("EmailLog");
+                    b.ToTable("EmailLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Enquiry", b =>
@@ -13704,7 +13704,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserOrganizationID_FK");
 
-                    b.ToTable("Enquiry", t =>
+                    b.ToTable("Enquiry", null, t =>
                         {
                             t.HasTrigger("tr_Enquiry");
                         });
@@ -13753,7 +13753,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("EnquiryID_FK");
 
-                    b.ToTable("EnquiryAttachment", t =>
+                    b.ToTable("EnquiryAttachment", null, t =>
                         {
                             t.HasTrigger("tr_EnquiryAttachment");
                         });
@@ -13806,7 +13806,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("SCMID_FK");
 
-                    b.ToTable("EnquiryConfig", t =>
+                    b.ToTable("EnquiryConfig", null, t =>
                         {
                             t.HasTrigger("tr_EnquiryConfig");
                         });
@@ -13824,7 +13824,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserID_FK");
 
-                    b.ToTable("EnquiryEscPerson", t =>
+                    b.ToTable("EnquiryEscPerson", null, t =>
                         {
                             t.HasTrigger("tr_EnquiryEscPerson");
                         });
@@ -13842,7 +13842,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("EnquiryLanguage", t =>
+                    b.ToTable("EnquiryLanguage", null, t =>
                         {
                             t.HasTrigger("tr_EnquiryLanguage");
                         });
@@ -13860,7 +13860,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserID_FK");
 
-                    b.ToTable("EnquirySCM", t =>
+                    b.ToTable("EnquirySCM", null, t =>
                         {
                             t.HasTrigger("tr_EnquirySCM");
                         });
@@ -13878,7 +13878,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("EnquiryServicesRequired", t =>
+                    b.ToTable("EnquiryServicesRequired", null, t =>
                         {
                             t.HasTrigger("tr_EnquiryServicesRequired");
                         });
@@ -13901,7 +13901,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("ErrorLogId");
 
-                    b.ToTable("ErrorLog");
+                    b.ToTable("ErrorLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Event", b =>
@@ -13960,7 +13960,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserCategory_FK");
 
-                    b.ToTable("Event", t =>
+                    b.ToTable("Event", null, t =>
                         {
                             t.HasTrigger("tr_Event");
                         });
@@ -14006,7 +14006,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserID_FK");
 
-                    b.ToTable("EventUser", t =>
+                    b.ToTable("EventUser", null, t =>
                         {
                             t.HasTrigger("tr_EventUser");
                         });
@@ -14053,7 +14053,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserID_FK");
 
-                    b.ToTable("EventUserLog", t =>
+                    b.ToTable("EventUserLog", null, t =>
                         {
                             t.HasTrigger("tr_EventUserLog");
                         });
@@ -14105,7 +14105,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ClinicianTypeID_FK");
 
-                    b.ToTable("ExternalDoctor", t =>
+                    b.ToTable("ExternalDoctor", null, t =>
                         {
                             t.HasTrigger("tr_ExternalDoctor");
                         });
@@ -14157,7 +14157,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("OrganizationID_FK");
 
-                    b.ToTable("Facility");
+                    b.ToTable("Facility", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.GeoFencing", b =>
@@ -14196,7 +14196,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("GeoFencingId");
 
-                    b.ToTable("GeoFencing", t =>
+                    b.ToTable("GeoFencing", null, t =>
                         {
                             t.HasTrigger("tr_GeoFencing");
                         });
@@ -14233,7 +14233,7 @@ namespace C4WX1.Database.Migrations
                     b.HasKey("GroupId")
                         .HasName("PK_GroupUser");
 
-                    b.ToTable("Group", t =>
+                    b.ToTable("Group", null, t =>
                         {
                             t.HasTrigger("tr_Group");
                         });
@@ -14258,7 +14258,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("RoleId_FK");
 
-                    b.ToTable("GroupRole", t =>
+                    b.ToTable("GroupRole", null, t =>
                         {
                             t.HasTrigger("tr_GroupRole");
                         });
@@ -14276,7 +14276,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("ICAWoundCare", t =>
+                    b.ToTable("ICAWoundCare", null, t =>
                         {
                             t.HasTrigger("tr_ICAWoundCare");
                         });
@@ -14975,7 +14975,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignID_FK");
 
-                    b.ToTable("InitialCareAssessment", t =>
+                    b.ToTable("InitialCareAssessment", null, t =>
                         {
                             t.HasTrigger("tr_InitialCareAssessment");
                         });
@@ -15026,7 +15026,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("InitialCareAssessmentID_FK");
 
-                    b.ToTable("InitialCareAssessmentAttachment", t =>
+                    b.ToTable("InitialCareAssessmentAttachment", null, t =>
                         {
                             t.HasTrigger("tr_InitialCareAssessmentAttachment");
                         });
@@ -15076,7 +15076,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("InitialCareAssessmentID_FK");
 
-                    b.ToTable("InitialCareAssessmentSpecialInstruction", t =>
+                    b.ToTable("InitialCareAssessmentSpecialInstruction", null, t =>
                         {
                             t.HasTrigger("tr_InitialCareAssessmentSpecialInstruction");
                         });
@@ -15095,7 +15095,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("InitialCareAssessmentID_FK", "VitalSignID_FK");
 
-                    b.ToTable("InitialCareAssessmentVitalSign", t =>
+                    b.ToTable("InitialCareAssessmentVitalSign", null, t =>
                         {
                             t.HasTrigger("tr_InitialCareAssessmentVitalSign");
                         });
@@ -15148,7 +15148,7 @@ namespace C4WX1.Database.Migrations
                     b.HasKey("IntegrationApiRequestLogID")
                         .HasName("PK__Integrat__5749CA7CC431EC3C");
 
-                    b.ToTable("IntegrationApiRequestLog");
+                    b.ToTable("IntegrationApiRequestLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Intervention", b =>
@@ -15186,7 +15186,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("DiseaseID_FK");
 
-                    b.ToTable("Intervention", t =>
+                    b.ToTable("Intervention", null, t =>
                         {
                             t.HasTrigger("tr_Intervention");
                         });
@@ -15241,7 +15241,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ItemUnitID_FK");
 
-                    b.ToTable("Item", t =>
+                    b.ToTable("Item", null, t =>
                         {
                             t.HasTrigger("tr_Item");
                         });
@@ -15280,7 +15280,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ItemID_FK");
 
-                    b.ToTable("ItemStock", t =>
+                    b.ToTable("ItemStock", null, t =>
                         {
                             t.HasTrigger("tr_ItemStock");
                         });
@@ -15306,7 +15306,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("LanguageId");
 
-                    b.ToTable("Language");
+                    b.ToTable("Language", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.LoginDevice", b =>
@@ -15335,7 +15335,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("LoginDeviceId");
 
-                    b.ToTable("LoginDevice", t =>
+                    b.ToTable("LoginDevice", null, t =>
                         {
                             t.HasTrigger("tr_LoginDevice");
                         });
@@ -15389,7 +15389,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("MailSettings", t =>
+                    b.ToTable("MailSettings", null, t =>
                         {
                             t.HasTrigger("tr_MailSettings");
                         });
@@ -15407,7 +15407,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserTypeID_FK");
 
-                    b.ToTable("MailSettingsMsgToUserType");
+                    b.ToTable("MailSettingsMsgToUserType", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.MedicationVitalSignType", b =>
@@ -15445,7 +15445,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignTypeID_FK");
 
-                    b.ToTable("MedicationVitalSignType", t =>
+                    b.ToTable("MedicationVitalSignType", null, t =>
                         {
                             t.HasTrigger("tr_MedicationVitalSignType");
                         });
@@ -15496,7 +15496,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ModifiedBy_FK");
 
-                    b.ToTable("MobileAppVersioning", t =>
+                    b.ToTable("MobileAppVersioning", null, t =>
                         {
                             t.HasTrigger("tr_MobileAppVersioning");
                         });
@@ -15543,7 +15543,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("MultiDisciplinaryMeeting", t =>
+                    b.ToTable("MultiDisciplinaryMeeting", null, t =>
                         {
                             t.HasTrigger("tr_MultiDisciplinaryMeeting");
                         });
@@ -15593,7 +15593,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("MultiDisciplinaryMeetingID_FK");
 
-                    b.ToTable("MultiDisciplinaryMeetingDetail", t =>
+                    b.ToTable("MultiDisciplinaryMeetingDetail", null, t =>
                         {
                             t.HasTrigger("tr_MultiDisciplinaryMeetingDetail");
                         });
@@ -15625,7 +15625,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("NotificationId_FK");
 
-                    b.ToTable("NotificationChat", t =>
+                    b.ToTable("NotificationChat", null, t =>
                         {
                             t.HasTrigger("tr_NotificationChat");
                         });
@@ -15657,7 +15657,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("NotificationId_FK");
 
-                    b.ToTable("NotificationEvent", t =>
+                    b.ToTable("NotificationEvent", null, t =>
                         {
                             t.HasTrigger("tr_NotificationEvent");
                         });
@@ -15696,7 +15696,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex(new[] { "notificationgroupCode" }, "idx_NotificationMessageTemplates1");
 
-                    b.ToTable("NotificationMessageTemplates", t =>
+                    b.ToTable("NotificationMessageTemplates", null, t =>
                         {
                             t.HasTrigger("tr_NotificationMessageTemplates");
                         });
@@ -15728,7 +15728,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TaskID_FK");
 
-                    b.ToTable("NotificationTask", t =>
+                    b.ToTable("NotificationTask", null, t =>
                         {
                             t.HasTrigger("tr_NotificationTask");
                         });
@@ -15761,7 +15761,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex(new[] { "notificationId", "VitalSignDetailId" }, "idx_NotificationVitalSignDetails1");
 
-                    b.ToTable("NotificationVitalSignDetails", t =>
+                    b.ToTable("NotificationVitalSignDetails", null, t =>
                         {
                             t.HasTrigger("tr_NotificationVitalSignDetails");
                         });
@@ -15811,7 +15811,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex(new[] { "userId" }, "idx_Notifications3");
 
-                    b.ToTable("Notifications", t =>
+                    b.ToTable("Notifications", null, t =>
                         {
                             t.HasTrigger("tr_Notifications");
                         });
@@ -15909,7 +15909,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TypeReferenceID_FK");
 
-                    b.ToTable("NutritionTask", t =>
+                    b.ToTable("NutritionTask", null, t =>
                         {
                             t.HasTrigger("tr_NutritionTask");
                         });
@@ -15953,7 +15953,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeId_FK");
 
-                    b.ToTable("NutritionTaskReference", t =>
+                    b.ToTable("NutritionTaskReference", null, t =>
                         {
                             t.HasTrigger("tr_NutritionTaskReference");
                         });
@@ -15980,7 +15980,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("OtpId");
 
-                    b.ToTable("Otp", t =>
+                    b.ToTable("Otp", null, t =>
                         {
                             t.HasTrigger("tr_Otp");
                         });
@@ -16020,7 +16020,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("PackageID");
 
-                    b.ToTable("Package", t =>
+                    b.ToTable("Package", null, t =>
                         {
                             t.HasTrigger("tr_Package");
                         });
@@ -16312,7 +16312,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ResidentTypeID_FK");
 
-                    b.ToTable("Patient", t =>
+                    b.ToTable("Patient", null, t =>
                         {
                             t.HasTrigger("tr_Patient");
                         });
@@ -16370,7 +16370,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignDetailId_FK");
 
-                    b.ToTable("PatientAMT", t =>
+                    b.ToTable("PatientAMT", null, t =>
                         {
                             t.HasTrigger("tr_PatientAMT");
                         });
@@ -16391,7 +16391,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("AMTQuestionID_FK");
 
-                    b.ToTable("PatientAMTAnswer", t =>
+                    b.ToTable("PatientAMTAnswer", null, t =>
                         {
                             t.HasTrigger("tr_PatientAMTAnswer");
                         });
@@ -16458,7 +16458,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CareReportID_FK");
 
-                    b.ToTable("PatientAccessLine", t =>
+                    b.ToTable("PatientAccessLine", null, t =>
                         {
                             t.HasTrigger("tr_PatientAccessLine");
                         });
@@ -16577,7 +16577,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("PatientAdditionalInfoID");
 
-                    b.ToTable("PatientAdditionalInfo", t =>
+                    b.ToTable("PatientAdditionalInfo", null, t =>
                         {
                             t.HasTrigger("tr_PatientAdditionalInfo");
                         });
@@ -16625,7 +16625,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("PatientAttachment", t =>
+                    b.ToTable("PatientAttachment", null, t =>
                         {
                             t.HasTrigger("tr_PatientAttachment");
                         });
@@ -16685,7 +16685,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignDetailID_FK");
 
-                    b.ToTable("PatientBradenScale", t =>
+                    b.ToTable("PatientBradenScale", null, t =>
                         {
                             t.HasTrigger("tr_PatientBradenScale");
                         });
@@ -16746,7 +16746,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserID_FK");
 
-                    b.ToTable("PatientClinician", t =>
+                    b.ToTable("PatientClinician", null, t =>
                         {
                             t.HasTrigger("tr_PatientClinician");
                         });
@@ -16803,7 +16803,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ReferID_FK");
 
-                    b.ToTable("PatientDrugAllergy", t =>
+                    b.ToTable("PatientDrugAllergy", null, t =>
                         {
                             t.HasTrigger("tr_PatientDrugAllergy");
                         });
@@ -16861,7 +16861,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignDetailId_FK");
 
-                    b.ToTable("PatientEBASDEP", t =>
+                    b.ToTable("PatientEBASDEP", null, t =>
                         {
                             t.HasTrigger("tr_PatientEBASDEP");
                         });
@@ -16882,7 +16882,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("EBASDEPQuestionID_FK");
 
-                    b.ToTable("PatientEBASDEPAnswer", t =>
+                    b.ToTable("PatientEBASDEPAnswer", null, t =>
                         {
                             t.HasTrigger("tr_PatientEBASDEPAnswer");
                         });
@@ -16900,7 +16900,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("FacilityID_FK");
 
-                    b.ToTable("PatientFacility");
+                    b.ToTable("PatientFacility", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.PatientFamilyHistory", b =>
@@ -16958,7 +16958,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("PatientFamilyHistory", t =>
+                    b.ToTable("PatientFamilyHistory", null, t =>
                         {
                             t.HasTrigger("tr_PatientFamilyHistory");
                         });
@@ -17009,7 +17009,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignDetailID_FK");
 
-                    b.ToTable("PatientGCS", t =>
+                    b.ToTable("PatientGCS", null, t =>
                         {
                             t.HasTrigger("tr_PatientGCS");
                         });
@@ -17062,7 +17062,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("PatientImmunisation", t =>
+                    b.ToTable("PatientImmunisation", null, t =>
                         {
                             t.HasTrigger("tr_PatientImmunisation");
                         });
@@ -17080,7 +17080,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("PatientLanguage", t =>
+                    b.ToTable("PatientLanguage", null, t =>
                         {
                             t.HasTrigger("tr_PatientLanguage");
                         });
@@ -17152,7 +17152,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignDetailID_FK");
 
-                    b.ToTable("PatientMBI", t =>
+                    b.ToTable("PatientMBI", null, t =>
                         {
                             t.HasTrigger("tr_PatientMBI");
                         });
@@ -17212,7 +17212,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignDetailID_FK");
 
-                    b.ToTable("PatientMFS", t =>
+                    b.ToTable("PatientMFS", null, t =>
                         {
                             t.HasTrigger("tr_PatientMFS");
                         });
@@ -17314,7 +17314,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignDetailID_FK");
 
-                    b.ToTable("PatientMMSE", t =>
+                    b.ToTable("PatientMMSE", null, t =>
                         {
                             t.HasTrigger("tr_PatientMMSE");
                         });
@@ -17363,7 +17363,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("PatientMedicalHistory", t =>
+                    b.ToTable("PatientMedicalHistory", null, t =>
                         {
                             t.HasTrigger("tr_PatientMedicalHistory");
                         });
@@ -17405,7 +17405,7 @@ namespace C4WX1.Database.Migrations
                     b.HasKey("PatientMedicationID")
                         .HasName("PK_PatientMedication_1");
 
-                    b.ToTable("PatientMedication", t =>
+                    b.ToTable("PatientMedication", null, t =>
                         {
                             t.HasTrigger("tr_PatientMedication");
                         });
@@ -17537,7 +17537,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("RouteID_FK");
 
-                    b.ToTable("PatientMedicationConsume", t =>
+                    b.ToTable("PatientMedicationConsume", null, t =>
                         {
                             t.HasTrigger("tr_PatientMedicationConsume");
                         });
@@ -17585,7 +17585,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientMedicationConsumeID_FK");
 
-                    b.ToTable("PatientMedicationConsumeAttachment", t =>
+                    b.ToTable("PatientMedicationConsumeAttachment", null, t =>
                         {
                             t.HasTrigger("tr_PatientMedicationConsumeAttachment");
                         });
@@ -17603,7 +17603,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("SupplyID_FK");
 
-                    b.ToTable("PatientMedicationSupply", t =>
+                    b.ToTable("PatientMedicationSupply", null, t =>
                         {
                             t.HasTrigger("tr_PatientMedicationSupply");
                         });
@@ -17713,7 +17713,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("PatientNutritionID");
 
-                    b.ToTable("PatientNutrition", t =>
+                    b.ToTable("PatientNutrition", null, t =>
                         {
                             t.HasTrigger("tr_PatientNutrition");
                         });
@@ -17772,7 +17772,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ReferID_FK");
 
-                    b.ToTable("PatientOtherAllergy", t =>
+                    b.ToTable("PatientOtherAllergy", null, t =>
                         {
                             t.HasTrigger("tr_PatientOtherAllergy");
                         });
@@ -17790,7 +17790,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("PatientPackage", t =>
+                    b.ToTable("PatientPackage", null, t =>
                         {
                             t.HasTrigger("tr_PatientPackage");
                         });
@@ -17885,7 +17885,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ReligionID_FK");
 
-                    b.ToTable("PatientProfile", t =>
+                    b.ToTable("PatientProfile", null, t =>
                         {
                             t.HasTrigger("tr_PatientProfile");
                         });
@@ -17963,7 +17963,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignDetailID_FK");
 
-                    b.ToTable("PatientRAF", t =>
+                    b.ToTable("PatientRAF", null, t =>
                         {
                             t.HasTrigger("tr_PatientRAF");
                         });
@@ -18039,7 +18039,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("SecondaryNurseID_FK");
 
-                    b.ToTable("PatientReferral", t =>
+                    b.ToTable("PatientReferral", null, t =>
                         {
                             t.HasTrigger("tr_PatientReferral");
                         });
@@ -18057,7 +18057,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ServiceID_FK");
 
-                    b.ToTable("PatientReferralService", t =>
+                    b.ToTable("PatientReferralService", null, t =>
                         {
                             t.HasTrigger("tr_PatientReferralService");
                         });
@@ -18156,7 +18156,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("RelationshipID_FK");
 
-                    b.ToTable("PatientSocialSupport", t =>
+                    b.ToTable("PatientSocialSupport", null, t =>
                         {
                             t.HasTrigger("tr_PatientSocialSupport");
                         });
@@ -18174,7 +18174,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("PatientSpecialIndicator", t =>
+                    b.ToTable("PatientSpecialIndicator", null, t =>
                         {
                             t.HasTrigger("tr_PatientSpecialIndicator");
                         });
@@ -18270,7 +18270,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("WoundStatusID_FK");
 
-                    b.ToTable("PatientWound", t =>
+                    b.ToTable("PatientWound", null, t =>
                         {
                             t.HasTrigger("tr_PatientWound");
                         });
@@ -18561,7 +18561,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("WoundStatusID_FK");
 
-                    b.ToTable("PatientWoundDraft", t =>
+                    b.ToTable("PatientWoundDraft", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundDraft");
                         });
@@ -18606,7 +18606,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TListItemID_FK");
 
-                    b.ToTable("PatientWoundDraftTreatmentList");
+                    b.ToTable("PatientWoundDraftTreatmentList", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.PatientWoundDraftTreatmentObjectives", b =>
@@ -18621,7 +18621,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ObjectiveID_FK");
 
-                    b.ToTable("PatientWoundDraftTreatmentObjectives");
+                    b.ToTable("PatientWoundDraftTreatmentObjectives", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.PatientWoundReviewBy", b =>
@@ -18666,7 +18666,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserId_FK");
 
-                    b.ToTable("PatientWoundReviewBy", t =>
+                    b.ToTable("PatientWoundReviewBy", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundReviewBy");
                         });
@@ -19166,7 +19166,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("VitalSignID_FK");
 
-                    b.ToTable("PatientWoundVisit", t =>
+                    b.ToTable("PatientWoundVisit", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundVisit");
                         });
@@ -19184,7 +19184,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("PatientWoundVisitAppearance", t =>
+                    b.ToTable("PatientWoundVisitAppearance", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundVisitAppearance");
                         });
@@ -19202,7 +19202,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("PatientWoundVisitCleansingItem", t =>
+                    b.ToTable("PatientWoundVisitCleansingItem", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundVisitCleansingItem");
                         });
@@ -19248,7 +19248,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserID_FK");
 
-                    b.ToTable("PatientWoundVisitClinician", t =>
+                    b.ToTable("PatientWoundVisitClinician", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundVisitClinician");
                         });
@@ -19295,7 +19295,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientWoundVisitID_FK");
 
-                    b.ToTable("PatientWoundVisitTreatment", t =>
+                    b.ToTable("PatientWoundVisitTreatment", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundVisitTreatment");
                         });
@@ -19340,7 +19340,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TListItemID_FK");
 
-                    b.ToTable("PatientWoundVisitTreatmentList", t =>
+                    b.ToTable("PatientWoundVisitTreatmentList", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundVisitTreatmentList");
                         });
@@ -19358,7 +19358,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ObjectiveID_FK");
 
-                    b.ToTable("PatientWoundVisitTreatmentObjectives", t =>
+                    b.ToTable("PatientWoundVisitTreatmentObjectives", null, t =>
                         {
                             t.HasTrigger("tr_PatientWoundVisitTreatmentObjectives");
                         });
@@ -19405,7 +19405,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("DiseaseID_FK");
 
-                    b.ToTable("ProblemList", t =>
+                    b.ToTable("ProblemList", null, t =>
                         {
                             t.HasTrigger("tr_ProblemList");
                         });
@@ -19443,7 +19443,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ScoreTypeID");
 
-                    b.ToTable("ProblemListGoal", t =>
+                    b.ToTable("ProblemListGoal", null, t =>
                         {
                             t.HasTrigger("tr_ProblemListGoal");
                         });
@@ -19536,7 +19536,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PaymentModeID_FK");
 
-                    b.ToTable("Receipt", t =>
+                    b.ToTable("Receipt", null, t =>
                         {
                             t.HasTrigger("tr_Receipt");
                         });
@@ -19566,7 +19566,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ReceiptID_FK");
 
-                    b.ToTable("ReceiptForInvoice", t =>
+                    b.ToTable("ReceiptForInvoice", null, t =>
                         {
                             t.HasTrigger("tr_ReceiptForInvoice");
                         });
@@ -19587,7 +19587,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("RecentView");
+                    b.ToTable("RecentView", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.RegisteredDevice", b =>
@@ -19611,7 +19611,7 @@ namespace C4WX1.Database.Migrations
                     b.Property<int?>("UserID")
                         .HasColumnType("integer");
 
-                    b.ToTable("RegisteredDevice", t =>
+                    b.ToTable("RegisteredDevice", null, t =>
                         {
                             t.HasTrigger("tr_RegisteredDevice");
                         });
@@ -19688,7 +19688,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("RegisteredDeviceID");
 
-                    b.ToTable("RegisteredDeviceV2", t =>
+                    b.ToTable("RegisteredDeviceV2", null, t =>
                         {
                             t.HasTrigger("tr_RegisteredDeviceV2");
                         });
@@ -19759,7 +19759,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("ResidentAssessmentCategoryID");
 
-                    b.ToTable("ResidentAssessmentCategory", t =>
+                    b.ToTable("ResidentAssessmentCategory", null, t =>
                         {
                             t.HasTrigger("tr_ResidentAssessmentCategory");
                         });
@@ -19791,7 +19791,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("Resource");
+                    b.ToTable("Resource", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.Role", b =>
@@ -19840,7 +19840,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Role", t =>
+                    b.ToTable("Role", null, t =>
                         {
                             t.HasTrigger("tr_Role");
                         });
@@ -19913,7 +19913,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("ScheduleId");
 
-                    b.ToTable("ScheduledTasks", t =>
+                    b.ToTable("ScheduledTasks", null, t =>
                         {
                             t.HasTrigger("tr_ScheduledTasks");
                         });
@@ -19967,7 +19967,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CategoryID_FK");
 
-                    b.ToTable("ServiceForBilling", t =>
+                    b.ToTable("ServiceForBilling", null, t =>
                         {
                             t.HasTrigger("tr_ServiceForBilling");
                         });
@@ -20011,7 +20011,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ServiceForBillingID_FK");
 
-                    b.ToTable("ServiceForBillingCost", t =>
+                    b.ToTable("ServiceForBillingCost", null, t =>
                         {
                             t.HasTrigger("tr_ServiceForBillingCost");
                         });
@@ -20029,7 +20029,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("SkillsetID_FK");
 
-                    b.ToTable("ServiceSkillset", t =>
+                    b.ToTable("ServiceSkillset", null, t =>
                         {
                             t.HasTrigger("tr_ServiceSkillset");
                         });
@@ -20066,7 +20066,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("SyncLogId");
 
-                    b.ToTable("SyncPatientLog", t =>
+                    b.ToTable("SyncPatientLog", null, t =>
                         {
                             t.HasTrigger("tr_SyncPatientLog");
                         });
@@ -20106,7 +20106,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("SyncLogId");
 
-                    b.ToTable("SyncWoundLog", t =>
+                    b.ToTable("SyncWoundLog", null, t =>
                         {
                             t.HasTrigger("tr_SyncWoundLog");
                         });
@@ -20143,7 +20143,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("SyncLogId");
 
-                    b.ToTable("SyncWoundVisitLog", t =>
+                    b.ToTable("SyncWoundVisitLog", null, t =>
                         {
                             t.HasTrigger("tr_SyncWoundVisitLog");
                         });
@@ -20173,7 +20173,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("ConfigName");
 
-                    b.ToTable("SysConfig", t =>
+                    b.ToTable("SysConfig", null, t =>
                         {
                             t.HasTrigger("tr_SysConfig");
                         });
@@ -20214,7 +20214,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("SystemID");
 
-                    b.ToTable("SystemForDisease", t =>
+                    b.ToTable("SystemForDisease", null, t =>
                         {
                             t.HasTrigger("tr_SystemForDisease");
                         });
@@ -20232,7 +20232,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("TD_WoundAssessmentFactor", t =>
+                    b.ToTable("TD_WoundAssessmentFactor", null, t =>
                         {
                             t.HasTrigger("tr_TD_WoundAssessmentFactor");
                         });
@@ -20363,7 +20363,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex(new[] { "ReferenceType", "ReferenceID" }, "IX_Task_Reference");
 
-                    b.ToTable("Task", t =>
+                    b.ToTable("Task", null, t =>
                         {
                             t.HasTrigger("tr_Task");
                         });
@@ -20404,7 +20404,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TaskID_FK");
 
-                    b.ToTable("TaskFileAttachment", t =>
+                    b.ToTable("TaskFileAttachment", null, t =>
                         {
                             t.HasTrigger("tr_TaskFileAttachment");
                         });
@@ -20422,7 +20422,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("TaskServicesRequired", t =>
+                    b.ToTable("TaskServicesRequired", null, t =>
                         {
                             t.HasTrigger("tr_TaskServicesRequired");
                         });
@@ -20461,7 +20461,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TaskID_FK");
 
-                    b.ToTable("TaskSpecificDate", t =>
+                    b.ToTable("TaskSpecificDate", null, t =>
                         {
                             t.HasTrigger("tr_TaskSpecificDate");
                         });
@@ -20508,7 +20508,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserID_FK");
 
-                    b.ToTable("TaskUser", t =>
+                    b.ToTable("TaskUser", null, t =>
                         {
                             t.HasTrigger("tr_TaskUser");
                         });
@@ -20575,7 +20575,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex(new[] { "TaskID_FK" }, "IX_TaskUserLog_3");
 
-                    b.ToTable("TaskUserLog", t =>
+                    b.ToTable("TaskUserLog", null, t =>
                         {
                             t.HasTrigger("tr_TaskUserLog");
                         });
@@ -20616,7 +20616,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TaskUserLogID_FK");
 
-                    b.ToTable("TaskUserLogAttachment", t =>
+                    b.ToTable("TaskUserLogAttachment", null, t =>
                         {
                             t.HasTrigger("tr_TaskUserLogAttachment");
                         });
@@ -20670,7 +20670,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("RecordingType_FK");
 
-                    b.ToTable("TeleconsultationRecording", t =>
+                    b.ToTable("TeleconsultationRecording", null, t =>
                         {
                             t.HasTrigger("tr_TeleconsultationRecording");
                         });
@@ -20719,7 +20719,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("TeleReportID");
 
-                    b.ToTable("TeleconsultationReport", t =>
+                    b.ToTable("TeleconsultationReport", null, t =>
                         {
                             t.HasTrigger("tr_TeleconsultationReport");
                         });
@@ -20803,7 +20803,7 @@ namespace C4WX1.Database.Migrations
                     b.HasKey("id")
                         .HasName("PK__Threshol__3213E83F6D225C2D");
 
-                    b.ToTable("Thresholds", t =>
+                    b.ToTable("Thresholds", null, t =>
                         {
                             t.HasTrigger("tr_Thresholds");
                         });
@@ -20863,7 +20863,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TListTypeID_FK");
 
-                    b.ToTable("TreatmentListItem", t =>
+                    b.ToTable("TreatmentListItem", null, t =>
                         {
                             t.HasTrigger("tr_TreatmentListItem");
                         });
@@ -20881,7 +20881,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("TListItemID_FK");
 
-                    b.ToTable("TreatmentTOL", t =>
+                    b.ToTable("TreatmentTOL", null, t =>
                         {
                             t.HasTrigger("tr_TreatmentTOL");
                         });
@@ -20918,7 +20918,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex(new[] { "code", "parentCode" }, "idx_Types1");
 
-                    b.ToTable("Types", t =>
+                    b.ToTable("Types", null, t =>
                         {
                             t.HasTrigger("tr_Types");
                         });
@@ -20951,7 +20951,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("UUIDLogID");
 
-                    b.ToTable("UUIDLog");
+                    b.ToTable("UUIDLog", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.UploadFile", b =>
@@ -20990,7 +20990,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("UploadFileId");
 
-                    b.ToTable("UploadFile", t =>
+                    b.ToTable("UploadFile", null, t =>
                         {
                             t.HasTrigger("tr_UploadFile");
                         });
@@ -21043,7 +21043,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserID_FK");
 
-                    b.ToTable("UserAddress", t =>
+                    b.ToTable("UserAddress", null, t =>
                         {
                             t.HasTrigger("tr_UserAddress");
                         });
@@ -21061,7 +21061,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("BranchID_FK");
 
-                    b.ToTable("UserBranch", t =>
+                    b.ToTable("UserBranch", null, t =>
                         {
                             t.HasTrigger("tr_UserBranch");
                         });
@@ -21106,7 +21106,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserCategoryOrganizationID_FK");
 
-                    b.ToTable("UserCategory", t =>
+                    b.ToTable("UserCategory", null, t =>
                         {
                             t.HasTrigger("tr_UserCategory");
                         });
@@ -21124,7 +21124,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("FacilityID_FK");
 
-                    b.ToTable("UserCategoryFacility");
+                    b.ToTable("UserCategoryFacility", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.UserCategoryParentChild", b =>
@@ -21139,7 +21139,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("ChildUserCategoryID_FK");
 
-                    b.ToTable("UserCategoryParentChild");
+                    b.ToTable("UserCategoryParentChild", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.UserCategoryRole", b =>
@@ -21158,7 +21158,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("RoleID_FK");
 
-                    b.ToTable("UserCategoryRole", t =>
+                    b.ToTable("UserCategoryRole", null, t =>
                         {
                             t.HasTrigger("tr_UserCategoryRole");
                         });
@@ -21176,7 +21176,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("LanguageID_FK");
 
-                    b.ToTable("UserLanguage", t =>
+                    b.ToTable("UserLanguage", null, t =>
                         {
                             t.HasTrigger("tr_UserLanguage");
                         });
@@ -21194,7 +21194,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("UserOrganization", t =>
+                    b.ToTable("UserOrganization", null, t =>
                         {
                             t.HasTrigger("tr_UserOrganization");
                         });
@@ -21219,7 +21219,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("RoleId_FK");
 
-                    b.ToTable("UserRole", t =>
+                    b.ToTable("UserRole", null, t =>
                         {
                             t.HasTrigger("tr_UserRole");
                         });
@@ -21237,7 +21237,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("CodeID_FK");
 
-                    b.ToTable("UserSkillset", t =>
+                    b.ToTable("UserSkillset", null, t =>
                         {
                             t.HasTrigger("tr_UserSkillset");
                         });
@@ -21282,7 +21282,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserCategoryID_FK");
 
-                    b.ToTable("UserType", t =>
+                    b.ToTable("UserType", null, t =>
                         {
                             t.HasTrigger("tr_UserType");
                         });
@@ -21300,7 +21300,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("UserTypeID_FK");
 
-                    b.ToTable("UserUserType", t =>
+                    b.ToTable("UserUserType", null, t =>
                         {
                             t.HasTrigger("tr_UserUserType");
                         });
@@ -21460,7 +21460,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientID_FK");
 
-                    b.ToTable("Users", t =>
+                    b.ToTable("Users", null, t =>
                         {
                             t.HasTrigger("tr_Users");
                         });
@@ -21493,7 +21493,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("vitalSignTypeId");
 
-                    b.ToTable("VitalSignDetails", t =>
+                    b.ToTable("VitalSignDetails", null, t =>
                         {
                             t.HasTrigger("tr_VitalSignDetails");
                         });
@@ -21524,7 +21524,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("vitalSignTypeId");
 
-                    b.ToTable("VitalSignRelationships", t =>
+                    b.ToTable("VitalSignRelationships", null, t =>
                         {
                             t.HasTrigger("tr_VitalSignRelationships");
                         });
@@ -21594,7 +21594,7 @@ namespace C4WX1.Database.Migrations
                     b.HasIndex(new[] { "VitalSignTypeID_FK" }, "IX_VitalSignTypeThreshold")
                         .IsUnique();
 
-                    b.ToTable("VitalSignTypeThreshold", t =>
+                    b.ToTable("VitalSignTypeThreshold", null, t =>
                         {
                             t.HasTrigger("tr_VitalSignTypeThreshold");
                         });
@@ -21633,7 +21633,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex(new[] { "name" }, "idx_VitalSignTypes1");
 
-                    b.ToTable("VitalSignTypes", t =>
+                    b.ToTable("VitalSignTypes", null, t =>
                         {
                             t.HasTrigger("tr_VitalSignTypes");
                         });
@@ -21678,7 +21678,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("patientId");
 
-                    b.ToTable("VitalSigns", t =>
+                    b.ToTable("VitalSigns", null, t =>
                         {
                             t.HasTrigger("tr_VitalSigns");
                         });
@@ -21722,7 +21722,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasIndex("PatientWoundVisitID_FK");
 
-                    b.ToTable("WoundConsolidatedEmail", t =>
+                    b.ToTable("WoundConsolidatedEmail", null, t =>
                         {
                             t.HasTrigger("tr_WoundConsolidatedEmail");
                         });
@@ -21738,7 +21738,7 @@ namespace C4WX1.Database.Migrations
 
                     b.HasKey("ParentUserCategoryID_FK", "ChildUserCategoryID_FK");
 
-                    b.ToTable("WoundUserCategoryParentChild");
+                    b.ToTable("WoundUserCategoryParentChild", (string)null);
                 });
 
             modelBuilder.Entity("C4WX1.Database.Models.vw_AssessmentDue", b =>

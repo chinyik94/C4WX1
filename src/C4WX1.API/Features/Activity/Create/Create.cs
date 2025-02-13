@@ -1,23 +1,17 @@
-﻿using C4WX1.Database.Models;
+﻿using C4WX1.API.Features.Activity.Dtos;
+using C4WX1.API.Features.Activity.Mappers;
+using C4WX1.Database.Models;
 using FastEndpoints;
+using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.Activity.Create
 {
-    public class CreateActivityDto
-    {
-        public int ProblemListID_FK { get; set; }
-        public int DiseaseID_FK { get; set; }
-        public string ActivityDetail { get; set; } = string.Empty;
-        public int? DiseaseSubInfoID_FK { get; set; }
-        public int UserId { get; set; }
-    }
-
     public class CreateActivitySummary : EndpointSummary
     {
         public CreateActivitySummary()
         {
-            Summary = $"Create {nameof(Activity)}";
-            Description = $"Create a new {nameof(Activity)}";
+            Summary = "Create Activity";
+            Description = "Create a new Activity";
             ExampleRequest = new CreateActivityDto
             {
                 ProblemListID_FK = 1,
@@ -26,11 +20,11 @@ namespace C4WX1.API.Features.Activity.Create
                 DiseaseSubInfoID_FK = 1,
                 UserId = 1
             };
-            Responses[204] = $"{nameof(Activity)} created successfully";
+            Responses[204] = "Activity created successfully";
         }
     }
 
-    public class Create(THCC_C4WDEVContext dbContext) : Endpoint<CreateActivityDto>
+    public class Create(THCC_C4WDEVContext dbContext) : EndpointWithMapper<CreateActivityDto, ActivityCreateMapper>
     {
         public override void Configure()
         {
@@ -41,18 +35,9 @@ namespace C4WX1.API.Features.Activity.Create
             Summary(new CreateActivitySummary());
         }
 
-        public override async System.Threading.Tasks.Task HandleAsync(CreateActivityDto req, CancellationToken ct)
+        public override async Task HandleAsync(CreateActivityDto req, CancellationToken ct)
         {
-            var entity = new Database.Models.Activity
-            {
-                ActivityDetail = req.ActivityDetail,
-                CreatedBy_FK = req.UserId,
-                CreatedDate = DateTime.Now,
-                DiseaseID_FK = req.DiseaseID_FK,
-                DiseaseSubInfoID_FK = req.DiseaseSubInfoID_FK,
-                ProblemListID_FK = req.ProblemListID_FK,
-                IsDeleted = false,
-            };
+            var entity = Map.ToEntity(req);
             dbContext.Activity.Add(entity);
             await dbContext.SaveChangesAsync(ct);
             await SendNoContentAsync(ct);

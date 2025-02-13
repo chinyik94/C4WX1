@@ -1,4 +1,4 @@
-﻿namespace C4WX1.API.Features.Activity.Shared
+﻿namespace C4WX1.API.Features.Activity.Dtos
 {
     public sealed class ActivityDto
     {

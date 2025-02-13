@@ -1,8 +1,9 @@
-﻿using FastEndpoints;
+﻿using C4WX1.API.Features.SysConfig.Dtos;
+using FastEndpoints;
 
-namespace C4WX1.API.Features.SysConfig.Shared
+namespace C4WX1.API.Features.SysConfig.Mappers
 {
-    public class SysConfigMapper : ResponseMapper<SysConfigDto, Database.Models.SysConfig>
+    public class SysConfigGetMapper : ResponseMapper<SysConfigDto, Database.Models.SysConfig>
     {
         public override SysConfigDto FromEntity(Database.Models.SysConfig e) => new()
         {

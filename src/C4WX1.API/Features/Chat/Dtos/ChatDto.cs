@@ -1,4 +1,4 @@
-﻿namespace C4WX1.API.Features.Chat.Shared
+﻿namespace C4WX1.API.Features.Chat.Dtos
 {
     public class ChatDto
     {

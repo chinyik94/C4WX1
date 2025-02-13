@@ -1,4 +1,5 @@
-﻿using C4WX1.API.Features.SysConfig.Shared;
+﻿using C4WX1.API.Features.SysConfig.Dtos;
+using C4WX1.API.Features.SysConfig.Mappers;
 using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
@@ -6,25 +7,19 @@ using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.SysConfig.Get
 {
-    public class GetSysConfigDto
-    {
-        [QueryParam]
-        public string ConfigName { get; set; } = null!;
-    }
-
     public class GetSysConfigSummary : EndpointSummary
     {
         public GetSysConfigSummary()
         {
-            Summary = $"Get {nameof(SysConfig)}";
-            Description = $"Get {nameof(SysConfig)} by ID or Access Key";
-            Responses[200] = $"{nameof(SysConfig)} retrieved successfully";
-            Responses[404] = $"{nameof(SysConfig)} not found";
+            Summary = "Get SysConfig";
+            Description = "Get SysConfig by its ConfigName";
+            Responses[200] = "SysConfig retrieved successfully";
+            Responses[404] = "SysConfig not found";
         }
     }
 
     public class Get(
-        THCC_C4WDEVContext dbContext): Endpoint<GetSysConfigDto, SysConfigDto, SysConfigMapper>
+        THCC_C4WDEVContext dbContext): Endpoint<GetSysConfigDto, SysConfigDto, SysConfigGetMapper>
     {
         public override void Configure()
         {

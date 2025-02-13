@@ -1,4 +1,4 @@
-﻿namespace C4WX1.API.Features.APIAccessKey.Shared
+﻿namespace C4WX1.API.Features.APIAccessKey.Dtos
 {
     public sealed class APIAccessKeyDto
     {

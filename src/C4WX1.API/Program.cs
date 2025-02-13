@@ -1,4 +1,4 @@
-using C4WX1.API.Features.Chat.Shared;
+using C4WX1.API.Features.Chat.Repository;
 using C4WX1.API.Features.Generator;
 using C4WX1.API.Features.Security;
 using C4WX1.Database.Models;

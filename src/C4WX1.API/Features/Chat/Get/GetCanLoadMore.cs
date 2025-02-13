@@ -1,17 +1,11 @@
-﻿using Dapper;
+﻿using C4WX1.API.Features.Chat.Dtos;
+using Dapper;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
 namespace C4WX1.API.Features.Chat.Get
 {
-    public class GetCanLoadMoreChatDto
-    {
-        public int? Min { get; set; }
-        public int? PatientId { get; set; }
-        public int? UserId { get; set; }
-    }
-
     public class GetCanLoadMoreChatSummary : EndpointSummary
     {
         public GetCanLoadMoreChatSummary()

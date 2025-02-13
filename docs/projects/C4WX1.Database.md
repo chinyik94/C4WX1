@@ -2,8 +2,8 @@
 
 This is project that mostly stores:
 - Entity models
-- DB context
-- EF Core migration files
+- DB context configuration
+- EF Core migrations
 
 Any DB schema changes can be done by executing the SQL script first, then update C# entity models using EF Core Power Tools (existing workflow)
 

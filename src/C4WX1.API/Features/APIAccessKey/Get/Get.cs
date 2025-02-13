@@ -1,7 +1,9 @@
-﻿using C4WX1.API.Features.APIAccessKey.Shared;
+﻿using C4WX1.API.Features.APIAccessKey.Dtos;
+using C4WX1.API.Features.APIAccessKey.Mappers;
 using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.APIAccessKey.Get
 {
@@ -18,15 +20,15 @@ namespace C4WX1.API.Features.APIAccessKey.Get
     {
         public GetAPIAccessKeySummary()
         {
-            Summary = $"Get {nameof(APIAccessKey)}";
-            Description = $"Get {nameof(APIAccessKey)} by ID or Access Key";
-            Responses[200] = $"{nameof(APIAccessKey)} retrieved successfully";
-            Responses[404] = $"{nameof(APIAccessKey)} not found";
+            Summary = "Get APIAccessKey";
+            Description = "Get APIAccessKey by its ID or Access Key";
+            Responses[200] = "APIAccessKey retrieved successfully";
+            Responses[404] = "APIAccessKey not found";
         }
     }
 
     public class Get(
-        THCC_C4WDEVContext dbContext): Endpoint<GetAccessKeyRequestDto, APIAccessKeyDto>
+        THCC_C4WDEVContext dbContext): Endpoint<GetAccessKeyRequestDto, APIAccessKeyDto, APIAccessKeyMapper>
     {
         public override void Configure()
         {
@@ -38,7 +40,7 @@ namespace C4WX1.API.Features.APIAccessKey.Get
             Summary(new GetAPIAccessKeySummary());
         }
 
-        public override async System.Threading.Tasks.Task HandleAsync(GetAccessKeyRequestDto req, CancellationToken ct)
+        public override async Task HandleAsync(GetAccessKeyRequestDto req, CancellationToken ct)
         {
             var query = dbContext.APIAccessKey.AsQueryable();
             if (req.ID != null)
@@ -57,16 +59,7 @@ namespace C4WX1.API.Features.APIAccessKey.Get
                 return;
             }
 
-            var dto = new APIAccessKeyDto()
-            {
-                APIAccessKeyID = entity.APIAccessKeyID,
-                TokenCode = entity.TokenCode,
-                AccessKey = entity.AccessKey,
-                ExpiryDate = entity.ExpiryDate,
-                CreatedDate = entity.CreatedDate,
-                UpdatedDate = entity.UpdatedDate,
-                UserId_FK = entity.UserId_FK
-            };
+            var dto = Map.FromEntity(entity);
             await SendAsync(dto, cancellation: ct);
         }
     }

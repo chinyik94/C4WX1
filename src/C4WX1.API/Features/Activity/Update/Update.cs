@@ -1,25 +1,17 @@
-﻿using C4WX1.Database.Models;
+﻿using C4WX1.API.Features.Activity.Dtos;
+using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.Activity.Update
 {
-    public class UpdateActivityDto
-    {
-        public int ActivityID { get; set; }
-        public int ProblemListID_FK { get; set; }
-        public int DiseaseID_FK { get; set; }
-        public string ActivityDetail { get; set; } = string.Empty;
-        public int? DiseaseSubInfoID_FK { get; set; }
-        public int UserId { get; set; }
-    }
-
     public class UpdateActivitySummary : EndpointSummary
     {
         public UpdateActivitySummary()
         {
-            Summary = $"Update {nameof(Activity)}";
-            Description = $"Update an existing {nameof(Activity)}";
+            Summary = "Update Activity";
+            Description = "Update an existing Activity";
             ExampleRequest = new UpdateActivityDto
             {
                 ActivityID = 1,
@@ -29,8 +21,8 @@ namespace C4WX1.API.Features.Activity.Update
                 DiseaseSubInfoID_FK = 1,
                 UserId = 1
             };
-            Responses[204] = $"{nameof(Activity)} updated successfully";
-            Responses[404] = $"{nameof(Activity)} not found";
+            Responses[204] = "Activity updated successfully";
+            Responses[404] = "Activity not found";
         }
     }
 
@@ -48,7 +40,7 @@ namespace C4WX1.API.Features.Activity.Update
             Summary(new UpdateActivitySummary());
         }
 
-        public override async System.Threading.Tasks.Task HandleAsync(UpdateActivityDto req, CancellationToken ct)
+        public override async Task HandleAsync(UpdateActivityDto req, CancellationToken ct)
         {
             var entity = await dbContext.Activity
                 .FirstOrDefaultAsync(a => a.ActivityID == req.ActivityID && !a.IsDeleted, ct);

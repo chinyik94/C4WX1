@@ -1,28 +1,24 @@
-﻿using C4WX1.Database.Models;
+﻿using C4WX1.API.Features.Chat.Dtos;
+using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.Chat.Delete
 {
-    public class DeleteChatDto
-    {
-        public int ChatID { get; set; }
-        public int UserID { get; set; }
-    }
-
     public class DeleteChatSummary : EndpointSummary
     {
         public DeleteChatSummary()
         {
-            Summary = $"Delete {nameof(Chat)}";
-            Description = $"Delete an existing {nameof(Chat)}";
+            Summary = "Delete Chat";
+            Description = "Delete an existing Chat";
             ExampleRequest = new DeleteChatDto
             {
                 ChatID = 1,
                 UserID = 1
             };
-            Responses[204] = $"{nameof(Chat)} deleted successfully";
-            Responses[404] = $"{nameof(Chat)} not found";
+            Responses[204] = "Chat deleted successfully";
+            Responses[404] = "Chat not found";
         }
     }
 
@@ -40,7 +36,7 @@ namespace C4WX1.API.Features.Chat.Delete
             Summary(new DeleteChatSummary());
         }
 
-        public override async System.Threading.Tasks.Task HandleAsync(DeleteChatDto req, CancellationToken ct)
+        public override async Task HandleAsync(DeleteChatDto req, CancellationToken ct)
         {
             var entity = dbContext.Chat
                 .Where(x => !x.IsDeleted

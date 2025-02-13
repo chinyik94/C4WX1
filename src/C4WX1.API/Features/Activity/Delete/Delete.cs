@@ -1,28 +1,24 @@
-﻿using C4WX1.Database.Models;
+﻿using C4WX1.API.Features.Activity.Dtos;
+using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.Activity.Delete
 {
-    public class DeleteActivityDto
-    {
-        public int ActivityID { get; set; }
-        public int UserID { get; set; }
-    }
-
     public class DeleteActivitySummary : EndpointSummary
     {
         public DeleteActivitySummary()
         {
-            Summary = $"Delete {nameof(Activity)}";
-            Description = $"Delete an existing {nameof(Activity)}";
+            Summary = "Delete Activity";
+            Description = "Delete an existing Activity";
             ExampleRequest = new DeleteActivityDto
             {
                 ActivityID = 1,
                 UserID = 1
             };
-            Responses[204] = $"{nameof(Activity)} deleted successfully";
-            Responses[404] = $"{nameof(Activity)} not found";
+            Responses[204] = "Activity deleted successfully";
+            Responses[404] = "Activity not found";
         }
     }
 
@@ -41,7 +37,7 @@ namespace C4WX1.API.Features.Activity.Delete
             Summary(new DeleteActivitySummary());
         }
 
-        public override async System.Threading.Tasks.Task HandleAsync(DeleteActivityDto req, CancellationToken ct)
+        public override async Task HandleAsync(DeleteActivityDto req, CancellationToken ct)
         {
             var entity = await dbContext.Activity
                 .FirstOrDefaultAsync(a => a.ActivityID == req.ActivityID && !a.IsDeleted, ct);
