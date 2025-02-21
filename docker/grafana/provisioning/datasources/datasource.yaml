@@ -1,0 +1,8 @@
+datasources:
+  - name: c4wx1-prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+    uid: c4wx1-prometheus

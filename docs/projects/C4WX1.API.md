@@ -14,6 +14,8 @@ This project is attempting to use vertical slice to separate different tables as
 - Dtos
 - Mappers
 - Repository
+- Constants
+- Extensions
 
 More folder can be created to separate different type of classes as required.
 
@@ -43,4 +45,12 @@ This folder contains all DTO to Entity or Entity to DTO mappers
 
 ### Repository
 
-This folder contains shared EF Core logics that are more complex
+This folder contains shared EF Core logics that are more complex and are shared across multiple API of the same feature.
+
+### Constants
+
+This folder contains shared constants across multiple API of the same feature. Example, SQL queries.
+
+### Extensions
+
+This folder contains shared extensions methods across multiple API of the same feature. Example, custom sorting using EF Core.
