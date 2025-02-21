@@ -22,15 +22,15 @@ namespace C4WX1.API.Features.Chat.Delete
         }
     }
 
-    public class Delete(
-        THCC_C4WDEVContext dbContext) : Endpoint<DeleteChatDto>
+    public class Delete(THCC_C4WDEVContext dbContext) 
+        : Endpoint<DeleteChatDto>
     {
         public override void Configure()
         {
-            Delete("chat");
+            Delete("chat/{chatID}");
             AllowAnonymous();
             Description(b => b
-                .Accepts<DeleteChatDto>("application/json")
+                .Accepts<DeleteChatDto>()
                 .Produces(404)
                 .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new DeleteChatSummary());

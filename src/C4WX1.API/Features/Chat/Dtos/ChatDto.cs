@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.Chat.Dtos
 {
-    public class ChatDto
+    public sealed class ChatDto
     {
         public int ChatID { get; set; }
         public string? Comment { get; set; }
@@ -15,21 +15,5 @@
         public ChatUserDto? UserData { get; set; }
         public ChatPatientDto? PatientData { get; set; }
         public ICollection<ChatDto> CommentList { get; set; } = [];
-    }
-
-    public class ChatUserDto
-    {
-        public int UserId { get; set; }
-        public string Firstname { get; set; } = string.Empty;
-        public string Lastname { get; set; } = string.Empty;
-        public string? Photo { get; set; }
-    }
-
-    public class ChatPatientDto
-    {
-        public int PatientID { get; set; }
-        public string Firstname { get; set; } = string.Empty;
-        public string Lastname { get; set; } = string.Empty;
-        public string? Photo { get; set; }
     }
 }

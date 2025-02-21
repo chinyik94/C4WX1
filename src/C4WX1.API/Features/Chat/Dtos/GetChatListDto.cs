@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.Chat.Dtos
 {
-    public class GetChatListDto
+    public sealed class GetChatListDto
     {
         public int? ChatID { get; set; }
         public int? PatientID { get; set; }

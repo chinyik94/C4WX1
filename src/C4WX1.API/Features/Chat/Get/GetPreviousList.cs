@@ -22,15 +22,15 @@ namespace C4WX1.API.Features.Chat.Get
         }
     }
 
-    public class GetPreviousList(
-        IChatRepository chatRepository) : Endpoint<GetChatListDto, IEnumerable<ChatDto>>
+    public class GetPreviousList(IChatRepository chatRepository) 
+        : Endpoint<GetChatListDto, IEnumerable<ChatDto>>
     {
         public override void Configure()
         {
-            Get("chat/list/previous");
+            Get("chat/previous");
             AllowAnonymous();
             Description(b => b
-                .Accepts<GetChatListDto>("application/json")
+                .Accepts<GetChatListDto>()
                 .Produces<IEnumerable<ChatDto>>()
                 .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetPreviousChatListSummary());
@@ -38,7 +38,7 @@ namespace C4WX1.API.Features.Chat.Get
 
         public override async Task HandleAsync(GetChatListDto req, CancellationToken ct)
         {
-            var dtos = await chatRepository.GetPreviousListAsync(req, ct);
+            var dtos = await chatRepository.ListPreviousAsync(req);
 
             await SendAsync(dtos, cancellation: ct);
         }

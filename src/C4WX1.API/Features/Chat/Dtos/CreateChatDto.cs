@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.Chat.Dtos
 {
-    public class CreateChatDto
+    public sealed class CreateChatDto
     {
         public string? Attachment { get; set; }
         public string? Attachment_Physical { get; set; }

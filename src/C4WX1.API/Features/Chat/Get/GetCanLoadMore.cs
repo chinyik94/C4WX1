@@ -1,8 +1,6 @@
 ﻿using C4WX1.API.Features.Chat.Dtos;
-using Dapper;
+using C4WX1.API.Features.Chat.Repository;
 using FastEndpoints;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
 
 namespace C4WX1.API.Features.Chat.Get
 {
@@ -21,15 +19,15 @@ namespace C4WX1.API.Features.Chat.Get
         }
     }
 
-    public class GetCanLoadMore(
-        IConfiguration configuration) : Endpoint<GetCanLoadMoreChatDto, bool>
+    public class GetCanLoadMore(IChatRepository repository) 
+        : Endpoint<GetCanLoadMoreChatDto, bool>
     {
         public override void Configure()
         {
             Get("chat/can-load-more");
             AllowAnonymous();
             Description(b => b
-                .Accepts<GetCanLoadMoreChatDto>("application/json")
+                .Accepts<GetCanLoadMoreChatDto>()
                 .Produces<bool>()
                 .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetCanLoadMoreChatSummary());
@@ -43,26 +41,7 @@ namespace C4WX1.API.Features.Chat.Get
                 return;
             }
 
-            var sql =
-                """
-                SELECT EXISTS(
-                    SELECT 1
-                    FROM "Chat"
-                    WHERE "IsDeleted" = FALSE
-                        AND (@patientId IS NULL OR "PatientID_FK" = @patientId)
-                        AND (@userId IS NULL OR "fn_CanAccessPatient"(@userId, "PatientID_FK"))
-                        AND "ChatID" < @min
-                )
-                """;
-
-            using var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection"));
-            var canLoadMore = await connection.QuerySingleAsync<bool>(sql, new
-            {
-                patientId = req.PatientId,
-                userId = req.UserId,
-                min = req.Min.Value
-            });
-
+            var canLoadMore = await repository.CanLoadMoreAsync(req.PatientId, req.UserId, req.Min ?? 0);
             await SendAsync(canLoadMore, cancellation: ct);
         }
     }

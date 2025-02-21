@@ -22,15 +22,15 @@ namespace C4WX1.API.Features.Chat.Get
         }
     }
 
-    public class GetLatestList(
-        IChatRepository chatRepository): Endpoint<GetChatListDto, IEnumerable<ChatDto>>
+    public class GetLatestList(IChatRepository chatRepository)
+        : Endpoint<GetChatListDto, IEnumerable<ChatDto>>
     {
         public override void Configure()
         {
-            Get("chat/list/latest");
+            Get("chat/latest");
             AllowAnonymous();
             Description(b => b
-                .Accepts<GetChatListDto>("application/json")
+                .Accepts<GetChatListDto>()
                 .Produces<IEnumerable<ChatDto>>()
                 .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetLatestChatListSummary());
@@ -39,8 +39,8 @@ namespace C4WX1.API.Features.Chat.Get
         public override async Task HandleAsync(GetChatListDto req, CancellationToken ct)
         {
             var dtos = req.ChatID != null
-                ? await chatRepository.GetLatestListAsync(req, ct)
-                : await chatRepository.GetPreviousListAsync(req, ct);
+                ? await chatRepository.ListLatestAsync(req)
+                : await chatRepository.ListPreviousAsync(req);
 
             await SendAsync(dtos, cancellation: ct);
         }

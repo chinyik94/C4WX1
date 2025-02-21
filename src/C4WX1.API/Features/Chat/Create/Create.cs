@@ -30,15 +30,15 @@ namespace C4WX1.API.Features.Chat.Create
         }
     }
 
-    public class Create(
-        THCC_C4WDEVContext dbContext): Endpoint<CreateChatDto, ChatDto, ChatCreateMapper>
+    public class Create(THCC_C4WDEVContext dbContext)
+        : Endpoint<CreateChatDto, ChatDto, ChatCreateMapper>
     {
         public override void Configure()
         {
             Post("chat");
             AllowAnonymous();
             Description(b => b
-                .Accepts<CreateChatDto>("application/json")
+                .Accepts<CreateChatDto>()
                 .Produces<ChatDto>()
                 .ProducesProblemFE()
                 .ProducesProblemFE<InternalErrorResponse>(500));
