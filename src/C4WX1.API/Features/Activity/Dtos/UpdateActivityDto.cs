@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.Activity.Dtos
 {
-    public class UpdateActivityDto
+    public sealed class UpdateActivityDto
     {
         public int ActivityID { get; set; }
         public int ProblemListID_FK { get; set; }

@@ -1,4 +1,5 @@
 ﻿using C4WX1.API.Features.Activity.Dtos;
+using C4WX1.API.Features.Activity.Mappers;
 using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
@@ -20,20 +21,20 @@ namespace C4WX1.API.Features.Activity.Update
                 ActivityDetail = "Activity Detail",
                 DiseaseSubInfoID_FK = 1,
                 UserId = 1
-            };
+            }; 
             Responses[204] = "Activity updated successfully";
             Responses[404] = "Activity not found";
         }
     }
 
-    public class Update(
-        THCC_C4WDEVContext dbContext): Endpoint<UpdateActivityDto>
+    public class Update(THCC_C4WDEVContext dbContext)
+        : EndpointWithMapper<UpdateActivityDto, UpdateActivityMapper>
     {
         public override void Configure()
         {
-            Put("activity");
+            Put("activity/{activityID}");
             Description(b => b
-                .Accepts<UpdateActivityDto>("application/json")
+                .Accepts<UpdateActivityDto>()
                 .Produces(204)
                 .Produces(404)
                 .ProducesProblemFE<InternalErrorResponse>(500));
@@ -50,12 +51,7 @@ namespace C4WX1.API.Features.Activity.Update
                 return;
             }
 
-            entity.ActivityDetail = req.ActivityDetail;
-            entity.DiseaseID_FK = req.DiseaseID_FK;
-            entity.DiseaseSubInfoID_FK = req.DiseaseSubInfoID_FK;
-            entity.ProblemListID_FK = req.ProblemListID_FK;
-            entity.ModifiedBy_FK = req.UserId;
-            entity.ModifiedDate = DateTime.Now;
+            entity = Map.UpdateEntity(req, entity);
             await dbContext.SaveChangesAsync(ct);
             await SendNoContentAsync(ct);
         }

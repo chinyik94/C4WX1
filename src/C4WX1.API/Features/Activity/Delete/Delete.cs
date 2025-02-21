@@ -22,15 +22,15 @@ namespace C4WX1.API.Features.Activity.Delete
         }
     }
 
-    public class Delete(
-        THCC_C4WDEVContext dbContext): Endpoint<DeleteActivityDto>
+    public class Delete(THCC_C4WDEVContext dbContext)
+        : Endpoint<DeleteActivityDto>
     {
         public override void Configure()
         {
-            Delete("activity");
+            Delete("activity/{activityID}");
             AllowAnonymous();
             Description(b => b
-                .Accepts<DeleteActivityDto>("application/json")
+                .Accepts<DeleteActivityDto>()
                 .Produces(204)
                 .Produces(404)
                 .ProducesProblemFE<InternalErrorResponse>(500));

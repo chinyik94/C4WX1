@@ -24,13 +24,14 @@ namespace C4WX1.API.Features.Activity.Create
         }
     }
 
-    public class Create(THCC_C4WDEVContext dbContext) : EndpointWithMapper<CreateActivityDto, ActivityCreateMapper>
+    public class Create(THCC_C4WDEVContext dbContext) 
+        : EndpointWithMapper<CreateActivityDto, CreateActivityMapper>
     {
         public override void Configure()
         {
             Post("activity");
             Description(b => b
-                .Accepts<CreateActivityDto>("application/json")
+                .Accepts<CreateActivityDto>()
                 .Produces(204));
             Summary(new CreateActivitySummary());
         }

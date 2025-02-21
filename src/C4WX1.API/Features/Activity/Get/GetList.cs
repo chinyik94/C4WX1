@@ -1,12 +1,11 @@
 ﻿using C4WX1.API.Features.Activity.Dtos;
 using C4WX1.API.Features.Activity.Mappers;
-using C4WX1.API.Features.Activity.Sqls;
-using C4WX1.API.Features.Shared;
+using C4WX1.API.Features.Activity.Repository;
+using C4WX1.API.Features.Shared.Constants;
+using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Database.Models;
-using Dapper;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.Activity.Get
@@ -23,33 +22,38 @@ namespace C4WX1.API.Features.Activity.Get
 
     public class GetList(
         THCC_C4WDEVContext dbContext,
-        IConfiguration configuration): Endpoint<GetListRequestDto, IEnumerable<ActivityDto>, ActivityMapper>
+        IActivityRepository repository)
+        : Endpoint<GetListDto, IEnumerable<ActivityDto>, ActivityMapper>
     {
         public override void Configure()
         {
-            Get("activity/list");
+            Get("activity");
             AllowAnonymous();
             Description(b => b
-                .Accepts<GetListRequestDto>()
+                .Accepts<GetListDto>()
                 .Produces<IEnumerable<ActivityDto>>()
                 .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetActivityListSummary());
         }
 
-        public override async Task HandleAsync(GetListRequestDto req, CancellationToken ct)
+        public override async Task HandleAsync(GetListDto req, CancellationToken ct)
         {
             var pageIndex = req.PageIndex ?? 1;
             var pageSize = req.PageSize ?? 10;
-            var orderBy = req.OrderBy ?? $"{nameof(Database.Models.Activity.ActivityDetail)} {GetListRequestDto.Asc}";
             var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-            var query = dbContext.Activity
-                .Where(x => !x.IsDeleted);
+
+            var orderBy = string.IsNullOrWhiteSpace(req.OrderBy)
+                ? SortDirections.Default
+                : req.OrderBy;
             var order = orderBy.Split(' ');
             var sortColumn = order[0];
-            var isDescending = order[1].Equals(GetListRequestDto.Desc, StringComparison.OrdinalIgnoreCase);
+            var isDescending = order[1].Equals(SortDirections.Default, StringComparison.OrdinalIgnoreCase);
+
+            var query = dbContext.Activity
+                .Where(x => !x.IsDeleted);
             query = sortColumn switch
             {
-                nameof(ProblemList.ProblemInfo) => isDescending
+                "ProblemInfo" => isDescending
                     ? query.OrderByDescending(x => x.ProblemListID_FKNavigation.ProblemInfo)
                     : query.OrderBy(x => x.ProblemListID_FKNavigation.ProblemInfo),
                 _ => isDescending
@@ -57,22 +61,27 @@ namespace C4WX1.API.Features.Activity.Get
                     : query.OrderBy(x => x.ActivityDetail)
             };
 
-            var data = await query
+            var dtos = await query
                 .Skip(startRowIndex)
                 .Take(pageSize)
                 .Select(x => Map.FromEntity(x))
                 .ToListAsync(ct);
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            using var connection = new NpgsqlConnection(connectionString);
-            foreach (var d in data)
+            if (dtos.Count <= 0)
             {
-                d.CanDelete = await connection.QuerySingleAsync<bool>(
-                    ActivitySqls.GetCanDeleteActivity,
-                    new { d.ActivityID });
+                await SendOkAsync(dtos, cancellation: ct);
+                return;
             }
 
-            await SendAsync(data, cancellation: ct);
+            var activityIds = dtos.Select(x => x.ActivityID);
+            var canDeleteDict = await repository.BatchCanDeleteAsync(activityIds);
+            foreach (var dto in dtos)
+            {
+                dto.CanDelete = canDeleteDict.TryGetValue(dto.ActivityID, out var canDelete)
+                    && canDelete;
+            }
+
+            await SendAsync(dtos, cancellation: ct);
         }
     }
 }

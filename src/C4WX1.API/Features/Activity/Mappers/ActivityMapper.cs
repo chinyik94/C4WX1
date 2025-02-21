@@ -3,7 +3,8 @@ using FastEndpoints;
 
 namespace C4WX1.API.Features.Activity.Mappers
 {
-    public class ActivityMapper : ResponseMapper<ActivityDto, Database.Models.Activity>
+    public class ActivityMapper 
+        : ResponseMapper<ActivityDto, Database.Models.Activity>
     {
         public override ActivityDto FromEntity(Database.Models.Activity e) => new()
         {
