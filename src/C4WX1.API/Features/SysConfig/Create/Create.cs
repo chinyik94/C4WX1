@@ -23,14 +23,14 @@ namespace C4WX1.API.Features.SysConfig.Create
         }
     }
 
-    public class Create(
-        THCC_C4WDEVContext dbContext): EndpointWithMapper<CreateSysConfigDto, SysConfigCreateMapper>
+    public class Create(THCC_C4WDEVContext dbContext)
+        : EndpointWithMapper<CreateSysConfigDto, SysConfigCreateMapper>
     {
         public override void Configure()
         {
             Post("sysconfig");
             Description(b => b
-                .Accepts<CreateSysConfigDto>("application/json")
+                .Accepts<CreateSysConfigDto>()
                 .Produces(204));
             Summary(new CreateSysConfigSummary());
         }

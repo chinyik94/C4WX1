@@ -1,4 +1,4 @@
-﻿using C4WX1.API.Features.Shared;
+﻿using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.SysConfig.Dtos;
 using C4WX1.API.Features.SysConfig.Mappers;
 using C4WX1.Database.Models;
@@ -18,13 +18,12 @@ namespace C4WX1.API.Features.SysConfig.Get
         }
     }
 
-    public class GetList(
-        THCC_C4WDEVContext dbContext) : Endpoint<GetSysConfigListDto, IEnumerable<SysConfigDto>, SysConfigGetMapper>
+    public class GetList(THCC_C4WDEVContext dbContext) 
+        : Endpoint<GetSysConfigListDto, IEnumerable<SysConfigDto>, SysConfigGetMapper>
     {
         public override void Configure()
         {
-            Get("sysconfig/list");
-            AllowAnonymous();
+            Get("sysconfig");
             Description(b => b
                 .Accepts<GetSysConfigListDto>()
                 .Produces<IEnumerable<SysConfigDto>>()
@@ -36,25 +35,22 @@ namespace C4WX1.API.Features.SysConfig.Get
         {
             var pageIndex = req.PageIndex ?? 1;
             var pageSize = req.PageSize ?? 10;
-            var orderBy = req.OrderBy ?? $"{nameof(Database.Models.SysConfig.ConfigName)} {GetListRequestDto.Asc}";
             var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-            var query = dbContext.SysConfig
-                .AsQueryable();
-            if (!string.IsNullOrWhiteSpace(req.ConfigName))
-            {
-                query = query.Where(x => x.ConfigName == req.ConfigName);
-            }
-            if (!string.IsNullOrWhiteSpace(req.ConfigValue))
-            {
-                query = query.Where(x => x.ConfigValue == req.ConfigValue);
-            }
 
+            var orderBy = string.IsNullOrWhiteSpace(req.OrderBy)
+                ? SortDirections.Default
+                : req.OrderBy;
             var order = orderBy.Split(' ');
             var sortColumn = order[0];
-            var isDescending = order[1].Equals(GetListRequestDto.Desc, StringComparison.OrdinalIgnoreCase);
+            var isDescending = order[1].Equals(SortDirections.Desc, StringComparison.OrdinalIgnoreCase);
+
+            var query = dbContext.SysConfig
+                .Where(x => (string.IsNullOrWhiteSpace(req.ConfigName) || x.ConfigName == req.ConfigName)
+                    && (string.IsNullOrWhiteSpace(req.ConfigValue) || x.ConfigValue == req.ConfigValue));
+
             query = sortColumn switch
             {
-                nameof(Database.Models.SysConfig.ConfigValue) => isDescending
+                "ConfigValue" => isDescending
                     ? query.OrderByDescending(x => x.ConfigValue)
                     : query.OrderBy(x => x.ConfigValue),
                 _ => isDescending

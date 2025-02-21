@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.SysConfig.Dtos
 {
-    public class SysConfigDto
+    public sealed class SysConfigDto
     {
         public string ConfigName { get; set; } = null!;
         public string? ConfigValue { get; set; }

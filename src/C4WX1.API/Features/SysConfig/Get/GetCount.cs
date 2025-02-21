@@ -15,8 +15,8 @@ namespace C4WX1.API.Features.SysConfig.Get
         }
     }
 
-    public class GetCount(
-        THCC_C4WDEVContext dbContext) : EndpointWithoutRequest<int>
+    public class GetCount(THCC_C4WDEVContext dbContext) 
+        : EndpointWithoutRequest<int>
     {
         public override void Configure()
         {

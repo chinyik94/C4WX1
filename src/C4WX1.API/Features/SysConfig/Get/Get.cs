@@ -18,12 +18,12 @@ namespace C4WX1.API.Features.SysConfig.Get
         }
     }
 
-    public class Get(
-        THCC_C4WDEVContext dbContext): Endpoint<GetSysConfigDto, SysConfigDto, SysConfigGetMapper>
+    public class Get(THCC_C4WDEVContext dbContext)
+        : Endpoint<GetSysConfigDto, SysConfigDto, SysConfigGetMapper>
     {
         public override void Configure()
         {
-            Get("sysconfig");
+            Get("sysconfig/config-name/{configName}");
             Description(b => b
                 .Produces<SysConfigDto>()
                 .Produces(404)

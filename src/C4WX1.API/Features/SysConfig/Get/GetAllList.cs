@@ -17,12 +17,12 @@ namespace C4WX1.API.Features.SysConfig.Get
         }
     }
 
-    public class GetAllList(
-        THCC_C4WDEVContext dbContext) : EndpointWithoutRequest<IEnumerable<SysConfigDto>, SysConfigGetMapper>
+    public class GetAllList(THCC_C4WDEVContext dbContext) 
+        : EndpointWithoutRequest<IEnumerable<SysConfigDto>, SysConfigGetMapper>
     {
         public override void Configure()
         {
-            Get("sysconfig/list/all");
+            Get("sysconfig/all");
             AllowAnonymous();
             Description(b => b
                 .Produces<IEnumerable<SysConfigDto>>()

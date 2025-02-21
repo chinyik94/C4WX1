@@ -30,14 +30,14 @@ namespace C4WX1.API.Features.SysConfig.Update
         }
     }
 
-    public class Update(
-        THCC_C4WDEVContext dbContext): Endpoint<List<UpdateSysConfigDto>>
+    public class Update(THCC_C4WDEVContext dbContext)
+        : Endpoint<List<UpdateSysConfigDto>>
     {
         public override void Configure()
         {
             Put("sysconfig");
             Description(b => b
-                .Accepts<IEnumerable<UpdateSysConfigDto>>("application/json")
+                .Accepts<IEnumerable<UpdateSysConfigDto>>()
                 .Produces(204)
                 .Produces(404)
                 .ProducesProblemFE<InternalErrorResponse>(500));
