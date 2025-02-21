@@ -1,12 +1,17 @@
+using C4WX1.API.Features.Activity.Repository;
+using C4WX1.API.Features.Branch.Repository;
 using C4WX1.API.Features.Chat.Repository;
 using C4WX1.API.Features.Generator;
 using C4WX1.API.Features.Security;
+using C4WX1.API.Features.SysConfig.Repository;
 using C4WX1.Database.Models;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 using Serilog;
 using Serilog.Events;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,11 +35,15 @@ try
     builder.Services.AddSerilog();
 
     builder.Services.AddDbContext<THCC_C4WDEVContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+        options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
     builder.Services.AddTransient<IChatRepository, ChatRepository>();
     builder.Services.AddTransient<ISecurityService, SecurityService>();
     builder.Services.AddTransient<IPasswordGenerator, PasswordGenerator>();
+    builder.Services.AddTransient<ISysConfigRepository, SysConfigRepository>();
+    builder.Services.AddTransient<IActivityRepository, ActivityRepository>();
+    builder.Services.AddTransient<IChatRepository, ChatRepository>();
+    builder.Services.AddTransient<IBranchRepository, BranchRepository>();
 
     var app = builder.Build();
 
@@ -49,8 +58,17 @@ try
                 ep.Description(b =>
                     b.ProducesProblemFE<InternalErrorResponse>(500));
             };
+            c.Serializer.Options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         })
         .UseSwaggerGen();
+
+    app.UseMetricServer();
+    app.UseHttpMetrics(options =>
+    {
+        options.AddCustomLabel("route", context =>
+            context.Request.Path.HasValue ? context.Request.Path.Value : "unknown");
+        options.ReduceStatusCodeCardinality();
+    });
 
     app.UseHttpsRedirection();
 

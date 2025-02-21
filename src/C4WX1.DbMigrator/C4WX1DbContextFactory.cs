@@ -16,7 +16,7 @@ namespace C4WX1.DbMigrator
 
             var optionsBuilder = new DbContextOptionsBuilder<THCC_C4WDEVContext>();
             optionsBuilder.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection"),
+                configuration.GetConnectionString("Default"),
                 options => options.UseNodaTime());
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
