@@ -1,4 +1,5 @@
-﻿using C4WX1.Database.Models;
+﻿using C4WX1.API.Features.SysConfig.Constants;
+using C4WX1.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 
@@ -14,35 +15,35 @@ namespace C4WX1.API.Features.Generator
             var rnd = new Random(seed);
 
             var passwordSysConfigs = await dbContext.SysConfig
-                .Where(x => x.ConfigName == "MinLength"
-                    || x.ConfigName == "MaxLength"
-                    || x.ConfigName == "PasswordNumberLength"
-                    || x.ConfigName == "PasswordUpperLength"
-                    || x.ConfigName == "PasswordSpecialLength"
-                    || x.ConfigName == "PasswordSpecialCharacters")
+                .Where(x => x.ConfigName == SysConfigNames.MinLength
+                    || x.ConfigName == SysConfigNames.MaxLength
+                    || x.ConfigName == SysConfigNames.PasswordNumberLength
+                    || x.ConfigName == SysConfigNames.PasswordUpperLength
+                    || x.ConfigName == SysConfigNames.PasswordSpecialLength
+                    || x.ConfigName == SysConfigNames.PasswordSpecialCharacters)
                 .ToListAsync();
 
-            var minLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == "MinLength").ConfigValue, out int parsedMinLength)
+            var minLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.MinLength).ConfigValue, out int parsedMinLength)
                 ? 8
                 : parsedMinLength;
 
-            var maxLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == "MaxLength").ConfigValue, out int parsedMaxLength)
+            var maxLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.MaxLength).ConfigValue, out int parsedMaxLength)
                 ? 16
                 : parsedMaxLength;
 
-            var numberLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == "PasswordNumberLength").ConfigValue, out int parsedNumberLength)
+            var numberLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.PasswordNumberLength).ConfigValue, out int parsedNumberLength)
                 ? 1
                 : parsedNumberLength;
 
-            var upperLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == "PasswordUpperLength").ConfigValue, out int parsedUpperLength)
+            var upperLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.PasswordUpperLength).ConfigValue, out int parsedUpperLength)
                 ? 1
                 : parsedUpperLength;
 
-            var specialLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == "PasswordSpecialLength").ConfigValue, out int parsedSpecialLength)
+            var specialLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.PasswordSpecialLength).ConfigValue, out int parsedSpecialLength)
                 ? 1
                 : parsedSpecialLength;
 
-            var specialCharacters = passwordSysConfigs.First(x => x.ConfigName == "PasswordSpecialCharacters").ConfigValue;
+            var specialCharacters = passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.PasswordSpecialCharacters).ConfigValue;
 
             var totalCharacters = rnd.Next(minLength, maxLength);
             totalCharacters = Math.Min(totalCharacters, 8);

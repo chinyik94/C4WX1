@@ -1,12 +1,9 @@
 ﻿using FastEndpoints;
 
-namespace C4WX1.API.Features.Shared
+namespace C4WX1.API.Features.Shared.Dtos
 {
-    public class GetListRequestDto
+    public class GetListDto
     {
-        public const string Asc = "asc";
-        public const string Desc = "desc";
-
         [QueryParam]
         public int? PageIndex { get; set; }
 

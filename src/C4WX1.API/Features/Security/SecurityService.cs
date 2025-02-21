@@ -11,7 +11,7 @@ namespace C4WX1.API.Features.Security
         private const int PasswordIterations = 2;
         private const int KeySize = 256;
 
-        public string Decrypt(string cipherText)
+        public string Decrypt(string cipherText, string passPhrase = Passphrase)
         {
             if (string.IsNullOrWhiteSpace(cipherText))
             {
@@ -23,7 +23,7 @@ namespace C4WX1.API.Features.Security
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
 
             using var deriveBytes = new Rfc2898DeriveBytes(
-                Passphrase,
+                passPhrase,
                 saltValueBytes,
                 PasswordIterations,
                 HashAlgorithmName.SHA1);
