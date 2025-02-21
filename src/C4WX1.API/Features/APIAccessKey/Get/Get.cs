@@ -7,15 +7,6 @@ using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.APIAccessKey.Get
 {
-    public class GetAccessKeyRequestDto
-    {
-        [QueryParam]
-        public int? ID { get; set; }
-
-        [QueryParam]
-        public string? AccessKey { get; set; } = string.Empty;
-    }
-
     public class GetAPIAccessKeySummary : EndpointSummary
     {
         public GetAPIAccessKeySummary()
@@ -27,12 +18,12 @@ namespace C4WX1.API.Features.APIAccessKey.Get
         }
     }
 
-    public class Get(
-        THCC_C4WDEVContext dbContext): Endpoint<GetAccessKeyRequestDto, APIAccessKeyDto, APIAccessKeyMapper>
+    public class Get(THCC_C4WDEVContext dbContext)
+        : Endpoint<GetAPIAccessKeyDto, APIAccessKeyDto, APIAccessKeyMapper>
     {
         public override void Configure()
         {
-            Get("api-access-key");
+            Get("api-access-key/{id}");
             Description(b => b
                 .Produces<APIAccessKeyDto>()
                 .Produces(404)
@@ -40,26 +31,19 @@ namespace C4WX1.API.Features.APIAccessKey.Get
             Summary(new GetAPIAccessKeySummary());
         }
 
-        public override async Task HandleAsync(GetAccessKeyRequestDto req, CancellationToken ct)
+        public override async Task HandleAsync(GetAPIAccessKeyDto req, CancellationToken ct)
         {
-            var query = dbContext.APIAccessKey.AsQueryable();
-            if (req.ID != null)
-            { 
-                query = query.Where(a => a.APIAccessKeyID == req.ID);
-            }
-            if (!string.IsNullOrWhiteSpace(req.AccessKey))
-            {
-                query = query.Where(a => a.AccessKey == req.AccessKey);
-            }
+            var dto = await dbContext.APIAccessKey
+                .Where(x => x.APIAccessKeyID == req.Id
+                    && (string.IsNullOrWhiteSpace(req.AccessKey) || x.AccessKey == req.AccessKey))
+                .Select(x => Map.FromEntity(x))
+                .FirstOrDefaultAsync(ct);
 
-            var entity = await query.FirstOrDefaultAsync(ct);
-            if (entity == null)
+            if (dto == null)
             {
                 await SendNotFoundAsync(ct);
                 return;
             }
-
-            var dto = Map.FromEntity(entity);
             await SendAsync(dto, cancellation: ct);
         }
     }

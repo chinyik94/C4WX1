@@ -23,14 +23,15 @@ namespace C4WX1.API.Features.APIAccessKey.Create
     public class Create(
         THCC_C4WDEVContext dbContext,
         IPasswordGenerator passwordGenerator,
-        ISecurityService securityService): Endpoint<CreateAPIAccessKeyDto, APIAccessKeyDto, APIAccessKeyMapper>
+        ISecurityService securityService)
+        : Endpoint<CreateAPIAccessKeyDto, APIAccessKeyDto, APIAccessKeyMapper>
     {
         public override void Configure()
         {
             Post("api-access-key");
             AllowAnonymous();
             Description(b => b
-                .Accepts<CreateAPIAccessKeyDto>("application/json")
+                .Accepts<CreateAPIAccessKeyDto>()
                 .Produces<APIAccessKeyDto>()
                 .Produces(404)
                 .ProducesProblemFE<InternalErrorResponse>(500));
