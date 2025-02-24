@@ -10,5 +10,7 @@
         public const string PasswordSpecialCharacters = nameof(PasswordSpecialCharacters);
         public const string BillingProposalRunningNo = nameof(BillingProposalRunningNo);
         public const string EnterpriseAbbr = nameof(EnterpriseAbbr);
+        public const string BillingInvoiceRunningNo = nameof(BillingInvoiceRunningNo);
+        public const string ReceiptRunningNo = nameof(ReceiptRunningNo);
     }
 }

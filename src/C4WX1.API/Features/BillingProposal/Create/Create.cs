@@ -51,8 +51,7 @@ namespace C4WX1.API.Features.BillingProposal.Create
 
     public class Create(
         THCC_C4WDEVContext dbContext,
-        ISysConfigRepository sysConfigRepository,
-        ISecurityService securityService)
+        ISysConfigRepository sysConfigRepository)
         : EndpointWithMapper<CreateBillingProposalDto, BillingProposalCreateMapper>
     {
         public override void Configure()
@@ -67,15 +66,6 @@ namespace C4WX1.API.Features.BillingProposal.Create
 
         public override async Task HandleAsync(CreateBillingProposalDto req, CancellationToken ct)
         {
-            var enterpriseAbbrSysConfig = await dbContext.SysConfig
-                .Where(x => x.ConfigName == SysConfigNames.EnterpriseAbbr)
-                .FirstOrDefaultAsync(ct);
-            if (enterpriseAbbrSysConfig == null || string.IsNullOrWhiteSpace(enterpriseAbbrSysConfig.ConfigValue))
-            {
-                ThrowError($"SysConfig {SysConfigNames.EnterpriseAbbr} is not set!");
-                return;
-            }
-
             var entity = Map.ToEntity(req);
             var groupNumber = req.GroupNumber;
             var version = 1;
@@ -93,7 +83,7 @@ namespace C4WX1.API.Features.BillingProposal.Create
             }
             entity.GroupNumber = groupNumber;
             entity.Version = (short)version;
-            var enterpriseAbbr = securityService.Decrypt(enterpriseAbbrSysConfig.ConfigValue, "ThC2RaPt3Ch20I7");
+            var enterpriseAbbr = sysConfigRepository.GetEnterpriseAbbrAsync(ct);
             entity.ProposalNumber = $"{enterpriseAbbr}P{groupNumber}-{version}";
 
             dbContext.BillingProposal.Add(entity);

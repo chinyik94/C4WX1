@@ -3,7 +3,7 @@ using C4WX1.API.Features.Shared.Constants;
 
 namespace C4WX1.API.Features.BillingProposal.Extensions
 {
-    public static class BillingProposalQueryExtensions
+    public static class QueryExtensions
     {
         public static IQueryable<Database.Models.BillingProposal> Sort(
             this IQueryable<Database.Models.BillingProposal> query,

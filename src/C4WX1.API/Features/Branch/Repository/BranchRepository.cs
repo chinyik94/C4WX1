@@ -7,7 +7,7 @@ namespace C4WX1.API.Features.Branch.Repository
     public class BranchRepository(IConfiguration configuration)
         : IBranchRepository
     {
-        private readonly string connectionString = configuration.GetConnectionString("Default");
+        private readonly string? connectionString = configuration.GetConnectionString("Default");
 
         public async Task<bool> CanDeleteBranchAsync(int branchId)
         {

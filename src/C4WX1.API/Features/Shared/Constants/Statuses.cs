@@ -5,5 +5,9 @@
         public const string Draft = nameof(Draft);
         public const string Sent = nameof(Sent);
         public const string Success = nameof(Success);
+        public const string Submitted = nameof(Submitted);
+        public const string PendingAck = "Pending Ack";
+        public const string Paid = nameof(Paid);
+        public const string Outstanding = nameof(Outstanding);
     }
 }
