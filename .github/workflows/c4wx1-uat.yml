@@ -1,38 +1,30 @@
-name: Deploy to ECS
+name: Deploy to ECS UAT
 
 on:
   push:
     branches:
-      - master  # Trigger only on master branch update
-  workflow_dispatch:  # Allow manual trigger
+      - master  # Adjust based on your branch strategy
 
 env:
-  AWS_REGION: ap-southeast-1  # Update with your AWS region
-  ECR_REPOSITORY: c4wx1-api  # Update with your ECR repository name
-  ECS_CLUSTER: c4wx1-api-cluster  # Update with your ECS cluster name
-  ECS_SERVICE: c4wx1-api-uat  # Update with your ECS service name
-  ECS_TASK_DEFINITION: ecs-task-definition.json  # Path to your task definition file
+  AWS_REGION: ap-southeast-1  
+  ECR_REPOSITORY: c4wx1-api        
+  ECS_SERVICE: c4wx1-api-uat               
+  ECS_CLUSTER: c4wx1-api-cluster 
+  CONTAINER_NAME: c4wx1-api-uat
+  ECS_TASK_DEFINITION_NAME: c4wx1-api-uat-task-definition           
 
 jobs:
   deploy:
-    name: Deploy to ECS
+    name: Deploy
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate Image Tag (Date + Commit Hash)
-        id: tag
-        run: |
-          TIMESTAMP=$(date +"%Y%m%d")
-          COMMIT_HASH=$(git rev-parse --short HEAD)
-          IMAGE_TAG="$TIMESTAMP-$COMMIT_HASH"
-          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
-          echo "Generated Image Tag: $IMAGE_TAG"
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -40,44 +32,49 @@ jobs:
 
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
 
-      - name: Build, Tag, and Push Docker Image to ECR
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG"
-          docker build -t $IMAGE_URI -f ./src/C4WX1.API/Dockerfile.UAT .
-          docker push $IMAGE_URI
-          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
-          echo "Pushed Image: $IMAGE_URI"
+          IMAGE_TAG=$(date +%y%m%d)-$(echo $GITHUB_SHA | cut -c1-7)-uat
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+      
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f src/C4WX1.API/Dockerfile.UAT .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+      
+      
+      - name: Retrieve the current ECS task definition
+        run: |
+          aws ecs describe-task-definition \
+            --task-definition ${{ env.ECS_TASK_DEFINITION_NAME }} \
+            --query taskDefinition > task-definition.json
+          echo "ECS_TASK_DEFINITION=task-definition.json" >> $GITHUB_ENV
 
-      - name: Download ECS Task Definition
+      - name: Clean up task-definition.json
         run: |
-          aws ecs describe-task-definition --task-definition ${{ env.ECS_SERVICE }} \
-          --query taskDefinition > task-definition.json
+          jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy, .enableFaultInjection)' task-definition.json > cleaned-task-definition.json
+          mv cleaned-task-definition.json task-definition.json
 
-      - name: Update ECS Task Definition with New Image
-        id: update-task-def
-        run: |
-          NEW_TASK_DEF=$(jq --arg IMAGE_URI "$IMAGE_URI" \
-            '.containerDefinitions[0].image = $IMAGE_URI' task-definition.json)
-          echo "$NEW_TASK_DEF" > new-task-def.json
-          echo "UPDATED_TASK_DEF=new-task-def.json" >> $GITHUB_ENV
+      - name: Set ECS_TASK_DEFINITION environment variable
+        run: echo "ECS_TASK_DEFINITION=task-definition.json" >> $GITHUB_ENV
 
-      - name: Register New ECS Task Definition
-        id: register-task-def
-        run: |
-          TASK_REVISION=$(aws ecs register-task-definition --cli-input-json file://${{ env.UPDATED_TASK_DEF }} \
-            --query "taskDefinition.revision" --output text)
-          echo "TASK_REVISION=$TASK_REVISION" >> $GITHUB_ENV
-          echo "Registered New Task Definition Revision: $TASK_REVISION"
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
 
-      - name: Deploy New Task Definition to ECS
-        run: |
-          aws ecs update-service --cluster ${{ env.ECS_CLUSTER }} \
-          --service ${{ env.ECS_SERVICE }} \
-          --task-definition ${{ env.ECS_SERVICE }}:${{ env.TASK_REVISION }} \
-          --force-new-deployment
-
-      - name: Output Deployment Details
-        run: |
-          echo "Deployment successful! New ECS Task Definition: ${{ env.TASK_REVISION }}"
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
