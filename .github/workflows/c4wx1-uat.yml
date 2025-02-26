@@ -45,7 +45,7 @@ jobs:
       - name: Build, Tag, and Push Docker Image to ECR
         run: |
           IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG"
-          docker build -t $IMAGE_URI .
+          docker build -t $IMAGE_URI -f ./src/C4WX1.API/Dockerfile.UAT .
           docker push $IMAGE_URI
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
           echo "Pushed Image: $IMAGE_URI"
