@@ -27,9 +27,6 @@ namespace C4WX1.API.Features.Branch.Get
         {
             Get("branch/for-control");
             Summary(new GetBranchListForControlSummary());
-            Description(b => b
-                .Produces<IEnumerable<BranchDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(CancellationToken ct)

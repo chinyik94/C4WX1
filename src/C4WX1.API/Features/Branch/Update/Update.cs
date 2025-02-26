@@ -41,13 +41,10 @@ namespace C4WX1.API.Features.Branch.Update
         public override void Configure()
         {
             Put("branch/{branchID}");
-            Summary(new UpdateBranchSummary());
             Description(b => b
-                .Accepts<UpdateBranchDto>()
-                .Produces(204)
-                .Produces(400)
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+                .ProducesProblemFE(400)
+                .Produces(404));
+            Summary(new UpdateBranchSummary());
         }
 
         public override async Task HandleAsync(UpdateBranchDto req, CancellationToken ct)

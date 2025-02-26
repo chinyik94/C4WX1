@@ -28,12 +28,8 @@ namespace C4WX1.API.Features.Branch.Get
         public override void Configure()
         {
             Get("branch/{id}");
+            Description(b => b.Produces(404));
             Summary(new GetBranchByIdSummary());
-            Description(b => b
-                .Accepts<GetByIdDto>()
-                .Produces<BranchDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)

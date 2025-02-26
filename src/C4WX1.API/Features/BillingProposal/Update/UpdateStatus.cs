@@ -36,12 +36,10 @@ namespace C4WX1.API.Features.BillingProposal.Update
         public override void Configure()
         {
             Put("billing-proposal/{id}/status");
-            Summary(new UpdateBillingProposalStatusSummary());
             Description(b => b
-                .Accepts<UpdateBillingProposalStatusDto>()
-                .Produces(400)
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+                .ProducesProblemFE(400)
+                .Produces(404));
+            Summary(new UpdateBillingProposalStatusSummary());
         }
 
         public override async Task HandleAsync(UpdateBillingProposalStatusDto req, CancellationToken ct)

@@ -29,12 +29,7 @@ namespace C4WX1.API.Features.APIAccessKey.Create
         public override void Configure()
         {
             Post("api-access-key");
-            AllowAnonymous();
-            Description(b => b
-                .Accepts<CreateAPIAccessKeyDto>()
-                .Produces<APIAccessKeyDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+            Description(b => b.Produces(404));
             Summary(new CreateAPIAccessKeySummary());
         }
 

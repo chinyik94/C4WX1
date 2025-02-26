@@ -1,4 +1,4 @@
-﻿using C4WX1.API.Features.Chat.Dtos;
+﻿using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
@@ -12,36 +12,27 @@ namespace C4WX1.API.Features.Chat.Delete
         {
             Summary = "Delete Chat";
             Description = "Delete an existing Chat";
-            ExampleRequest = new DeleteChatDto
-            {
-                ChatID = 1,
-                UserID = 1
-            };
             Responses[204] = "Chat deleted successfully";
             Responses[404] = "Chat not found";
         }
     }
 
     public class Delete(THCC_C4WDEVContext dbContext) 
-        : Endpoint<DeleteChatDto>
+        : Endpoint<DeleteByIdDto>
     {
         public override void Configure()
         {
             Delete("chat/{chatID}");
-            AllowAnonymous();
-            Description(b => b
-                .Accepts<DeleteChatDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+            Description(b => b.Produces(404));
             Summary(new DeleteChatSummary());
         }
 
-        public override async Task HandleAsync(DeleteChatDto req, CancellationToken ct)
+        public override async Task HandleAsync(DeleteByIdDto req, CancellationToken ct)
         {
             var entity = dbContext.Chat
                 .Where(x => !x.IsDeleted
-                    && x.ChatID == req.ChatID
-                    && x.CreatedBy_FK == req.UserID);
+                    && x.ChatID == req.Id
+                    && x.CreatedBy_FK == req.UserId);
             if (entity == null)
             {
                 await SendNotFoundAsync(ct);
@@ -49,12 +40,14 @@ namespace C4WX1.API.Features.Chat.Delete
             }
             var deleteDurationConfig = await dbContext.SysConfig
                 .FirstOrDefaultAsync(x => x.ConfigName == "DeleteMessageDuration", ct);
-            var deleteDuration = int.TryParse(deleteDurationConfig?.ConfigValue ?? string.Empty, out var value)
+            var deleteDuration = int
+                .TryParse(deleteDurationConfig?.ConfigValue ?? string.Empty, out var value)
                 ? value 
                 : 30;
             foreach (var e in entity)
             {
-                if ((DateTime.Now - e.CreatedDate).TotalMinutes <= deleteDuration || e.ParentID_FK == req.ChatID)
+                if ((DateTime.Now - e.CreatedDate).TotalMinutes <= deleteDuration 
+                    || e.ParentID_FK == req.Id)
                 {
                     e.IsDeleted = true;
                 }

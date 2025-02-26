@@ -36,12 +36,9 @@ namespace C4WX1.API.Features.Chat.Create
         public override void Configure()
         {
             Post("chat");
-            AllowAnonymous();
             Description(b => b
-                .Accepts<CreateChatDto>()
-                .Produces<ChatDto>()
-                .ProducesProblemFE()
-                .ProducesProblemFE<InternalErrorResponse>(500));
+                .ProducesProblemFE(400)
+                .Produces(404));
             Summary(new CreateChatSummary());
         }
 

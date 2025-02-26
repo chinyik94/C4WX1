@@ -29,10 +29,6 @@ namespace C4WX1.API.Features.Branch.Get
         {
             Get("branch");
             Summary(new GetBranchListSummary());
-            Description(b => b
-                .Accepts<GetListDto>()
-                .Produces<IEnumerable<BranchDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetListDto req, CancellationToken ct)

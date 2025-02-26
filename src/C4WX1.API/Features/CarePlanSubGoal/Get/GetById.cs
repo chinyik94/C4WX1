@@ -28,12 +28,8 @@ namespace C4WX1.API.Features.CarePlanSubGoal.Get
         public override void Configure()
         {
             Get("care-plan-sub-goal/{id}");
+            Description(b => b.Produces(404));
             Summary(new GetCarePlanSubGoalByIdSummary());
-            Description(b => b
-                .Accepts<GetByIdDto>()
-                .Produces<CarePlanSubGoalDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)

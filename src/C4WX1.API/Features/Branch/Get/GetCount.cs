@@ -22,9 +22,6 @@ namespace C4WX1.API.Features.Branch.Get
         {
             Get("branch/count");
             Summary(new GetBranchCountSummary());
-            Description(b => b
-                .Produces<int>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(CancellationToken ct)

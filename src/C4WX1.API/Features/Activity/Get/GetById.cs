@@ -28,13 +28,7 @@ namespace C4WX1.API.Features.Activity.Get
         public override void Configure()
         {
             Get("activity/{Id}");
-            AllowAnonymous();
-            Description(b => b
-                .Accepts<GetByIdDto>()
-                .Produces<ActivityDto>()
-                .Produces(200)
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+            Description(b => b.Produces(404));
             Summary(new GetActivityByIdSummary());
         }
 

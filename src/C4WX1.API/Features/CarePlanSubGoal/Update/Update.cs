@@ -31,11 +31,8 @@ namespace C4WX1.API.Features.CarePlanSubGoal.Update
         public override void Configure()
         {
             Put("care-plan-sub-goal/{carePlanSubGoalID}");
+            Description(b => b.Produces(404));
             Summary(new UpdateCarePlanSubGoalSummary());
-            Description(b => b
-                .Accepts<UpdateCarePlanSubGoalDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(UpdateCarePlanSubGoalDto req, CancellationToken ct)

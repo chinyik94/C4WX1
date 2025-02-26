@@ -23,10 +23,6 @@ namespace C4WX1.API.Features.BillingProposal.Get
         {
             Get("billing-proposal/session-balance");
             Summary(new GetBillingProposalSessionBalanceSummary());
-            Description(b => b
-                .Accepts<GetBillingProposalSessionBalanceDto>()
-                .Produces<string>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetBillingProposalSessionBalanceDto req, CancellationToken ct)

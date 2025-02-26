@@ -37,10 +37,8 @@ namespace C4WX1.API.Features.C4WImage.Update
         public override void Configure()
         {
             Put("c4w-image/{c4wImageId}");
+            Description(b => b.Produces(404));
             Summary(new UpdateC4WImageSummary());
-            Description(b => b
-                .Accepts<UpdateC4WImageDto>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(UpdateC4WImageDto req, CancellationToken ct)

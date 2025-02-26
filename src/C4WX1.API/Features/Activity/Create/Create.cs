@@ -30,9 +30,6 @@ namespace C4WX1.API.Features.Activity.Create
         public override void Configure()
         {
             Post("activity");
-            Description(b => b
-                .Accepts<CreateActivityDto>()
-                .Produces(204));
             Summary(new CreateActivitySummary());
         }
 

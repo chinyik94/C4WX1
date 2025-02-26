@@ -36,11 +36,7 @@ namespace C4WX1.API.Features.SysConfig.Update
         public override void Configure()
         {
             Put("sysconfig");
-            Description(b => b
-                .Accepts<IEnumerable<UpdateSysConfigDto>>()
-                .Produces(204)
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+            Description(b => b.Produces(404));
             Summary(new UpdateSysConfigSummary());
         }
 

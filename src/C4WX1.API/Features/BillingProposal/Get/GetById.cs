@@ -25,12 +25,8 @@ namespace C4WX1.API.Features.BillingProposal.Get
         public override void Configure()
         {
             Get("billing-proposal/{id}");
+            Description(b => b.Produces(404));
             Summary(new GetBillingProposalSummary());
-            Description(b => b
-                .Accepts<GetByIdDto>()
-                .Produces<BillingProposalDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)

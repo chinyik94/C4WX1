@@ -29,9 +29,6 @@ namespace C4WX1.API.Features.CarePlanSubGoal.Create
         {
             Post("care-plan-sub-goal");
             Summary(new CreateCarePlanSubGoalSummary());
-            Description(b => b
-                .Accepts<CreateCarePlanSubGoalDto>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(CreateCarePlanSubGoalDto req, CancellationToken ct)

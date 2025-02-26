@@ -28,11 +28,8 @@ namespace C4WX1.API.Features.BillingProposal.Delete
         public override void Configure()
         {
             Delete("billing-proposal/{id}");
+            Description(b => b.Produces(404));
             Summary(new DeleteBillingProposalSummary());
-            Description(b => b
-                .Accepts<DeleteBillingProposalDto>()
-                .Produces(404)
-                .Produces<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(DeleteBillingProposalDto req, CancellationToken ct)

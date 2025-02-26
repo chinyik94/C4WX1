@@ -1,5 +1,6 @@
 using C4WX1.API.Features.Activity.Repository;
 using C4WX1.API.Features.Branch.Repository;
+using C4WX1.API.Features.CarePlanSubGoal.Repository;
 using C4WX1.API.Features.Chat.Repository;
 using C4WX1.API.Features.Generator;
 using C4WX1.API.Features.Security;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Prometheus;
 using Serilog;
 using Serilog.Events;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +46,7 @@ try
     builder.Services.AddTransient<IActivityRepository, ActivityRepository>();
     builder.Services.AddTransient<IChatRepository, ChatRepository>();
     builder.Services.AddTransient<IBranchRepository, BranchRepository>();
+    builder.Services.AddTransient<ICarePlanSubGoalRepository, CarePlanSubGoalRepository>();
 
     var app = builder.Build();
 
@@ -59,6 +62,8 @@ try
                     b.ProducesProblemFE<InternalErrorResponse>(500));
             };
             c.Serializer.Options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            c.Serializer.Options.PropertyNamingPolicy = null;
+            c.Binding.UsePropertyNamingPolicy = true;
         })
         .UseSwaggerGen();
 

@@ -24,10 +24,6 @@ namespace C4WX1.API.Features.SysConfig.Get
         public override void Configure()
         {
             Get("sysconfig");
-            Description(b => b
-                .Accepts<GetSysConfigListDto>()
-                .Produces<IEnumerable<SysConfigDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetSysConfigListSummary());
         }
 

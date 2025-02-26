@@ -28,10 +28,6 @@ namespace C4WX1.API.Features.BillingProposal.Get
         {
             Get("billing-proposal/all");
             Summary(new GetAllBillingProposalListSummary());
-            Description(b => b
-                .Accepts<GetAllBillingProposalListDto>()
-                .Produces<IEnumerable<BillingProposalDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetAllBillingProposalListDto req, CancellationToken ct)

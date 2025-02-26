@@ -29,10 +29,6 @@ namespace C4WX1.API.Features.CarePlanSubGoal.Get
         {
             Get("care-plan-sub-goal");
             Summary(new GetCarePlanSubGoalListSummary());
-            Description(b => b
-                .Accepts<GetListDto>()
-                .Produces<IEnumerable<CarePlanSubGoalDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetListDto req, CancellationToken ct)

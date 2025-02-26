@@ -34,10 +34,6 @@ namespace C4WX1.API.Features.C4WDeviceToken.Update
         {
             Put("c4w-device-token/{c4WDeviceTokenId}");
             Summary(new UpdateC4WDeviceTokenSummary());
-            Description(b => b
-                .Accepts<UpdateC4WDeviceTokenDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(UpdateC4WDeviceTokenDto req, CancellationToken ct)

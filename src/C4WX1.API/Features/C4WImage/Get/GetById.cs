@@ -25,11 +25,8 @@ namespace C4WX1.API.Features.C4WImage.Get
         public override void Configure()
         {
             Get("c4w-image/{id}");
+            Description(b => b.Produces(404));
             Summary(new GetC4WImageByIdSummary());
-            Description(b => b
-                .Accepts<GetByIdDto>()
-                .Produces<C4WImageDto>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)

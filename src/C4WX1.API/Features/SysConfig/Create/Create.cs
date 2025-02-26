@@ -29,9 +29,6 @@ namespace C4WX1.API.Features.SysConfig.Create
         public override void Configure()
         {
             Post("sysconfig");
-            Description(b => b
-                .Accepts<CreateSysConfigDto>()
-                .Produces(204));
             Summary(new CreateSysConfigSummary());
         }
 

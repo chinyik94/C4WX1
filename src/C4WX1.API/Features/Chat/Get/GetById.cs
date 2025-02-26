@@ -25,11 +25,6 @@ namespace C4WX1.API.Features.Chat.Get
         public override void Configure()
         {
             Get("chat/{id}");
-            AllowAnonymous();
-            Description(b => b
-                .Accepts<GetByIdDto>()
-                .Produces<ChatDto>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetChatByIdSummary());
         }
 

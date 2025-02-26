@@ -25,10 +25,6 @@ namespace C4WX1.API.Features.BillingProposal.Get
         {
             Get("billing-proposal/active/{patientId}");
             Summary(new GetActiveBillingProposalListSummary());
-            Description(b => b.
-                Accepts<GetActiveBillingProposalListDto>()
-                .Produces<IEnumerable<BillingProposalDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetActiveBillingProposalListDto req, CancellationToken ct)

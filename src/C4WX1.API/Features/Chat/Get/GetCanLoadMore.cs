@@ -25,11 +25,6 @@ namespace C4WX1.API.Features.Chat.Get
         public override void Configure()
         {
             Get("chat/can-load-more");
-            AllowAnonymous();
-            Description(b => b
-                .Accepts<GetCanLoadMoreChatDto>()
-                .Produces<bool>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetCanLoadMoreChatSummary());
         }
 

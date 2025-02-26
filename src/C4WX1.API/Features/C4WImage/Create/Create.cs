@@ -35,9 +35,6 @@ namespace C4WX1.API.Features.C4WImage.Create
         {
             Post("c4w-image");
             Summary(new CreateC4WImageSummary());
-            Description(b => b
-                .Accepts<CreateC4WImageDto>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(CreateC4WImageDto req, CancellationToken ct)

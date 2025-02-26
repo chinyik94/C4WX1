@@ -58,10 +58,6 @@ namespace C4WX1.API.Features.BillingProposal.Create
         {
             Post("billing-proposal");
             Summary(new CreateBillingProposalSummary());
-            Description(b => b
-                .Accepts<CreateBillingProposalDto>()
-                .Produces(204)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(CreateBillingProposalDto req, CancellationToken ct)

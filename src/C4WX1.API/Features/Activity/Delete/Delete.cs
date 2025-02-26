@@ -1,4 +1,4 @@
-﻿using C4WX1.API.Features.Activity.Dtos;
+﻿using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
@@ -12,35 +12,25 @@ namespace C4WX1.API.Features.Activity.Delete
         {
             Summary = "Delete Activity";
             Description = "Delete an existing Activity";
-            ExampleRequest = new DeleteActivityDto
-            {
-                ActivityID = 1,
-                UserID = 1
-            };
             Responses[204] = "Activity deleted successfully";
             Responses[404] = "Activity not found";
         }
     }
 
     public class Delete(THCC_C4WDEVContext dbContext)
-        : Endpoint<DeleteActivityDto>
+        : Endpoint<DeleteByIdDto>
     {
         public override void Configure()
         {
             Delete("activity/{activityID}");
-            AllowAnonymous();
-            Description(b => b
-                .Accepts<DeleteActivityDto>()
-                .Produces(204)
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+            Description(b => b.Produces(404));
             Summary(new DeleteActivitySummary());
         }
 
-        public override async Task HandleAsync(DeleteActivityDto req, CancellationToken ct)
+        public override async Task HandleAsync(DeleteByIdDto req, CancellationToken ct)
         {
             var entity = await dbContext.Activity
-                .FirstOrDefaultAsync(a => a.ActivityID == req.ActivityID && !a.IsDeleted, ct);
+                .FirstOrDefaultAsync(a => a.ActivityID == req.Id && !a.IsDeleted, ct);
             if (entity == null)
             {
                 await SendNotFoundAsync(ct);
@@ -48,7 +38,7 @@ namespace C4WX1.API.Features.Activity.Delete
             }
 
             entity.IsDeleted = true;
-            entity.ModifiedBy_FK = req.UserID;
+            entity.ModifiedBy_FK = req.UserId;
             entity.ModifiedDate = DateTime.Now;
             await dbContext.SaveChangesAsync(ct);
             await SendNoContentAsync(ct);

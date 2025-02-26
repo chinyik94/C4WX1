@@ -31,9 +31,6 @@ namespace C4WX1.API.Features.C4WDeviceToken.Create
         {
             Post("c4w-device-token");
             Summary(new CreateC4WDeviceTokenSummary());
-            Description(b => b
-                .Accepts<CreateC4WDeviceTokenDto>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(CreateC4WDeviceTokenDto req, CancellationToken ct)

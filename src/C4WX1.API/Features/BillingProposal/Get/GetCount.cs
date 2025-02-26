@@ -23,10 +23,6 @@ namespace C4WX1.API.Features.BillingProposal.Get
         {
             Get("billing-proposal/count");
             Summary(new GetBillingProposalCountSummary());
-            Description(b => b
-                .Accepts<GetBillingProposalCountDto>()
-                .Produces<int>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetBillingProposalCountDto req, CancellationToken ct)

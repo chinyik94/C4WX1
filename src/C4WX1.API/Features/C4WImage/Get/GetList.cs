@@ -26,10 +26,6 @@ namespace C4WX1.API.Features.C4WImage.Get
         {
             Get("c4w-image");
             Summary(new GetC4WImageListSummary());
-            Description(b => b
-                .Accepts<GetC4WImageListDto>()
-                .Produces<IEnumerable<C4WImageDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetC4WImageListDto req, CancellationToken ct)

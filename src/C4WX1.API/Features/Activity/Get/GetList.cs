@@ -28,11 +28,6 @@ namespace C4WX1.API.Features.Activity.Get
         public override void Configure()
         {
             Get("activity");
-            AllowAnonymous();
-            Description(b => b
-                .Accepts<GetListDto>()
-                .Produces<IEnumerable<ActivityDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetActivityListSummary());
         }
 

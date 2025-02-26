@@ -40,12 +40,8 @@ namespace C4WX1.API.Features.Branch.Create
         public override void Configure()
         {
             Post("branch");
+            Description(b => b.ProducesProblemFE(400));
             Summary(new CreateBranchSummary());
-            Description(b => b
-                .Accepts<CreateBranchDto>()
-                .Produces(204)
-                .Produces(400)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(CreateBranchDto req, CancellationToken ct)

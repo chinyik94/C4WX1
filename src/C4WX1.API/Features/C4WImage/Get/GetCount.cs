@@ -23,10 +23,6 @@ namespace C4WX1.API.Features.C4WImage.Get
         {
             Get("c4w-image/count");
             Summary(new GetC4WImageCountSummary());
-            Description(b => b
-                .Accepts<GetC4WImageCountByDateDto>()
-                .Produces<int>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetC4WImageCountByDateDto req, CancellationToken ct)

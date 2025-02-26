@@ -24,12 +24,8 @@ namespace C4WX1.API.Features.C4WDeviceToken.Get
         public override void Configure()
         {
             Get("c4w-device-token/old-device-token");
+            Description(b => b.Produces(404));
             Summary(new GetC4WDeviceTokenByOldDeviceTokenSummary());
-            Description(b => b
-                .Accepts<GetC4WDeviceTokenByOldDeviceTokenDto>()
-                .Produces<C4WDeviceTokenDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(GetC4WDeviceTokenByOldDeviceTokenDto req, CancellationToken ct)

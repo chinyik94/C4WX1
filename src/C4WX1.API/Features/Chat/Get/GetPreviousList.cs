@@ -28,11 +28,6 @@ namespace C4WX1.API.Features.Chat.Get
         public override void Configure()
         {
             Get("chat/previous");
-            AllowAnonymous();
-            Description(b => b
-                .Accepts<GetChatListDto>()
-                .Produces<IEnumerable<ChatDto>>()
-                .ProducesProblemFE<InternalErrorResponse>(500));
             Summary(new GetPreviousChatListSummary());
         }
 

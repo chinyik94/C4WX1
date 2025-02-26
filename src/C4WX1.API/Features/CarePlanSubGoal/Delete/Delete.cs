@@ -23,11 +23,8 @@ namespace C4WX1.API.Features.CarePlanSubGoal.Delete
         public override void Configure()
         {
             Delete("care-plan-sub-goal/{id}");
+            Description(b => b.Produces(404));
             Summary(new DeleteCarePlanSubGoalSummary());
-            Description(b => b
-                .Accepts<DeleteByIdDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
         public override async Task HandleAsync(DeleteByIdDto req, CancellationToken ct)

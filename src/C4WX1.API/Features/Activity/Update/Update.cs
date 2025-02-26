@@ -33,11 +33,7 @@ namespace C4WX1.API.Features.Activity.Update
         public override void Configure()
         {
             Put("activity/{activityID}");
-            Description(b => b
-                .Accepts<UpdateActivityDto>()
-                .Produces(204)
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+            Description(b => b.Produces(404));
             Summary(new UpdateActivitySummary());
         }
 

@@ -24,10 +24,7 @@ namespace C4WX1.API.Features.APIAccessKey.Get
         public override void Configure()
         {
             Get("api-access-key/{id}");
-            Description(b => b
-                .Produces<APIAccessKeyDto>()
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+            Description(b => b.Produces(404));
             Summary(new GetAPIAccessKeySummary());
         }
 

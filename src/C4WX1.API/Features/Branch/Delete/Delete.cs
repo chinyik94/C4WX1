@@ -32,13 +32,10 @@ namespace C4WX1.API.Features.Branch.Delete
         public override void Configure()
         {
             Delete("branch/{id}");
-            Summary(new DeleteBranchSummary());
             Description(b => b
-                .Accepts<DeleteBranchDto>()
-                .Produces(204)
-                .Produces(400)
-                .Produces(404)
-                .ProducesProblemFE<InternalErrorResponse>(500));
+                .ProducesProblemFE(400)
+                .Produces(404));
+            Summary(new DeleteBranchSummary());
         }
 
         public override async Task HandleAsync(DeleteBranchDto req, CancellationToken ct)
