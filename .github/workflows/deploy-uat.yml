@@ -1,9 +1,13 @@
-name: Deploy to ECS UAT
+name: Deploy C4WX1 to ECS UAT
 
 on:
   push:
     branches:
-      - master  # Adjust based on your branch strategy
+      - master
+    paths:
+      - 'src/C4WX1.API/**'
+      - 'src/C4WX1.Database/**'
+      - '.github/workflows/deploy-uat.yml'
 
 env:
   AWS_REGION: ap-southeast-1  
@@ -15,9 +19,9 @@ env:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy to UAT
     runs-on: ubuntu-latest
-    environment: production
+    environment: uat
 
     steps:
       - name: Checkout

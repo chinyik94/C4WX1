@@ -22,7 +22,7 @@ namespace C4WX1.API.Features.Chat.Delete
     {
         public override void Configure()
         {
-            Delete("chat/{chatID}");
+            Delete("chat/{id}");
             Description(b => b.Produces(404));
             Summary(new DeleteChatSummary());
         }

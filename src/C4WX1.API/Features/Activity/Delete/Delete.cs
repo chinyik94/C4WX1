@@ -22,7 +22,7 @@ namespace C4WX1.API.Features.Activity.Delete
     {
         public override void Configure()
         {
-            Delete("activity/{activityID}");
+            Delete("activity/{id}");
             Description(b => b.Produces(404));
             Summary(new DeleteActivitySummary());
         }
