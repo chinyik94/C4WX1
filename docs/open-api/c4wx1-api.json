@@ -20,22 +20,22 @@
         "description": "Update one or multiple existing SysConfigs",
         "operationId": "C4WX1APIFeaturesSysConfigUpdateUpdate",
         "requestBody": {
-          "x-name": "IEnumerable`1",
+          "x-name": "List`1",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "example": [
                   {
-                    "configName": "Config1",
-                    "configValue": "Value1",
-                    "userID": 1
+                    "ConfigName": "Config1",
+                    "ConfigValue": "Value1",
+                    "UserID": 1
                   },
                   {
-                    "configName": "Config2",
-                    "configValue": "Value2",
-                    "userID": 1
+                    "ConfigName": "Config2",
+                    "ConfigValue": "Value2",
+                    "UserID": 1
                   }
                 ],
                 "items": {
@@ -75,7 +75,7 @@
         "operationId": "C4WX1APIFeaturesSysConfigGetGetList",
         "parameters": [
           {
-            "name": "configName",
+            "name": "ConfigName",
             "in": "query",
             "schema": {
               "type": "string",
@@ -83,7 +83,7 @@
             }
           },
           {
-            "name": "configValue",
+            "name": "ConfigValue",
             "in": "query",
             "schema": {
               "type": "string",
@@ -91,7 +91,7 @@
             }
           },
           {
-            "name": "pageIndex",
+            "name": "PageIndex",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -100,7 +100,7 @@
             }
           },
           {
-            "name": "pageSize",
+            "name": "PageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -109,7 +109,7 @@
             }
           },
           {
-            "name": "orderBy",
+            "name": "OrderBy",
             "in": "query",
             "schema": {
               "type": "string",
@@ -154,7 +154,7 @@
           "x-name": "CreateSysConfigDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesSysConfigDtosCreateSysConfigDto"
               }
@@ -192,14 +192,6 @@
           {
             "name": "configName",
             "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "configName",
-            "in": "query",
             "required": true,
             "schema": {
               "type": "string"
@@ -342,6 +334,61 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Chat"
+        ],
+        "summary": "Delete Chat",
+        "description": "Delete an existing Chat",
+        "operationId": "C4WX1APIFeaturesChatDeleteDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "x-name": "DeleteByIdDto",
+          "description": "",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesSharedDtosDeleteByIdDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesSharedDtosDeleteByIdDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": "Chat deleted successfully"
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Chat not found"
+          }
+        }
       }
     },
     "/api/chat/can-load-more": {
@@ -354,7 +401,7 @@
         "operationId": "C4WX1APIFeaturesChatGetGetCanLoadMore",
         "parameters": [
           {
-            "name": "min",
+            "name": "Min",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -363,7 +410,7 @@
             }
           },
           {
-            "name": "patientId",
+            "name": "PatientId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -372,7 +419,7 @@
             }
           },
           {
-            "name": "userId",
+            "name": "UserId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -415,7 +462,7 @@
         "operationId": "C4WX1APIFeaturesChatGetGetLatestList",
         "parameters": [
           {
-            "name": "chatID",
+            "name": "ChatID",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -424,7 +471,7 @@
             }
           },
           {
-            "name": "patientID",
+            "name": "PatientID",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -433,7 +480,7 @@
             }
           },
           {
-            "name": "userID",
+            "name": "UserID",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -442,7 +489,7 @@
             }
           },
           {
-            "name": "count",
+            "name": "Count",
             "in": "query",
             "required": true,
             "schema": {
@@ -451,7 +498,7 @@
             }
           },
           {
-            "name": "family",
+            "name": "Family",
             "in": "query",
             "schema": {
               "type": "boolean",
@@ -496,7 +543,7 @@
         "operationId": "C4WX1APIFeaturesChatGetGetPreviousList",
         "parameters": [
           {
-            "name": "chatID",
+            "name": "ChatID",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -505,7 +552,7 @@
             }
           },
           {
-            "name": "patientID",
+            "name": "PatientID",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -514,7 +561,7 @@
             }
           },
           {
-            "name": "userID",
+            "name": "UserID",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -523,7 +570,7 @@
             }
           },
           {
-            "name": "count",
+            "name": "Count",
             "in": "query",
             "required": true,
             "schema": {
@@ -532,7 +579,7 @@
             }
           },
           {
-            "name": "family",
+            "name": "Family",
             "in": "query",
             "schema": {
               "type": "boolean",
@@ -567,58 +614,6 @@
         }
       }
     },
-    "/api/chat/{chatID}": {
-      "delete": {
-        "tags": [
-          "Chat"
-        ],
-        "summary": "Delete Chat",
-        "description": "Delete an existing Chat",
-        "operationId": "C4WX1APIFeaturesChatDeleteDelete",
-        "parameters": [
-          {
-            "name": "chatID",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "x-name": "DeleteChatDto",
-          "description": "",
-          "content": {
-            "*/*": {
-              "schema": {
-                "$ref": "#/components/schemas/C4WX1APIFeaturesChatDtosDeleteChatDto"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "204": {
-            "description": "Chat deleted successfully"
-          },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Chat not found"
-          }
-        }
-      }
-    },
     "/api/chat": {
       "post": {
         "tags": [
@@ -631,7 +626,7 @@
           "x-name": "CreateChatDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesChatDtosCreateChatDto"
               }
@@ -670,6 +665,294 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Chat not found"
+          }
+        }
+      }
+    },
+    "/api/care-plan-sub-goal/{carePlanSubGoalID}": {
+      "put": {
+        "tags": [
+          "Care-Plan-Sub-Goal"
+        ],
+        "summary": "Update Care Plan Sub Goal",
+        "description": "Update a new Care Plan Sub Goal",
+        "operationId": "C4WX1APIFeaturesCarePlanSubGoalUpdateUpdate",
+        "parameters": [
+          {
+            "name": "carePlanSubGoalID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "x-name": "UpdateCarePlanSubGoalDto",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesCarePlanSubGoalDtosUpdateCarePlanSubGoalDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": "Care Plan Sub Goal updated successfully"
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Care Plan Sub Goal not found"
+          }
+        }
+      }
+    },
+    "/api/care-plan-sub-goal/{id}": {
+      "get": {
+        "tags": [
+          "Care-Plan-Sub-Goal"
+        ],
+        "summary": "Get Care Plan Sub Goal",
+        "description": "Get a Care Plan Sub Goal by its ID",
+        "operationId": "C4WX1APIFeaturesCarePlanSubGoalGetGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Care Plan Sub Goal retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/C4WX1APIFeaturesCarePlanSubGoalDtosCarePlanSubGoalDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Care Plan Sub Goal not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Care-Plan-Sub-Goal"
+        ],
+        "summary": "Delete Care Plan Sub Goal",
+        "description": "Delete a Care Plan Sub Goal by its ID",
+        "operationId": "C4WX1APIFeaturesCarePlanSubGoalDeleteDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "x-name": "DeleteByIdDto",
+          "description": "",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesSharedDtosDeleteByIdDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesSharedDtosDeleteByIdDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Care Plan Sub Goal not found"
+          }
+        }
+      }
+    },
+    "/api/care-plan-sub-goal/count": {
+      "get": {
+        "tags": [
+          "Care-Plan-Sub-Goal"
+        ],
+        "summary": "Get Care Plan Sub Goal Count",
+        "description": "Get Care Plan Sub Goal Count",
+        "operationId": "C4WX1APIFeaturesCarePlanSubGoalGetGetCount",
+        "responses": {
+          "200": {
+            "description": "Care Plan Sub Goal Count retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/care-plan-sub-goal": {
+      "get": {
+        "tags": [
+          "Care-Plan-Sub-Goal"
+        ],
+        "summary": "Get Care Plan Sub Goal List",
+        "description": "Get a paged and sorted Care Plan Sub Goal List",
+        "operationId": "C4WX1APIFeaturesCarePlanSubGoalGetGetList",
+        "parameters": [
+          {
+            "name": "PageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Care Plan Sub Goal List retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/C4WX1APIFeaturesCarePlanSubGoalDtosCarePlanSubGoalDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Care-Plan-Sub-Goal"
+        ],
+        "summary": "Create Care Plan Sub Goal",
+        "description": "Create a new Care Plan Sub Goal",
+        "operationId": "C4WX1APIFeaturesCarePlanSubGoalCreateCreate",
+        "requestBody": {
+          "x-name": "CreateCarePlanSubGoalDto",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesCarePlanSubGoalDtosCreateCarePlanSubGoalDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": "Care Plan Sub Goal created successfully"
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -697,7 +980,7 @@
           "x-name": "UpdateC4WImageDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesC4WImageDtosUpdateC4WImageDto"
               }
@@ -719,6 +1002,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "C4W Image not found"
           }
         }
       }
@@ -762,6 +1048,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "C4W Image not found"
           }
         }
       }
@@ -776,7 +1065,7 @@
         "operationId": "C4WX1APIFeaturesC4WImageGetGetCount",
         "parameters": [
           {
-            "name": "fromDate",
+            "name": "FromDate",
             "in": "query",
             "required": true,
             "schema": {
@@ -785,7 +1074,7 @@
             }
           },
           {
-            "name": "toDate",
+            "name": "ToDate",
             "in": "query",
             "required": true,
             "schema": {
@@ -829,7 +1118,7 @@
         "operationId": "C4WX1APIFeaturesC4WImageGetGetList",
         "parameters": [
           {
-            "name": "fromDate",
+            "name": "FromDate",
             "in": "query",
             "required": true,
             "schema": {
@@ -838,7 +1127,7 @@
             }
           },
           {
-            "name": "toDate",
+            "name": "ToDate",
             "in": "query",
             "required": true,
             "schema": {
@@ -847,7 +1136,7 @@
             }
           },
           {
-            "name": "pageIndex",
+            "name": "PageIndex",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -856,7 +1145,7 @@
             }
           },
           {
-            "name": "pageSize",
+            "name": "PageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -865,7 +1154,7 @@
             }
           },
           {
-            "name": "orderBy",
+            "name": "OrderBy",
             "in": "query",
             "schema": {
               "type": "string",
@@ -910,7 +1199,7 @@
           "x-name": "CreateC4WImageDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesC4WImageDtosCreateC4WImageDto"
               }
@@ -959,7 +1248,7 @@
           "x-name": "UpdateC4WDeviceTokenDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesC4WDeviceTokenDtosUpdateC4WDeviceTokenDto"
               }
@@ -981,9 +1270,6 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "C4W Device Token not found"
           }
         }
       }
@@ -998,7 +1284,7 @@
         "operationId": "C4WX1APIFeaturesC4WDeviceTokenGetGetByOldDeviceToken",
         "parameters": [
           {
-            "name": "oldDeviceToken",
+            "name": "OldDeviceToken",
             "in": "query",
             "required": true,
             "schema": {
@@ -1045,7 +1331,7 @@
           "x-name": "CreateC4WDeviceTokenDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesC4WDeviceTokenDtosCreateC4WDeviceTokenDto"
               }
@@ -1094,7 +1380,7 @@
           "x-name": "UpdateBranchDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesBranchDtosUpdateBranchDto"
               }
@@ -1118,7 +1404,14 @@
             }
           },
           "400": {
-            "description": "Branch data invalid"
+            "description": "Branch data invalid",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsErrorResponse"
+                }
+              }
+            }
           },
           "404": {
             "description": "Branch not found"
@@ -1197,6 +1490,11 @@
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesBranchDtosDeleteBranchDto"
               }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesBranchDtosDeleteBranchDto"
+              }
             }
           },
           "required": true,
@@ -1217,7 +1515,14 @@
             }
           },
           "400": {
-            "description": "Branch cannot be deleted"
+            "description": "Branch cannot be deleted",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsErrorResponse"
+                }
+              }
+            }
           },
           "404": {
             "description": "Branch not found"
@@ -1268,7 +1573,7 @@
         "operationId": "C4WX1APIFeaturesBranchGetGetList",
         "parameters": [
           {
-            "name": "pageIndex",
+            "name": "PageIndex",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1277,7 +1582,7 @@
             }
           },
           {
-            "name": "pageSize",
+            "name": "PageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1286,7 +1591,7 @@
             }
           },
           {
-            "name": "orderBy",
+            "name": "OrderBy",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1331,7 +1636,7 @@
           "x-name": "CreateBranchDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesBranchDtosCreateBranchDto"
               }
@@ -1355,7 +1660,14 @@
             }
           },
           "400": {
-            "description": "Branch data invalid"
+            "description": "Branch data invalid",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -1418,7 +1730,7 @@
           "x-name": "UpdateBillingProposalDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosUpdateBillingProposalDto"
               }
@@ -1516,6 +1828,11 @@
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosDeleteBillingProposalDto"
               }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosDeleteBillingProposalDto"
+              }
             }
           },
           "required": true,
@@ -1528,7 +1845,7 @@
           "500": {
             "description": "Server Error",
             "content": {
-              "application/json": {
+              "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
                 }
@@ -1564,7 +1881,7 @@
           "x-name": "UpdateBillingProposalStatusDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosUpdateBillingProposalStatusDto"
               }
@@ -1588,7 +1905,14 @@
             }
           },
           "400": {
-            "description": "Billing Proposal not found"
+            "description": "Billing Proposal not found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsErrorResponse"
+                }
+              }
+            }
           },
           "404": {
             "description": "Billing Proposal Status invalid"
@@ -1652,7 +1976,7 @@
         "operationId": "C4WX1APIFeaturesBillingProposalGetGetAllList",
         "parameters": [
           {
-            "name": "keyword",
+            "name": "Keyword",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1660,7 +1984,7 @@
             }
           },
           {
-            "name": "status",
+            "name": "Status",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1668,7 +1992,7 @@
             }
           },
           {
-            "name": "orderBy",
+            "name": "OrderBy",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1713,7 +2037,7 @@
         "operationId": "C4WX1APIFeaturesBillingProposalGetGetCount",
         "parameters": [
           {
-            "name": "keyword",
+            "name": "Keyword",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1721,7 +2045,7 @@
             }
           },
           {
-            "name": "status",
+            "name": "Status",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1764,7 +2088,7 @@
         "operationId": "C4WX1APIFeaturesBillingProposalGetGetHistoryList",
         "parameters": [
           {
-            "name": "groupNumber",
+            "name": "GroupNumber",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1772,7 +2096,7 @@
             }
           },
           {
-            "name": "orderBy",
+            "name": "OrderBy",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1817,7 +2141,7 @@
         "operationId": "C4WX1APIFeaturesBillingProposalGetGetList",
         "parameters": [
           {
-            "name": "keyword",
+            "name": "Keyword",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1825,7 +2149,7 @@
             }
           },
           {
-            "name": "status",
+            "name": "Status",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1833,7 +2157,7 @@
             }
           },
           {
-            "name": "pageIndex",
+            "name": "PageIndex",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1842,7 +2166,7 @@
             }
           },
           {
-            "name": "pageSize",
+            "name": "PageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1851,7 +2175,7 @@
             }
           },
           {
-            "name": "orderBy",
+            "name": "OrderBy",
             "in": "query",
             "schema": {
               "type": "string",
@@ -1896,7 +2220,7 @@
           "x-name": "CreateBillingProposalDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosCreateBillingProposalDto"
               }
@@ -1932,7 +2256,7 @@
         "operationId": "C4WX1APIFeaturesBillingProposalGetGetSessionBalance",
         "parameters": [
           {
-            "name": "proposalId",
+            "name": "ProposalId",
             "in": "query",
             "required": true,
             "schema": {
@@ -1941,7 +2265,7 @@
             }
           },
           {
-            "name": "serviceId",
+            "name": "ServiceId",
             "in": "query",
             "required": true,
             "schema": {
@@ -1950,7 +2274,7 @@
             }
           },
           {
-            "name": "endDate",
+            "name": "EndDate",
             "in": "query",
             "required": true,
             "schema": {
@@ -1983,125 +2307,6 @@
         }
       }
     },
-    "/api/billing-invoice/{id}": {
-      "get": {
-        "tags": [
-          "Billing-Invoice"
-        ],
-        "summary": "Get Billing Invoice",
-        "description": "Get Billing Invoice by its ID",
-        "operationId": "C4WX1APIFeaturesBillingInvoiceGetGet",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "initialCareAssessmentID",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            }
-          },
-          {
-            "name": "careReportID",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            }
-          },
-          {
-            "name": "patientID",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Billing Invoice retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceDto"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Billing Invoice not found"
-          }
-        }
-      }
-    },
-    "/api/audit-enquiry/{id}": {
-      "get": {
-        "tags": [
-          "Audit-Enquiry"
-        ],
-        "summary": "Get Audit Enquiry",
-        "description": "Get Audit Enquiry by its ID",
-        "operationId": "C4WX1APIFeaturesAuditEnquiryGetGet",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Audit Enquiry retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryDto"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Audit Enquiry not found"
-          }
-        }
-      }
-    },
     "/api/api-access-key/{id}": {
       "get": {
         "tags": [
@@ -2121,7 +2326,7 @@
             }
           },
           {
-            "name": "accessKey",
+            "name": "AccessKey",
             "in": "query",
             "schema": {
               "type": "string",
@@ -2168,7 +2373,7 @@
           "x-name": "CreateAPIAccessKeyDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesAPIAccessKeyDtosCreateAPIAccessKeyDto"
               }
@@ -2227,7 +2432,7 @@
           "x-name": "UpdateActivityDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesActivityDtosUpdateActivityDto"
               }
@@ -2254,59 +2459,9 @@
             "description": "Activity not found"
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Activity"
-        ],
-        "summary": "Delete Activity",
-        "description": "Delete an existing Activity",
-        "operationId": "C4WX1APIFeaturesActivityDeleteDelete",
-        "parameters": [
-          {
-            "name": "activityID",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "x-name": "DeleteActivityDto",
-          "description": "",
-          "content": {
-            "*/*": {
-              "schema": {
-                "$ref": "#/components/schemas/C4WX1APIFeaturesActivityDtosDeleteActivityDto"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "204": {
-            "description": "Activity deleted successfully"
-          },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Activity not found"
-          }
-        }
       }
     },
-    "/api/activity/{id}": {
+    "/api/activity/{Id}": {
       "get": {
         "tags": [
           "Activity"
@@ -2316,7 +2471,7 @@
         "operationId": "C4WX1APIFeaturesActivityGetGetById",
         "parameters": [
           {
-            "name": "id",
+            "name": "Id",
             "in": "path",
             "required": true,
             "schema": {
@@ -2327,7 +2482,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Activity retrieved successfully"
+            "description": "Activity retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/C4WX1APIFeaturesActivityDtosActivityDto"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server Error",
@@ -2388,7 +2550,7 @@
         "operationId": "C4WX1APIFeaturesActivityGetGetList",
         "parameters": [
           {
-            "name": "pageIndex",
+            "name": "PageIndex",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -2397,7 +2559,7 @@
             }
           },
           {
-            "name": "pageSize",
+            "name": "PageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -2406,7 +2568,7 @@
             }
           },
           {
-            "name": "orderBy",
+            "name": "OrderBy",
             "in": "query",
             "schema": {
               "type": "string",
@@ -2451,7 +2613,7 @@
           "x-name": "CreateActivityDto",
           "description": "",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/C4WX1APIFeaturesActivityDtosCreateActivityDto"
               }
@@ -2476,6 +2638,63 @@
           }
         }
       }
+    },
+    "/api/activity/{id}": {
+      "delete": {
+        "tags": [
+          "Activity"
+        ],
+        "summary": "Delete Activity",
+        "description": "Delete an existing Activity",
+        "operationId": "C4WX1APIFeaturesActivityDeleteDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "x-name": "DeleteByIdDto",
+          "description": "",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesSharedDtosDeleteByIdDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/C4WX1APIFeaturesSharedDtosDeleteByIdDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": "Activity deleted successfully"
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FastEndpointsInternalErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Activity not found"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2485,23 +2704,23 @@
         "description": "the dto used to send an error response to the client when an unhandled exception occurs on the server",
         "additionalProperties": false,
         "properties": {
-          "status": {
+          "Status": {
             "type": "string",
             "description": "error status",
             "default": "Internal Server Error!"
           },
-          "code": {
+          "Code": {
             "type": "integer",
             "description": "http status code of the error response",
             "format": "int32",
             "default": 500
           },
-          "reason": {
+          "Reason": {
             "type": "string",
             "description": "the reason for the error",
             "default": "Something unexpected has happened"
           },
-          "note": {
+          "Note": {
             "type": "string",
             "description": "additional information or instructions",
             "default": "See application log for stack trace."
@@ -2512,13 +2731,13 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "configName": {
+          "ConfigName": {
             "type": "string"
           },
-          "configValue": {
+          "ConfigValue": {
             "type": "string"
           },
-          "userID": {
+          "UserID": {
             "type": "integer",
             "format": "int32"
           }
@@ -2528,28 +2747,28 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "configName": {
+          "ConfigName": {
             "type": "string"
           },
-          "configValue": {
+          "ConfigValue": {
             "type": "string",
             "nullable": true
           },
-          "modifiedDate": {
+          "ModifiedDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "modifiedBy_FK": {
+          "ModifiedBy_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "isConfigurable": {
+          "IsConfigurable": {
             "type": "boolean",
             "nullable": true
           },
-          "description": {
+          "Description": {
             "type": "string",
             "nullable": true
           }
@@ -2577,25 +2796,25 @@
       "C4WX1APIFeaturesSysConfigDtosCreateSysConfigDto": {
         "type": "object",
         "example": {
-          "configName": "Config Name",
-          "configValue": "Config Value",
-          "isConfigurable": false,
-          "description": "Description"
+          "ConfigName": "Config Name",
+          "ConfigValue": "Config Value",
+          "IsConfigurable": false,
+          "Description": "Description"
         },
         "additionalProperties": false,
         "properties": {
-          "configName": {
+          "ConfigName": {
             "type": "string"
           },
-          "configValue": {
+          "ConfigValue": {
             "type": "string",
             "nullable": true
           },
-          "isConfigurable": {
+          "IsConfigurable": {
             "type": "boolean",
             "nullable": true
           },
-          "description": {
+          "Description": {
             "type": "string",
             "nullable": true
           }
@@ -2605,48 +2824,48 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "chatID": {
+          "ChatID": {
             "type": "integer",
             "format": "int32"
           },
-          "comment": {
+          "Comment": {
             "type": "string",
             "nullable": true
           },
-          "attachment": {
+          "Attachment": {
             "type": "string",
             "nullable": true
           },
-          "attachment_Physical": {
+          "Attachment_Physical": {
             "type": "string",
             "nullable": true
           },
-          "parentID_FK": {
+          "ParentID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "patientID_FK": {
+          "PatientID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "createdDate": {
+          "CreatedDate": {
             "type": "string",
             "format": "date-time"
           },
-          "createdBy_FK": {
+          "CreatedBy_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "isDeleted": {
+          "IsDeleted": {
             "type": "boolean"
           },
-          "family": {
+          "Family": {
             "type": "boolean",
             "nullable": true
           },
-          "userData": {
+          "UserData": {
             "nullable": true,
             "oneOf": [
               {
@@ -2654,7 +2873,7 @@
               }
             ]
           },
-          "patientData": {
+          "PatientData": {
             "nullable": true,
             "oneOf": [
               {
@@ -2662,7 +2881,7 @@
               }
             ]
           },
-          "commentList": {
+          "CommentList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/C4WX1APIFeaturesChatDtosChatDto"
@@ -2674,17 +2893,17 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           },
-          "firstname": {
+          "Firstname": {
             "type": "string"
           },
-          "lastname": {
+          "Lastname": {
             "type": "string"
           },
-          "photo": {
+          "Photo": {
             "type": "string",
             "nullable": true
           }
@@ -2694,17 +2913,17 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "patientID": {
+          "PatientID": {
             "type": "integer",
             "format": "int32"
           },
-          "firstname": {
+          "Firstname": {
             "type": "string"
           },
-          "lastname": {
+          "Lastname": {
             "type": "string"
           },
-          "photo": {
+          "Photo": {
             "type": "string",
             "nullable": true
           }
@@ -2722,14 +2941,11 @@
         "type": "object",
         "additionalProperties": false
       },
-      "C4WX1APIFeaturesChatDtosDeleteChatDto": {
+      "C4WX1APIFeaturesSharedDtosDeleteByIdDto": {
         "type": "object",
-        "example": {
-          "userID": 1
-        },
         "additionalProperties": false,
         "properties": {
-          "userID": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -2740,18 +2956,18 @@
         "description": "the dto used to send an error response to the client",
         "additionalProperties": false,
         "properties": {
-          "statusCode": {
+          "StatusCode": {
             "type": "integer",
             "description": "the http status code sent to the client. default is 400.",
             "format": "int32",
             "default": 400
           },
-          "message": {
+          "Message": {
             "type": "string",
             "description": "the message for the error response",
             "default": "One or more errors occurred!"
           },
-          "errors": {
+          "Errors": {
             "type": "object",
             "description": "the collection of errors for the current context",
             "additionalProperties": {
@@ -2766,96 +2982,178 @@
       "C4WX1APIFeaturesChatDtosCreateChatDto": {
         "type": "object",
         "example": {
-          "attachment": "Attachment",
-          "attachment_Physical": "Attachment_Physical",
-          "createdBy_FK": 1,
-          "parentID_FK": 1,
-          "patientID_FK": 1,
-          "comment": "Comment",
-          "family": true
+          "Attachment": "Attachment",
+          "Attachment_Physical": "Attachment_Physical",
+          "CreatedBy_FK": 1,
+          "ParentID_FK": 1,
+          "PatientID_FK": 1,
+          "Comment": "Comment",
+          "Family": true
         },
         "additionalProperties": false,
         "properties": {
-          "attachment": {
+          "Attachment": {
             "type": "string",
             "nullable": true
           },
-          "attachment_Physical": {
+          "Attachment_Physical": {
             "type": "string",
             "nullable": true
           },
-          "createdBy_FK": {
+          "CreatedBy_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "parentID_FK": {
+          "ParentID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "patientID_FK": {
+          "PatientID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "comment": {
+          "Comment": {
             "type": "string",
             "nullable": true
           },
-          "family": {
+          "Family": {
             "type": "boolean",
             "nullable": true
+          }
+        }
+      },
+      "C4WX1APIFeaturesCarePlanSubGoalDtosUpdateCarePlanSubGoalDto": {
+        "type": "object",
+        "example": {
+          "CarePlanSubID_FK": 1,
+          "CarePlanSubGoalName": "care plan sub goal",
+          "UserId": 1
+        },
+        "additionalProperties": false,
+        "properties": {
+          "CarePlanSubID_FK": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CarePlanSubGoalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "C4WX1APIFeaturesCarePlanSubGoalDtosCarePlanSubGoalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "CarePlanSubGoalID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ScoreTypeID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Score1": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "Score2": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "CarePlanSubGoalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CanDelete": {
+            "type": "boolean"
+          }
+        }
+      },
+      "C4WX1APIFeaturesCarePlanSubGoalDtosCreateCarePlanSubGoalDto": {
+        "type": "object",
+        "example": {
+          "CarePlanSubID_FK": 1,
+          "CarePlanSubGoalName": "care plan sub goal",
+          "UserId": 1
+        },
+        "additionalProperties": false,
+        "properties": {
+          "CarePlanSubID_FK": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CarePlanSubGoalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
       "C4WX1APIFeaturesC4WImageDtosUpdateC4WImageDto": {
         "type": "object",
         "example": {
-          "woundImageName": "wound image name",
-          "woundImageData": "wound image data",
-          "woundBedImageName": "wound bed image name",
-          "woundBedImageData": "wound bed image data",
-          "tissueImageName": "tissue image name",
-          "tissueImageData": "tissue image data",
-          "depthImageName": "depth image name",
-          "depthImageData": "depth image data",
-          "userId": 1
+          "WoundImageName": "wound image name",
+          "WoundImageData": "wound image data",
+          "WoundBedImageName": "wound bed image name",
+          "WoundBedImageData": "wound bed image data",
+          "TissueImageName": "tissue image name",
+          "TissueImageData": "tissue image data",
+          "DepthImageName": "depth image name",
+          "DepthImageData": "depth image data",
+          "UserId": 1
         },
         "additionalProperties": false,
         "properties": {
-          "woundImageName": {
+          "WoundImageName": {
             "type": "string",
             "nullable": true
           },
-          "woundImageData": {
+          "WoundImageData": {
             "type": "string",
             "nullable": true
           },
-          "woundBedImageName": {
+          "WoundBedImageName": {
             "type": "string",
             "nullable": true
           },
-          "woundBedImageData": {
+          "WoundBedImageData": {
             "type": "string",
             "nullable": true
           },
-          "tissueImageName": {
+          "TissueImageName": {
             "type": "string",
             "nullable": true
           },
-          "tissueImageData": {
+          "TissueImageData": {
             "type": "string",
             "nullable": true
           },
-          "depthImageName": {
+          "DepthImageName": {
             "type": "string",
             "nullable": true
           },
-          "depthImageData": {
+          "DepthImageData": {
             "type": "string",
             "nullable": true
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -2865,54 +3163,54 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "c4WImageId": {
+          "C4WImageId": {
             "type": "integer",
             "format": "int32"
           },
-          "woundImageName": {
+          "WoundImageName": {
             "type": "string",
             "nullable": true
           },
-          "woundImageData": {
+          "WoundImageData": {
             "type": "string",
             "nullable": true
           },
-          "woundBedImageName": {
+          "WoundBedImageName": {
             "type": "string",
             "nullable": true
           },
-          "woundBedImageData": {
+          "WoundBedImageData": {
             "type": "string",
             "nullable": true
           },
-          "tissueImageName": {
+          "TissueImageName": {
             "type": "string",
             "nullable": true
           },
-          "tissueImageData": {
+          "TissueImageData": {
             "type": "string",
             "nullable": true
           },
-          "depthImageName": {
+          "DepthImageName": {
             "type": "string",
             "nullable": true
           },
-          "depthImageData": {
+          "DepthImageData": {
             "type": "string",
             "nullable": true
           },
-          "isDeleted": {
+          "IsDeleted": {
             "type": "boolean"
           },
-          "createdDate": {
+          "CreatedDate": {
             "type": "string",
             "format": "date-time"
           },
-          "createdBy_FK": {
+          "CreatedBy_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "modifiedDate": {
+          "ModifiedDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -2937,51 +3235,51 @@
       "C4WX1APIFeaturesC4WImageDtosCreateC4WImageDto": {
         "type": "object",
         "example": {
-          "woundImageName": "wound image name",
-          "woundImageData": "wound image data",
-          "woundBedImageName": "wound bed image name",
-          "woundBedImageData": "wound bed image data",
-          "tissueImageName": "tissue image name",
-          "tissueImageData": "tissue image data",
-          "depthImageName": "depth image name",
-          "depthImageData": "depth image data",
-          "userId": 1
+          "WoundImageName": "wound image name",
+          "WoundImageData": "wound image data",
+          "WoundBedImageName": "wound bed image name",
+          "WoundBedImageData": "wound bed image data",
+          "TissueImageName": "tissue image name",
+          "TissueImageData": "tissue image data",
+          "DepthImageName": "depth image name",
+          "DepthImageData": "depth image data",
+          "UserId": 1
         },
         "additionalProperties": false,
         "properties": {
-          "woundImageName": {
+          "WoundImageName": {
             "type": "string",
             "nullable": true
           },
-          "woundImageData": {
+          "WoundImageData": {
             "type": "string",
             "nullable": true
           },
-          "woundBedImageName": {
+          "WoundBedImageName": {
             "type": "string",
             "nullable": true
           },
-          "woundBedImageData": {
+          "WoundBedImageData": {
             "type": "string",
             "nullable": true
           },
-          "tissueImageName": {
+          "TissueImageName": {
             "type": "string",
             "nullable": true
           },
-          "tissueImageData": {
+          "TissueImageData": {
             "type": "string",
             "nullable": true
           },
-          "depthImageName": {
+          "DepthImageName": {
             "type": "string",
             "nullable": true
           },
-          "depthImageData": {
+          "DepthImageData": {
             "type": "string",
             "nullable": true
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -2990,31 +3288,31 @@
       "C4WX1APIFeaturesC4WDeviceTokenDtosUpdateC4WDeviceTokenDto": {
         "type": "object",
         "example": {
-          "oldDeviceToken": "Old token",
-          "newDeviceToken": "New token",
-          "clientEnvironment": "test env",
-          "device": "IPhone",
-          "userId": 1
+          "OldDeviceToken": "Old token",
+          "NewDeviceToken": "New token",
+          "ClientEnvironment": "test env",
+          "Device": "IPhone",
+          "UserId": 1
         },
         "additionalProperties": false,
         "properties": {
-          "oldDeviceToken": {
+          "OldDeviceToken": {
             "type": "string",
             "nullable": true
           },
-          "newDeviceToken": {
+          "NewDeviceToken": {
             "type": "string",
             "nullable": true
           },
-          "clientEnvironment": {
+          "ClientEnvironment": {
             "type": "string",
             "nullable": true
           },
-          "device": {
+          "Device": {
             "type": "string",
             "nullable": true
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -3024,43 +3322,43 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "c4WDeviceTokenId": {
+          "C4WDeviceTokenId": {
             "type": "integer",
             "format": "int32"
           },
-          "oldDeviceToken": {
+          "OldDeviceToken": {
             "type": "string",
             "nullable": true
           },
-          "newDeviceToken": {
+          "NewDeviceToken": {
             "type": "string",
             "nullable": true
           },
-          "clientEnvironment": {
+          "ClientEnvironment": {
             "type": "string",
             "nullable": true
           },
-          "device": {
+          "Device": {
             "type": "string",
             "nullable": true
           },
-          "isDeleted": {
+          "IsDeleted": {
             "type": "boolean"
           },
-          "createdDate": {
+          "CreatedDate": {
             "type": "string",
             "format": "date-time"
           },
-          "createdBy_FK": {
+          "CreatedBy_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "modifiedDate": {
+          "ModifiedDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "modifiedBy_FK": {
+          "ModifiedBy_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -3074,31 +3372,31 @@
       "C4WX1APIFeaturesC4WDeviceTokenDtosCreateC4WDeviceTokenDto": {
         "type": "object",
         "example": {
-          "oldDeviceToken": "Old Token",
-          "newDeviceToken": "New Token",
-          "clientEnvironment": "test env",
-          "device": "Iphone",
-          "userId": 1
+          "OldDeviceToken": "Old Token",
+          "NewDeviceToken": "New Token",
+          "ClientEnvironment": "test env",
+          "Device": "Iphone",
+          "UserId": 1
         },
         "additionalProperties": false,
         "properties": {
-          "oldDeviceToken": {
+          "OldDeviceToken": {
             "type": "string",
             "nullable": true
           },
-          "newDeviceToken": {
+          "NewDeviceToken": {
             "type": "string",
             "nullable": true
           },
-          "clientEnvironment": {
+          "ClientEnvironment": {
             "type": "string",
             "nullable": true
           },
-          "device": {
+          "Device": {
             "type": "string",
             "nullable": true
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -3107,61 +3405,61 @@
       "C4WX1APIFeaturesBranchDtosUpdateBranchDto": {
         "type": "object",
         "example": {
-          "branchName": "BranchName",
-          "address1": "Address1",
-          "address2": "Address2",
-          "address3": "Address3",
-          "contact": "Contact",
-          "email": "test@test.com",
-          "status": "Active",
-          "currencyID_FK": 1,
-          "userId": 1,
-          "userDataList": [
+          "BranchName": "BranchName",
+          "Address1": "Address1",
+          "Address2": "Address2",
+          "Address3": "Address3",
+          "Contact": "Contact",
+          "Email": "test@test.com",
+          "Status": "Active",
+          "CurrencyID_FK": 1,
+          "UserId": 1,
+          "UserDataList": [
             {
-              "userId": 1,
-              "firstName": null,
-              "lastName": null
+              "UserId": 1,
+              "FirstName": null,
+              "LastName": null
             }
           ]
         },
         "additionalProperties": false,
         "properties": {
-          "branchName": {
+          "BranchName": {
             "type": "string"
           },
-          "address1": {
+          "Address1": {
             "type": "string",
             "nullable": true
           },
-          "address2": {
+          "Address2": {
             "type": "string",
             "nullable": true
           },
-          "address3": {
+          "Address3": {
             "type": "string",
             "nullable": true
           },
-          "contact": {
+          "Contact": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "status": {
+          "Status": {
             "type": "string"
           },
-          "currencyID_FK": {
+          "CurrencyID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           },
-          "userDataList": {
+          "UserDataList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/C4WX1APIFeaturesBranchDtosBranchUserDto"
@@ -3173,14 +3471,14 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           },
-          "firstName": {
+          "FirstName": {
             "type": "string"
           },
-          "lastName": {
+          "LastName": {
             "type": "string"
           }
         }
@@ -3189,51 +3487,51 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "branchID": {
+          "BranchID": {
             "type": "integer",
             "format": "int32"
           },
-          "branchName": {
+          "BranchName": {
             "type": "string"
           },
-          "address1": {
+          "Address1": {
             "type": "string",
             "nullable": true
           },
-          "address2": {
+          "Address2": {
             "type": "string",
             "nullable": true
           },
-          "address3": {
+          "Address3": {
             "type": "string",
             "nullable": true
           },
-          "contact": {
+          "Contact": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "status": {
+          "Status": {
             "type": "string"
           },
-          "isSystemUsed": {
+          "IsSystemUsed": {
             "type": "boolean"
           },
-          "currencyID_FK": {
+          "CurrencyID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "currencyName": {
+          "CurrencyName": {
             "type": "string"
           },
-          "canDelete": {
+          "CanDelete": {
             "type": "boolean"
           },
-          "userDataList": {
+          "UserDataList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/C4WX1APIFeaturesBranchDtosBranchUserDto"
@@ -3244,11 +3542,11 @@
       "C4WX1APIFeaturesBranchDtosDeleteBranchDto": {
         "type": "object",
         "example": {
-          "userId": 1
+          "UserId": 1
         },
         "additionalProperties": false,
         "properties": {
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -3257,66 +3555,66 @@
       "C4WX1APIFeaturesBranchDtosCreateBranchDto": {
         "type": "object",
         "example": {
-          "branchID": 0,
-          "branchName": "BranchName",
-          "address1": "Address1",
-          "address2": "Address2",
-          "address3": "Address3",
-          "contact": "Contact",
-          "email": "test@test.com",
-          "status": "Active",
-          "currencyID_FK": 1,
-          "userId": 1,
-          "userDataList": [
+          "BranchID": 0,
+          "BranchName": "BranchName",
+          "Address1": "Address1",
+          "Address2": "Address2",
+          "Address3": "Address3",
+          "Contact": "Contact",
+          "Email": "test@test.com",
+          "Status": "Active",
+          "CurrencyID_FK": 1,
+          "UserId": 1,
+          "UserDataList": [
             {
-              "userId": 1,
-              "firstName": null,
-              "lastName": null
+              "UserId": 1,
+              "FirstName": null,
+              "LastName": null
             }
           ]
         },
         "additionalProperties": false,
         "properties": {
-          "branchID": {
+          "BranchID": {
             "type": "integer",
             "format": "int32"
           },
-          "branchName": {
+          "BranchName": {
             "type": "string"
           },
-          "address1": {
+          "Address1": {
             "type": "string",
             "nullable": true
           },
-          "address2": {
+          "Address2": {
             "type": "string",
             "nullable": true
           },
-          "address3": {
+          "Address3": {
             "type": "string",
             "nullable": true
           },
-          "contact": {
+          "Contact": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "status": {
+          "Status": {
             "type": "string"
           },
-          "currencyID_FK": {
+          "CurrencyID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           },
-          "userDataList": {
+          "UserDataList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/C4WX1APIFeaturesBranchDtosBranchUserDto"
@@ -3327,89 +3625,89 @@
       "C4WX1APIFeaturesBillingProposalDtosUpdateBillingProposalDto": {
         "type": "object",
         "example": {
-          "patientID_FK": 1,
-          "title": "Title",
-          "sendEmail": true,
-          "emailPatient": true,
-          "emailTo": "test-to@gmail.com",
-          "emailCC": "test-cc@gmail.com",
-          "emailBCC": "test-bcc@gmail.com",
-          "currencyID_FK": 1,
-          "status": "Active",
-          "groupNumber": "1",
-          "version": 1,
-          "proposalType": "ProposalType",
-          "userId": 1,
-          "serviceList": [
+          "PatientID_FK": 1,
+          "Title": "Title",
+          "SendEmail": true,
+          "EmailPatient": true,
+          "EmailTo": "test-to@gmail.com",
+          "EmailCC": "test-cc@gmail.com",
+          "EmailBCC": "test-bcc@gmail.com",
+          "CurrencyID_FK": 1,
+          "Status": "Active",
+          "GroupNumber": "1",
+          "Version": 1,
+          "ProposalType": "ProposalType",
+          "UserId": 1,
+          "ServiceList": [
             {
-              "billingInvoiceServiceID": 0,
-              "billingProposalID_FK": 0,
-              "serviceID_FK": 1,
-              "categoryId": 0,
-              "title": null,
-              "startDate": "2025-02-21T20:43:16.8101995+08:00",
-              "endDate": "2025-02-21T20:43:16.8124593+08:00",
-              "unitCost": 0.0,
-              "duration1": "Duration1",
-              "duration2": "Duration2",
-              "visit": 1,
-              "session": 0,
-              "discount": 0.0,
-              "serviceDescription": "ServiceDescription",
-              "categoryName": null
+              "BillingInvoiceServiceID": 0,
+              "BillingProposalID_FK": 0,
+              "ServiceID_FK": 1,
+              "CategoryId": 0,
+              "Title": null,
+              "StartDate": "2025-02-27T23:51:34.5331158+08:00",
+              "EndDate": "2025-02-27T23:51:34.5365272+08:00",
+              "UnitCost": 0.0,
+              "Duration1": "Duration1",
+              "Duration2": "Duration2",
+              "Visit": 1,
+              "Session": 0,
+              "Discount": 0.0,
+              "ServiceDescription": "ServiceDescription",
+              "CategoryName": null
             }
           ]
         },
         "additionalProperties": false,
         "properties": {
-          "patientID_FK": {
+          "PatientID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "title": {
+          "Title": {
             "type": "string"
           },
-          "sendEmail": {
+          "SendEmail": {
             "type": "boolean",
             "nullable": true
           },
-          "emailPatient": {
+          "EmailPatient": {
             "type": "boolean",
             "nullable": true
           },
-          "emailTo": {
+          "EmailTo": {
             "type": "string",
             "nullable": true
           },
-          "emailCC": {
+          "EmailCC": {
             "type": "string",
             "nullable": true
           },
-          "emailBCC": {
+          "EmailBCC": {
             "type": "string",
             "nullable": true
           },
-          "currencyID_FK": {
+          "CurrencyID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "status": {
+          "Status": {
             "type": "string"
           },
-          "groupNumber": {
+          "GroupNumber": {
             "type": "string"
           },
-          "version": {
+          "Version": {
             "type": "integer"
           },
-          "proposalType": {
+          "ProposalType": {
             "type": "string"
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           },
-          "serviceList": {
+          "ServiceList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto"
@@ -3421,62 +3719,62 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "billingInvoiceServiceID": {
+          "BillingInvoiceServiceID": {
             "type": "integer",
             "format": "int32"
           },
-          "billingProposalID_FK": {
+          "BillingProposalID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "serviceID_FK": {
+          "ServiceID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "categoryId": {
+          "CategoryId": {
             "type": "integer",
             "format": "int32"
           },
-          "title": {
+          "Title": {
             "type": "string"
           },
-          "startDate": {
+          "StartDate": {
             "type": "string",
             "format": "date-time"
           },
-          "endDate": {
+          "EndDate": {
             "type": "string",
             "format": "date-time"
           },
-          "unitCost": {
+          "UnitCost": {
             "type": "number",
             "format": "decimal"
           },
-          "duration1": {
+          "Duration1": {
             "type": "string",
             "nullable": true
           },
-          "duration2": {
+          "Duration2": {
             "type": "string",
             "nullable": true
           },
-          "visit": {
+          "Visit": {
             "type": "integer",
             "format": "int32"
           },
-          "session": {
+          "Session": {
             "type": "integer",
             "format": "int32"
           },
-          "discount": {
+          "Discount": {
             "type": "number",
             "format": "decimal"
           },
-          "serviceDescription": {
+          "ServiceDescription": {
             "type": "string",
             "nullable": true
           },
-          "categoryName": {
+          "CategoryName": {
             "type": "string"
           }
         }
@@ -3484,16 +3782,16 @@
       "C4WX1APIFeaturesBillingProposalDtosUpdateBillingProposalStatusDto": {
         "type": "object",
         "example": {
-          "userId": 1,
-          "status": "Success"
+          "UserId": 1,
+          "Status": "Success"
         },
         "additionalProperties": false,
         "properties": {
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           },
-          "status": {
+          "Status": {
             "type": "string"
           }
         }
@@ -3502,91 +3800,91 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "billingProposalID": {
+          "BillingProposalID": {
             "type": "integer",
             "format": "int32"
           },
-          "patientID_FK": {
+          "PatientID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "proposalNumber": {
+          "ProposalNumber": {
             "type": "string"
           },
-          "title": {
+          "Title": {
             "type": "string"
           },
-          "sendEmail": {
+          "SendEmail": {
             "type": "boolean",
             "nullable": true
           },
-          "emailPatient": {
+          "EmailPatient": {
             "type": "boolean",
             "nullable": true
           },
-          "emailTo": {
+          "EmailTo": {
             "type": "string",
             "nullable": true
           },
-          "emailCC": {
+          "EmailCC": {
             "type": "string",
             "nullable": true
           },
-          "emailBCC": {
+          "EmailBCC": {
             "type": "string",
             "nullable": true
           },
-          "currencyID_FK": {
+          "CurrencyID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "currencyCode": {
+          "CurrencyCode": {
             "type": "string"
           },
-          "totalCost": {
+          "TotalCost": {
             "type": "number",
             "format": "decimal"
           },
-          "status": {
+          "Status": {
             "type": "string"
           },
-          "groupNumber": {
+          "GroupNumber": {
             "type": "string"
           },
-          "version": {
+          "Version": {
             "type": "integer"
           },
-          "createdDate": {
+          "CreatedDate": {
             "type": "string",
             "format": "date-time"
           },
-          "createdBy_FK": {
+          "CreatedBy_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "modifiedDate": {
+          "ModifiedDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "modifiedBy_FK": {
+          "ModifiedBy_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "isDeleted": {
+          "IsDeleted": {
             "type": "boolean"
           },
-          "proposalType": {
+          "ProposalType": {
             "type": "string"
           },
-          "patientData": {
+          "PatientData": {
             "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto"
           },
-          "createdByData": {
+          "CreatedByData": {
             "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto"
           },
-          "modifiedByData": {
+          "ModifiedByData": {
             "nullable": true,
             "oneOf": [
               {
@@ -3594,7 +3892,7 @@
               }
             ]
           },
-          "serviceList": {
+          "ServiceList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto"
@@ -3606,37 +3904,37 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "patientID": {
+          "PatientID": {
             "type": "integer",
             "format": "int32"
           },
-          "firstName": {
+          "FirstName": {
             "type": "string"
           },
-          "lastName": {
+          "LastName": {
             "type": "string"
           },
-          "photo": {
+          "Photo": {
             "type": "string",
             "nullable": true
           },
-          "mailingAddress1": {
+          "MailingAddress1": {
             "type": "string",
             "nullable": true
           },
-          "mailingAddress2": {
+          "MailingAddress2": {
             "type": "string",
             "nullable": true
           },
-          "mailingAddress3": {
+          "MailingAddress3": {
             "type": "string",
             "nullable": true
           },
-          "mailingPostalCode": {
+          "MailingPostalCode": {
             "type": "string",
             "nullable": true
           },
-          "profile": {
+          "Profile": {
             "nullable": true,
             "oneOf": [
               {
@@ -3650,7 +3948,7 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           }
@@ -3660,21 +3958,21 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           },
-          "firstName": {
+          "FirstName": {
             "type": "string"
           },
-          "lastName": {
+          "LastName": {
             "type": "string"
           },
-          "photo": {
+          "Photo": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string"
           }
         }
@@ -3713,11 +4011,11 @@
       "C4WX1APIFeaturesBillingProposalDtosDeleteBillingProposalDto": {
         "type": "object",
         "example": {
-          "userId": 1
+          "UserId": 1
         },
         "additionalProperties": false,
         "properties": {
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -3726,89 +4024,89 @@
       "C4WX1APIFeaturesBillingProposalDtosCreateBillingProposalDto": {
         "type": "object",
         "example": {
-          "patientID_FK": 1,
-          "title": "Title",
-          "sendEmail": true,
-          "emailPatient": true,
-          "emailTo": "test-to@gmail.com",
-          "emailCC": "test-cc@gmail.com",
-          "emailBCC": "test-bcc@gmail.com",
-          "currencyID_FK": 1,
-          "status": "Active",
-          "groupNumber": "1",
-          "version": 1,
-          "proposalType": "ProposalType",
-          "userId": 1,
-          "serviceList": [
+          "PatientID_FK": 1,
+          "Title": "Title",
+          "SendEmail": true,
+          "EmailPatient": true,
+          "EmailTo": "test-to@gmail.com",
+          "EmailCC": "test-cc@gmail.com",
+          "EmailBCC": "test-bcc@gmail.com",
+          "CurrencyID_FK": 1,
+          "Status": "Active",
+          "GroupNumber": "1",
+          "Version": 1,
+          "ProposalType": "ProposalType",
+          "UserId": 1,
+          "ServiceList": [
             {
-              "billingInvoiceServiceID": 0,
-              "billingProposalID_FK": 0,
-              "serviceID_FK": 1,
-              "categoryId": 0,
-              "title": null,
-              "startDate": "2025-02-21T20:43:16.8364914+08:00",
-              "endDate": "2025-02-21T20:43:16.8364935+08:00",
-              "unitCost": 0.0,
-              "duration1": "Duration1",
-              "duration2": "Duration2",
-              "visit": 1,
-              "session": 0,
-              "discount": 0.0,
-              "serviceDescription": "ServiceDescription",
-              "categoryName": null
+              "BillingInvoiceServiceID": 0,
+              "BillingProposalID_FK": 0,
+              "ServiceID_FK": 1,
+              "CategoryId": 0,
+              "Title": null,
+              "StartDate": "2025-02-27T23:51:34.5585733+08:00",
+              "EndDate": "2025-02-27T23:51:34.558576+08:00",
+              "UnitCost": 0.0,
+              "Duration1": "Duration1",
+              "Duration2": "Duration2",
+              "Visit": 1,
+              "Session": 0,
+              "Discount": 0.0,
+              "ServiceDescription": "ServiceDescription",
+              "CategoryName": null
             }
           ]
         },
         "additionalProperties": false,
         "properties": {
-          "patientID_FK": {
+          "PatientID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "title": {
+          "Title": {
             "type": "string"
           },
-          "sendEmail": {
+          "SendEmail": {
             "type": "boolean",
             "nullable": true
           },
-          "emailPatient": {
+          "EmailPatient": {
             "type": "boolean",
             "nullable": true
           },
-          "emailTo": {
+          "EmailTo": {
             "type": "string",
             "nullable": true
           },
-          "emailCC": {
+          "EmailCC": {
             "type": "string",
             "nullable": true
           },
-          "emailBCC": {
+          "EmailBCC": {
             "type": "string",
             "nullable": true
           },
-          "currencyID_FK": {
+          "CurrencyID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "status": {
+          "Status": {
             "type": "string"
           },
-          "groupNumber": {
+          "GroupNumber": {
             "type": "string"
           },
-          "version": {
+          "Version": {
             "type": "integer"
           },
-          "proposalType": {
+          "ProposalType": {
             "type": "string"
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           },
-          "serviceList": {
+          "ServiceList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto"
@@ -3816,570 +4114,34 @@
           }
         }
       },
-      "C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "billingInvoiceID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "patientID_FK": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "invoiceNumber": {
-            "type": "string"
-          },
-          "invoiceDueDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "caseNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "initialCareAssessmentID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "careReportID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "consumable": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "sendEmail": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "emailPatient": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "emailTo": {
-            "type": "string",
-            "nullable": true
-          },
-          "emailCC": {
-            "type": "string",
-            "nullable": true
-          },
-          "emailBCC": {
-            "type": "string",
-            "nullable": true
-          },
-          "currencyID_FK": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalCost": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "status": {
-            "type": "string"
-          },
-          "groupNumber": {
-            "type": "string"
-          },
-          "version": {
-            "type": "integer"
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy_FK": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "modifiedBy_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "invoiceDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "currencyCode": {
-            "type": "string"
-          },
-          "patientData": {
-            "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientDto"
-          },
-          "createdByData": {
-            "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceUserDto"
-          },
-          "modifiedByData": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceUserDto"
-              }
-            ]
-          },
-          "serviceList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceServiceDto"
-            }
-          },
-          "consumableList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceConsumableDto"
-            }
-          }
-        }
-      },
-      "C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "patientID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "photo": {
-            "type": "string",
-            "nullable": true
-          },
-          "caseID": {
-            "type": "string",
-            "nullable": true
-          },
-          "profile": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientProfileDto"
-              }
-            ]
-          }
-        }
-      },
-      "C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientProfileDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "billingAddress1": {
-            "type": "string",
-            "nullable": true
-          },
-          "billingAddress2": {
-            "type": "string",
-            "nullable": true
-          },
-          "billingAddress3": {
-            "type": "string",
-            "nullable": true
-          },
-          "billingPostalCode": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceUserDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "photo": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string"
-          }
-        }
-      },
-      "C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceServiceDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "billingInvoiceServiceID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "proposalID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "serviceID_FK": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "unitCost": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "session": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "discount": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "title": {
-            "type": "string"
-          },
-          "categoryName": {
-            "type": "string"
-          },
-          "billingProposalData": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceProposalDto"
-              }
-            ]
-          }
-        }
-      },
-      "C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceProposalDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "billingProposalID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "proposalNumber": {
-            "type": "string"
-          },
-          "patientID_FK": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "title": {
-            "type": "string"
-          },
-          "proposalType": {
-            "type": "string"
-          }
-        }
-      },
-      "C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceConsumableDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "billingInvoiceConsumableID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "itemID_FK": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "unitPrice": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "quantity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "billingInvoiceItemDto": {
-            "$ref": "#/components/schemas/C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceItemDto"
-          }
-        }
-      },
-      "C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceItemDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "itemID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "categoryID_FK": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "categoryName": {
-            "type": "string"
-          },
-          "itemName": {
-            "type": "string"
-          }
-        }
-      },
-      "C4WX1APIFeaturesBillingInvoiceDtosGetBillingInvoiceDto": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/C4WX1APIFeaturesSharedDtosGetByIdDto"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
-        ]
-      },
-      "C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "auditAction": {
-            "type": "string"
-          },
-          "actionTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "enquiryID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "careManagerAssignedID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "enquirySourceID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "firstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "raceID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "identificationNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "preferredLanguageID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "genderID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "patientAddress1": {
-            "type": "string",
-            "nullable": true
-          },
-          "patientAddress2": {
-            "type": "string",
-            "nullable": true
-          },
-          "patientAddress3": {
-            "type": "string",
-            "nullable": true
-          },
-          "postalCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "nameOfCaller": {
-            "type": "string",
-            "nullable": true
-          },
-          "contactNumberOfCaller": {
-            "type": "string",
-            "nullable": true
-          },
-          "emailOfCaller": {
-            "type": "string",
-            "nullable": true
-          },
-          "preferredAppointmentDateTime": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "medicalHistory": {
-            "type": "string",
-            "nullable": true
-          },
-          "caregiverAtHomeID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "servicesRequiredID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "remarks": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "createdBy_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "modifiedBy_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "isDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "otherRace": {
-            "type": "string",
-            "nullable": true
-          },
-          "otherPreferredLanguage": {
-            "type": "string",
-            "nullable": true
-          },
-          "userOrganizationID_FK": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "caseNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "note": {
-            "type": "string",
-            "nullable": true
-          },
-          "orderID": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryUserDto"
-              }
-            ]
-          },
-          "createdBy": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryUserDto"
-              }
-            ]
-          }
-        }
-      },
-      "C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryUserDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "photo": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
       "C4WX1APIFeaturesAPIAccessKeyDtosAPIAccessKeyDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "apiAccessKeyID": {
+          "APIAccessKeyID": {
             "type": "integer",
             "format": "int32"
           },
-          "tokenCode": {
+          "TokenCode": {
             "type": "string"
           },
-          "accessKey": {
+          "AccessKey": {
             "type": "string"
           },
-          "expiryDate": {
+          "ExpiryDate": {
             "type": "string",
             "format": "date-time"
           },
-          "createdDate": {
+          "CreatedDate": {
             "type": "string",
             "format": "date-time"
           },
-          "updatedDate": {
+          "UpdatedDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "userId_FK": {
+          "UserId_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -4401,10 +4163,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "code": {
+          "Code": {
             "type": "string"
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -4413,31 +4175,31 @@
       "C4WX1APIFeaturesActivityDtosUpdateActivityDto": {
         "type": "object",
         "example": {
-          "problemListID_FK": 1,
-          "diseaseID_FK": 1,
-          "activityDetail": "Activity Detail",
-          "diseaseSubInfoID_FK": 1,
-          "userId": 1
+          "ProblemListID_FK": 1,
+          "DiseaseID_FK": 1,
+          "ActivityDetail": "Activity Detail",
+          "DiseaseSubInfoID_FK": 1,
+          "UserId": 1
         },
         "additionalProperties": false,
         "properties": {
-          "problemListID_FK": {
+          "ProblemListID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "diseaseID_FK": {
+          "DiseaseID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "activityDetail": {
+          "ActivityDetail": {
             "type": "string"
           },
-          "diseaseSubInfoID_FK": {
+          "DiseaseSubInfoID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }
@@ -4447,95 +4209,82 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "activityID": {
+          "ActivityID": {
             "type": "integer",
             "format": "int32"
           },
-          "problemListID_FK": {
+          "ProblemListID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "diseaseID_FK": {
+          "DiseaseID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "activityDetail": {
+          "ActivityDetail": {
             "type": "string"
           },
-          "isDeleted": {
+          "IsDeleted": {
             "type": "boolean"
           },
-          "createdDate": {
+          "CreatedDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "createdBy_FK": {
+          "CreatedBy_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "modifiedDate": {
+          "ModifiedDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "modifiedBy_FK": {
+          "ModifiedBy_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "diseaseSubInfoID_FK": {
+          "DiseaseSubInfoID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "canDelete": {
+          "CanDelete": {
             "type": "boolean"
-          }
-        }
-      },
-      "C4WX1APIFeaturesActivityDtosDeleteActivityDto": {
-        "type": "object",
-        "example": {
-          "userID": 1
-        },
-        "additionalProperties": false,
-        "properties": {
-          "userID": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
       "C4WX1APIFeaturesActivityDtosCreateActivityDto": {
         "type": "object",
         "example": {
-          "problemListID_FK": 1,
-          "diseaseID_FK": 1,
-          "activityDetail": "Activity Detail",
-          "diseaseSubInfoID_FK": 1,
-          "userId": 1
+          "ProblemListID_FK": 1,
+          "DiseaseID_FK": 1,
+          "ActivityDetail": "Activity Detail",
+          "DiseaseSubInfoID_FK": 1,
+          "UserId": 1
         },
         "additionalProperties": false,
         "properties": {
-          "problemListID_FK": {
+          "ProblemListID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "diseaseID_FK": {
+          "DiseaseID_FK": {
             "type": "integer",
             "format": "int32"
           },
-          "activityDetail": {
+          "ActivityDetail": {
             "type": "string"
           },
-          "diseaseSubInfoID_FK": {
+          "DiseaseSubInfoID_FK": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "userId": {
+          "UserId": {
             "type": "integer",
             "format": "int32"
           }

@@ -1,15 +1,9 @@
 ---
 title: C4WX1.API v1.0.0
 language_tabs:
-  - shell: curl
-  - http: HTTP
-  - javascript: JavaScript
-  - python: Python
+  - shell: CURL
 language_clients:
   - shell: ""
-  - http: ""
-  - javascript: ""
-  - python: ""
 toc_footers: []
 includes: []
 search: true
@@ -34,80 +28,44 @@ Base URLs:
 
 <h1 id="c4wx1-api-sysconfig">Sysconfig</h1>
 
-## Update SysConfig
+## C4WX1APIFeaturesSysConfigUpdateUpdate
 
 <a id="opIdC4WX1APIFeaturesSysConfigUpdateUpdate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X PUT https://localhost:7055/api/sysconfig \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-PUT https://localhost:7055/api/sysconfig HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '[
-  {
-    "configName": "Config1",
-    "configValue": "Value1",
-    "userID": 1
-  },
-  {
-    "configName": "Config2",
-    "configValue": "Value2",
-    "userID": 1
-  }
-]';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/sysconfig',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.put('https://localhost:7055/api/sysconfig', headers = headers)
-
-print(r.json())
-
+curl --request PUT \
+  --url https://localhost:7055/api/sysconfig \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '[{"ConfigName":"Config1","ConfigValue":"Value1","UserID":1},{"ConfigName":"Config2","ConfigValue":"Value2","UserID":1}]'
 ```
 
 `PUT /api/sysconfig`
+
+*Update SysConfig*
 
 Update one or multiple existing SysConfigs
 
 > Body parameter
 
-<h3 id="update-sysconfig-parameters">Parameters</h3>
+```json
+[
+  {
+    "ConfigName": "Config1",
+    "ConfigValue": "Value1",
+    "UserID": 1
+  },
+  {
+    "ConfigName": "Config2",
+    "ConfigValue": "Value2",
+    "UserID": 1
+  }
+]
+```
+
+<h3 id="c4wx1apifeaturessysconfigupdateupdate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -119,14 +77,14 @@ Update one or multiple existing SysConfigs
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="update-sysconfig-responses">Responses</h3>
+<h3 id="c4wx1apifeaturessysconfigupdateupdate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -138,71 +96,33 @@ Update one or multiple existing SysConfigs
 This operation does not require authentication
 </aside>
 
-## Get SysConfig List
+## C4WX1APIFeaturesSysConfigGetGetList
 
 <a id="opIdC4WX1APIFeaturesSysConfigGetGetList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/sysconfig \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/sysconfig HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/sysconfig',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/sysconfig', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/sysconfig \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/sysconfig`
 
+*Get SysConfig List*
+
 Get a filtered, paged and sorted list of SysConfigs
 
-<h3 id="get-sysconfig-list-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturessysconfiggetgetlist-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|configName|query|string|false|none|
-|configValue|query|string|false|none|
-|pageIndex|query|integer(int32)|false|none|
-|pageSize|query|integer(int32)|false|none|
-|orderBy|query|string|false|none|
+|ConfigName|query|string|false|none|
+|ConfigValue|query|string|false|none|
+|PageIndex|query|integer(int32)|false|none|
+|PageSize|query|integer(int32)|false|none|
+|OrderBy|query|string|false|none|
 
 > Example responses
 
@@ -211,109 +131,73 @@ Get a filtered, paged and sorted list of SysConfigs
 ```json
 [
   {
-    "configName": "string",
-    "configValue": "string",
-    "modifiedDate": "2019-08-24T14:15:22Z",
-    "modifiedBy_FK": 0,
-    "isConfigurable": true,
-    "description": "string"
+    "ConfigName": "string",
+    "ConfigValue": "string",
+    "ModifiedDate": "2019-08-24T14:15:22Z",
+    "ModifiedBy_FK": 0,
+    "IsConfigurable": true,
+    "Description": "string"
   }
 ]
 ```
 
-<h3 id="get-sysconfig-list-responses">Responses</h3>
+<h3 id="c4wx1apifeaturessysconfiggetgetlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|SysConfig List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-sysconfig-list-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturessysconfiggetgetlist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesSysConfigDtosSysConfigDto](#schemac4wx1apifeaturessysconfigdtossysconfigdto)]|false|none|none|
-|» configName|string|false|none|none|
-|» configValue|string¦null|false|none|none|
-|» modifiedDate|string(date-time)¦null|false|none|none|
-|» modifiedBy_FK|integer(int32)¦null|false|none|none|
-|» isConfigurable|boolean¦null|false|none|none|
-|» description|string¦null|false|none|none|
+|» ConfigName|string|false|none|none|
+|» ConfigValue|string¦null|false|none|none|
+|» ModifiedDate|string(date-time)¦null|false|none|none|
+|» ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|» IsConfigurable|boolean¦null|false|none|none|
+|» Description|string¦null|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Create SysConfig
+## C4WX1APIFeaturesSysConfigCreateCreate
 
 <a id="opIdC4WX1APIFeaturesSysConfigCreateCreate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X POST https://localhost:7055/api/sysconfig \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-POST https://localhost:7055/api/sysconfig HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "configName": "Config Name",
-  "configValue": "Config Value",
-  "isConfigurable": false,
-  "description": "Description"
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/sysconfig',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.post('https://localhost:7055/api/sysconfig', headers = headers)
-
-print(r.json())
-
+curl --request POST \
+  --url https://localhost:7055/api/sysconfig \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"ConfigName":"Config Name","ConfigValue":"Config Value","IsConfigurable":false,"Description":"Description"}'
 ```
 
 `POST /api/sysconfig`
+
+*Create SysConfig*
 
 Create a new SysConfig
 
 > Body parameter
 
-<h3 id="create-sysconfig-parameters">Parameters</h3>
+```json
+{
+  "ConfigName": "Config Name",
+  "ConfigValue": "Config Value",
+  "IsConfigurable": false,
+  "Description": "Description"
+}
+```
+
+<h3 id="c4wx1apifeaturessysconfigcreatecreate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -325,14 +209,14 @@ Create a new SysConfig
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="create-sysconfig-responses">Responses</h3>
+<h3 id="c4wx1apifeaturessysconfigcreatecreate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -343,70 +227,29 @@ Create a new SysConfig
 This operation does not require authentication
 </aside>
 
-## Get SysConfig
+## C4WX1APIFeaturesSysConfigGetGet
 
 <a id="opIdC4WX1APIFeaturesSysConfigGetGet"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/sysconfig/config-name/{configName}?configName=string \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/sysconfig/config-name/{configName}?configName=string HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/sysconfig/config-name/{configName}?configName=string',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/sysconfig/config-name/{configName}', params={
-  'configName': 'string'
-}, headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/sysconfig/config-name/string \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/sysconfig/config-name/{configName}`
 
+*Get SysConfig*
+
 Get SysConfig by its ConfigName
 
-<h3 id="get-sysconfig-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturessysconfiggetget-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |configName|path|string|true|none|
-|configName|query|string|true|none|
 
 > Example responses
 
@@ -414,16 +257,16 @@ Get SysConfig by its ConfigName
 
 ```json
 {
-  "configName": "string",
-  "configValue": "string",
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "isConfigurable": true,
-  "description": "string"
+  "ConfigName": "string",
+  "ConfigValue": "string",
+  "ModifiedDate": "2019-08-24T14:15:22Z",
+  "ModifiedBy_FK": 0,
+  "IsConfigurable": true,
+  "Description": "string"
 }
 ```
 
-<h3 id="get-sysconfig-responses">Responses</h3>
+<h3 id="c4wx1apifeaturessysconfiggetget-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -435,59 +278,21 @@ Get SysConfig by its ConfigName
 This operation does not require authentication
 </aside>
 
-## Get All SysConfig
+## C4WX1APIFeaturesSysConfigGetGetAllList
 
 <a id="opIdC4WX1APIFeaturesSysConfigGetGetAllList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/sysconfig/all \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/sysconfig/all HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/sysconfig/all',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/sysconfig/all', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/sysconfig/all \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/sysconfig/all`
+
+*Get All SysConfig*
 
 Get all SysConfigs
 
@@ -498,94 +303,56 @@ Get all SysConfigs
 ```json
 [
   {
-    "configName": "string",
-    "configValue": "string",
-    "modifiedDate": "2019-08-24T14:15:22Z",
-    "modifiedBy_FK": 0,
-    "isConfigurable": true,
-    "description": "string"
+    "ConfigName": "string",
+    "ConfigValue": "string",
+    "ModifiedDate": "2019-08-24T14:15:22Z",
+    "ModifiedBy_FK": 0,
+    "IsConfigurable": true,
+    "Description": "string"
   }
 ]
 ```
 
-<h3 id="get-all-sysconfig-responses">Responses</h3>
+<h3 id="c4wx1apifeaturessysconfiggetgetalllist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|SysConfig List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-all-sysconfig-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturessysconfiggetgetalllist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesSysConfigDtosSysConfigDto](#schemac4wx1apifeaturessysconfigdtossysconfigdto)]|false|none|none|
-|» configName|string|false|none|none|
-|» configValue|string¦null|false|none|none|
-|» modifiedDate|string(date-time)¦null|false|none|none|
-|» modifiedBy_FK|integer(int32)¦null|false|none|none|
-|» isConfigurable|boolean¦null|false|none|none|
-|» description|string¦null|false|none|none|
+|» ConfigName|string|false|none|none|
+|» ConfigValue|string¦null|false|none|none|
+|» ModifiedDate|string(date-time)¦null|false|none|none|
+|» ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|» IsConfigurable|boolean¦null|false|none|none|
+|» Description|string¦null|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get SysConfig Count
+## C4WX1APIFeaturesSysConfigGetGetCount
 
 <a id="opIdC4WX1APIFeaturesSysConfigGetGetCount"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/sysconfig/count \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/sysconfig/count HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/sysconfig/count',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/sysconfig/count', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/sysconfig/count \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/sysconfig/count`
+
+*Get SysConfig Count*
 
 Get the number of SysConfigs
 
@@ -597,7 +364,7 @@ Get the number of SysConfigs
 0
 ```
 
-<h3 id="get-sysconfig-count-responses">Responses</h3>
+<h3 id="c4wx1apifeaturessysconfiggetgetcount-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -610,63 +377,25 @@ This operation does not require authentication
 
 <h1 id="c4wx1-api-chat">Chat</h1>
 
-## Get Chat
+## C4WX1APIFeaturesChatGetGetById
 
 <a id="opIdC4WX1APIFeaturesChatGetGetById"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/chat/{id} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/chat/{id} HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/chat/{id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/chat/{id}', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/chat/0 \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/chat/{id}`
 
+*Get Chat*
+
 Get Chat by its ID
 
-<h3 id="get-chat-parameters">Parameters</h3>
+<h3 id="c4wx1apifeatureschatgetgetbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -678,59 +407,59 @@ Get Chat by its ID
 
 ```json
 {
-  "chatID": 0,
-  "comment": "string",
-  "attachment": "string",
-  "attachment_Physical": "string",
-  "parentID_FK": 0,
-  "patientID_FK": 0,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "isDeleted": true,
-  "family": true,
-  "userData": {
-    "userId": 0,
-    "firstname": "string",
-    "lastname": "string",
-    "photo": "string"
+  "ChatID": 0,
+  "Comment": "string",
+  "Attachment": "string",
+  "Attachment_Physical": "string",
+  "ParentID_FK": 0,
+  "PatientID_FK": 0,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "IsDeleted": true,
+  "Family": true,
+  "UserData": {
+    "UserId": 0,
+    "Firstname": "string",
+    "Lastname": "string",
+    "Photo": "string"
   },
-  "patientData": {
-    "patientID": 0,
-    "firstname": "string",
-    "lastname": "string",
-    "photo": "string"
+  "PatientData": {
+    "PatientID": 0,
+    "Firstname": "string",
+    "Lastname": "string",
+    "Photo": "string"
   },
-  "commentList": [
+  "CommentList": [
     {
-      "chatID": 0,
-      "comment": "string",
-      "attachment": "string",
-      "attachment_Physical": "string",
-      "parentID_FK": 0,
-      "patientID_FK": 0,
-      "createdDate": "2019-08-24T14:15:22Z",
-      "createdBy_FK": 0,
-      "isDeleted": true,
-      "family": true,
-      "userData": {
-        "userId": 0,
-        "firstname": "string",
-        "lastname": "string",
-        "photo": "string"
+      "ChatID": 0,
+      "Comment": "string",
+      "Attachment": "string",
+      "Attachment_Physical": "string",
+      "ParentID_FK": 0,
+      "PatientID_FK": 0,
+      "CreatedDate": "2019-08-24T14:15:22Z",
+      "CreatedBy_FK": 0,
+      "IsDeleted": true,
+      "Family": true,
+      "UserData": {
+        "UserId": 0,
+        "Firstname": "string",
+        "Lastname": "string",
+        "Photo": "string"
       },
-      "patientData": {
-        "patientID": 0,
-        "firstname": "string",
-        "lastname": "string",
-        "photo": "string"
+      "PatientData": {
+        "PatientID": 0,
+        "Firstname": "string",
+        "Lastname": "string",
+        "Photo": "string"
       },
-      "commentList": []
+      "CommentList": []
     }
   ]
 }
 ```
 
-<h3 id="get-chat-responses">Responses</h3>
+<h3 id="c4wx1apifeatureschatgetgetbyid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -741,447 +470,40 @@ Get Chat by its ID
 This operation does not require authentication
 </aside>
 
-## Get Can Load More Chat
-
-<a id="opIdC4WX1APIFeaturesChatGetGetCanLoadMore"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/chat/can-load-more \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/chat/can-load-more HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/chat/can-load-more',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/chat/can-load-more', headers = headers)
-
-print(r.json())
-
-```
-
-`GET /api/chat/can-load-more`
-
-Check if there are more chats to load
-
-<h3 id="get-can-load-more-chat-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|min|query|integer(int32)|false|none|
-|patientId|query|integer(int32)|false|none|
-|userId|query|integer(int32)|false|none|
-
-> Example responses
-
-> 200 Response
-
-```json
-true
-```
-
-<h3 id="get-can-load-more-chat-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|boolean|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Get Latest Chat List
-
-<a id="opIdC4WX1APIFeaturesChatGetGetLatestList"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/chat/latest?count=0 \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/chat/latest?count=0 HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/chat/latest?count=0',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/chat/latest', params={
-  'count': '0'
-}, headers = headers)
-
-print(r.json())
-
-```
-
-`GET /api/chat/latest`
-
-Get the latest Chat list
-
-<h3 id="get-latest-chat-list-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|chatID|query|integer(int32)|false|none|
-|patientID|query|integer(int32)|false|none|
-|userID|query|integer(int32)|false|none|
-|count|query|integer(int32)|true|none|
-|family|query|boolean|false|none|
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "chatID": 0,
-    "comment": "string",
-    "attachment": "string",
-    "attachment_Physical": "string",
-    "parentID_FK": 0,
-    "patientID_FK": 0,
-    "createdDate": "2019-08-24T14:15:22Z",
-    "createdBy_FK": 0,
-    "isDeleted": true,
-    "family": true,
-    "userData": {
-      "userId": 0,
-      "firstname": "string",
-      "lastname": "string",
-      "photo": "string"
-    },
-    "patientData": {
-      "patientID": 0,
-      "firstname": "string",
-      "lastname": "string",
-      "photo": "string"
-    },
-    "commentList": [
-      {}
-    ]
-  }
-]
-```
-
-<h3 id="get-latest-chat-list-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Chat list retrieved successfully|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
-
-<h3 id="get-latest-chat-list-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
-|» chatID|integer(int32)|false|none|none|
-|» comment|string¦null|false|none|none|
-|» attachment|string¦null|false|none|none|
-|» attachment_Physical|string¦null|false|none|none|
-|» parentID_FK|integer(int32)¦null|false|none|none|
-|» patientID_FK|integer(int32)¦null|false|none|none|
-|» createdDate|string(date-time)|false|none|none|
-|» createdBy_FK|integer(int32)|false|none|none|
-|» isDeleted|boolean|false|none|none|
-|» family|boolean¦null|false|none|none|
-|» userData|[C4WX1APIFeaturesChatDtosChatUserDto](#schemac4wx1apifeatureschatdtoschatuserdto)¦null|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstname|string|false|none|none|
-|»» lastname|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|» patientData|[C4WX1APIFeaturesChatDtosChatPatientDto](#schemac4wx1apifeatureschatdtoschatpatientdto)¦null|false|none|none|
-|»» patientID|integer(int32)|false|none|none|
-|»» firstname|string|false|none|none|
-|»» lastname|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|» commentList|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Get Previous Chat List
-
-<a id="opIdC4WX1APIFeaturesChatGetGetPreviousList"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/chat/previous?count=0 \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/chat/previous?count=0 HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/chat/previous?count=0',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/chat/previous', params={
-  'count': '0'
-}, headers = headers)
-
-print(r.json())
-
-```
-
-`GET /api/chat/previous`
-
-Get the previous Chat list
-
-<h3 id="get-previous-chat-list-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|chatID|query|integer(int32)|false|none|
-|patientID|query|integer(int32)|false|none|
-|userID|query|integer(int32)|false|none|
-|count|query|integer(int32)|true|none|
-|family|query|boolean|false|none|
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "chatID": 0,
-    "comment": "string",
-    "attachment": "string",
-    "attachment_Physical": "string",
-    "parentID_FK": 0,
-    "patientID_FK": 0,
-    "createdDate": "2019-08-24T14:15:22Z",
-    "createdBy_FK": 0,
-    "isDeleted": true,
-    "family": true,
-    "userData": {
-      "userId": 0,
-      "firstname": "string",
-      "lastname": "string",
-      "photo": "string"
-    },
-    "patientData": {
-      "patientID": 0,
-      "firstname": "string",
-      "lastname": "string",
-      "photo": "string"
-    },
-    "commentList": [
-      {}
-    ]
-  }
-]
-```
-
-<h3 id="get-previous-chat-list-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Chat list retrieved successfully|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
-
-<h3 id="get-previous-chat-list-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
-|» chatID|integer(int32)|false|none|none|
-|» comment|string¦null|false|none|none|
-|» attachment|string¦null|false|none|none|
-|» attachment_Physical|string¦null|false|none|none|
-|» parentID_FK|integer(int32)¦null|false|none|none|
-|» patientID_FK|integer(int32)¦null|false|none|none|
-|» createdDate|string(date-time)|false|none|none|
-|» createdBy_FK|integer(int32)|false|none|none|
-|» isDeleted|boolean|false|none|none|
-|» family|boolean¦null|false|none|none|
-|» userData|[C4WX1APIFeaturesChatDtosChatUserDto](#schemac4wx1apifeatureschatdtoschatuserdto)¦null|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstname|string|false|none|none|
-|»» lastname|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|» patientData|[C4WX1APIFeaturesChatDtosChatPatientDto](#schemac4wx1apifeatureschatdtoschatpatientdto)¦null|false|none|none|
-|»» patientID|integer(int32)|false|none|none|
-|»» firstname|string|false|none|none|
-|»» lastname|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|» commentList|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Delete Chat
+## C4WX1APIFeaturesChatDeleteDelete
 
 <a id="opIdC4WX1APIFeaturesChatDeleteDelete"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X DELETE https://localhost:7055/api/chat/{chatID} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
+curl --request DELETE \
+  --url https://localhost:7055/api/chat/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: */*' \
+  --data '{"UserId":0}'
 ```
 
-```http
-DELETE https://localhost:7055/api/chat/{chatID} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
+`DELETE /api/chat/{id}`
 
-```
-
-```javascript
-const inputBody = '{
-  "userID": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/chat/{chatID}',
-{
-  method: 'DELETE',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.delete('https://localhost:7055/api/chat/{chatID}', headers = headers)
-
-print(r.json())
-
-```
-
-`DELETE /api/chat/{chatID}`
+*Delete Chat*
 
 Delete an existing Chat
 
 > Body parameter
 
-<h3 id="delete-chat-parameters">Parameters</h3>
+```json
+{
+  "UserId": 0
+}
+```
+
+<h3 id="c4wx1apifeatureschatdeletedelete-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|chatID|path|integer(int32)|true|none|
-|body|body|[C4WX1APIFeaturesChatDtosDeleteChatDto](#schemac4wx1apifeatureschatdtosdeletechatdto)|true|none|
+|id|path|integer(int32)|true|none|
+|body|body|[C4WX1APIFeaturesSharedDtosDeleteByIdDto](#schemac4wx1apifeaturesshareddtosdeletebyiddto)|true|none|
 
 > Example responses
 
@@ -1189,14 +511,14 @@ Delete an existing Chat
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="delete-chat-responses">Responses</h3>
+<h3 id="c4wx1apifeatureschatdeletedelete-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -1208,77 +530,294 @@ Delete an existing Chat
 This operation does not require authentication
 </aside>
 
-## Create Chat
+## C4WX1APIFeaturesChatGetGetCanLoadMore
+
+<a id="opIdC4WX1APIFeaturesChatGetGetCanLoadMore"></a>
+
+> Code samples
+
+```shell
+curl --request GET \
+  --url https://localhost:7055/api/chat/can-load-more \
+  --header 'Accept: application/json'
+```
+
+`GET /api/chat/can-load-more`
+
+*Get Can Load More Chat*
+
+Check if there are more chats to load
+
+<h3 id="c4wx1apifeatureschatgetgetcanloadmore-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|Min|query|integer(int32)|false|none|
+|PatientId|query|integer(int32)|false|none|
+|UserId|query|integer(int32)|false|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+true
+```
+
+<h3 id="c4wx1apifeatureschatgetgetcanloadmore-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|boolean|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesChatGetGetLatestList
+
+<a id="opIdC4WX1APIFeaturesChatGetGetLatestList"></a>
+
+> Code samples
+
+```shell
+curl --request GET \
+  --url 'https://localhost:7055/api/chat/latest?Count=0' \
+  --header 'Accept: application/json'
+```
+
+`GET /api/chat/latest`
+
+*Get Latest Chat List*
+
+Get the latest Chat list
+
+<h3 id="c4wx1apifeatureschatgetgetlatestlist-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ChatID|query|integer(int32)|false|none|
+|PatientID|query|integer(int32)|false|none|
+|UserID|query|integer(int32)|false|none|
+|Count|query|integer(int32)|true|none|
+|Family|query|boolean|false|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "ChatID": 0,
+    "Comment": "string",
+    "Attachment": "string",
+    "Attachment_Physical": "string",
+    "ParentID_FK": 0,
+    "PatientID_FK": 0,
+    "CreatedDate": "2019-08-24T14:15:22Z",
+    "CreatedBy_FK": 0,
+    "IsDeleted": true,
+    "Family": true,
+    "UserData": {
+      "UserId": 0,
+      "Firstname": "string",
+      "Lastname": "string",
+      "Photo": "string"
+    },
+    "PatientData": {
+      "PatientID": 0,
+      "Firstname": "string",
+      "Lastname": "string",
+      "Photo": "string"
+    },
+    "CommentList": [
+      {}
+    ]
+  }
+]
+```
+
+<h3 id="c4wx1apifeatureschatgetgetlatestlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Chat list retrieved successfully|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<h3 id="c4wx1apifeatureschatgetgetlatestlist-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
+|» ChatID|integer(int32)|false|none|none|
+|» Comment|string¦null|false|none|none|
+|» Attachment|string¦null|false|none|none|
+|» Attachment_Physical|string¦null|false|none|none|
+|» ParentID_FK|integer(int32)¦null|false|none|none|
+|» PatientID_FK|integer(int32)¦null|false|none|none|
+|» CreatedDate|string(date-time)|false|none|none|
+|» CreatedBy_FK|integer(int32)|false|none|none|
+|» IsDeleted|boolean|false|none|none|
+|» Family|boolean¦null|false|none|none|
+|» UserData|[C4WX1APIFeaturesChatDtosChatUserDto](#schemac4wx1apifeatureschatdtoschatuserdto)¦null|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» Firstname|string|false|none|none|
+|»» Lastname|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|» PatientData|[C4WX1APIFeaturesChatDtosChatPatientDto](#schemac4wx1apifeatureschatdtoschatpatientdto)¦null|false|none|none|
+|»» PatientID|integer(int32)|false|none|none|
+|»» Firstname|string|false|none|none|
+|»» Lastname|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|» CommentList|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesChatGetGetPreviousList
+
+<a id="opIdC4WX1APIFeaturesChatGetGetPreviousList"></a>
+
+> Code samples
+
+```shell
+curl --request GET \
+  --url 'https://localhost:7055/api/chat/previous?Count=0' \
+  --header 'Accept: application/json'
+```
+
+`GET /api/chat/previous`
+
+*Get Previous Chat List*
+
+Get the previous Chat list
+
+<h3 id="c4wx1apifeatureschatgetgetpreviouslist-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ChatID|query|integer(int32)|false|none|
+|PatientID|query|integer(int32)|false|none|
+|UserID|query|integer(int32)|false|none|
+|Count|query|integer(int32)|true|none|
+|Family|query|boolean|false|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "ChatID": 0,
+    "Comment": "string",
+    "Attachment": "string",
+    "Attachment_Physical": "string",
+    "ParentID_FK": 0,
+    "PatientID_FK": 0,
+    "CreatedDate": "2019-08-24T14:15:22Z",
+    "CreatedBy_FK": 0,
+    "IsDeleted": true,
+    "Family": true,
+    "UserData": {
+      "UserId": 0,
+      "Firstname": "string",
+      "Lastname": "string",
+      "Photo": "string"
+    },
+    "PatientData": {
+      "PatientID": 0,
+      "Firstname": "string",
+      "Lastname": "string",
+      "Photo": "string"
+    },
+    "CommentList": [
+      {}
+    ]
+  }
+]
+```
+
+<h3 id="c4wx1apifeatureschatgetgetpreviouslist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Chat list retrieved successfully|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<h3 id="c4wx1apifeatureschatgetgetpreviouslist-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
+|» ChatID|integer(int32)|false|none|none|
+|» Comment|string¦null|false|none|none|
+|» Attachment|string¦null|false|none|none|
+|» Attachment_Physical|string¦null|false|none|none|
+|» ParentID_FK|integer(int32)¦null|false|none|none|
+|» PatientID_FK|integer(int32)¦null|false|none|none|
+|» CreatedDate|string(date-time)|false|none|none|
+|» CreatedBy_FK|integer(int32)|false|none|none|
+|» IsDeleted|boolean|false|none|none|
+|» Family|boolean¦null|false|none|none|
+|» UserData|[C4WX1APIFeaturesChatDtosChatUserDto](#schemac4wx1apifeatureschatdtoschatuserdto)¦null|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» Firstname|string|false|none|none|
+|»» Lastname|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|» PatientData|[C4WX1APIFeaturesChatDtosChatPatientDto](#schemac4wx1apifeatureschatdtoschatpatientdto)¦null|false|none|none|
+|»» PatientID|integer(int32)|false|none|none|
+|»» Firstname|string|false|none|none|
+|»» Lastname|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|» CommentList|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesChatCreateCreate
 
 <a id="opIdC4WX1APIFeaturesChatCreateCreate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X POST https://localhost:7055/api/chat \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://localhost:7055/api/chat HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/json
-
-```
-
-```javascript
-const inputBody = '{
-  "attachment": "Attachment",
-  "attachment_Physical": "Attachment_Physical",
-  "createdBy_FK": 1,
-  "parentID_FK": 1,
-  "patientID_FK": 1,
-  "comment": "Comment",
-  "family": true
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/chat',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://localhost:7055/api/chat', headers = headers)
-
-print(r.json())
-
+curl --request POST \
+  --url https://localhost:7055/api/chat \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{"Attachment":"Attachment","Attachment_Physical":"Attachment_Physical","CreatedBy_FK":1,"ParentID_FK":1,"PatientID_FK":1,"Comment":"Comment","Family":true}'
 ```
 
 `POST /api/chat`
+
+*Create Chat*
 
 Create a new Chat
 
 > Body parameter
 
-<h3 id="create-chat-parameters">Parameters</h3>
+```json
+{
+  "Attachment": "Attachment",
+  "Attachment_Physical": "Attachment_Physical",
+  "CreatedBy_FK": 1,
+  "ParentID_FK": 1,
+  "PatientID_FK": 1,
+  "Comment": "Comment",
+  "Family": true
+}
+```
+
+<h3 id="c4wx1apifeatureschatcreatecreate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -1290,64 +829,408 @@ Create a new Chat
 
 ```json
 {
-  "chatID": 0,
-  "comment": "string",
-  "attachment": "string",
-  "attachment_Physical": "string",
-  "parentID_FK": 0,
-  "patientID_FK": 0,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "isDeleted": true,
-  "family": true,
-  "userData": {
-    "userId": 0,
-    "firstname": "string",
-    "lastname": "string",
-    "photo": "string"
+  "ChatID": 0,
+  "Comment": "string",
+  "Attachment": "string",
+  "Attachment_Physical": "string",
+  "ParentID_FK": 0,
+  "PatientID_FK": 0,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "IsDeleted": true,
+  "Family": true,
+  "UserData": {
+    "UserId": 0,
+    "Firstname": "string",
+    "Lastname": "string",
+    "Photo": "string"
   },
-  "patientData": {
-    "patientID": 0,
-    "firstname": "string",
-    "lastname": "string",
-    "photo": "string"
+  "PatientData": {
+    "PatientID": 0,
+    "Firstname": "string",
+    "Lastname": "string",
+    "Photo": "string"
   },
-  "commentList": [
+  "CommentList": [
     {
-      "chatID": 0,
-      "comment": "string",
-      "attachment": "string",
-      "attachment_Physical": "string",
-      "parentID_FK": 0,
-      "patientID_FK": 0,
-      "createdDate": "2019-08-24T14:15:22Z",
-      "createdBy_FK": 0,
-      "isDeleted": true,
-      "family": true,
-      "userData": {
-        "userId": 0,
-        "firstname": "string",
-        "lastname": "string",
-        "photo": "string"
+      "ChatID": 0,
+      "Comment": "string",
+      "Attachment": "string",
+      "Attachment_Physical": "string",
+      "ParentID_FK": 0,
+      "PatientID_FK": 0,
+      "CreatedDate": "2019-08-24T14:15:22Z",
+      "CreatedBy_FK": 0,
+      "IsDeleted": true,
+      "Family": true,
+      "UserData": {
+        "UserId": 0,
+        "Firstname": "string",
+        "Lastname": "string",
+        "Photo": "string"
       },
-      "patientData": {
-        "patientID": 0,
-        "firstname": "string",
-        "lastname": "string",
-        "photo": "string"
+      "PatientData": {
+        "PatientID": 0,
+        "Firstname": "string",
+        "Lastname": "string",
+        "Photo": "string"
       },
-      "commentList": []
+      "CommentList": []
     }
   ]
 }
 ```
 
-<h3 id="create-chat-responses">Responses</h3>
+<h3 id="c4wx1apifeatureschatcreatecreate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Chat created successfully|[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request|[FastEndpointsErrorResponse](#schemafastendpointserrorresponse)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Chat not found|None|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="c4wx1-api-care-plan-sub-goal">Care-Plan-Sub-Goal</h1>
+
+## C4WX1APIFeaturesCarePlanSubGoalUpdateUpdate
+
+<a id="opIdC4WX1APIFeaturesCarePlanSubGoalUpdateUpdate"></a>
+
+> Code samples
+
+```shell
+curl --request PUT \
+  --url https://localhost:7055/api/care-plan-sub-goal/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"CarePlanSubID_FK":1,"CarePlanSubGoalName":"care plan sub goal","UserId":1}'
+```
+
+`PUT /api/care-plan-sub-goal/{carePlanSubGoalID}`
+
+*Update Care Plan Sub Goal*
+
+Update a new Care Plan Sub Goal
+
+> Body parameter
+
+```json
+{
+  "CarePlanSubID_FK": 1,
+  "CarePlanSubGoalName": "care plan sub goal",
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoalupdateupdate-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|carePlanSubGoalID|path|integer(int32)|true|none|
+|body|body|[C4WX1APIFeaturesCarePlanSubGoalDtosUpdateCarePlanSubGoalDto](#schemac4wx1apifeaturescareplansubgoaldtosupdatecareplansubgoaldto)|true|none|
+
+> Example responses
+
+> 500 Response
+
+```json
+{
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
+}
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoalupdateupdate-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Care Plan Sub Goal updated successfully|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Care Plan Sub Goal not found|None|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesCarePlanSubGoalGetGetById
+
+<a id="opIdC4WX1APIFeaturesCarePlanSubGoalGetGetById"></a>
+
+> Code samples
+
+```shell
+curl --request GET \
+  --url https://localhost:7055/api/care-plan-sub-goal/0 \
+  --header 'Accept: application/json'
+```
+
+`GET /api/care-plan-sub-goal/{id}`
+
+*Get Care Plan Sub Goal*
+
+Get a Care Plan Sub Goal by its ID
+
+<h3 id="c4wx1apifeaturescareplansubgoalgetgetbyid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer(int32)|true|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "CarePlanSubGoalID": 0,
+  "ScoreTypeID": 0,
+  "Score1": 0,
+  "Score2": 0,
+  "CarePlanSubGoalName": "string",
+  "IsDeleted": true,
+  "CanDelete": true
+}
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoalgetgetbyid-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Care Plan Sub Goal retrieved successfully|[C4WX1APIFeaturesCarePlanSubGoalDtosCarePlanSubGoalDto](#schemac4wx1apifeaturescareplansubgoaldtoscareplansubgoaldto)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Care Plan Sub Goal not found|None|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesCarePlanSubGoalDeleteDelete
+
+<a id="opIdC4WX1APIFeaturesCarePlanSubGoalDeleteDelete"></a>
+
+> Code samples
+
+```shell
+curl --request DELETE \
+  --url https://localhost:7055/api/care-plan-sub-goal/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: */*' \
+  --data '{"UserId":0}'
+```
+
+`DELETE /api/care-plan-sub-goal/{id}`
+
+*Delete Care Plan Sub Goal*
+
+Delete a Care Plan Sub Goal by its ID
+
+> Body parameter
+
+```json
+{
+  "UserId": 0
+}
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoaldeletedelete-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer(int32)|true|none|
+|body|body|[C4WX1APIFeaturesSharedDtosDeleteByIdDto](#schemac4wx1apifeaturesshareddtosdeletebyiddto)|true|none|
+
+> Example responses
+
+> 500 Response
+
+```json
+{
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
+}
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoaldeletedelete-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Care Plan Sub Goal not found|None|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesCarePlanSubGoalGetGetCount
+
+<a id="opIdC4WX1APIFeaturesCarePlanSubGoalGetGetCount"></a>
+
+> Code samples
+
+```shell
+curl --request GET \
+  --url https://localhost:7055/api/care-plan-sub-goal/count \
+  --header 'Accept: application/json'
+```
+
+`GET /api/care-plan-sub-goal/count`
+
+*Get Care Plan Sub Goal Count*
+
+Get Care Plan Sub Goal Count
+
+> Example responses
+
+> 200 Response
+
+```json
+0
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoalgetgetcount-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Care Plan Sub Goal Count retrieved successfully|integer|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesCarePlanSubGoalGetGetList
+
+<a id="opIdC4WX1APIFeaturesCarePlanSubGoalGetGetList"></a>
+
+> Code samples
+
+```shell
+curl --request GET \
+  --url https://localhost:7055/api/care-plan-sub-goal \
+  --header 'Accept: application/json'
+```
+
+`GET /api/care-plan-sub-goal`
+
+*Get Care Plan Sub Goal List*
+
+Get a paged and sorted Care Plan Sub Goal List
+
+<h3 id="c4wx1apifeaturescareplansubgoalgetgetlist-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|PageIndex|query|integer(int32)|false|none|
+|PageSize|query|integer(int32)|false|none|
+|OrderBy|query|string|false|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "CarePlanSubGoalID": 0,
+    "ScoreTypeID": 0,
+    "Score1": 0,
+    "Score2": 0,
+    "CarePlanSubGoalName": "string",
+    "IsDeleted": true,
+    "CanDelete": true
+  }
+]
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoalgetgetlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Care Plan Sub Goal List retrieved successfully|Inline|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<h3 id="c4wx1apifeaturescareplansubgoalgetgetlist-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[[C4WX1APIFeaturesCarePlanSubGoalDtosCarePlanSubGoalDto](#schemac4wx1apifeaturescareplansubgoaldtoscareplansubgoaldto)]|false|none|none|
+|» CarePlanSubGoalID|integer(int32)|false|none|none|
+|» ScoreTypeID|integer(int32)¦null|false|none|none|
+|» Score1|number(decimal)¦null|false|none|none|
+|» Score2|number(decimal)¦null|false|none|none|
+|» CarePlanSubGoalName|string¦null|false|none|none|
+|» IsDeleted|boolean¦null|false|none|none|
+|» CanDelete|boolean|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesCarePlanSubGoalCreateCreate
+
+<a id="opIdC4WX1APIFeaturesCarePlanSubGoalCreateCreate"></a>
+
+> Code samples
+
+```shell
+curl --request POST \
+  --url https://localhost:7055/api/care-plan-sub-goal \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"CarePlanSubID_FK":1,"CarePlanSubGoalName":"care plan sub goal","UserId":1}'
+```
+
+`POST /api/care-plan-sub-goal`
+
+*Create Care Plan Sub Goal*
+
+Create a new Care Plan Sub Goal
+
+> Body parameter
+
+```json
+{
+  "CarePlanSubID_FK": 1,
+  "CarePlanSubGoalName": "care plan sub goal",
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoalcreatecreate-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[C4WX1APIFeaturesCarePlanSubGoalDtosCreateCarePlanSubGoalDto](#schemac4wx1apifeaturescareplansubgoaldtoscreatecareplansubgoaldto)|true|none|
+
+> Example responses
+
+> 500 Response
+
+```json
+{
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
+}
+```
+
+<h3 id="c4wx1apifeaturescareplansubgoalcreatecreate-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Care Plan Sub Goal created successfully|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
 <aside class="success">
@@ -1356,79 +1239,43 @@ This operation does not require authentication
 
 <h1 id="c4wx1-api-c4w-image">C4w-Image</h1>
 
-## Update C4W Image
+## C4WX1APIFeaturesC4WImageUpdateUpdate
 
 <a id="opIdC4WX1APIFeaturesC4WImageUpdateUpdate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X PUT https://localhost:7055/api/c4w-image/{c4wImageId} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-PUT https://localhost:7055/api/c4w-image/{c4wImageId} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "woundImageName": "wound image name",
-  "woundImageData": "wound image data",
-  "woundBedImageName": "wound bed image name",
-  "woundBedImageData": "wound bed image data",
-  "tissueImageName": "tissue image name",
-  "tissueImageData": "tissue image data",
-  "depthImageName": "depth image name",
-  "depthImageData": "depth image data",
-  "userId": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/c4w-image/{c4wImageId}',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.put('https://localhost:7055/api/c4w-image/{c4wImageId}', headers = headers)
-
-print(r.json())
-
+curl --request PUT \
+  --url https://localhost:7055/api/c4w-image/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"WoundImageName":"wound image name","WoundImageData":"wound image data","WoundBedImageName":"wound bed image name","WoundBedImageData":"wound bed image data","TissueImageName":"tissue image name","TissueImageData":"tissue image data","DepthImageName":"depth image name","DepthImageData":"depth image data","UserId":1}'
 ```
 
 `PUT /api/c4w-image/{c4wImageId}`
+
+*Update C4W Image*
 
 Update an existing C4W Image
 
 > Body parameter
 
-<h3 id="update-c4w-image-parameters">Parameters</h3>
+```json
+{
+  "WoundImageName": "wound image name",
+  "WoundImageData": "wound image data",
+  "WoundBedImageName": "wound bed image name",
+  "WoundBedImageData": "wound bed image data",
+  "TissueImageName": "tissue image name",
+  "TissueImageData": "tissue image data",
+  "DepthImageName": "depth image name",
+  "DepthImageData": "depth image data",
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturesc4wimageupdateupdate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -1441,81 +1288,44 @@ Update an existing C4W Image
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="update-c4w-image-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesc4wimageupdateupdate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|C4W Image updated successfully|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|C4W Image not found|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get C4W Image
+## C4WX1APIFeaturesC4WImageGetGetById
 
 <a id="opIdC4WX1APIFeaturesC4WImageGetGetById"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/c4w-image/{id} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/c4w-image/{id} HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/c4w-image/{id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/c4w-image/{id}', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/c4w-image/0 \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/c4w-image/{id}`
 
+*Get C4W Image*
+
 Get a C4W Image by its ID
 
-<h3 id="get-c4w-image-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesc4wimagegetgetbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -1527,97 +1337,58 @@ Get a C4W Image by its ID
 
 ```json
 {
-  "c4WImageId": 0,
-  "woundImageName": "string",
-  "woundImageData": "string",
-  "woundBedImageName": "string",
-  "woundBedImageData": "string",
-  "tissueImageName": "string",
-  "tissueImageData": "string",
-  "depthImageName": "string",
-  "depthImageData": "string",
-  "isDeleted": true,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z"
+  "C4WImageId": 0,
+  "WoundImageName": "string",
+  "WoundImageData": "string",
+  "WoundBedImageName": "string",
+  "WoundBedImageData": "string",
+  "TissueImageName": "string",
+  "TissueImageData": "string",
+  "DepthImageName": "string",
+  "DepthImageData": "string",
+  "IsDeleted": true,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "ModifiedDate": "2019-08-24T14:15:22Z"
 }
 ```
 
-<h3 id="get-c4w-image-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesc4wimagegetgetbyid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|C4W Image retrieved successfully|[C4WX1APIFeaturesC4WImageDtosC4WImageDto](#schemac4wx1apifeaturesc4wimagedtosc4wimagedto)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|C4W Image not found|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get C4W Image Count
+## C4WX1APIFeaturesC4WImageGetGetCount
 
 <a id="opIdC4WX1APIFeaturesC4WImageGetGetCount"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/c4w-image/count?fromDate=2019-08-24T14%3A15%3A22Z&toDate=2019-08-24T14%3A15%3A22Z \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/c4w-image/count?fromDate=2019-08-24T14%3A15%3A22Z&toDate=2019-08-24T14%3A15%3A22Z HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/c4w-image/count?fromDate=2019-08-24T14%3A15%3A22Z&toDate=2019-08-24T14%3A15%3A22Z',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/c4w-image/count', params={
-  'fromDate': '2019-08-24T14:15:22Z',  'toDate': '2019-08-24T14:15:22Z'
-}, headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url 'https://localhost:7055/api/c4w-image/count?FromDate=2019-08-24T14%3A15%3A22Z&ToDate=2019-08-24T14%3A15%3A22Z' \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/c4w-image/count`
 
+*Get C4W Image Count*
+
 Get C4W Image Count based on its CreatedDate
 
-<h3 id="get-c4w-image-count-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesc4wimagegetgetcount-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|fromDate|query|string(date-time)|true|none|
-|toDate|query|string(date-time)|true|none|
+|FromDate|query|string(date-time)|true|none|
+|ToDate|query|string(date-time)|true|none|
 
 > Example responses
 
@@ -1627,7 +1398,7 @@ Get C4W Image Count based on its CreatedDate
 0
 ```
 
-<h3 id="get-c4w-image-count-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesc4wimagegetgetcount-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -1638,73 +1409,33 @@ Get C4W Image Count based on its CreatedDate
 This operation does not require authentication
 </aside>
 
-## Get C4W Image List
+## C4WX1APIFeaturesC4WImageGetGetList
 
 <a id="opIdC4WX1APIFeaturesC4WImageGetGetList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/c4w-image?fromDate=2019-08-24T14%3A15%3A22Z&toDate=2019-08-24T14%3A15%3A22Z \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/c4w-image?fromDate=2019-08-24T14%3A15%3A22Z&toDate=2019-08-24T14%3A15%3A22Z HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/c4w-image?fromDate=2019-08-24T14%3A15%3A22Z&toDate=2019-08-24T14%3A15%3A22Z',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/c4w-image', params={
-  'fromDate': '2019-08-24T14:15:22Z',  'toDate': '2019-08-24T14:15:22Z'
-}, headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url 'https://localhost:7055/api/c4w-image?FromDate=2019-08-24T14%3A15%3A22Z&ToDate=2019-08-24T14%3A15%3A22Z' \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/c4w-image`
 
+*Get C4W Image List*
+
 Get a filtered, paged and sorted C4W Image List
 
-<h3 id="get-c4w-image-list-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesc4wimagegetgetlist-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|fromDate|query|string(date-time)|true|none|
-|toDate|query|string(date-time)|true|none|
-|pageIndex|query|integer(int32)|false|none|
-|pageSize|query|integer(int32)|false|none|
-|orderBy|query|string|false|none|
+|FromDate|query|string(date-time)|true|none|
+|ToDate|query|string(date-time)|true|none|
+|PageIndex|query|integer(int32)|false|none|
+|PageSize|query|integer(int32)|false|none|
+|OrderBy|query|string|false|none|
 
 > Example responses
 
@@ -1713,128 +1444,92 @@ Get a filtered, paged and sorted C4W Image List
 ```json
 [
   {
-    "c4WImageId": 0,
-    "woundImageName": "string",
-    "woundImageData": "string",
-    "woundBedImageName": "string",
-    "woundBedImageData": "string",
-    "tissueImageName": "string",
-    "tissueImageData": "string",
-    "depthImageName": "string",
-    "depthImageData": "string",
-    "isDeleted": true,
-    "createdDate": "2019-08-24T14:15:22Z",
-    "createdBy_FK": 0,
-    "modifiedDate": "2019-08-24T14:15:22Z"
+    "C4WImageId": 0,
+    "WoundImageName": "string",
+    "WoundImageData": "string",
+    "WoundBedImageName": "string",
+    "WoundBedImageData": "string",
+    "TissueImageName": "string",
+    "TissueImageData": "string",
+    "DepthImageName": "string",
+    "DepthImageData": "string",
+    "IsDeleted": true,
+    "CreatedDate": "2019-08-24T14:15:22Z",
+    "CreatedBy_FK": 0,
+    "ModifiedDate": "2019-08-24T14:15:22Z"
   }
 ]
 ```
 
-<h3 id="get-c4w-image-list-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesc4wimagegetgetlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|C4W Image List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-c4w-image-list-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturesc4wimagegetgetlist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesC4WImageDtosC4WImageDto](#schemac4wx1apifeaturesc4wimagedtosc4wimagedto)]|false|none|none|
-|» c4WImageId|integer(int32)|false|none|none|
-|» woundImageName|string¦null|false|none|none|
-|» woundImageData|string¦null|false|none|none|
-|» woundBedImageName|string¦null|false|none|none|
-|» woundBedImageData|string¦null|false|none|none|
-|» tissueImageName|string¦null|false|none|none|
-|» tissueImageData|string¦null|false|none|none|
-|» depthImageName|string¦null|false|none|none|
-|» depthImageData|string¦null|false|none|none|
-|» isDeleted|boolean|false|none|none|
-|» createdDate|string(date-time)|false|none|none|
-|» createdBy_FK|integer(int32)|false|none|none|
-|» modifiedDate|string(date-time)¦null|false|none|none|
+|» C4WImageId|integer(int32)|false|none|none|
+|» WoundImageName|string¦null|false|none|none|
+|» WoundImageData|string¦null|false|none|none|
+|» WoundBedImageName|string¦null|false|none|none|
+|» WoundBedImageData|string¦null|false|none|none|
+|» TissueImageName|string¦null|false|none|none|
+|» TissueImageData|string¦null|false|none|none|
+|» DepthImageName|string¦null|false|none|none|
+|» DepthImageData|string¦null|false|none|none|
+|» IsDeleted|boolean|false|none|none|
+|» CreatedDate|string(date-time)|false|none|none|
+|» CreatedBy_FK|integer(int32)|false|none|none|
+|» ModifiedDate|string(date-time)¦null|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Create C4W Image
+## C4WX1APIFeaturesC4WImageCreateCreate
 
 <a id="opIdC4WX1APIFeaturesC4WImageCreateCreate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X POST https://localhost:7055/api/c4w-image \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-POST https://localhost:7055/api/c4w-image HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "woundImageName": "wound image name",
-  "woundImageData": "wound image data",
-  "woundBedImageName": "wound bed image name",
-  "woundBedImageData": "wound bed image data",
-  "tissueImageName": "tissue image name",
-  "tissueImageData": "tissue image data",
-  "depthImageName": "depth image name",
-  "depthImageData": "depth image data",
-  "userId": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/c4w-image',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.post('https://localhost:7055/api/c4w-image', headers = headers)
-
-print(r.json())
-
+curl --request POST \
+  --url https://localhost:7055/api/c4w-image \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"WoundImageName":"wound image name","WoundImageData":"wound image data","WoundBedImageName":"wound bed image name","WoundBedImageData":"wound bed image data","TissueImageName":"tissue image name","TissueImageData":"tissue image data","DepthImageName":"depth image name","DepthImageData":"depth image data","UserId":1}'
 ```
 
 `POST /api/c4w-image`
+
+*Create C4W Image*
 
 Create a new C4W Image
 
 > Body parameter
 
-<h3 id="create-c4w-image-parameters">Parameters</h3>
+```json
+{
+  "WoundImageName": "wound image name",
+  "WoundImageData": "wound image data",
+  "WoundBedImageName": "wound bed image name",
+  "WoundBedImageData": "wound bed image data",
+  "TissueImageName": "tissue image name",
+  "TissueImageData": "tissue image data",
+  "DepthImageName": "depth image name",
+  "DepthImageData": "depth image data",
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturesc4wimagecreatecreate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -1846,14 +1541,14 @@ Create a new C4W Image
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="create-c4w-image-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesc4wimagecreatecreate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -1866,75 +1561,39 @@ This operation does not require authentication
 
 <h1 id="c4wx1-api-c4w-device-token">C4w-Device-Token</h1>
 
-## Update C4W Device Token
+## C4WX1APIFeaturesC4WDeviceTokenUpdateUpdate
 
 <a id="opIdC4WX1APIFeaturesC4WDeviceTokenUpdateUpdate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X PUT https://localhost:7055/api/c4w-device-token/{c4WDeviceTokenId} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-PUT https://localhost:7055/api/c4w-device-token/{c4WDeviceTokenId} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "oldDeviceToken": "Old token",
-  "newDeviceToken": "New token",
-  "clientEnvironment": "test env",
-  "device": "IPhone",
-  "userId": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/c4w-device-token/{c4WDeviceTokenId}',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.put('https://localhost:7055/api/c4w-device-token/{c4WDeviceTokenId}', headers = headers)
-
-print(r.json())
-
+curl --request PUT \
+  --url https://localhost:7055/api/c4w-device-token/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"OldDeviceToken":"Old token","NewDeviceToken":"New token","ClientEnvironment":"test env","Device":"IPhone","UserId":1}'
 ```
 
 `PUT /api/c4w-device-token/{c4WDeviceTokenId}`
+
+*Update C4W Device Token*
 
 Update an existing C4W Device Token
 
 > Body parameter
 
-<h3 id="update-c4w-device-token-parameters">Parameters</h3>
+```json
+{
+  "OldDeviceToken": "Old token",
+  "NewDeviceToken": "New token",
+  "ClientEnvironment": "test env",
+  "Device": "IPhone",
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturesc4wdevicetokenupdateupdate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -1947,88 +1606,47 @@ Update an existing C4W Device Token
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="update-c4w-device-token-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesc4wdevicetokenupdateupdate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|C4W Device Token updated successfully|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|C4W Device Token not found|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get C4W Device Token by Old Device Token
+## C4WX1APIFeaturesC4WDeviceTokenGetGetByOldDeviceToken
 
 <a id="opIdC4WX1APIFeaturesC4WDeviceTokenGetGetByOldDeviceToken"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/c4w-device-token/old-device-token?oldDeviceToken=string \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/c4w-device-token/old-device-token?oldDeviceToken=string HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/c4w-device-token/old-device-token?oldDeviceToken=string',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/c4w-device-token/old-device-token', params={
-  'oldDeviceToken': 'string'
-}, headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url 'https://localhost:7055/api/c4w-device-token/old-device-token?OldDeviceToken=string' \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/c4w-device-token/old-device-token`
 
+*Get C4W Device Token by Old Device Token*
+
 Get a C4W Device Token by Old Device Token
 
-<h3 id="get-c4w-device-token-by-old-device-token-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesc4wdevicetokengetgetbyolddevicetoken-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|oldDeviceToken|query|string|true|none|
+|OldDeviceToken|query|string|true|none|
 
 > Example responses
 
@@ -2036,20 +1654,20 @@ Get a C4W Device Token by Old Device Token
 
 ```json
 {
-  "c4WDeviceTokenId": 0,
-  "oldDeviceToken": "string",
-  "newDeviceToken": "string",
-  "clientEnvironment": "string",
-  "device": "string",
-  "isDeleted": true,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0
+  "C4WDeviceTokenId": 0,
+  "OldDeviceToken": "string",
+  "NewDeviceToken": "string",
+  "ClientEnvironment": "string",
+  "Device": "string",
+  "IsDeleted": true,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "ModifiedDate": "2019-08-24T14:15:22Z",
+  "ModifiedBy_FK": 0
 }
 ```
 
-<h3 id="get-c4w-device-token-by-old-device-token-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesc4wdevicetokengetgetbyolddevicetoken-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2061,75 +1679,39 @@ Get a C4W Device Token by Old Device Token
 This operation does not require authentication
 </aside>
 
-## Create C4W Device Token
+## C4WX1APIFeaturesC4WDeviceTokenCreateCreate
 
 <a id="opIdC4WX1APIFeaturesC4WDeviceTokenCreateCreate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X POST https://localhost:7055/api/c4w-device-token \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-POST https://localhost:7055/api/c4w-device-token HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "oldDeviceToken": "Old Token",
-  "newDeviceToken": "New Token",
-  "clientEnvironment": "test env",
-  "device": "Iphone",
-  "userId": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/c4w-device-token',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.post('https://localhost:7055/api/c4w-device-token', headers = headers)
-
-print(r.json())
-
+curl --request POST \
+  --url https://localhost:7055/api/c4w-device-token \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"OldDeviceToken":"Old Token","NewDeviceToken":"New Token","ClientEnvironment":"test env","Device":"Iphone","UserId":1}'
 ```
 
 `POST /api/c4w-device-token`
+
+*Create C4W Device Token*
 
 Create a new C4W Device Token
 
 > Body parameter
 
-<h3 id="create-c4w-device-token-parameters">Parameters</h3>
+```json
+{
+  "OldDeviceToken": "Old Token",
+  "NewDeviceToken": "New Token",
+  "ClientEnvironment": "test env",
+  "Device": "Iphone",
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturesc4wdevicetokencreatecreate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2141,14 +1723,14 @@ Create a new C4W Device Token
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="create-c4w-device-token-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesc4wdevicetokencreatecreate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2161,86 +1743,50 @@ This operation does not require authentication
 
 <h1 id="c4wx1-api-branch">Branch</h1>
 
-## Update Branch
+## C4WX1APIFeaturesBranchUpdateUpdate
 
 <a id="opIdC4WX1APIFeaturesBranchUpdateUpdate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X PUT https://localhost:7055/api/branch/{branchID} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-PUT https://localhost:7055/api/branch/{branchID} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "branchName": "BranchName",
-  "address1": "Address1",
-  "address2": "Address2",
-  "address3": "Address3",
-  "contact": "Contact",
-  "email": "test@test.com",
-  "status": "Active",
-  "currencyID_FK": 1,
-  "userId": 1,
-  "userDataList": [
-    {
-      "userId": 1,
-      "firstName": null,
-      "lastName": null
-    }
-  ]
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/branch/{branchID}',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.put('https://localhost:7055/api/branch/{branchID}', headers = headers)
-
-print(r.json())
-
+curl --request PUT \
+  --url https://localhost:7055/api/branch/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"BranchName":"BranchName","Address1":"Address1","Address2":"Address2","Address3":"Address3","Contact":"Contact","Email":"test@test.com","Status":"Active","CurrencyID_FK":1,"UserId":1,"UserDataList":[{"UserId":1,"FirstName":null,"LastName":null}]}'
 ```
 
 `PUT /api/branch/{branchID}`
+
+*Update Branch*
 
 Update an existing Branch by its ID
 
 > Body parameter
 
-<h3 id="update-branch-parameters">Parameters</h3>
+```json
+{
+  "BranchName": "BranchName",
+  "Address1": "Address1",
+  "Address2": "Address2",
+  "Address3": "Address3",
+  "Contact": "Contact",
+  "Email": "test@test.com",
+  "Status": "Active",
+  "CurrencyID_FK": 1,
+  "UserId": 1,
+  "UserDataList": [
+    {
+      "UserId": 1,
+      "FirstName": null,
+      "LastName": null
+    }
+  ]
+}
+```
+
+<h3 id="c4wx1apifeaturesbranchupdateupdate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2249,23 +1795,29 @@ Update an existing Branch by its ID
 
 > Example responses
 
-> 500 Response
+> 400 Response
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "StatusCode": 400,
+  "Message": "One or more errors occurred!",
+  "Errors": {
+    "property1": [
+      "string"
+    ],
+    "property2": [
+      "string"
+    ]
+  }
 }
 ```
 
-<h3 id="update-branch-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbranchupdateupdate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Branch updated successfully|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Branch data invalid|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Branch data invalid|[FastEndpointsErrorResponse](#schemafastendpointserrorresponse)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Branch not found|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
@@ -2273,63 +1825,25 @@ Update an existing Branch by its ID
 This operation does not require authentication
 </aside>
 
-## Get Branch
+## C4WX1APIFeaturesBranchGetGetById
 
 <a id="opIdC4WX1APIFeaturesBranchGetGetById"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/branch/{id} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/branch/{id} HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/branch/{id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/branch/{id}', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/branch/0 \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/branch/{id}`
 
+*Get Branch*
+
 Get Branch by its ID
 
-<h3 id="get-branch-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbranchgetgetbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2341,29 +1855,29 @@ Get Branch by its ID
 
 ```json
 {
-  "branchID": 0,
-  "branchName": "string",
-  "address1": "string",
-  "address2": "string",
-  "address3": "string",
-  "contact": "string",
-  "email": "string",
-  "status": "string",
-  "isSystemUsed": true,
-  "currencyID_FK": 0,
-  "currencyName": "string",
-  "canDelete": true,
-  "userDataList": [
+  "BranchID": 0,
+  "BranchName": "string",
+  "Address1": "string",
+  "Address2": "string",
+  "Address3": "string",
+  "Contact": "string",
+  "Email": "string",
+  "Status": "string",
+  "IsSystemUsed": true,
+  "CurrencyID_FK": 0,
+  "CurrencyName": "string",
+  "CanDelete": true,
+  "UserDataList": [
     {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string"
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string"
     }
   ]
 }
 ```
 
-<h3 id="get-branch-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbranchgetgetbyid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2375,71 +1889,35 @@ Get Branch by its ID
 This operation does not require authentication
 </aside>
 
-## Delete Branch
+## C4WX1APIFeaturesBranchDeleteDelete
 
 <a id="opIdC4WX1APIFeaturesBranchDeleteDelete"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X DELETE https://localhost:7055/api/branch/{id} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-DELETE https://localhost:7055/api/branch/{id} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "userId": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/branch/{id}',
-{
-  method: 'DELETE',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.delete('https://localhost:7055/api/branch/{id}', headers = headers)
-
-print(r.json())
-
+curl --request DELETE \
+  --url https://localhost:7055/api/branch/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: */*' \
+  --data '{"UserId":1}'
 ```
 
 `DELETE /api/branch/{id}`
+
+*Delete Branch*
 
 Delete an existing Branch by its ID
 
 > Body parameter
 
-<h3 id="delete-branch-parameters">Parameters</h3>
+```json
+{
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturesbranchdeletedelete-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2448,23 +1926,29 @@ Delete an existing Branch by its ID
 
 > Example responses
 
-> 500 Response
+> 400 Response
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "StatusCode": 400,
+  "Message": "One or more errors occurred!",
+  "Errors": {
+    "property1": [
+      "string"
+    ],
+    "property2": [
+      "string"
+    ]
+  }
 }
 ```
 
-<h3 id="delete-branch-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbranchdeletedelete-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Branch deleted successfully|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Branch cannot be deleted|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Branch cannot be deleted|[FastEndpointsErrorResponse](#schemafastendpointserrorresponse)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Branch not found|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
@@ -2472,59 +1956,21 @@ Delete an existing Branch by its ID
 This operation does not require authentication
 </aside>
 
-## Get Branch Count
+## C4WX1APIFeaturesBranchGetGetCount
 
 <a id="opIdC4WX1APIFeaturesBranchGetGetCount"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/branch/count \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/branch/count HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/branch/count',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/branch/count', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/branch/count \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/branch/count`
+
+*Get Branch Count*
 
 Get number of Branch
 
@@ -2536,7 +1982,7 @@ Get number of Branch
 0
 ```
 
-<h3 id="get-branch-count-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbranchgetgetcount-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2547,69 +1993,31 @@ Get number of Branch
 This operation does not require authentication
 </aside>
 
-## Get Branch List
+## C4WX1APIFeaturesBranchGetGetList
 
 <a id="opIdC4WX1APIFeaturesBranchGetGetList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/branch \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/branch HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/branch',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/branch', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/branch \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/branch`
 
+*Get Branch List*
+
 Get a paged and sorted Branch List
 
-<h3 id="get-branch-list-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbranchgetgetlist-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|pageIndex|query|integer(int32)|false|none|
-|pageSize|query|integer(int32)|false|none|
-|orderBy|query|string|false|none|
+|PageIndex|query|integer(int32)|false|none|
+|PageSize|query|integer(int32)|false|none|
+|OrderBy|query|string|false|none|
 
 > Example responses
 
@@ -2618,145 +2026,109 @@ Get a paged and sorted Branch List
 ```json
 [
   {
-    "branchID": 0,
-    "branchName": "string",
-    "address1": "string",
-    "address2": "string",
-    "address3": "string",
-    "contact": "string",
-    "email": "string",
-    "status": "string",
-    "isSystemUsed": true,
-    "currencyID_FK": 0,
-    "currencyName": "string",
-    "canDelete": true,
-    "userDataList": [
+    "BranchID": 0,
+    "BranchName": "string",
+    "Address1": "string",
+    "Address2": "string",
+    "Address3": "string",
+    "Contact": "string",
+    "Email": "string",
+    "Status": "string",
+    "IsSystemUsed": true,
+    "CurrencyID_FK": 0,
+    "CurrencyName": "string",
+    "CanDelete": true,
+    "UserDataList": [
       {
-        "userId": 0,
-        "firstName": "string",
-        "lastName": "string"
+        "UserId": 0,
+        "FirstName": "string",
+        "LastName": "string"
       }
     ]
   }
 ]
 ```
 
-<h3 id="get-branch-list-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbranchgetgetlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Branch List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-branch-list-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturesbranchgetgetlist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesBranchDtosBranchDto](#schemac4wx1apifeaturesbranchdtosbranchdto)]|false|none|none|
-|» branchID|integer(int32)|false|none|none|
-|» branchName|string|false|none|none|
-|» address1|string¦null|false|none|none|
-|» address2|string¦null|false|none|none|
-|» address3|string¦null|false|none|none|
-|» contact|string¦null|false|none|none|
-|» email|string¦null|false|none|none|
-|» status|string|false|none|none|
-|» isSystemUsed|boolean|false|none|none|
-|» currencyID_FK|integer(int32)¦null|false|none|none|
-|» currencyName|string|false|none|none|
-|» canDelete|boolean|false|none|none|
-|» userDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
+|» BranchID|integer(int32)|false|none|none|
+|» BranchName|string|false|none|none|
+|» Address1|string¦null|false|none|none|
+|» Address2|string¦null|false|none|none|
+|» Address3|string¦null|false|none|none|
+|» Contact|string¦null|false|none|none|
+|» Email|string¦null|false|none|none|
+|» Status|string|false|none|none|
+|» IsSystemUsed|boolean|false|none|none|
+|» CurrencyID_FK|integer(int32)¦null|false|none|none|
+|» CurrencyName|string|false|none|none|
+|» CanDelete|boolean|false|none|none|
+|» UserDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Create Branch
+## C4WX1APIFeaturesBranchCreateCreate
 
 <a id="opIdC4WX1APIFeaturesBranchCreateCreate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X POST https://localhost:7055/api/branch \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-POST https://localhost:7055/api/branch HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "branchID": 0,
-  "branchName": "BranchName",
-  "address1": "Address1",
-  "address2": "Address2",
-  "address3": "Address3",
-  "contact": "Contact",
-  "email": "test@test.com",
-  "status": "Active",
-  "currencyID_FK": 1,
-  "userId": 1,
-  "userDataList": [
-    {
-      "userId": 1,
-      "firstName": null,
-      "lastName": null
-    }
-  ]
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/branch',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.post('https://localhost:7055/api/branch', headers = headers)
-
-print(r.json())
-
+curl --request POST \
+  --url https://localhost:7055/api/branch \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"BranchID":0,"BranchName":"BranchName","Address1":"Address1","Address2":"Address2","Address3":"Address3","Contact":"Contact","Email":"test@test.com","Status":"Active","CurrencyID_FK":1,"UserId":1,"UserDataList":[{"UserId":1,"FirstName":null,"LastName":null}]}'
 ```
 
 `POST /api/branch`
+
+*Create Branch*
 
 Create a new Branch
 
 > Body parameter
 
-<h3 id="create-branch-parameters">Parameters</h3>
+```json
+{
+  "BranchID": 0,
+  "BranchName": "BranchName",
+  "Address1": "Address1",
+  "Address2": "Address2",
+  "Address3": "Address3",
+  "Contact": "Contact",
+  "Email": "test@test.com",
+  "Status": "Active",
+  "CurrencyID_FK": 1,
+  "UserId": 1,
+  "UserDataList": [
+    {
+      "UserId": 1,
+      "FirstName": null,
+      "LastName": null
+    }
+  ]
+}
+```
+
+<h3 id="c4wx1apifeaturesbranchcreatecreate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2764,82 +2136,50 @@ Create a new Branch
 
 > Example responses
 
-> 500 Response
+> 400 Response
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "StatusCode": 400,
+  "Message": "One or more errors occurred!",
+  "Errors": {
+    "property1": [
+      "string"
+    ],
+    "property2": [
+      "string"
+    ]
+  }
 }
 ```
 
-<h3 id="create-branch-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbranchcreatecreate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Branch created successfully|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Branch data invalid|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Branch data invalid|[FastEndpointsErrorResponse](#schemafastendpointserrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get Branch List for Control
+## C4WX1APIFeaturesBranchGetGetListForControl
 
 <a id="opIdC4WX1APIFeaturesBranchGetGetListForControl"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/branch/for-control \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/branch/for-control HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/branch/for-control',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/branch/for-control', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/branch/for-control \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/branch/for-control`
+
+*Get Branch List for Control*
 
 Get sorted Branch List for Control
 
@@ -2850,59 +2190,59 @@ Get sorted Branch List for Control
 ```json
 [
   {
-    "branchID": 0,
-    "branchName": "string",
-    "address1": "string",
-    "address2": "string",
-    "address3": "string",
-    "contact": "string",
-    "email": "string",
-    "status": "string",
-    "isSystemUsed": true,
-    "currencyID_FK": 0,
-    "currencyName": "string",
-    "canDelete": true,
-    "userDataList": [
+    "BranchID": 0,
+    "BranchName": "string",
+    "Address1": "string",
+    "Address2": "string",
+    "Address3": "string",
+    "Contact": "string",
+    "Email": "string",
+    "Status": "string",
+    "IsSystemUsed": true,
+    "CurrencyID_FK": 0,
+    "CurrencyName": "string",
+    "CanDelete": true,
+    "UserDataList": [
       {
-        "userId": 0,
-        "firstName": "string",
-        "lastName": "string"
+        "UserId": 0,
+        "FirstName": "string",
+        "LastName": "string"
       }
     ]
   }
 ]
 ```
 
-<h3 id="get-branch-list-for-control-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbranchgetgetlistforcontrol-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Branch List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-branch-list-for-control-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturesbranchgetgetlistforcontrol-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesBranchDtosBranchDto](#schemac4wx1apifeaturesbranchdtosbranchdto)]|false|none|none|
-|» branchID|integer(int32)|false|none|none|
-|» branchName|string|false|none|none|
-|» address1|string¦null|false|none|none|
-|» address2|string¦null|false|none|none|
-|» address3|string¦null|false|none|none|
-|» contact|string¦null|false|none|none|
-|» email|string¦null|false|none|none|
-|» status|string|false|none|none|
-|» isSystemUsed|boolean|false|none|none|
-|» currencyID_FK|integer(int32)¦null|false|none|none|
-|» currencyName|string|false|none|none|
-|» canDelete|boolean|false|none|none|
-|» userDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
+|» BranchID|integer(int32)|false|none|none|
+|» BranchName|string|false|none|none|
+|» Address1|string¦null|false|none|none|
+|» Address2|string¦null|false|none|none|
+|» Address3|string¦null|false|none|none|
+|» Contact|string¦null|false|none|none|
+|» Email|string¦null|false|none|none|
+|» Status|string|false|none|none|
+|» IsSystemUsed|boolean|false|none|none|
+|» CurrencyID_FK|integer(int32)¦null|false|none|none|
+|» CurrencyName|string|false|none|none|
+|» CanDelete|boolean|false|none|none|
+|» UserDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
@@ -2910,102 +2250,66 @@ This operation does not require authentication
 
 <h1 id="c4wx1-api-billing-proposal">Billing-Proposal</h1>
 
-## Update Billing Proposal
+## C4WX1APIFeaturesBillingProposalUpdateUpdate
 
 <a id="opIdC4WX1APIFeaturesBillingProposalUpdateUpdate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X PUT https://localhost:7055/api/billing-proposal/{id} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-PUT https://localhost:7055/api/billing-proposal/{id} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "patientID_FK": 1,
-  "title": "Title",
-  "sendEmail": true,
-  "emailPatient": true,
-  "emailTo": "test-to@gmail.com",
-  "emailCC": "test-cc@gmail.com",
-  "emailBCC": "test-bcc@gmail.com",
-  "currencyID_FK": 1,
-  "status": "Active",
-  "groupNumber": "1",
-  "version": 1,
-  "proposalType": "ProposalType",
-  "userId": 1,
-  "serviceList": [
-    {
-      "billingInvoiceServiceID": 0,
-      "billingProposalID_FK": 0,
-      "serviceID_FK": 1,
-      "categoryId": 0,
-      "title": null,
-      "startDate": "2025-02-21T20:43:16.8101995+08:00",
-      "endDate": "2025-02-21T20:43:16.8124593+08:00",
-      "unitCost": 0,
-      "duration1": "Duration1",
-      "duration2": "Duration2",
-      "visit": 1,
-      "session": 0,
-      "discount": 0,
-      "serviceDescription": "ServiceDescription",
-      "categoryName": null
-    }
-  ]
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/{id}',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.put('https://localhost:7055/api/billing-proposal/{id}', headers = headers)
-
-print(r.json())
-
+curl --request PUT \
+  --url https://localhost:7055/api/billing-proposal/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"PatientID_FK":1,"Title":"Title","SendEmail":true,"EmailPatient":true,"EmailTo":"test-to@gmail.com","EmailCC":"test-cc@gmail.com","EmailBCC":"test-bcc@gmail.com","CurrencyID_FK":1,"Status":"Active","GroupNumber":"1","Version":1,"ProposalType":"ProposalType","UserId":1,"ServiceList":[{"BillingInvoiceServiceID":0,"BillingProposalID_FK":0,"ServiceID_FK":1,"CategoryId":0,"Title":null,"StartDate":"2025-02-27T23:51:34.5331158+08:00","EndDate":"2025-02-27T23:51:34.5365272+08:00","UnitCost":0,"Duration1":"Duration1","Duration2":"Duration2","Visit":1,"Session":0,"Discount":0,"ServiceDescription":"ServiceDescription","CategoryName":null}]}'
 ```
 
 `PUT /api/billing-proposal/{id}`
+
+*Update Billing Proposal*
 
 Update Billing Proposal by its ID
 
 > Body parameter
 
-<h3 id="update-billing-proposal-parameters">Parameters</h3>
+```json
+{
+  "PatientID_FK": 1,
+  "Title": "Title",
+  "SendEmail": true,
+  "EmailPatient": true,
+  "EmailTo": "test-to@gmail.com",
+  "EmailCC": "test-cc@gmail.com",
+  "EmailBCC": "test-bcc@gmail.com",
+  "CurrencyID_FK": 1,
+  "Status": "Active",
+  "GroupNumber": "1",
+  "Version": 1,
+  "ProposalType": "ProposalType",
+  "UserId": 1,
+  "ServiceList": [
+    {
+      "BillingInvoiceServiceID": 0,
+      "BillingProposalID_FK": 0,
+      "ServiceID_FK": 1,
+      "CategoryId": 0,
+      "Title": null,
+      "StartDate": "2025-02-27T23:51:34.5331158+08:00",
+      "EndDate": "2025-02-27T23:51:34.5365272+08:00",
+      "UnitCost": 0,
+      "Duration1": "Duration1",
+      "Duration2": "Duration2",
+      "Visit": 1,
+      "Session": 0,
+      "Discount": 0,
+      "ServiceDescription": "ServiceDescription",
+      "CategoryName": null
+    }
+  ]
+}
+```
+
+<h3 id="c4wx1apifeaturesbillingproposalupdateupdate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -3018,14 +2322,14 @@ Update Billing Proposal by its ID
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="update-billing-proposal-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalupdateupdate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3037,63 +2341,25 @@ Update Billing Proposal by its ID
 This operation does not require authentication
 </aside>
 
-## Get Billing Proposal
+## C4WX1APIFeaturesBillingProposalGetGetById
 
 <a id="opIdC4WX1APIFeaturesBillingProposalGetGetById"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/billing-proposal/{id} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/billing-proposal/{id} HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/{id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/billing-proposal/{id}', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/billing-proposal/0 \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/billing-proposal/{id}`
 
+*Get Billing Proposal*
+
 Get Billing Proposal by its ID
 
-<h3 id="get-billing-proposal-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -3105,77 +2371,77 @@ Get Billing Proposal by its ID
 
 ```json
 {
-  "billingProposalID": 0,
-  "patientID_FK": 0,
-  "proposalNumber": "string",
-  "title": "string",
-  "sendEmail": true,
-  "emailPatient": true,
-  "emailTo": "string",
-  "emailCC": "string",
-  "emailBCC": "string",
-  "currencyID_FK": 0,
-  "currencyCode": "string",
-  "totalCost": 0,
-  "status": "string",
-  "groupNumber": "string",
-  "version": 0,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "isDeleted": true,
-  "proposalType": "string",
-  "patientData": {
-    "patientID": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "mailingAddress1": "string",
-    "mailingAddress2": "string",
-    "mailingAddress3": "string",
-    "mailingPostalCode": "string",
-    "profile": {
-      "email": "string"
+  "BillingProposalID": 0,
+  "PatientID_FK": 0,
+  "ProposalNumber": "string",
+  "Title": "string",
+  "SendEmail": true,
+  "EmailPatient": true,
+  "EmailTo": "string",
+  "EmailCC": "string",
+  "EmailBCC": "string",
+  "CurrencyID_FK": 0,
+  "CurrencyCode": "string",
+  "TotalCost": 0,
+  "Status": "string",
+  "GroupNumber": "string",
+  "Version": 0,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "ModifiedDate": "2019-08-24T14:15:22Z",
+  "ModifiedBy_FK": 0,
+  "IsDeleted": true,
+  "ProposalType": "string",
+  "PatientData": {
+    "PatientID": 0,
+    "FirstName": "string",
+    "LastName": "string",
+    "Photo": "string",
+    "MailingAddress1": "string",
+    "MailingAddress2": "string",
+    "MailingAddress3": "string",
+    "MailingPostalCode": "string",
+    "Profile": {
+      "Email": "string"
     }
   },
-  "createdByData": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "email": "string"
+  "CreatedByData": {
+    "UserId": 0,
+    "FirstName": "string",
+    "LastName": "string",
+    "Photo": "string",
+    "Email": "string"
   },
-  "modifiedByData": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "email": "string"
+  "ModifiedByData": {
+    "UserId": 0,
+    "FirstName": "string",
+    "LastName": "string",
+    "Photo": "string",
+    "Email": "string"
   },
-  "serviceList": [
+  "ServiceList": [
     {
-      "billingInvoiceServiceID": 0,
-      "billingProposalID_FK": 0,
-      "serviceID_FK": 0,
-      "categoryId": 0,
-      "title": "string",
-      "startDate": "2019-08-24T14:15:22Z",
-      "endDate": "2019-08-24T14:15:22Z",
-      "unitCost": 0,
-      "duration1": "string",
-      "duration2": "string",
-      "visit": 0,
-      "session": 0,
-      "discount": 0,
-      "serviceDescription": "string",
-      "categoryName": "string"
+      "BillingInvoiceServiceID": 0,
+      "BillingProposalID_FK": 0,
+      "ServiceID_FK": 0,
+      "CategoryId": 0,
+      "Title": "string",
+      "StartDate": "2019-08-24T14:15:22Z",
+      "EndDate": "2019-08-24T14:15:22Z",
+      "UnitCost": 0,
+      "Duration1": "string",
+      "Duration2": "string",
+      "Visit": 0,
+      "Session": 0,
+      "Discount": 0,
+      "ServiceDescription": "string",
+      "CategoryName": "string"
     }
   ]
 }
 ```
 
-<h3 id="get-billing-proposal-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetbyid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3187,71 +2453,35 @@ Get Billing Proposal by its ID
 This operation does not require authentication
 </aside>
 
-## Delete Billing Proposal
+## C4WX1APIFeaturesBillingProposalDeleteDelete
 
 <a id="opIdC4WX1APIFeaturesBillingProposalDeleteDelete"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X DELETE https://localhost:7055/api/billing-proposal/{id} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://localhost:7055/api/billing-proposal/{id} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/json
-
-```
-
-```javascript
-const inputBody = '{
-  "userId": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/{id}',
-{
-  method: 'DELETE',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://localhost:7055/api/billing-proposal/{id}', headers = headers)
-
-print(r.json())
-
+curl --request DELETE \
+  --url https://localhost:7055/api/billing-proposal/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: */*' \
+  --data '{"UserId":1}'
 ```
 
 `DELETE /api/billing-proposal/{id}`
+
+*Delete Billing Proposal*
 
 Delete Billing Proposal by its ID
 
 > Body parameter
 
-<h3 id="delete-billing-proposal-parameters">Parameters</h3>
+```json
+{
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturesbillingproposaldeletedelete-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -3264,14 +2494,14 @@ Delete Billing Proposal by its ID
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="delete-billing-proposal-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposaldeletedelete-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3283,72 +2513,36 @@ Delete Billing Proposal by its ID
 This operation does not require authentication
 </aside>
 
-## Update Billing Proposal Status
+## C4WX1APIFeaturesBillingProposalUpdateUpdateStatus
 
 <a id="opIdC4WX1APIFeaturesBillingProposalUpdateUpdateStatus"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X PUT https://localhost:7055/api/billing-proposal/{id}/status \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-PUT https://localhost:7055/api/billing-proposal/{id}/status HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "userId": 1,
-  "status": "Success"
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/{id}/status',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.put('https://localhost:7055/api/billing-proposal/{id}/status', headers = headers)
-
-print(r.json())
-
+curl --request PUT \
+  --url https://localhost:7055/api/billing-proposal/0/status \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"UserId":1,"Status":"Success"}'
 ```
 
 `PUT /api/billing-proposal/{id}/status`
+
+*Update Billing Proposal Status*
 
 Update Billing Proposal Status by its ID
 
 > Body parameter
 
-<h3 id="update-billing-proposal-status-parameters">Parameters</h3>
+```json
+{
+  "UserId": 1,
+  "Status": "Success"
+}
+```
+
+<h3 id="c4wx1apifeaturesbillingproposalupdateupdatestatus-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -3357,23 +2551,29 @@ Update Billing Proposal Status by its ID
 
 > Example responses
 
-> 500 Response
+> 400 Response
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "StatusCode": 400,
+  "Message": "One or more errors occurred!",
+  "Errors": {
+    "property1": [
+      "string"
+    ],
+    "property2": [
+      "string"
+    ]
+  }
 }
 ```
 
-<h3 id="update-billing-proposal-status-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalupdateupdatestatus-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Billing Proposal not found|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Billing Proposal not found|[FastEndpointsErrorResponse](#schemafastendpointserrorresponse)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Billing Proposal Status invalid|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
@@ -3381,63 +2581,25 @@ Update Billing Proposal Status by its ID
 This operation does not require authentication
 </aside>
 
-## Get Active Billing Proposal List
+## C4WX1APIFeaturesBillingProposalGetGetActiveList
 
 <a id="opIdC4WX1APIFeaturesBillingProposalGetGetActiveList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/billing-proposal/active/{patientId} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/billing-proposal/active/{patientId} HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/active/{patientId}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/billing-proposal/active/{patientId}', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/billing-proposal/active/0 \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/billing-proposal/active/{patientId}`
 
+*Get Active Billing Proposal List*
+
 Get filtered and sorted Active Billing Proposal List by PatientID
 
-<h3 id="get-active-billing-proposal-list-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetactivelist-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -3450,219 +2612,181 @@ Get filtered and sorted Active Billing Proposal List by PatientID
 ```json
 [
   {
-    "billingProposalID": 0,
-    "patientID_FK": 0,
-    "proposalNumber": "string",
-    "title": "string",
-    "sendEmail": true,
-    "emailPatient": true,
-    "emailTo": "string",
-    "emailCC": "string",
-    "emailBCC": "string",
-    "currencyID_FK": 0,
-    "currencyCode": "string",
-    "totalCost": 0,
-    "status": "string",
-    "groupNumber": "string",
-    "version": 0,
-    "createdDate": "2019-08-24T14:15:22Z",
-    "createdBy_FK": 0,
-    "modifiedDate": "2019-08-24T14:15:22Z",
-    "modifiedBy_FK": 0,
-    "isDeleted": true,
-    "proposalType": "string",
-    "patientData": {
-      "patientID": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "mailingAddress1": "string",
-      "mailingAddress2": "string",
-      "mailingAddress3": "string",
-      "mailingPostalCode": "string",
-      "profile": {
-        "email": "string"
+    "BillingProposalID": 0,
+    "PatientID_FK": 0,
+    "ProposalNumber": "string",
+    "Title": "string",
+    "SendEmail": true,
+    "EmailPatient": true,
+    "EmailTo": "string",
+    "EmailCC": "string",
+    "EmailBCC": "string",
+    "CurrencyID_FK": 0,
+    "CurrencyCode": "string",
+    "TotalCost": 0,
+    "Status": "string",
+    "GroupNumber": "string",
+    "Version": 0,
+    "CreatedDate": "2019-08-24T14:15:22Z",
+    "CreatedBy_FK": 0,
+    "ModifiedDate": "2019-08-24T14:15:22Z",
+    "ModifiedBy_FK": 0,
+    "IsDeleted": true,
+    "ProposalType": "string",
+    "PatientData": {
+      "PatientID": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "MailingAddress1": "string",
+      "MailingAddress2": "string",
+      "MailingAddress3": "string",
+      "MailingPostalCode": "string",
+      "Profile": {
+        "Email": "string"
       }
     },
-    "createdByData": {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "email": "string"
+    "CreatedByData": {
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "Email": "string"
     },
-    "modifiedByData": {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "email": "string"
+    "ModifiedByData": {
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "Email": "string"
     },
-    "serviceList": [
+    "ServiceList": [
       {
-        "billingInvoiceServiceID": 0,
-        "billingProposalID_FK": 0,
-        "serviceID_FK": 0,
-        "categoryId": 0,
-        "title": "string",
-        "startDate": "2019-08-24T14:15:22Z",
-        "endDate": "2019-08-24T14:15:22Z",
-        "unitCost": 0,
-        "duration1": "string",
-        "duration2": "string",
-        "visit": 0,
-        "session": 0,
-        "discount": 0,
-        "serviceDescription": "string",
-        "categoryName": "string"
+        "BillingInvoiceServiceID": 0,
+        "BillingProposalID_FK": 0,
+        "ServiceID_FK": 0,
+        "CategoryId": 0,
+        "Title": "string",
+        "StartDate": "2019-08-24T14:15:22Z",
+        "EndDate": "2019-08-24T14:15:22Z",
+        "UnitCost": 0,
+        "Duration1": "string",
+        "Duration2": "string",
+        "Visit": 0,
+        "Session": 0,
+        "Discount": 0,
+        "ServiceDescription": "string",
+        "CategoryName": "string"
       }
     ]
   }
 ]
 ```
 
-<h3 id="get-active-billing-proposal-list-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetactivelist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Billing Proposal List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-active-billing-proposal-list-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetactivelist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaldto)]|false|none|none|
-|» billingProposalID|integer(int32)|false|none|none|
-|» patientID_FK|integer(int32)|false|none|none|
-|» proposalNumber|string|false|none|none|
-|» title|string|false|none|none|
-|» sendEmail|boolean¦null|false|none|none|
-|» emailPatient|boolean¦null|false|none|none|
-|» emailTo|string¦null|false|none|none|
-|» emailCC|string¦null|false|none|none|
-|» emailBCC|string¦null|false|none|none|
-|» currencyID_FK|integer(int32)|false|none|none|
-|» currencyCode|string|false|none|none|
-|» totalCost|number(decimal)|false|none|none|
-|» status|string|false|none|none|
-|» groupNumber|string|false|none|none|
-|» version|integer|false|none|none|
-|» createdDate|string(date-time)|false|none|none|
-|» createdBy_FK|integer(int32)|false|none|none|
-|» modifiedDate|string(date-time)¦null|false|none|none|
-|» modifiedBy_FK|integer(int32)¦null|false|none|none|
-|» isDeleted|boolean|false|none|none|
-|» proposalType|string|false|none|none|
-|» patientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
-|»» patientID|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» mailingAddress1|string¦null|false|none|none|
-|»» mailingAddress2|string¦null|false|none|none|
-|»» mailingAddress3|string¦null|false|none|none|
-|»» mailingPostalCode|string¦null|false|none|none|
-|»» profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
-|»»» email|string¦null|false|none|none|
-|» createdByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» email|string|false|none|none|
-|» modifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» email|string|false|none|none|
-|» serviceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
-|»» billingInvoiceServiceID|integer(int32)|false|none|none|
-|»» billingProposalID_FK|integer(int32)|false|none|none|
-|»» serviceID_FK|integer(int32)|false|none|none|
-|»» categoryId|integer(int32)|false|none|none|
-|»» title|string|false|none|none|
-|»» startDate|string(date-time)|false|none|none|
-|»» endDate|string(date-time)|false|none|none|
-|»» unitCost|number(decimal)|false|none|none|
-|»» duration1|string¦null|false|none|none|
-|»» duration2|string¦null|false|none|none|
-|»» visit|integer(int32)|false|none|none|
-|»» session|integer(int32)|false|none|none|
-|»» discount|number(decimal)|false|none|none|
-|»» serviceDescription|string¦null|false|none|none|
-|»» categoryName|string|false|none|none|
+|» BillingProposalID|integer(int32)|false|none|none|
+|» PatientID_FK|integer(int32)|false|none|none|
+|» ProposalNumber|string|false|none|none|
+|» Title|string|false|none|none|
+|» SendEmail|boolean¦null|false|none|none|
+|» EmailPatient|boolean¦null|false|none|none|
+|» EmailTo|string¦null|false|none|none|
+|» EmailCC|string¦null|false|none|none|
+|» EmailBCC|string¦null|false|none|none|
+|» CurrencyID_FK|integer(int32)|false|none|none|
+|» CurrencyCode|string|false|none|none|
+|» TotalCost|number(decimal)|false|none|none|
+|» Status|string|false|none|none|
+|» GroupNumber|string|false|none|none|
+|» Version|integer|false|none|none|
+|» CreatedDate|string(date-time)|false|none|none|
+|» CreatedBy_FK|integer(int32)|false|none|none|
+|» ModifiedDate|string(date-time)¦null|false|none|none|
+|» ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|» IsDeleted|boolean|false|none|none|
+|» ProposalType|string|false|none|none|
+|» PatientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
+|»» PatientID|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» MailingAddress1|string¦null|false|none|none|
+|»» MailingAddress2|string¦null|false|none|none|
+|»» MailingAddress3|string¦null|false|none|none|
+|»» MailingPostalCode|string¦null|false|none|none|
+|»» Profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
+|»»» Email|string¦null|false|none|none|
+|» CreatedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» Email|string|false|none|none|
+|» ModifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» Email|string|false|none|none|
+|» ServiceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
+|»» BillingInvoiceServiceID|integer(int32)|false|none|none|
+|»» BillingProposalID_FK|integer(int32)|false|none|none|
+|»» ServiceID_FK|integer(int32)|false|none|none|
+|»» CategoryId|integer(int32)|false|none|none|
+|»» Title|string|false|none|none|
+|»» StartDate|string(date-time)|false|none|none|
+|»» EndDate|string(date-time)|false|none|none|
+|»» UnitCost|number(decimal)|false|none|none|
+|»» Duration1|string¦null|false|none|none|
+|»» Duration2|string¦null|false|none|none|
+|»» Visit|integer(int32)|false|none|none|
+|»» Session|integer(int32)|false|none|none|
+|»» Discount|number(decimal)|false|none|none|
+|»» ServiceDescription|string¦null|false|none|none|
+|»» CategoryName|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get All Billing Proposal List
+## C4WX1APIFeaturesBillingProposalGetGetAllList
 
 <a id="opIdC4WX1APIFeaturesBillingProposalGetGetAllList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/billing-proposal/all \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/billing-proposal/all HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/all',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/billing-proposal/all', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/billing-proposal/all \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/billing-proposal/all`
 
+*Get All Billing Proposal List*
+
 Get all filtered and sorted Billing Proposal List
 
-<h3 id="get-all-billing-proposal-list-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetalllist-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|keyword|query|string|false|none|
-|status|query|string|false|none|
-|orderBy|query|string|false|none|
+|Keyword|query|string|false|none|
+|Status|query|string|false|none|
+|OrderBy|query|string|false|none|
 
 > Example responses
 
@@ -3671,218 +2795,180 @@ Get all filtered and sorted Billing Proposal List
 ```json
 [
   {
-    "billingProposalID": 0,
-    "patientID_FK": 0,
-    "proposalNumber": "string",
-    "title": "string",
-    "sendEmail": true,
-    "emailPatient": true,
-    "emailTo": "string",
-    "emailCC": "string",
-    "emailBCC": "string",
-    "currencyID_FK": 0,
-    "currencyCode": "string",
-    "totalCost": 0,
-    "status": "string",
-    "groupNumber": "string",
-    "version": 0,
-    "createdDate": "2019-08-24T14:15:22Z",
-    "createdBy_FK": 0,
-    "modifiedDate": "2019-08-24T14:15:22Z",
-    "modifiedBy_FK": 0,
-    "isDeleted": true,
-    "proposalType": "string",
-    "patientData": {
-      "patientID": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "mailingAddress1": "string",
-      "mailingAddress2": "string",
-      "mailingAddress3": "string",
-      "mailingPostalCode": "string",
-      "profile": {
-        "email": "string"
+    "BillingProposalID": 0,
+    "PatientID_FK": 0,
+    "ProposalNumber": "string",
+    "Title": "string",
+    "SendEmail": true,
+    "EmailPatient": true,
+    "EmailTo": "string",
+    "EmailCC": "string",
+    "EmailBCC": "string",
+    "CurrencyID_FK": 0,
+    "CurrencyCode": "string",
+    "TotalCost": 0,
+    "Status": "string",
+    "GroupNumber": "string",
+    "Version": 0,
+    "CreatedDate": "2019-08-24T14:15:22Z",
+    "CreatedBy_FK": 0,
+    "ModifiedDate": "2019-08-24T14:15:22Z",
+    "ModifiedBy_FK": 0,
+    "IsDeleted": true,
+    "ProposalType": "string",
+    "PatientData": {
+      "PatientID": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "MailingAddress1": "string",
+      "MailingAddress2": "string",
+      "MailingAddress3": "string",
+      "MailingPostalCode": "string",
+      "Profile": {
+        "Email": "string"
       }
     },
-    "createdByData": {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "email": "string"
+    "CreatedByData": {
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "Email": "string"
     },
-    "modifiedByData": {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "email": "string"
+    "ModifiedByData": {
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "Email": "string"
     },
-    "serviceList": [
+    "ServiceList": [
       {
-        "billingInvoiceServiceID": 0,
-        "billingProposalID_FK": 0,
-        "serviceID_FK": 0,
-        "categoryId": 0,
-        "title": "string",
-        "startDate": "2019-08-24T14:15:22Z",
-        "endDate": "2019-08-24T14:15:22Z",
-        "unitCost": 0,
-        "duration1": "string",
-        "duration2": "string",
-        "visit": 0,
-        "session": 0,
-        "discount": 0,
-        "serviceDescription": "string",
-        "categoryName": "string"
+        "BillingInvoiceServiceID": 0,
+        "BillingProposalID_FK": 0,
+        "ServiceID_FK": 0,
+        "CategoryId": 0,
+        "Title": "string",
+        "StartDate": "2019-08-24T14:15:22Z",
+        "EndDate": "2019-08-24T14:15:22Z",
+        "UnitCost": 0,
+        "Duration1": "string",
+        "Duration2": "string",
+        "Visit": 0,
+        "Session": 0,
+        "Discount": 0,
+        "ServiceDescription": "string",
+        "CategoryName": "string"
       }
     ]
   }
 ]
 ```
 
-<h3 id="get-all-billing-proposal-list-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetalllist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Billing Proposal List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-all-billing-proposal-list-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetalllist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaldto)]|false|none|none|
-|» billingProposalID|integer(int32)|false|none|none|
-|» patientID_FK|integer(int32)|false|none|none|
-|» proposalNumber|string|false|none|none|
-|» title|string|false|none|none|
-|» sendEmail|boolean¦null|false|none|none|
-|» emailPatient|boolean¦null|false|none|none|
-|» emailTo|string¦null|false|none|none|
-|» emailCC|string¦null|false|none|none|
-|» emailBCC|string¦null|false|none|none|
-|» currencyID_FK|integer(int32)|false|none|none|
-|» currencyCode|string|false|none|none|
-|» totalCost|number(decimal)|false|none|none|
-|» status|string|false|none|none|
-|» groupNumber|string|false|none|none|
-|» version|integer|false|none|none|
-|» createdDate|string(date-time)|false|none|none|
-|» createdBy_FK|integer(int32)|false|none|none|
-|» modifiedDate|string(date-time)¦null|false|none|none|
-|» modifiedBy_FK|integer(int32)¦null|false|none|none|
-|» isDeleted|boolean|false|none|none|
-|» proposalType|string|false|none|none|
-|» patientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
-|»» patientID|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» mailingAddress1|string¦null|false|none|none|
-|»» mailingAddress2|string¦null|false|none|none|
-|»» mailingAddress3|string¦null|false|none|none|
-|»» mailingPostalCode|string¦null|false|none|none|
-|»» profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
-|»»» email|string¦null|false|none|none|
-|» createdByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» email|string|false|none|none|
-|» modifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» email|string|false|none|none|
-|» serviceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
-|»» billingInvoiceServiceID|integer(int32)|false|none|none|
-|»» billingProposalID_FK|integer(int32)|false|none|none|
-|»» serviceID_FK|integer(int32)|false|none|none|
-|»» categoryId|integer(int32)|false|none|none|
-|»» title|string|false|none|none|
-|»» startDate|string(date-time)|false|none|none|
-|»» endDate|string(date-time)|false|none|none|
-|»» unitCost|number(decimal)|false|none|none|
-|»» duration1|string¦null|false|none|none|
-|»» duration2|string¦null|false|none|none|
-|»» visit|integer(int32)|false|none|none|
-|»» session|integer(int32)|false|none|none|
-|»» discount|number(decimal)|false|none|none|
-|»» serviceDescription|string¦null|false|none|none|
-|»» categoryName|string|false|none|none|
+|» BillingProposalID|integer(int32)|false|none|none|
+|» PatientID_FK|integer(int32)|false|none|none|
+|» ProposalNumber|string|false|none|none|
+|» Title|string|false|none|none|
+|» SendEmail|boolean¦null|false|none|none|
+|» EmailPatient|boolean¦null|false|none|none|
+|» EmailTo|string¦null|false|none|none|
+|» EmailCC|string¦null|false|none|none|
+|» EmailBCC|string¦null|false|none|none|
+|» CurrencyID_FK|integer(int32)|false|none|none|
+|» CurrencyCode|string|false|none|none|
+|» TotalCost|number(decimal)|false|none|none|
+|» Status|string|false|none|none|
+|» GroupNumber|string|false|none|none|
+|» Version|integer|false|none|none|
+|» CreatedDate|string(date-time)|false|none|none|
+|» CreatedBy_FK|integer(int32)|false|none|none|
+|» ModifiedDate|string(date-time)¦null|false|none|none|
+|» ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|» IsDeleted|boolean|false|none|none|
+|» ProposalType|string|false|none|none|
+|» PatientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
+|»» PatientID|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» MailingAddress1|string¦null|false|none|none|
+|»» MailingAddress2|string¦null|false|none|none|
+|»» MailingAddress3|string¦null|false|none|none|
+|»» MailingPostalCode|string¦null|false|none|none|
+|»» Profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
+|»»» Email|string¦null|false|none|none|
+|» CreatedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» Email|string|false|none|none|
+|» ModifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» Email|string|false|none|none|
+|» ServiceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
+|»» BillingInvoiceServiceID|integer(int32)|false|none|none|
+|»» BillingProposalID_FK|integer(int32)|false|none|none|
+|»» ServiceID_FK|integer(int32)|false|none|none|
+|»» CategoryId|integer(int32)|false|none|none|
+|»» Title|string|false|none|none|
+|»» StartDate|string(date-time)|false|none|none|
+|»» EndDate|string(date-time)|false|none|none|
+|»» UnitCost|number(decimal)|false|none|none|
+|»» Duration1|string¦null|false|none|none|
+|»» Duration2|string¦null|false|none|none|
+|»» Visit|integer(int32)|false|none|none|
+|»» Session|integer(int32)|false|none|none|
+|»» Discount|number(decimal)|false|none|none|
+|»» ServiceDescription|string¦null|false|none|none|
+|»» CategoryName|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get Billing Proposal Count
+## C4WX1APIFeaturesBillingProposalGetGetCount
 
 <a id="opIdC4WX1APIFeaturesBillingProposalGetGetCount"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/billing-proposal/count \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/billing-proposal/count HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/count',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/billing-proposal/count', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/billing-proposal/count \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/billing-proposal/count`
 
+*Get Billing Proposal Count*
+
 Get filtered Billing Proposal Count
 
-<h3 id="get-billing-proposal-count-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetcount-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|keyword|query|string|false|none|
-|status|query|string|false|none|
+|Keyword|query|string|false|none|
+|Status|query|string|false|none|
 
 > Example responses
 
@@ -3892,7 +2978,7 @@ Get filtered Billing Proposal Count
 0
 ```
 
-<h3 id="get-billing-proposal-count-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetcount-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3903,68 +2989,30 @@ Get filtered Billing Proposal Count
 This operation does not require authentication
 </aside>
 
-## Get History Billing Proposal List
+## C4WX1APIFeaturesBillingProposalGetGetHistoryList
 
 <a id="opIdC4WX1APIFeaturesBillingProposalGetGetHistoryList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/billing-proposal/history \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/billing-proposal/history HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/history',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/billing-proposal/history', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/billing-proposal/history \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/billing-proposal/history`
 
+*Get History Billing Proposal List*
+
 Get filtered and sorted History Billing Proposal List
 
-<h3 id="get-history-billing-proposal-list-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgethistorylist-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|groupNumber|query|string|false|none|
-|orderBy|query|string|false|none|
+|GroupNumber|query|string|false|none|
+|OrderBy|query|string|false|none|
 
 > Example responses
 
@@ -3973,221 +3021,183 @@ Get filtered and sorted History Billing Proposal List
 ```json
 [
   {
-    "billingProposalID": 0,
-    "patientID_FK": 0,
-    "proposalNumber": "string",
-    "title": "string",
-    "sendEmail": true,
-    "emailPatient": true,
-    "emailTo": "string",
-    "emailCC": "string",
-    "emailBCC": "string",
-    "currencyID_FK": 0,
-    "currencyCode": "string",
-    "totalCost": 0,
-    "status": "string",
-    "groupNumber": "string",
-    "version": 0,
-    "createdDate": "2019-08-24T14:15:22Z",
-    "createdBy_FK": 0,
-    "modifiedDate": "2019-08-24T14:15:22Z",
-    "modifiedBy_FK": 0,
-    "isDeleted": true,
-    "proposalType": "string",
-    "patientData": {
-      "patientID": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "mailingAddress1": "string",
-      "mailingAddress2": "string",
-      "mailingAddress3": "string",
-      "mailingPostalCode": "string",
-      "profile": {
-        "email": "string"
+    "BillingProposalID": 0,
+    "PatientID_FK": 0,
+    "ProposalNumber": "string",
+    "Title": "string",
+    "SendEmail": true,
+    "EmailPatient": true,
+    "EmailTo": "string",
+    "EmailCC": "string",
+    "EmailBCC": "string",
+    "CurrencyID_FK": 0,
+    "CurrencyCode": "string",
+    "TotalCost": 0,
+    "Status": "string",
+    "GroupNumber": "string",
+    "Version": 0,
+    "CreatedDate": "2019-08-24T14:15:22Z",
+    "CreatedBy_FK": 0,
+    "ModifiedDate": "2019-08-24T14:15:22Z",
+    "ModifiedBy_FK": 0,
+    "IsDeleted": true,
+    "ProposalType": "string",
+    "PatientData": {
+      "PatientID": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "MailingAddress1": "string",
+      "MailingAddress2": "string",
+      "MailingAddress3": "string",
+      "MailingPostalCode": "string",
+      "Profile": {
+        "Email": "string"
       }
     },
-    "createdByData": {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "email": "string"
+    "CreatedByData": {
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "Email": "string"
     },
-    "modifiedByData": {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "email": "string"
+    "ModifiedByData": {
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "Email": "string"
     },
-    "serviceList": [
+    "ServiceList": [
       {
-        "billingInvoiceServiceID": 0,
-        "billingProposalID_FK": 0,
-        "serviceID_FK": 0,
-        "categoryId": 0,
-        "title": "string",
-        "startDate": "2019-08-24T14:15:22Z",
-        "endDate": "2019-08-24T14:15:22Z",
-        "unitCost": 0,
-        "duration1": "string",
-        "duration2": "string",
-        "visit": 0,
-        "session": 0,
-        "discount": 0,
-        "serviceDescription": "string",
-        "categoryName": "string"
+        "BillingInvoiceServiceID": 0,
+        "BillingProposalID_FK": 0,
+        "ServiceID_FK": 0,
+        "CategoryId": 0,
+        "Title": "string",
+        "StartDate": "2019-08-24T14:15:22Z",
+        "EndDate": "2019-08-24T14:15:22Z",
+        "UnitCost": 0,
+        "Duration1": "string",
+        "Duration2": "string",
+        "Visit": 0,
+        "Session": 0,
+        "Discount": 0,
+        "ServiceDescription": "string",
+        "CategoryName": "string"
       }
     ]
   }
 ]
 ```
 
-<h3 id="get-history-billing-proposal-list-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgethistorylist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Billing Proposal List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-history-billing-proposal-list-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgethistorylist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaldto)]|false|none|none|
-|» billingProposalID|integer(int32)|false|none|none|
-|» patientID_FK|integer(int32)|false|none|none|
-|» proposalNumber|string|false|none|none|
-|» title|string|false|none|none|
-|» sendEmail|boolean¦null|false|none|none|
-|» emailPatient|boolean¦null|false|none|none|
-|» emailTo|string¦null|false|none|none|
-|» emailCC|string¦null|false|none|none|
-|» emailBCC|string¦null|false|none|none|
-|» currencyID_FK|integer(int32)|false|none|none|
-|» currencyCode|string|false|none|none|
-|» totalCost|number(decimal)|false|none|none|
-|» status|string|false|none|none|
-|» groupNumber|string|false|none|none|
-|» version|integer|false|none|none|
-|» createdDate|string(date-time)|false|none|none|
-|» createdBy_FK|integer(int32)|false|none|none|
-|» modifiedDate|string(date-time)¦null|false|none|none|
-|» modifiedBy_FK|integer(int32)¦null|false|none|none|
-|» isDeleted|boolean|false|none|none|
-|» proposalType|string|false|none|none|
-|» patientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
-|»» patientID|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» mailingAddress1|string¦null|false|none|none|
-|»» mailingAddress2|string¦null|false|none|none|
-|»» mailingAddress3|string¦null|false|none|none|
-|»» mailingPostalCode|string¦null|false|none|none|
-|»» profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
-|»»» email|string¦null|false|none|none|
-|» createdByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» email|string|false|none|none|
-|» modifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» email|string|false|none|none|
-|» serviceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
-|»» billingInvoiceServiceID|integer(int32)|false|none|none|
-|»» billingProposalID_FK|integer(int32)|false|none|none|
-|»» serviceID_FK|integer(int32)|false|none|none|
-|»» categoryId|integer(int32)|false|none|none|
-|»» title|string|false|none|none|
-|»» startDate|string(date-time)|false|none|none|
-|»» endDate|string(date-time)|false|none|none|
-|»» unitCost|number(decimal)|false|none|none|
-|»» duration1|string¦null|false|none|none|
-|»» duration2|string¦null|false|none|none|
-|»» visit|integer(int32)|false|none|none|
-|»» session|integer(int32)|false|none|none|
-|»» discount|number(decimal)|false|none|none|
-|»» serviceDescription|string¦null|false|none|none|
-|»» categoryName|string|false|none|none|
+|» BillingProposalID|integer(int32)|false|none|none|
+|» PatientID_FK|integer(int32)|false|none|none|
+|» ProposalNumber|string|false|none|none|
+|» Title|string|false|none|none|
+|» SendEmail|boolean¦null|false|none|none|
+|» EmailPatient|boolean¦null|false|none|none|
+|» EmailTo|string¦null|false|none|none|
+|» EmailCC|string¦null|false|none|none|
+|» EmailBCC|string¦null|false|none|none|
+|» CurrencyID_FK|integer(int32)|false|none|none|
+|» CurrencyCode|string|false|none|none|
+|» TotalCost|number(decimal)|false|none|none|
+|» Status|string|false|none|none|
+|» GroupNumber|string|false|none|none|
+|» Version|integer|false|none|none|
+|» CreatedDate|string(date-time)|false|none|none|
+|» CreatedBy_FK|integer(int32)|false|none|none|
+|» ModifiedDate|string(date-time)¦null|false|none|none|
+|» ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|» IsDeleted|boolean|false|none|none|
+|» ProposalType|string|false|none|none|
+|» PatientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
+|»» PatientID|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» MailingAddress1|string¦null|false|none|none|
+|»» MailingAddress2|string¦null|false|none|none|
+|»» MailingAddress3|string¦null|false|none|none|
+|»» MailingPostalCode|string¦null|false|none|none|
+|»» Profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
+|»»» Email|string¦null|false|none|none|
+|» CreatedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» Email|string|false|none|none|
+|» ModifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» Email|string|false|none|none|
+|» ServiceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
+|»» BillingInvoiceServiceID|integer(int32)|false|none|none|
+|»» BillingProposalID_FK|integer(int32)|false|none|none|
+|»» ServiceID_FK|integer(int32)|false|none|none|
+|»» CategoryId|integer(int32)|false|none|none|
+|»» Title|string|false|none|none|
+|»» StartDate|string(date-time)|false|none|none|
+|»» EndDate|string(date-time)|false|none|none|
+|»» UnitCost|number(decimal)|false|none|none|
+|»» Duration1|string¦null|false|none|none|
+|»» Duration2|string¦null|false|none|none|
+|»» Visit|integer(int32)|false|none|none|
+|»» Session|integer(int32)|false|none|none|
+|»» Discount|number(decimal)|false|none|none|
+|»» ServiceDescription|string¦null|false|none|none|
+|»» CategoryName|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Get Billing Proposal List
+## C4WX1APIFeaturesBillingProposalGetGetList
 
 <a id="opIdC4WX1APIFeaturesBillingProposalGetGetList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/billing-proposal \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/billing-proposal HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/billing-proposal', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/billing-proposal \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/billing-proposal`
 
+*Get Billing Proposal List*
+
 Get a filtered, paged and sorted list of Billing Proposals
 
-<h3 id="get-billing-proposal-list-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetlist-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|keyword|query|string|false|none|
-|status|query|string|false|none|
-|pageIndex|query|integer(int32)|false|none|
-|pageSize|query|integer(int32)|false|none|
-|orderBy|query|string|false|none|
+|Keyword|query|string|false|none|
+|Status|query|string|false|none|
+|PageIndex|query|integer(int32)|false|none|
+|PageSize|query|integer(int32)|false|none|
+|OrderBy|query|string|false|none|
 
 > Example responses
 
@@ -4196,252 +3206,216 @@ Get a filtered, paged and sorted list of Billing Proposals
 ```json
 [
   {
-    "billingProposalID": 0,
-    "patientID_FK": 0,
-    "proposalNumber": "string",
-    "title": "string",
-    "sendEmail": true,
-    "emailPatient": true,
-    "emailTo": "string",
-    "emailCC": "string",
-    "emailBCC": "string",
-    "currencyID_FK": 0,
-    "currencyCode": "string",
-    "totalCost": 0,
-    "status": "string",
-    "groupNumber": "string",
-    "version": 0,
-    "createdDate": "2019-08-24T14:15:22Z",
-    "createdBy_FK": 0,
-    "modifiedDate": "2019-08-24T14:15:22Z",
-    "modifiedBy_FK": 0,
-    "isDeleted": true,
-    "proposalType": "string",
-    "patientData": {
-      "patientID": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "mailingAddress1": "string",
-      "mailingAddress2": "string",
-      "mailingAddress3": "string",
-      "mailingPostalCode": "string",
-      "profile": {
-        "email": "string"
+    "BillingProposalID": 0,
+    "PatientID_FK": 0,
+    "ProposalNumber": "string",
+    "Title": "string",
+    "SendEmail": true,
+    "EmailPatient": true,
+    "EmailTo": "string",
+    "EmailCC": "string",
+    "EmailBCC": "string",
+    "CurrencyID_FK": 0,
+    "CurrencyCode": "string",
+    "TotalCost": 0,
+    "Status": "string",
+    "GroupNumber": "string",
+    "Version": 0,
+    "CreatedDate": "2019-08-24T14:15:22Z",
+    "CreatedBy_FK": 0,
+    "ModifiedDate": "2019-08-24T14:15:22Z",
+    "ModifiedBy_FK": 0,
+    "IsDeleted": true,
+    "ProposalType": "string",
+    "PatientData": {
+      "PatientID": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "MailingAddress1": "string",
+      "MailingAddress2": "string",
+      "MailingAddress3": "string",
+      "MailingPostalCode": "string",
+      "Profile": {
+        "Email": "string"
       }
     },
-    "createdByData": {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "email": "string"
+    "CreatedByData": {
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "Email": "string"
     },
-    "modifiedByData": {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "photo": "string",
-      "email": "string"
+    "ModifiedByData": {
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string",
+      "Photo": "string",
+      "Email": "string"
     },
-    "serviceList": [
+    "ServiceList": [
       {
-        "billingInvoiceServiceID": 0,
-        "billingProposalID_FK": 0,
-        "serviceID_FK": 0,
-        "categoryId": 0,
-        "title": "string",
-        "startDate": "2019-08-24T14:15:22Z",
-        "endDate": "2019-08-24T14:15:22Z",
-        "unitCost": 0,
-        "duration1": "string",
-        "duration2": "string",
-        "visit": 0,
-        "session": 0,
-        "discount": 0,
-        "serviceDescription": "string",
-        "categoryName": "string"
+        "BillingInvoiceServiceID": 0,
+        "BillingProposalID_FK": 0,
+        "ServiceID_FK": 0,
+        "CategoryId": 0,
+        "Title": "string",
+        "StartDate": "2019-08-24T14:15:22Z",
+        "EndDate": "2019-08-24T14:15:22Z",
+        "UnitCost": 0,
+        "Duration1": "string",
+        "Duration2": "string",
+        "Visit": 0,
+        "Session": 0,
+        "Discount": 0,
+        "ServiceDescription": "string",
+        "CategoryName": "string"
       }
     ]
   }
 ]
 ```
 
-<h3 id="get-billing-proposal-list-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Billing Proposal List retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-billing-proposal-list-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetlist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaldto)]|false|none|none|
-|» billingProposalID|integer(int32)|false|none|none|
-|» patientID_FK|integer(int32)|false|none|none|
-|» proposalNumber|string|false|none|none|
-|» title|string|false|none|none|
-|» sendEmail|boolean¦null|false|none|none|
-|» emailPatient|boolean¦null|false|none|none|
-|» emailTo|string¦null|false|none|none|
-|» emailCC|string¦null|false|none|none|
-|» emailBCC|string¦null|false|none|none|
-|» currencyID_FK|integer(int32)|false|none|none|
-|» currencyCode|string|false|none|none|
-|» totalCost|number(decimal)|false|none|none|
-|» status|string|false|none|none|
-|» groupNumber|string|false|none|none|
-|» version|integer|false|none|none|
-|» createdDate|string(date-time)|false|none|none|
-|» createdBy_FK|integer(int32)|false|none|none|
-|» modifiedDate|string(date-time)¦null|false|none|none|
-|» modifiedBy_FK|integer(int32)¦null|false|none|none|
-|» isDeleted|boolean|false|none|none|
-|» proposalType|string|false|none|none|
-|» patientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
-|»» patientID|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» mailingAddress1|string¦null|false|none|none|
-|»» mailingAddress2|string¦null|false|none|none|
-|»» mailingAddress3|string¦null|false|none|none|
-|»» mailingPostalCode|string¦null|false|none|none|
-|»» profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
-|»»» email|string¦null|false|none|none|
-|» createdByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» email|string|false|none|none|
-|» modifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
-|»» userId|integer(int32)|false|none|none|
-|»» firstName|string|false|none|none|
-|»» lastName|string|false|none|none|
-|»» photo|string¦null|false|none|none|
-|»» email|string|false|none|none|
-|» serviceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
-|»» billingInvoiceServiceID|integer(int32)|false|none|none|
-|»» billingProposalID_FK|integer(int32)|false|none|none|
-|»» serviceID_FK|integer(int32)|false|none|none|
-|»» categoryId|integer(int32)|false|none|none|
-|»» title|string|false|none|none|
-|»» startDate|string(date-time)|false|none|none|
-|»» endDate|string(date-time)|false|none|none|
-|»» unitCost|number(decimal)|false|none|none|
-|»» duration1|string¦null|false|none|none|
-|»» duration2|string¦null|false|none|none|
-|»» visit|integer(int32)|false|none|none|
-|»» session|integer(int32)|false|none|none|
-|»» discount|number(decimal)|false|none|none|
-|»» serviceDescription|string¦null|false|none|none|
-|»» categoryName|string|false|none|none|
+|» BillingProposalID|integer(int32)|false|none|none|
+|» PatientID_FK|integer(int32)|false|none|none|
+|» ProposalNumber|string|false|none|none|
+|» Title|string|false|none|none|
+|» SendEmail|boolean¦null|false|none|none|
+|» EmailPatient|boolean¦null|false|none|none|
+|» EmailTo|string¦null|false|none|none|
+|» EmailCC|string¦null|false|none|none|
+|» EmailBCC|string¦null|false|none|none|
+|» CurrencyID_FK|integer(int32)|false|none|none|
+|» CurrencyCode|string|false|none|none|
+|» TotalCost|number(decimal)|false|none|none|
+|» Status|string|false|none|none|
+|» GroupNumber|string|false|none|none|
+|» Version|integer|false|none|none|
+|» CreatedDate|string(date-time)|false|none|none|
+|» CreatedBy_FK|integer(int32)|false|none|none|
+|» ModifiedDate|string(date-time)¦null|false|none|none|
+|» ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|» IsDeleted|boolean|false|none|none|
+|» ProposalType|string|false|none|none|
+|» PatientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
+|»» PatientID|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» MailingAddress1|string¦null|false|none|none|
+|»» MailingAddress2|string¦null|false|none|none|
+|»» MailingAddress3|string¦null|false|none|none|
+|»» MailingPostalCode|string¦null|false|none|none|
+|»» Profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
+|»»» Email|string¦null|false|none|none|
+|» CreatedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» Email|string|false|none|none|
+|» ModifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
+|»» UserId|integer(int32)|false|none|none|
+|»» FirstName|string|false|none|none|
+|»» LastName|string|false|none|none|
+|»» Photo|string¦null|false|none|none|
+|»» Email|string|false|none|none|
+|» ServiceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
+|»» BillingInvoiceServiceID|integer(int32)|false|none|none|
+|»» BillingProposalID_FK|integer(int32)|false|none|none|
+|»» ServiceID_FK|integer(int32)|false|none|none|
+|»» CategoryId|integer(int32)|false|none|none|
+|»» Title|string|false|none|none|
+|»» StartDate|string(date-time)|false|none|none|
+|»» EndDate|string(date-time)|false|none|none|
+|»» UnitCost|number(decimal)|false|none|none|
+|»» Duration1|string¦null|false|none|none|
+|»» Duration2|string¦null|false|none|none|
+|»» Visit|integer(int32)|false|none|none|
+|»» Session|integer(int32)|false|none|none|
+|»» Discount|number(decimal)|false|none|none|
+|»» ServiceDescription|string¦null|false|none|none|
+|»» CategoryName|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Create Billing Proposal
+## C4WX1APIFeaturesBillingProposalCreateCreate
 
 <a id="opIdC4WX1APIFeaturesBillingProposalCreateCreate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X POST https://localhost:7055/api/billing-proposal \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-POST https://localhost:7055/api/billing-proposal HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "patientID_FK": 1,
-  "title": "Title",
-  "sendEmail": true,
-  "emailPatient": true,
-  "emailTo": "test-to@gmail.com",
-  "emailCC": "test-cc@gmail.com",
-  "emailBCC": "test-bcc@gmail.com",
-  "currencyID_FK": 1,
-  "status": "Active",
-  "groupNumber": "1",
-  "version": 1,
-  "proposalType": "ProposalType",
-  "userId": 1,
-  "serviceList": [
-    {
-      "billingInvoiceServiceID": 0,
-      "billingProposalID_FK": 0,
-      "serviceID_FK": 1,
-      "categoryId": 0,
-      "title": null,
-      "startDate": "2025-02-21T20:43:16.8364914+08:00",
-      "endDate": "2025-02-21T20:43:16.8364935+08:00",
-      "unitCost": 0,
-      "duration1": "Duration1",
-      "duration2": "Duration2",
-      "visit": 1,
-      "session": 0,
-      "discount": 0,
-      "serviceDescription": "ServiceDescription",
-      "categoryName": null
-    }
-  ]
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.post('https://localhost:7055/api/billing-proposal', headers = headers)
-
-print(r.json())
-
+curl --request POST \
+  --url https://localhost:7055/api/billing-proposal \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"PatientID_FK":1,"Title":"Title","SendEmail":true,"EmailPatient":true,"EmailTo":"test-to@gmail.com","EmailCC":"test-cc@gmail.com","EmailBCC":"test-bcc@gmail.com","CurrencyID_FK":1,"Status":"Active","GroupNumber":"1","Version":1,"ProposalType":"ProposalType","UserId":1,"ServiceList":[{"BillingInvoiceServiceID":0,"BillingProposalID_FK":0,"ServiceID_FK":1,"CategoryId":0,"Title":null,"StartDate":"2025-02-27T23:51:34.5585733+08:00","EndDate":"2025-02-27T23:51:34.558576+08:00","UnitCost":0,"Duration1":"Duration1","Duration2":"Duration2","Visit":1,"Session":0,"Discount":0,"ServiceDescription":"ServiceDescription","CategoryName":null}]}'
 ```
 
 `POST /api/billing-proposal`
+
+*Create Billing Proposal*
 
 Create new Billing Proposal
 
 > Body parameter
 
-<h3 id="create-billing-proposal-parameters">Parameters</h3>
+```json
+{
+  "PatientID_FK": 1,
+  "Title": "Title",
+  "SendEmail": true,
+  "EmailPatient": true,
+  "EmailTo": "test-to@gmail.com",
+  "EmailCC": "test-cc@gmail.com",
+  "EmailBCC": "test-bcc@gmail.com",
+  "CurrencyID_FK": 1,
+  "Status": "Active",
+  "GroupNumber": "1",
+  "Version": 1,
+  "ProposalType": "ProposalType",
+  "UserId": 1,
+  "ServiceList": [
+    {
+      "BillingInvoiceServiceID": 0,
+      "BillingProposalID_FK": 0,
+      "ServiceID_FK": 1,
+      "CategoryId": 0,
+      "Title": null,
+      "StartDate": "2025-02-27T23:51:34.5585733+08:00",
+      "EndDate": "2025-02-27T23:51:34.558576+08:00",
+      "UnitCost": 0,
+      "Duration1": "Duration1",
+      "Duration2": "Duration2",
+      "Visit": 1,
+      "Session": 0,
+      "Discount": 0,
+      "ServiceDescription": "ServiceDescription",
+      "CategoryName": null
+    }
+  ]
+}
+```
+
+<h3 id="c4wx1apifeaturesbillingproposalcreatecreate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -4453,14 +3427,14 @@ Create new Billing Proposal
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="create-billing-proposal-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalcreatecreate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -4471,71 +3445,31 @@ Create new Billing Proposal
 This operation does not require authentication
 </aside>
 
-## Get Billing Proposal Session Balance
+## C4WX1APIFeaturesBillingProposalGetGetSessionBalance
 
 <a id="opIdC4WX1APIFeaturesBillingProposalGetGetSessionBalance"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/billing-proposal/session-balance?proposalId=0&serviceId=0&endDate=2019-08-24T14%3A15%3A22Z \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/billing-proposal/session-balance?proposalId=0&serviceId=0&endDate=2019-08-24T14%3A15%3A22Z HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-proposal/session-balance?proposalId=0&serviceId=0&endDate=2019-08-24T14%3A15%3A22Z',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/billing-proposal/session-balance', params={
-  'proposalId': '0',  'serviceId': '0',  'endDate': '2019-08-24T14:15:22Z'
-}, headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url 'https://localhost:7055/api/billing-proposal/session-balance?ProposalId=0&ServiceId=0&EndDate=2019-08-24T14%3A15%3A22Z' \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/billing-proposal/session-balance`
 
+*Get Billing Proposal Session Balance*
+
 Get Billing Proposal Session Balance by its ProposalId, ServiceId and EndDate
 
-<h3 id="get-billing-proposal-session-balance-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetsessionbalance-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|proposalId|query|integer(int32)|true|none|
-|serviceId|query|integer(int32)|true|none|
-|endDate|query|string(date-time)|true|none|
+|ProposalId|query|integer(int32)|true|none|
+|ServiceId|query|integer(int32)|true|none|
+|EndDate|query|string(date-time)|true|none|
 
 > Example responses
 
@@ -4545,7 +3479,7 @@ Get Billing Proposal Session Balance by its ProposalId, ServiceId and EndDate
 "string"
 ```
 
-<h3 id="get-billing-proposal-session-balance-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesbillingproposalgetgetsessionbalance-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -4556,377 +3490,32 @@ Get Billing Proposal Session Balance by its ProposalId, ServiceId and EndDate
 This operation does not require authentication
 </aside>
 
-<h1 id="c4wx1-api-billing-invoice">Billing-Invoice</h1>
-
-## Get Billing Invoice
-
-<a id="opIdC4WX1APIFeaturesBillingInvoiceGetGet"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/billing-invoice/{id} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/billing-invoice/{id} HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/billing-invoice/{id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/billing-invoice/{id}', headers = headers)
-
-print(r.json())
-
-```
-
-`GET /api/billing-invoice/{id}`
-
-Get Billing Invoice by its ID
-
-<h3 id="get-billing-invoice-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|id|path|integer(int32)|true|none|
-|initialCareAssessmentID|query|integer(int32)|false|none|
-|careReportID|query|integer(int32)|false|none|
-|patientID|query|integer(int32)|false|none|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "billingInvoiceID": 0,
-  "patientID_FK": 0,
-  "invoiceNumber": "string",
-  "invoiceDueDate": "2019-08-24T14:15:22Z",
-  "caseNumber": "string",
-  "initialCareAssessmentID_FK": 0,
-  "careReportID_FK": 0,
-  "consumable": true,
-  "sendEmail": true,
-  "emailPatient": true,
-  "emailTo": "string",
-  "emailCC": "string",
-  "emailBCC": "string",
-  "currencyID_FK": 0,
-  "totalCost": 0,
-  "status": "string",
-  "groupNumber": "string",
-  "version": 0,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "isDeleted": true,
-  "invoiceDate": "2019-08-24T14:15:22Z",
-  "currencyCode": "string",
-  "patientData": {
-    "patientID": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "caseID": "string",
-    "profile": {
-      "email": "string",
-      "billingAddress1": "string",
-      "billingAddress2": "string",
-      "billingAddress3": "string",
-      "billingPostalCode": "string"
-    }
-  },
-  "createdByData": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "email": "string"
-  },
-  "modifiedByData": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "email": "string"
-  },
-  "serviceList": [
-    {
-      "billingInvoiceServiceID": 0,
-      "proposalID_FK": 0,
-      "serviceID_FK": 0,
-      "unitCost": 0,
-      "session": 0,
-      "discount": 0,
-      "title": "string",
-      "categoryName": "string",
-      "billingProposalData": {
-        "billingProposalID": 0,
-        "proposalNumber": "string",
-        "patientID_FK": 0,
-        "title": "string",
-        "proposalType": "string"
-      }
-    }
-  ],
-  "consumableList": [
-    {
-      "billingInvoiceConsumableID": 0,
-      "itemID_FK": 0,
-      "unitPrice": 0,
-      "quantity": 0,
-      "billingInvoiceItemDto": {
-        "itemID": 0,
-        "categoryID_FK": 0,
-        "categoryName": "string",
-        "itemName": "string"
-      }
-    }
-  ]
-}
-```
-
-<h3 id="get-billing-invoice-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Billing Invoice retrieved successfully|[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoicedto)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Billing Invoice not found|None|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="c4wx1-api-audit-enquiry">Audit-Enquiry</h1>
-
-## Get Audit Enquiry
-
-<a id="opIdC4WX1APIFeaturesAuditEnquiryGetGet"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/audit-enquiry/{id} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/audit-enquiry/{id} HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/audit-enquiry/{id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/audit-enquiry/{id}', headers = headers)
-
-print(r.json())
-
-```
-
-`GET /api/audit-enquiry/{id}`
-
-Get Audit Enquiry by its ID
-
-<h3 id="get-audit-enquiry-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|id|path|integer(int32)|true|none|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "auditAction": "string",
-  "actionTime": "2019-08-24T14:15:22Z",
-  "enquiryID": 0,
-  "careManagerAssignedID_FK": 0,
-  "enquirySourceID_FK": 0,
-  "firstName": "string",
-  "lastName": "string",
-  "dateOfBirth": "2019-08-24T14:15:22Z",
-  "raceID_FK": 0,
-  "identificationNumber": "string",
-  "preferredLanguageID_FK": 0,
-  "genderID_FK": 0,
-  "patientAddress1": "string",
-  "patientAddress2": "string",
-  "patientAddress3": "string",
-  "postalCode": "string",
-  "nameOfCaller": "string",
-  "contactNumberOfCaller": "string",
-  "emailOfCaller": "string",
-  "preferredAppointmentDateTime": "2019-08-24T14:15:22Z",
-  "medicalHistory": "string",
-  "caregiverAtHomeID_FK": 0,
-  "servicesRequiredID_FK": 0,
-  "status": "string",
-  "remarks": "string",
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "isDeleted": true,
-  "otherRace": "string",
-  "otherPreferredLanguage": "string",
-  "userOrganizationID_FK": 0,
-  "caseNumber": "string",
-  "note": "string",
-  "orderID": "string",
-  "modifiedBy": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string"
-  },
-  "createdBy": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string"
-  }
-}
-```
-
-<h3 id="get-audit-enquiry-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Audit Enquiry retrieved successfully|[C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryDto](#schemac4wx1apifeaturesauditenquirydtosauditenquirydto)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Audit Enquiry not found|None|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 <h1 id="c4wx1-api-api-access-key">Api-Access-Key</h1>
 
-## Get APIAccessKey
+## C4WX1APIFeaturesAPIAccessKeyGetGet
 
 <a id="opIdC4WX1APIFeaturesAPIAccessKeyGetGet"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/api-access-key/{id} \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/api-access-key/{id} HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/api-access-key/{id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/api-access-key/{id}', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/api-access-key/0 \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/api-access-key/{id}`
 
+*Get APIAccessKey*
+
 Get APIAccessKey by its ID or Access Key
 
-<h3 id="get-apiaccesskey-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesapiaccesskeygetget-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |id|path|integer(int32)|true|none|
-|accessKey|query|string|false|none|
+|AccessKey|query|string|false|none|
 
 > Example responses
 
@@ -4934,17 +3523,17 @@ Get APIAccessKey by its ID or Access Key
 
 ```json
 {
-  "apiAccessKeyID": 0,
-  "tokenCode": "string",
-  "accessKey": "string",
-  "expiryDate": "2019-08-24T14:15:22Z",
-  "createdDate": "2019-08-24T14:15:22Z",
-  "updatedDate": "2019-08-24T14:15:22Z",
-  "userId_FK": 0
+  "APIAccessKeyID": 0,
+  "TokenCode": "string",
+  "AccessKey": "string",
+  "ExpiryDate": "2019-08-24T14:15:22Z",
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "UpdatedDate": "2019-08-24T14:15:22Z",
+  "UserId_FK": 0
 }
 ```
 
-<h3 id="get-apiaccesskey-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesapiaccesskeygetget-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -4956,72 +3545,36 @@ Get APIAccessKey by its ID or Access Key
 This operation does not require authentication
 </aside>
 
-## Create APIAccessKey
+## C4WX1APIFeaturesAPIAccessKeyCreateCreate
 
 <a id="opIdC4WX1APIFeaturesAPIAccessKeyCreateCreate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X POST https://localhost:7055/api/api-access-key \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://localhost:7055/api/api-access-key HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/json
-
-```
-
-```javascript
-const inputBody = '{
-  "code": "string",
-  "userId": 0
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/api-access-key',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://localhost:7055/api/api-access-key', headers = headers)
-
-print(r.json())
-
+curl --request POST \
+  --url https://localhost:7055/api/api-access-key \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{"Code":"string","UserId":0}'
 ```
 
 `POST /api/api-access-key`
+
+*Create APIAccessKey*
 
 Create a new APIAccessKey
 
 > Body parameter
 
-<h3 id="create-apiaccesskey-parameters">Parameters</h3>
+```json
+{
+  "Code": "string",
+  "UserId": 0
+}
+```
+
+<h3 id="c4wx1apifeaturesapiaccesskeycreatecreate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -5033,17 +3586,17 @@ Create a new APIAccessKey
 
 ```json
 {
-  "apiAccessKeyID": 0,
-  "tokenCode": "string",
-  "accessKey": "string",
-  "expiryDate": "2019-08-24T14:15:22Z",
-  "createdDate": "2019-08-24T14:15:22Z",
-  "updatedDate": "2019-08-24T14:15:22Z",
-  "userId_FK": 0
+  "APIAccessKeyID": 0,
+  "TokenCode": "string",
+  "AccessKey": "string",
+  "ExpiryDate": "2019-08-24T14:15:22Z",
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "UpdatedDate": "2019-08-24T14:15:22Z",
+  "UserId_FK": 0
 }
 ```
 
-<h3 id="create-apiaccesskey-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesapiaccesskeycreatecreate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -5057,75 +3610,39 @@ This operation does not require authentication
 
 <h1 id="c4wx1-api-activity">Activity</h1>
 
-## Update Activity
+## C4WX1APIFeaturesActivityUpdateUpdate
 
 <a id="opIdC4WX1APIFeaturesActivityUpdateUpdate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X PUT https://localhost:7055/api/activity/{activityID} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-PUT https://localhost:7055/api/activity/{activityID} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "problemListID_FK": 1,
-  "diseaseID_FK": 1,
-  "activityDetail": "Activity Detail",
-  "diseaseSubInfoID_FK": 1,
-  "userId": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/activity/{activityID}',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.put('https://localhost:7055/api/activity/{activityID}', headers = headers)
-
-print(r.json())
-
+curl --request PUT \
+  --url https://localhost:7055/api/activity/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"ProblemListID_FK":1,"DiseaseID_FK":1,"ActivityDetail":"Activity Detail","DiseaseSubInfoID_FK":1,"UserId":1}'
 ```
 
 `PUT /api/activity/{activityID}`
+
+*Update Activity*
 
 Update an existing Activity
 
 > Body parameter
 
-<h3 id="update-activity-parameters">Parameters</h3>
+```json
+{
+  "ProblemListID_FK": 1,
+  "DiseaseID_FK": 1,
+  "ActivityDetail": "Activity Detail",
+  "DiseaseSubInfoID_FK": 1,
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturesactivityupdateupdate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -5138,14 +3655,14 @@ Update an existing Activity
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="update-activity-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesactivityupdateupdate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -5157,182 +3674,55 @@ Update an existing Activity
 This operation does not require authentication
 </aside>
 
-## Delete Activity
-
-<a id="opIdC4WX1APIFeaturesActivityDeleteDelete"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://localhost:7055/api/activity/{activityID} \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-DELETE https://localhost:7055/api/activity/{activityID} HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "userID": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/activity/{activityID}',
-{
-  method: 'DELETE',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.delete('https://localhost:7055/api/activity/{activityID}', headers = headers)
-
-print(r.json())
-
-```
-
-`DELETE /api/activity/{activityID}`
-
-Delete an existing Activity
-
-> Body parameter
-
-<h3 id="delete-activity-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|activityID|path|integer(int32)|true|none|
-|body|body|[C4WX1APIFeaturesActivityDtosDeleteActivityDto](#schemac4wx1apifeaturesactivitydtosdeleteactivitydto)|true|none|
-
-> Example responses
-
-> 500 Response
-
-```json
-{
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
-}
-```
-
-<h3 id="delete-activity-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Activity deleted successfully|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Activity not found|None|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Get Activity
+## C4WX1APIFeaturesActivityGetGetById
 
 <a id="opIdC4WX1APIFeaturesActivityGetGetById"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/activity/{id} \
-  -H 'Accept: application/problem+json'
-
+curl --request GET \
+  --url https://localhost:7055/api/activity/0 \
+  --header 'Accept: application/json'
 ```
 
-```http
-GET https://localhost:7055/api/activity/{id} HTTP/1.1
-Host: localhost:7055
-Accept: application/problem+json
+`GET /api/activity/{Id}`
 
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/activity/{id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/problem+json'
-}
-
-r = requests.get('https://localhost:7055/api/activity/{id}', headers = headers)
-
-print(r.json())
-
-```
-
-`GET /api/activity/{id}`
+*Get Activity*
 
 Get an Activity by its ID
 
-<h3 id="get-activity-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesactivitygetgetbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|integer(int32)|true|none|
+|Id|path|integer(int32)|true|none|
 
 > Example responses
 
-> 500 Response
+> 200 Response
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "ActivityID": 0,
+  "ProblemListID_FK": 0,
+  "DiseaseID_FK": 0,
+  "ActivityDetail": "string",
+  "IsDeleted": true,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "ModifiedDate": "2019-08-24T14:15:22Z",
+  "ModifiedBy_FK": 0,
+  "DiseaseSubInfoID_FK": 0,
+  "CanDelete": true
 }
 ```
 
-<h3 id="get-activity-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesactivitygetgetbyid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Activity retrieved successfully|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Activity retrieved successfully|[C4WX1APIFeaturesActivityDtosActivityDto](#schemac4wx1apifeaturesactivitydtosactivitydto)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Activity not found|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
@@ -5340,59 +3730,21 @@ Get an Activity by its ID
 This operation does not require authentication
 </aside>
 
-## Get Activity Count
+## C4WX1APIFeaturesActivityGetGetCount
 
 <a id="opIdC4WX1APIFeaturesActivityGetGetCount"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/activity/count \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/activity/count HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/activity/count',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/activity/count', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/activity/count \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/activity/count`
+
+*Get Activity Count*
 
 Get the number of activities
 
@@ -5404,7 +3756,7 @@ Get the number of activities
 0
 ```
 
-<h3 id="get-activity-count-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesactivitygetgetcount-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -5415,69 +3767,31 @@ Get the number of activities
 This operation does not require authentication
 </aside>
 
-## Get Activity List
+## C4WX1APIFeaturesActivityGetGetList
 
 <a id="opIdC4WX1APIFeaturesActivityGetGetList"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X GET https://localhost:7055/api/activity \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://localhost:7055/api/activity HTTP/1.1
-Host: localhost:7055
-Accept: application/json
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/json'
-};
-
-fetch('https://localhost:7055/api/activity',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://localhost:7055/api/activity', headers = headers)
-
-print(r.json())
-
+curl --request GET \
+  --url https://localhost:7055/api/activity \
+  --header 'Accept: application/json'
 ```
 
 `GET /api/activity`
 
+*Get Activity List*
+
 Get a list of activities
 
-<h3 id="get-activity-list-parameters">Parameters</h3>
+<h3 id="c4wx1apifeaturesactivitygetgetlist-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|pageIndex|query|integer(int32)|false|none|
-|pageSize|query|integer(int32)|false|none|
-|orderBy|query|string|false|none|
+|PageIndex|query|integer(int32)|false|none|
+|PageSize|query|integer(int32)|false|none|
+|OrderBy|query|string|false|none|
 
 > Example responses
 
@@ -5486,120 +3800,84 @@ Get a list of activities
 ```json
 [
   {
-    "activityID": 0,
-    "problemListID_FK": 0,
-    "diseaseID_FK": 0,
-    "activityDetail": "string",
-    "isDeleted": true,
-    "createdDate": "2019-08-24T14:15:22Z",
-    "createdBy_FK": 0,
-    "modifiedDate": "2019-08-24T14:15:22Z",
-    "modifiedBy_FK": 0,
-    "diseaseSubInfoID_FK": 0,
-    "canDelete": true
+    "ActivityID": 0,
+    "ProblemListID_FK": 0,
+    "DiseaseID_FK": 0,
+    "ActivityDetail": "string",
+    "IsDeleted": true,
+    "CreatedDate": "2019-08-24T14:15:22Z",
+    "CreatedBy_FK": 0,
+    "ModifiedDate": "2019-08-24T14:15:22Z",
+    "ModifiedBy_FK": 0,
+    "DiseaseSubInfoID_FK": 0,
+    "CanDelete": true
   }
 ]
 ```
 
-<h3 id="get-activity-list-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesactivitygetgetlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Activity list retrieved successfully|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
-<h3 id="get-activity-list-responseschema">Response Schema</h3>
+<h3 id="c4wx1apifeaturesactivitygetgetlist-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |*anonymous*|[[C4WX1APIFeaturesActivityDtosActivityDto](#schemac4wx1apifeaturesactivitydtosactivitydto)]|false|none|none|
-|» activityID|integer(int32)|false|none|none|
-|» problemListID_FK|integer(int32)|false|none|none|
-|» diseaseID_FK|integer(int32)|false|none|none|
-|» activityDetail|string|false|none|none|
-|» isDeleted|boolean|false|none|none|
-|» createdDate|string(date-time)¦null|false|none|none|
-|» createdBy_FK|integer(int32)¦null|false|none|none|
-|» modifiedDate|string(date-time)¦null|false|none|none|
-|» modifiedBy_FK|integer(int32)¦null|false|none|none|
-|» diseaseSubInfoID_FK|integer(int32)¦null|false|none|none|
-|» canDelete|boolean|false|none|none|
+|» ActivityID|integer(int32)|false|none|none|
+|» ProblemListID_FK|integer(int32)|false|none|none|
+|» DiseaseID_FK|integer(int32)|false|none|none|
+|» ActivityDetail|string|false|none|none|
+|» IsDeleted|boolean|false|none|none|
+|» CreatedDate|string(date-time)¦null|false|none|none|
+|» CreatedBy_FK|integer(int32)¦null|false|none|none|
+|» ModifiedDate|string(date-time)¦null|false|none|none|
+|» ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|» DiseaseSubInfoID_FK|integer(int32)¦null|false|none|none|
+|» CanDelete|boolean|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## Create Activity
+## C4WX1APIFeaturesActivityCreateCreate
 
 <a id="opIdC4WX1APIFeaturesActivityCreateCreate"></a>
 
 > Code samples
 
 ```shell
-# You can also use wget
-curl -X POST https://localhost:7055/api/activity \
-  -H 'Content-Type: */*' \
-  -H 'Accept: application/problem+json'
-
-```
-
-```http
-POST https://localhost:7055/api/activity HTTP/1.1
-Host: localhost:7055
-Content-Type: */*
-Accept: application/problem+json
-
-```
-
-```javascript
-const inputBody = '{
-  "problemListID_FK": 1,
-  "diseaseID_FK": 1,
-  "activityDetail": "Activity Detail",
-  "diseaseSubInfoID_FK": 1,
-  "userId": 1
-}';
-const headers = {
-  'Content-Type':'*/*',
-  'Accept':'application/problem+json'
-};
-
-fetch('https://localhost:7055/api/activity',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': '*/*',
-  'Accept': 'application/problem+json'
-}
-
-r = requests.post('https://localhost:7055/api/activity', headers = headers)
-
-print(r.json())
-
+curl --request POST \
+  --url https://localhost:7055/api/activity \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: application/json' \
+  --data '{"ProblemListID_FK":1,"DiseaseID_FK":1,"ActivityDetail":"Activity Detail","DiseaseSubInfoID_FK":1,"UserId":1}'
 ```
 
 `POST /api/activity`
+
+*Create Activity*
 
 Create a new Activity
 
 > Body parameter
 
-<h3 id="create-activity-parameters">Parameters</h3>
+```json
+{
+  "ProblemListID_FK": 1,
+  "DiseaseID_FK": 1,
+  "ActivityDetail": "Activity Detail",
+  "DiseaseSubInfoID_FK": 1,
+  "UserId": 1
+}
+```
+
+<h3 id="c4wx1apifeaturesactivitycreatecreate-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -5611,18 +3889,78 @@ Create a new Activity
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 ```
 
-<h3 id="create-activity-responses">Responses</h3>
+<h3 id="c4wx1apifeaturesactivitycreatecreate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Activity created successfully|None|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## C4WX1APIFeaturesActivityDeleteDelete
+
+<a id="opIdC4WX1APIFeaturesActivityDeleteDelete"></a>
+
+> Code samples
+
+```shell
+curl --request DELETE \
+  --url https://localhost:7055/api/activity/0 \
+  --header 'Accept: application/problem+json' \
+  --header 'Content-Type: */*' \
+  --data '{"UserId":0}'
+```
+
+`DELETE /api/activity/{id}`
+
+*Delete Activity*
+
+Delete an existing Activity
+
+> Body parameter
+
+```json
+{
+  "UserId": 0
+}
+```
+
+<h3 id="c4wx1apifeaturesactivitydeletedelete-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer(int32)|true|none|
+|body|body|[C4WX1APIFeaturesSharedDtosDeleteByIdDto](#schemac4wx1apifeaturesshareddtosdeletebyiddto)|true|none|
+
+> Example responses
+
+> 500 Response
+
+```json
+{
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
+}
+```
+
+<h3 id="c4wx1apifeaturesactivitydeletedelete-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Activity deleted successfully|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Activity not found|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|[FastEndpointsInternalErrorResponse](#schemafastendpointsinternalerrorresponse)|
 
 <aside class="success">
@@ -5640,10 +3978,10 @@ This operation does not require authentication
 
 ```json
 {
-  "status": "Internal Server Error!",
-  "code": 500,
-  "reason": "Something unexpected has happened",
-  "note": "See application log for stack trace."
+  "Status": "Internal Server Error!",
+  "Code": 500,
+  "Reason": "Something unexpected has happened",
+  "Note": "See application log for stack trace."
 }
 
 ```
@@ -5654,10 +3992,10 @@ the dto used to send an error response to the client when an unhandled exception
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|status|string|false|none|error status|
-|code|integer(int32)|false|none|http status code of the error response|
-|reason|string|false|none|the reason for the error|
-|note|string|false|none|additional information or instructions|
+|Status|string|false|none|error status|
+|Code|integer(int32)|false|none|http status code of the error response|
+|Reason|string|false|none|the reason for the error|
+|Note|string|false|none|additional information or instructions|
 
 <h2 id="tocS_C4WX1APIFeaturesSysConfigDtosUpdateSysConfigDto">C4WX1APIFeaturesSysConfigDtosUpdateSysConfigDto</h2>
 <!-- backwards compatibility -->
@@ -5668,9 +4006,9 @@ the dto used to send an error response to the client when an unhandled exception
 
 ```json
 {
-  "configName": "string",
-  "configValue": "string",
-  "userID": 0
+  "ConfigName": "string",
+  "ConfigValue": "string",
+  "UserID": 0
 }
 
 ```
@@ -5679,9 +4017,9 @@ the dto used to send an error response to the client when an unhandled exception
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|configName|string|false|none|none|
-|configValue|string|false|none|none|
-|userID|integer(int32)|false|none|none|
+|ConfigName|string|false|none|none|
+|ConfigValue|string|false|none|none|
+|UserID|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesSysConfigDtosSysConfigDto">C4WX1APIFeaturesSysConfigDtosSysConfigDto</h2>
 <!-- backwards compatibility -->
@@ -5692,12 +4030,12 @@ the dto used to send an error response to the client when an unhandled exception
 
 ```json
 {
-  "configName": "string",
-  "configValue": "string",
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "isConfigurable": true,
-  "description": "string"
+  "ConfigName": "string",
+  "ConfigValue": "string",
+  "ModifiedDate": "2019-08-24T14:15:22Z",
+  "ModifiedBy_FK": 0,
+  "IsConfigurable": true,
+  "Description": "string"
 }
 
 ```
@@ -5706,12 +4044,12 @@ the dto used to send an error response to the client when an unhandled exception
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|configName|string|false|none|none|
-|configValue|string¦null|false|none|none|
-|modifiedDate|string(date-time)¦null|false|none|none|
-|modifiedBy_FK|integer(int32)¦null|false|none|none|
-|isConfigurable|boolean¦null|false|none|none|
-|description|string¦null|false|none|none|
+|ConfigName|string|false|none|none|
+|ConfigValue|string¦null|false|none|none|
+|ModifiedDate|string(date-time)¦null|false|none|none|
+|ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|IsConfigurable|boolean¦null|false|none|none|
+|Description|string¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesSysConfigDtosGetSysConfigDto">C4WX1APIFeaturesSysConfigDtosGetSysConfigDto</h2>
 <!-- backwards compatibility -->
@@ -5780,10 +4118,10 @@ and
 
 ```json
 {
-  "configName": "Config Name",
-  "configValue": "Config Value",
-  "isConfigurable": false,
-  "description": "Description"
+  "ConfigName": "Config Name",
+  "ConfigValue": "Config Value",
+  "IsConfigurable": false,
+  "Description": "Description"
 }
 
 ```
@@ -5792,10 +4130,10 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|configName|string|false|none|none|
-|configValue|string¦null|false|none|none|
-|isConfigurable|boolean¦null|false|none|none|
-|description|string¦null|false|none|none|
+|ConfigName|string|false|none|none|
+|ConfigValue|string¦null|false|none|none|
+|IsConfigurable|boolean¦null|false|none|none|
+|Description|string¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesChatDtosChatDto">C4WX1APIFeaturesChatDtosChatDto</h2>
 <!-- backwards compatibility -->
@@ -5806,53 +4144,53 @@ and
 
 ```json
 {
-  "chatID": 0,
-  "comment": "string",
-  "attachment": "string",
-  "attachment_Physical": "string",
-  "parentID_FK": 0,
-  "patientID_FK": 0,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "isDeleted": true,
-  "family": true,
-  "userData": {
-    "userId": 0,
-    "firstname": "string",
-    "lastname": "string",
-    "photo": "string"
+  "ChatID": 0,
+  "Comment": "string",
+  "Attachment": "string",
+  "Attachment_Physical": "string",
+  "ParentID_FK": 0,
+  "PatientID_FK": 0,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "IsDeleted": true,
+  "Family": true,
+  "UserData": {
+    "UserId": 0,
+    "Firstname": "string",
+    "Lastname": "string",
+    "Photo": "string"
   },
-  "patientData": {
-    "patientID": 0,
-    "firstname": "string",
-    "lastname": "string",
-    "photo": "string"
+  "PatientData": {
+    "PatientID": 0,
+    "Firstname": "string",
+    "Lastname": "string",
+    "Photo": "string"
   },
-  "commentList": [
+  "CommentList": [
     {
-      "chatID": 0,
-      "comment": "string",
-      "attachment": "string",
-      "attachment_Physical": "string",
-      "parentID_FK": 0,
-      "patientID_FK": 0,
-      "createdDate": "2019-08-24T14:15:22Z",
-      "createdBy_FK": 0,
-      "isDeleted": true,
-      "family": true,
-      "userData": {
-        "userId": 0,
-        "firstname": "string",
-        "lastname": "string",
-        "photo": "string"
+      "ChatID": 0,
+      "Comment": "string",
+      "Attachment": "string",
+      "Attachment_Physical": "string",
+      "ParentID_FK": 0,
+      "PatientID_FK": 0,
+      "CreatedDate": "2019-08-24T14:15:22Z",
+      "CreatedBy_FK": 0,
+      "IsDeleted": true,
+      "Family": true,
+      "UserData": {
+        "UserId": 0,
+        "Firstname": "string",
+        "Lastname": "string",
+        "Photo": "string"
       },
-      "patientData": {
-        "patientID": 0,
-        "firstname": "string",
-        "lastname": "string",
-        "photo": "string"
+      "PatientData": {
+        "PatientID": 0,
+        "Firstname": "string",
+        "Lastname": "string",
+        "Photo": "string"
       },
-      "commentList": []
+      "CommentList": []
     }
   ]
 }
@@ -5863,19 +4201,19 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|chatID|integer(int32)|false|none|none|
-|comment|string¦null|false|none|none|
-|attachment|string¦null|false|none|none|
-|attachment_Physical|string¦null|false|none|none|
-|parentID_FK|integer(int32)¦null|false|none|none|
-|patientID_FK|integer(int32)¦null|false|none|none|
-|createdDate|string(date-time)|false|none|none|
-|createdBy_FK|integer(int32)|false|none|none|
-|isDeleted|boolean|false|none|none|
-|family|boolean¦null|false|none|none|
-|userData|[C4WX1APIFeaturesChatDtosChatUserDto](#schemac4wx1apifeatureschatdtoschatuserdto)¦null|false|none|none|
-|patientData|[C4WX1APIFeaturesChatDtosChatPatientDto](#schemac4wx1apifeatureschatdtoschatpatientdto)¦null|false|none|none|
-|commentList|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
+|ChatID|integer(int32)|false|none|none|
+|Comment|string¦null|false|none|none|
+|Attachment|string¦null|false|none|none|
+|Attachment_Physical|string¦null|false|none|none|
+|ParentID_FK|integer(int32)¦null|false|none|none|
+|PatientID_FK|integer(int32)¦null|false|none|none|
+|CreatedDate|string(date-time)|false|none|none|
+|CreatedBy_FK|integer(int32)|false|none|none|
+|IsDeleted|boolean|false|none|none|
+|Family|boolean¦null|false|none|none|
+|UserData|[C4WX1APIFeaturesChatDtosChatUserDto](#schemac4wx1apifeatureschatdtoschatuserdto)¦null|false|none|none|
+|PatientData|[C4WX1APIFeaturesChatDtosChatPatientDto](#schemac4wx1apifeatureschatdtoschatpatientdto)¦null|false|none|none|
+|CommentList|[[C4WX1APIFeaturesChatDtosChatDto](#schemac4wx1apifeatureschatdtoschatdto)]|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesChatDtosChatUserDto">C4WX1APIFeaturesChatDtosChatUserDto</h2>
 <!-- backwards compatibility -->
@@ -5886,10 +4224,10 @@ and
 
 ```json
 {
-  "userId": 0,
-  "firstname": "string",
-  "lastname": "string",
-  "photo": "string"
+  "UserId": 0,
+  "Firstname": "string",
+  "Lastname": "string",
+  "Photo": "string"
 }
 
 ```
@@ -5898,10 +4236,10 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|userId|integer(int32)|false|none|none|
-|firstname|string|false|none|none|
-|lastname|string|false|none|none|
-|photo|string¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
+|Firstname|string|false|none|none|
+|Lastname|string|false|none|none|
+|Photo|string¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesChatDtosChatPatientDto">C4WX1APIFeaturesChatDtosChatPatientDto</h2>
 <!-- backwards compatibility -->
@@ -5912,10 +4250,10 @@ and
 
 ```json
 {
-  "patientID": 0,
-  "firstname": "string",
-  "lastname": "string",
-  "photo": "string"
+  "PatientID": 0,
+  "Firstname": "string",
+  "Lastname": "string",
+  "Photo": "string"
 }
 
 ```
@@ -5924,10 +4262,10 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|patientID|integer(int32)|false|none|none|
-|firstname|string|false|none|none|
-|lastname|string|false|none|none|
-|photo|string¦null|false|none|none|
+|PatientID|integer(int32)|false|none|none|
+|Firstname|string|false|none|none|
+|Lastname|string|false|none|none|
+|Photo|string¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesSharedDtosGetByIdDto">C4WX1APIFeaturesSharedDtosGetByIdDto</h2>
 <!-- backwards compatibility -->
@@ -5977,16 +4315,16 @@ and
 
 *None*
 
-<h2 id="tocS_C4WX1APIFeaturesChatDtosDeleteChatDto">C4WX1APIFeaturesChatDtosDeleteChatDto</h2>
+<h2 id="tocS_C4WX1APIFeaturesSharedDtosDeleteByIdDto">C4WX1APIFeaturesSharedDtosDeleteByIdDto</h2>
 <!-- backwards compatibility -->
-<a id="schemac4wx1apifeatureschatdtosdeletechatdto"></a>
-<a id="schema_C4WX1APIFeaturesChatDtosDeleteChatDto"></a>
-<a id="tocSc4wx1apifeatureschatdtosdeletechatdto"></a>
-<a id="tocsc4wx1apifeatureschatdtosdeletechatdto"></a>
+<a id="schemac4wx1apifeaturesshareddtosdeletebyiddto"></a>
+<a id="schema_C4WX1APIFeaturesSharedDtosDeleteByIdDto"></a>
+<a id="tocSc4wx1apifeaturesshareddtosdeletebyiddto"></a>
+<a id="tocsc4wx1apifeaturesshareddtosdeletebyiddto"></a>
 
 ```json
 {
-  "userID": 1
+  "UserId": 0
 }
 
 ```
@@ -5995,7 +4333,7 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|userID|integer(int32)|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_FastEndpointsErrorResponse">FastEndpointsErrorResponse</h2>
 <!-- backwards compatibility -->
@@ -6006,9 +4344,9 @@ and
 
 ```json
 {
-  "statusCode": 400,
-  "message": "One or more errors occurred!",
-  "errors": {
+  "StatusCode": 400,
+  "Message": "One or more errors occurred!",
+  "Errors": {
     "property1": [
       "string"
     ],
@@ -6026,9 +4364,9 @@ the dto used to send an error response to the client
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|statusCode|integer(int32)|false|none|the http status code sent to the client. default is 400.|
-|message|string|false|none|the message for the error response|
-|errors|object|false|none|the collection of errors for the current context|
+|StatusCode|integer(int32)|false|none|the http status code sent to the client. default is 400.|
+|Message|string|false|none|the message for the error response|
+|Errors|object|false|none|the collection of errors for the current context|
 |» **additionalProperties**|[string]|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesChatDtosCreateChatDto">C4WX1APIFeaturesChatDtosCreateChatDto</h2>
@@ -6040,13 +4378,13 @@ the dto used to send an error response to the client
 
 ```json
 {
-  "attachment": "Attachment",
-  "attachment_Physical": "Attachment_Physical",
-  "createdBy_FK": 1,
-  "parentID_FK": 1,
-  "patientID_FK": 1,
-  "comment": "Comment",
-  "family": true
+  "Attachment": "Attachment",
+  "Attachment_Physical": "Attachment_Physical",
+  "CreatedBy_FK": 1,
+  "ParentID_FK": 1,
+  "PatientID_FK": 1,
+  "Comment": "Comment",
+  "Family": true
 }
 
 ```
@@ -6055,13 +4393,93 @@ the dto used to send an error response to the client
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|attachment|string¦null|false|none|none|
-|attachment_Physical|string¦null|false|none|none|
-|createdBy_FK|integer(int32)|false|none|none|
-|parentID_FK|integer(int32)¦null|false|none|none|
-|patientID_FK|integer(int32)¦null|false|none|none|
-|comment|string¦null|false|none|none|
-|family|boolean¦null|false|none|none|
+|Attachment|string¦null|false|none|none|
+|Attachment_Physical|string¦null|false|none|none|
+|CreatedBy_FK|integer(int32)|false|none|none|
+|ParentID_FK|integer(int32)¦null|false|none|none|
+|PatientID_FK|integer(int32)¦null|false|none|none|
+|Comment|string¦null|false|none|none|
+|Family|boolean¦null|false|none|none|
+
+<h2 id="tocS_C4WX1APIFeaturesCarePlanSubGoalDtosUpdateCarePlanSubGoalDto">C4WX1APIFeaturesCarePlanSubGoalDtosUpdateCarePlanSubGoalDto</h2>
+<!-- backwards compatibility -->
+<a id="schemac4wx1apifeaturescareplansubgoaldtosupdatecareplansubgoaldto"></a>
+<a id="schema_C4WX1APIFeaturesCarePlanSubGoalDtosUpdateCarePlanSubGoalDto"></a>
+<a id="tocSc4wx1apifeaturescareplansubgoaldtosupdatecareplansubgoaldto"></a>
+<a id="tocsc4wx1apifeaturescareplansubgoaldtosupdatecareplansubgoaldto"></a>
+
+```json
+{
+  "CarePlanSubID_FK": 1,
+  "CarePlanSubGoalName": "care plan sub goal",
+  "UserId": 1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|CarePlanSubID_FK|integer(int32)|false|none|none|
+|CarePlanSubGoalName|string¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
+
+<h2 id="tocS_C4WX1APIFeaturesCarePlanSubGoalDtosCarePlanSubGoalDto">C4WX1APIFeaturesCarePlanSubGoalDtosCarePlanSubGoalDto</h2>
+<!-- backwards compatibility -->
+<a id="schemac4wx1apifeaturescareplansubgoaldtoscareplansubgoaldto"></a>
+<a id="schema_C4WX1APIFeaturesCarePlanSubGoalDtosCarePlanSubGoalDto"></a>
+<a id="tocSc4wx1apifeaturescareplansubgoaldtoscareplansubgoaldto"></a>
+<a id="tocsc4wx1apifeaturescareplansubgoaldtoscareplansubgoaldto"></a>
+
+```json
+{
+  "CarePlanSubGoalID": 0,
+  "ScoreTypeID": 0,
+  "Score1": 0,
+  "Score2": 0,
+  "CarePlanSubGoalName": "string",
+  "IsDeleted": true,
+  "CanDelete": true
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|CarePlanSubGoalID|integer(int32)|false|none|none|
+|ScoreTypeID|integer(int32)¦null|false|none|none|
+|Score1|number(decimal)¦null|false|none|none|
+|Score2|number(decimal)¦null|false|none|none|
+|CarePlanSubGoalName|string¦null|false|none|none|
+|IsDeleted|boolean¦null|false|none|none|
+|CanDelete|boolean|false|none|none|
+
+<h2 id="tocS_C4WX1APIFeaturesCarePlanSubGoalDtosCreateCarePlanSubGoalDto">C4WX1APIFeaturesCarePlanSubGoalDtosCreateCarePlanSubGoalDto</h2>
+<!-- backwards compatibility -->
+<a id="schemac4wx1apifeaturescareplansubgoaldtoscreatecareplansubgoaldto"></a>
+<a id="schema_C4WX1APIFeaturesCarePlanSubGoalDtosCreateCarePlanSubGoalDto"></a>
+<a id="tocSc4wx1apifeaturescareplansubgoaldtoscreatecareplansubgoaldto"></a>
+<a id="tocsc4wx1apifeaturescareplansubgoaldtoscreatecareplansubgoaldto"></a>
+
+```json
+{
+  "CarePlanSubID_FK": 1,
+  "CarePlanSubGoalName": "care plan sub goal",
+  "UserId": 1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|CarePlanSubID_FK|integer(int32)|false|none|none|
+|CarePlanSubGoalName|string¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesC4WImageDtosUpdateC4WImageDto">C4WX1APIFeaturesC4WImageDtosUpdateC4WImageDto</h2>
 <!-- backwards compatibility -->
@@ -6072,15 +4490,15 @@ the dto used to send an error response to the client
 
 ```json
 {
-  "woundImageName": "wound image name",
-  "woundImageData": "wound image data",
-  "woundBedImageName": "wound bed image name",
-  "woundBedImageData": "wound bed image data",
-  "tissueImageName": "tissue image name",
-  "tissueImageData": "tissue image data",
-  "depthImageName": "depth image name",
-  "depthImageData": "depth image data",
-  "userId": 1
+  "WoundImageName": "wound image name",
+  "WoundImageData": "wound image data",
+  "WoundBedImageName": "wound bed image name",
+  "WoundBedImageData": "wound bed image data",
+  "TissueImageName": "tissue image name",
+  "TissueImageData": "tissue image data",
+  "DepthImageName": "depth image name",
+  "DepthImageData": "depth image data",
+  "UserId": 1
 }
 
 ```
@@ -6089,15 +4507,15 @@ the dto used to send an error response to the client
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|woundImageName|string¦null|false|none|none|
-|woundImageData|string¦null|false|none|none|
-|woundBedImageName|string¦null|false|none|none|
-|woundBedImageData|string¦null|false|none|none|
-|tissueImageName|string¦null|false|none|none|
-|tissueImageData|string¦null|false|none|none|
-|depthImageName|string¦null|false|none|none|
-|depthImageData|string¦null|false|none|none|
-|userId|integer(int32)|false|none|none|
+|WoundImageName|string¦null|false|none|none|
+|WoundImageData|string¦null|false|none|none|
+|WoundBedImageName|string¦null|false|none|none|
+|WoundBedImageData|string¦null|false|none|none|
+|TissueImageName|string¦null|false|none|none|
+|TissueImageData|string¦null|false|none|none|
+|DepthImageName|string¦null|false|none|none|
+|DepthImageData|string¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesC4WImageDtosC4WImageDto">C4WX1APIFeaturesC4WImageDtosC4WImageDto</h2>
 <!-- backwards compatibility -->
@@ -6108,19 +4526,19 @@ the dto used to send an error response to the client
 
 ```json
 {
-  "c4WImageId": 0,
-  "woundImageName": "string",
-  "woundImageData": "string",
-  "woundBedImageName": "string",
-  "woundBedImageData": "string",
-  "tissueImageName": "string",
-  "tissueImageData": "string",
-  "depthImageName": "string",
-  "depthImageData": "string",
-  "isDeleted": true,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z"
+  "C4WImageId": 0,
+  "WoundImageName": "string",
+  "WoundImageData": "string",
+  "WoundBedImageName": "string",
+  "WoundBedImageData": "string",
+  "TissueImageName": "string",
+  "TissueImageData": "string",
+  "DepthImageName": "string",
+  "DepthImageData": "string",
+  "IsDeleted": true,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "ModifiedDate": "2019-08-24T14:15:22Z"
 }
 
 ```
@@ -6129,19 +4547,19 @@ the dto used to send an error response to the client
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|c4WImageId|integer(int32)|false|none|none|
-|woundImageName|string¦null|false|none|none|
-|woundImageData|string¦null|false|none|none|
-|woundBedImageName|string¦null|false|none|none|
-|woundBedImageData|string¦null|false|none|none|
-|tissueImageName|string¦null|false|none|none|
-|tissueImageData|string¦null|false|none|none|
-|depthImageName|string¦null|false|none|none|
-|depthImageData|string¦null|false|none|none|
-|isDeleted|boolean|false|none|none|
-|createdDate|string(date-time)|false|none|none|
-|createdBy_FK|integer(int32)|false|none|none|
-|modifiedDate|string(date-time)¦null|false|none|none|
+|C4WImageId|integer(int32)|false|none|none|
+|WoundImageName|string¦null|false|none|none|
+|WoundImageData|string¦null|false|none|none|
+|WoundBedImageName|string¦null|false|none|none|
+|WoundBedImageData|string¦null|false|none|none|
+|TissueImageName|string¦null|false|none|none|
+|TissueImageData|string¦null|false|none|none|
+|DepthImageName|string¦null|false|none|none|
+|DepthImageData|string¦null|false|none|none|
+|IsDeleted|boolean|false|none|none|
+|CreatedDate|string(date-time)|false|none|none|
+|CreatedBy_FK|integer(int32)|false|none|none|
+|ModifiedDate|string(date-time)¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesC4WImageDtosGetC4WImageCountByDateDto">C4WX1APIFeaturesC4WImageDtosGetC4WImageCountByDateDto</h2>
 <!-- backwards compatibility -->
@@ -6194,15 +4612,15 @@ and
 
 ```json
 {
-  "woundImageName": "wound image name",
-  "woundImageData": "wound image data",
-  "woundBedImageName": "wound bed image name",
-  "woundBedImageData": "wound bed image data",
-  "tissueImageName": "tissue image name",
-  "tissueImageData": "tissue image data",
-  "depthImageName": "depth image name",
-  "depthImageData": "depth image data",
-  "userId": 1
+  "WoundImageName": "wound image name",
+  "WoundImageData": "wound image data",
+  "WoundBedImageName": "wound bed image name",
+  "WoundBedImageData": "wound bed image data",
+  "TissueImageName": "tissue image name",
+  "TissueImageData": "tissue image data",
+  "DepthImageName": "depth image name",
+  "DepthImageData": "depth image data",
+  "UserId": 1
 }
 
 ```
@@ -6211,15 +4629,15 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|woundImageName|string¦null|false|none|none|
-|woundImageData|string¦null|false|none|none|
-|woundBedImageName|string¦null|false|none|none|
-|woundBedImageData|string¦null|false|none|none|
-|tissueImageName|string¦null|false|none|none|
-|tissueImageData|string¦null|false|none|none|
-|depthImageName|string¦null|false|none|none|
-|depthImageData|string¦null|false|none|none|
-|userId|integer(int32)|false|none|none|
+|WoundImageName|string¦null|false|none|none|
+|WoundImageData|string¦null|false|none|none|
+|WoundBedImageName|string¦null|false|none|none|
+|WoundBedImageData|string¦null|false|none|none|
+|TissueImageName|string¦null|false|none|none|
+|TissueImageData|string¦null|false|none|none|
+|DepthImageName|string¦null|false|none|none|
+|DepthImageData|string¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesC4WDeviceTokenDtosUpdateC4WDeviceTokenDto">C4WX1APIFeaturesC4WDeviceTokenDtosUpdateC4WDeviceTokenDto</h2>
 <!-- backwards compatibility -->
@@ -6230,11 +4648,11 @@ and
 
 ```json
 {
-  "oldDeviceToken": "Old token",
-  "newDeviceToken": "New token",
-  "clientEnvironment": "test env",
-  "device": "IPhone",
-  "userId": 1
+  "OldDeviceToken": "Old token",
+  "NewDeviceToken": "New token",
+  "ClientEnvironment": "test env",
+  "Device": "IPhone",
+  "UserId": 1
 }
 
 ```
@@ -6243,11 +4661,11 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|oldDeviceToken|string¦null|false|none|none|
-|newDeviceToken|string¦null|false|none|none|
-|clientEnvironment|string¦null|false|none|none|
-|device|string¦null|false|none|none|
-|userId|integer(int32)|false|none|none|
+|OldDeviceToken|string¦null|false|none|none|
+|NewDeviceToken|string¦null|false|none|none|
+|ClientEnvironment|string¦null|false|none|none|
+|Device|string¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesC4WDeviceTokenDtosC4WDeviceTokenDto">C4WX1APIFeaturesC4WDeviceTokenDtosC4WDeviceTokenDto</h2>
 <!-- backwards compatibility -->
@@ -6258,16 +4676,16 @@ and
 
 ```json
 {
-  "c4WDeviceTokenId": 0,
-  "oldDeviceToken": "string",
-  "newDeviceToken": "string",
-  "clientEnvironment": "string",
-  "device": "string",
-  "isDeleted": true,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0
+  "C4WDeviceTokenId": 0,
+  "OldDeviceToken": "string",
+  "NewDeviceToken": "string",
+  "ClientEnvironment": "string",
+  "Device": "string",
+  "IsDeleted": true,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "ModifiedDate": "2019-08-24T14:15:22Z",
+  "ModifiedBy_FK": 0
 }
 
 ```
@@ -6276,16 +4694,16 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|c4WDeviceTokenId|integer(int32)|false|none|none|
-|oldDeviceToken|string¦null|false|none|none|
-|newDeviceToken|string¦null|false|none|none|
-|clientEnvironment|string¦null|false|none|none|
-|device|string¦null|false|none|none|
-|isDeleted|boolean|false|none|none|
-|createdDate|string(date-time)|false|none|none|
-|createdBy_FK|integer(int32)|false|none|none|
-|modifiedDate|string(date-time)¦null|false|none|none|
-|modifiedBy_FK|integer(int32)¦null|false|none|none|
+|C4WDeviceTokenId|integer(int32)|false|none|none|
+|OldDeviceToken|string¦null|false|none|none|
+|NewDeviceToken|string¦null|false|none|none|
+|ClientEnvironment|string¦null|false|none|none|
+|Device|string¦null|false|none|none|
+|IsDeleted|boolean|false|none|none|
+|CreatedDate|string(date-time)|false|none|none|
+|CreatedBy_FK|integer(int32)|false|none|none|
+|ModifiedDate|string(date-time)¦null|false|none|none|
+|ModifiedBy_FK|integer(int32)¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesC4WDeviceTokenDtosGetC4WDeviceTokenByOldDeviceTokenDto">C4WX1APIFeaturesC4WDeviceTokenDtosGetC4WDeviceTokenByOldDeviceTokenDto</h2>
 <!-- backwards compatibility -->
@@ -6312,11 +4730,11 @@ and
 
 ```json
 {
-  "oldDeviceToken": "Old Token",
-  "newDeviceToken": "New Token",
-  "clientEnvironment": "test env",
-  "device": "Iphone",
-  "userId": 1
+  "OldDeviceToken": "Old Token",
+  "NewDeviceToken": "New Token",
+  "ClientEnvironment": "test env",
+  "Device": "Iphone",
+  "UserId": 1
 }
 
 ```
@@ -6325,11 +4743,11 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|oldDeviceToken|string¦null|false|none|none|
-|newDeviceToken|string¦null|false|none|none|
-|clientEnvironment|string¦null|false|none|none|
-|device|string¦null|false|none|none|
-|userId|integer(int32)|false|none|none|
+|OldDeviceToken|string¦null|false|none|none|
+|NewDeviceToken|string¦null|false|none|none|
+|ClientEnvironment|string¦null|false|none|none|
+|Device|string¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBranchDtosUpdateBranchDto">C4WX1APIFeaturesBranchDtosUpdateBranchDto</h2>
 <!-- backwards compatibility -->
@@ -6340,20 +4758,20 @@ and
 
 ```json
 {
-  "branchName": "BranchName",
-  "address1": "Address1",
-  "address2": "Address2",
-  "address3": "Address3",
-  "contact": "Contact",
-  "email": "test@test.com",
-  "status": "Active",
-  "currencyID_FK": 1,
-  "userId": 1,
-  "userDataList": [
+  "BranchName": "BranchName",
+  "Address1": "Address1",
+  "Address2": "Address2",
+  "Address3": "Address3",
+  "Contact": "Contact",
+  "Email": "test@test.com",
+  "Status": "Active",
+  "CurrencyID_FK": 1,
+  "UserId": 1,
+  "UserDataList": [
     {
-      "userId": 1,
-      "firstName": null,
-      "lastName": null
+      "UserId": 1,
+      "FirstName": null,
+      "LastName": null
     }
   ]
 }
@@ -6364,16 +4782,16 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|branchName|string|false|none|none|
-|address1|string¦null|false|none|none|
-|address2|string¦null|false|none|none|
-|address3|string¦null|false|none|none|
-|contact|string¦null|false|none|none|
-|email|string¦null|false|none|none|
-|status|string|false|none|none|
-|currencyID_FK|integer(int32)¦null|false|none|none|
-|userId|integer(int32)|false|none|none|
-|userDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
+|BranchName|string|false|none|none|
+|Address1|string¦null|false|none|none|
+|Address2|string¦null|false|none|none|
+|Address3|string¦null|false|none|none|
+|Contact|string¦null|false|none|none|
+|Email|string¦null|false|none|none|
+|Status|string|false|none|none|
+|CurrencyID_FK|integer(int32)¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
+|UserDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBranchDtosBranchUserDto">C4WX1APIFeaturesBranchDtosBranchUserDto</h2>
 <!-- backwards compatibility -->
@@ -6384,9 +4802,9 @@ and
 
 ```json
 {
-  "userId": 0,
-  "firstName": "string",
-  "lastName": "string"
+  "UserId": 0,
+  "FirstName": "string",
+  "LastName": "string"
 }
 
 ```
@@ -6395,9 +4813,9 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|userId|integer(int32)|false|none|none|
-|firstName|string|false|none|none|
-|lastName|string|false|none|none|
+|UserId|integer(int32)|false|none|none|
+|FirstName|string|false|none|none|
+|LastName|string|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBranchDtosBranchDto">C4WX1APIFeaturesBranchDtosBranchDto</h2>
 <!-- backwards compatibility -->
@@ -6408,23 +4826,23 @@ and
 
 ```json
 {
-  "branchID": 0,
-  "branchName": "string",
-  "address1": "string",
-  "address2": "string",
-  "address3": "string",
-  "contact": "string",
-  "email": "string",
-  "status": "string",
-  "isSystemUsed": true,
-  "currencyID_FK": 0,
-  "currencyName": "string",
-  "canDelete": true,
-  "userDataList": [
+  "BranchID": 0,
+  "BranchName": "string",
+  "Address1": "string",
+  "Address2": "string",
+  "Address3": "string",
+  "Contact": "string",
+  "Email": "string",
+  "Status": "string",
+  "IsSystemUsed": true,
+  "CurrencyID_FK": 0,
+  "CurrencyName": "string",
+  "CanDelete": true,
+  "UserDataList": [
     {
-      "userId": 0,
-      "firstName": "string",
-      "lastName": "string"
+      "UserId": 0,
+      "FirstName": "string",
+      "LastName": "string"
     }
   ]
 }
@@ -6435,19 +4853,19 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|branchID|integer(int32)|false|none|none|
-|branchName|string|false|none|none|
-|address1|string¦null|false|none|none|
-|address2|string¦null|false|none|none|
-|address3|string¦null|false|none|none|
-|contact|string¦null|false|none|none|
-|email|string¦null|false|none|none|
-|status|string|false|none|none|
-|isSystemUsed|boolean|false|none|none|
-|currencyID_FK|integer(int32)¦null|false|none|none|
-|currencyName|string|false|none|none|
-|canDelete|boolean|false|none|none|
-|userDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
+|BranchID|integer(int32)|false|none|none|
+|BranchName|string|false|none|none|
+|Address1|string¦null|false|none|none|
+|Address2|string¦null|false|none|none|
+|Address3|string¦null|false|none|none|
+|Contact|string¦null|false|none|none|
+|Email|string¦null|false|none|none|
+|Status|string|false|none|none|
+|IsSystemUsed|boolean|false|none|none|
+|CurrencyID_FK|integer(int32)¦null|false|none|none|
+|CurrencyName|string|false|none|none|
+|CanDelete|boolean|false|none|none|
+|UserDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBranchDtosDeleteBranchDto">C4WX1APIFeaturesBranchDtosDeleteBranchDto</h2>
 <!-- backwards compatibility -->
@@ -6458,7 +4876,7 @@ and
 
 ```json
 {
-  "userId": 1
+  "UserId": 1
 }
 
 ```
@@ -6467,7 +4885,7 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|userId|integer(int32)|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBranchDtosCreateBranchDto">C4WX1APIFeaturesBranchDtosCreateBranchDto</h2>
 <!-- backwards compatibility -->
@@ -6478,21 +4896,21 @@ and
 
 ```json
 {
-  "branchID": 0,
-  "branchName": "BranchName",
-  "address1": "Address1",
-  "address2": "Address2",
-  "address3": "Address3",
-  "contact": "Contact",
-  "email": "test@test.com",
-  "status": "Active",
-  "currencyID_FK": 1,
-  "userId": 1,
-  "userDataList": [
+  "BranchID": 0,
+  "BranchName": "BranchName",
+  "Address1": "Address1",
+  "Address2": "Address2",
+  "Address3": "Address3",
+  "Contact": "Contact",
+  "Email": "test@test.com",
+  "Status": "Active",
+  "CurrencyID_FK": 1,
+  "UserId": 1,
+  "UserDataList": [
     {
-      "userId": 1,
-      "firstName": null,
-      "lastName": null
+      "UserId": 1,
+      "FirstName": null,
+      "LastName": null
     }
   ]
 }
@@ -6503,17 +4921,17 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|branchID|integer(int32)|false|none|none|
-|branchName|string|false|none|none|
-|address1|string¦null|false|none|none|
-|address2|string¦null|false|none|none|
-|address3|string¦null|false|none|none|
-|contact|string¦null|false|none|none|
-|email|string¦null|false|none|none|
-|status|string|false|none|none|
-|currencyID_FK|integer(int32)¦null|false|none|none|
-|userId|integer(int32)|false|none|none|
-|userDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
+|BranchID|integer(int32)|false|none|none|
+|BranchName|string|false|none|none|
+|Address1|string¦null|false|none|none|
+|Address2|string¦null|false|none|none|
+|Address3|string¦null|false|none|none|
+|Contact|string¦null|false|none|none|
+|Email|string¦null|false|none|none|
+|Status|string|false|none|none|
+|CurrencyID_FK|integer(int32)¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
+|UserDataList|[[C4WX1APIFeaturesBranchDtosBranchUserDto](#schemac4wx1apifeaturesbranchdtosbranchuserdto)]|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosUpdateBillingProposalDto">C4WX1APIFeaturesBillingProposalDtosUpdateBillingProposalDto</h2>
 <!-- backwards compatibility -->
@@ -6524,36 +4942,36 @@ and
 
 ```json
 {
-  "patientID_FK": 1,
-  "title": "Title",
-  "sendEmail": true,
-  "emailPatient": true,
-  "emailTo": "test-to@gmail.com",
-  "emailCC": "test-cc@gmail.com",
-  "emailBCC": "test-bcc@gmail.com",
-  "currencyID_FK": 1,
-  "status": "Active",
-  "groupNumber": "1",
-  "version": 1,
-  "proposalType": "ProposalType",
-  "userId": 1,
-  "serviceList": [
+  "PatientID_FK": 1,
+  "Title": "Title",
+  "SendEmail": true,
+  "EmailPatient": true,
+  "EmailTo": "test-to@gmail.com",
+  "EmailCC": "test-cc@gmail.com",
+  "EmailBCC": "test-bcc@gmail.com",
+  "CurrencyID_FK": 1,
+  "Status": "Active",
+  "GroupNumber": "1",
+  "Version": 1,
+  "ProposalType": "ProposalType",
+  "UserId": 1,
+  "ServiceList": [
     {
-      "billingInvoiceServiceID": 0,
-      "billingProposalID_FK": 0,
-      "serviceID_FK": 1,
-      "categoryId": 0,
-      "title": null,
-      "startDate": "2025-02-21T20:43:16.8101995+08:00",
-      "endDate": "2025-02-21T20:43:16.8124593+08:00",
-      "unitCost": 0,
-      "duration1": "Duration1",
-      "duration2": "Duration2",
-      "visit": 1,
-      "session": 0,
-      "discount": 0,
-      "serviceDescription": "ServiceDescription",
-      "categoryName": null
+      "BillingInvoiceServiceID": 0,
+      "BillingProposalID_FK": 0,
+      "ServiceID_FK": 1,
+      "CategoryId": 0,
+      "Title": null,
+      "StartDate": "2025-02-27T23:51:34.5331158+08:00",
+      "EndDate": "2025-02-27T23:51:34.5365272+08:00",
+      "UnitCost": 0,
+      "Duration1": "Duration1",
+      "Duration2": "Duration2",
+      "Visit": 1,
+      "Session": 0,
+      "Discount": 0,
+      "ServiceDescription": "ServiceDescription",
+      "CategoryName": null
     }
   ]
 }
@@ -6564,20 +4982,20 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|patientID_FK|integer(int32)|false|none|none|
-|title|string|false|none|none|
-|sendEmail|boolean¦null|false|none|none|
-|emailPatient|boolean¦null|false|none|none|
-|emailTo|string¦null|false|none|none|
-|emailCC|string¦null|false|none|none|
-|emailBCC|string¦null|false|none|none|
-|currencyID_FK|integer(int32)|false|none|none|
-|status|string|false|none|none|
-|groupNumber|string|false|none|none|
-|version|integer|false|none|none|
-|proposalType|string|false|none|none|
-|userId|integer(int32)|false|none|none|
-|serviceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
+|PatientID_FK|integer(int32)|false|none|none|
+|Title|string|false|none|none|
+|SendEmail|boolean¦null|false|none|none|
+|EmailPatient|boolean¦null|false|none|none|
+|EmailTo|string¦null|false|none|none|
+|EmailCC|string¦null|false|none|none|
+|EmailBCC|string¦null|false|none|none|
+|CurrencyID_FK|integer(int32)|false|none|none|
+|Status|string|false|none|none|
+|GroupNumber|string|false|none|none|
+|Version|integer|false|none|none|
+|ProposalType|string|false|none|none|
+|UserId|integer(int32)|false|none|none|
+|ServiceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto">C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto</h2>
 <!-- backwards compatibility -->
@@ -6588,21 +5006,21 @@ and
 
 ```json
 {
-  "billingInvoiceServiceID": 0,
-  "billingProposalID_FK": 0,
-  "serviceID_FK": 0,
-  "categoryId": 0,
-  "title": "string",
-  "startDate": "2019-08-24T14:15:22Z",
-  "endDate": "2019-08-24T14:15:22Z",
-  "unitCost": 0,
-  "duration1": "string",
-  "duration2": "string",
-  "visit": 0,
-  "session": 0,
-  "discount": 0,
-  "serviceDescription": "string",
-  "categoryName": "string"
+  "BillingInvoiceServiceID": 0,
+  "BillingProposalID_FK": 0,
+  "ServiceID_FK": 0,
+  "CategoryId": 0,
+  "Title": "string",
+  "StartDate": "2019-08-24T14:15:22Z",
+  "EndDate": "2019-08-24T14:15:22Z",
+  "UnitCost": 0,
+  "Duration1": "string",
+  "Duration2": "string",
+  "Visit": 0,
+  "Session": 0,
+  "Discount": 0,
+  "ServiceDescription": "string",
+  "CategoryName": "string"
 }
 
 ```
@@ -6611,21 +5029,21 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|billingInvoiceServiceID|integer(int32)|false|none|none|
-|billingProposalID_FK|integer(int32)|false|none|none|
-|serviceID_FK|integer(int32)|false|none|none|
-|categoryId|integer(int32)|false|none|none|
-|title|string|false|none|none|
-|startDate|string(date-time)|false|none|none|
-|endDate|string(date-time)|false|none|none|
-|unitCost|number(decimal)|false|none|none|
-|duration1|string¦null|false|none|none|
-|duration2|string¦null|false|none|none|
-|visit|integer(int32)|false|none|none|
-|session|integer(int32)|false|none|none|
-|discount|number(decimal)|false|none|none|
-|serviceDescription|string¦null|false|none|none|
-|categoryName|string|false|none|none|
+|BillingInvoiceServiceID|integer(int32)|false|none|none|
+|BillingProposalID_FK|integer(int32)|false|none|none|
+|ServiceID_FK|integer(int32)|false|none|none|
+|CategoryId|integer(int32)|false|none|none|
+|Title|string|false|none|none|
+|StartDate|string(date-time)|false|none|none|
+|EndDate|string(date-time)|false|none|none|
+|UnitCost|number(decimal)|false|none|none|
+|Duration1|string¦null|false|none|none|
+|Duration2|string¦null|false|none|none|
+|Visit|integer(int32)|false|none|none|
+|Session|integer(int32)|false|none|none|
+|Discount|number(decimal)|false|none|none|
+|ServiceDescription|string¦null|false|none|none|
+|CategoryName|string|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosUpdateBillingProposalStatusDto">C4WX1APIFeaturesBillingProposalDtosUpdateBillingProposalStatusDto</h2>
 <!-- backwards compatibility -->
@@ -6636,8 +5054,8 @@ and
 
 ```json
 {
-  "userId": 1,
-  "status": "Success"
+  "UserId": 1,
+  "Status": "Success"
 }
 
 ```
@@ -6646,8 +5064,8 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|userId|integer(int32)|false|none|none|
-|status|string|false|none|none|
+|UserId|integer(int32)|false|none|none|
+|Status|string|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosBillingProposalDto">C4WX1APIFeaturesBillingProposalDtosBillingProposalDto</h2>
 <!-- backwards compatibility -->
@@ -6658,71 +5076,71 @@ and
 
 ```json
 {
-  "billingProposalID": 0,
-  "patientID_FK": 0,
-  "proposalNumber": "string",
-  "title": "string",
-  "sendEmail": true,
-  "emailPatient": true,
-  "emailTo": "string",
-  "emailCC": "string",
-  "emailBCC": "string",
-  "currencyID_FK": 0,
-  "currencyCode": "string",
-  "totalCost": 0,
-  "status": "string",
-  "groupNumber": "string",
-  "version": 0,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "isDeleted": true,
-  "proposalType": "string",
-  "patientData": {
-    "patientID": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "mailingAddress1": "string",
-    "mailingAddress2": "string",
-    "mailingAddress3": "string",
-    "mailingPostalCode": "string",
-    "profile": {
-      "email": "string"
+  "BillingProposalID": 0,
+  "PatientID_FK": 0,
+  "ProposalNumber": "string",
+  "Title": "string",
+  "SendEmail": true,
+  "EmailPatient": true,
+  "EmailTo": "string",
+  "EmailCC": "string",
+  "EmailBCC": "string",
+  "CurrencyID_FK": 0,
+  "CurrencyCode": "string",
+  "TotalCost": 0,
+  "Status": "string",
+  "GroupNumber": "string",
+  "Version": 0,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "ModifiedDate": "2019-08-24T14:15:22Z",
+  "ModifiedBy_FK": 0,
+  "IsDeleted": true,
+  "ProposalType": "string",
+  "PatientData": {
+    "PatientID": 0,
+    "FirstName": "string",
+    "LastName": "string",
+    "Photo": "string",
+    "MailingAddress1": "string",
+    "MailingAddress2": "string",
+    "MailingAddress3": "string",
+    "MailingPostalCode": "string",
+    "Profile": {
+      "Email": "string"
     }
   },
-  "createdByData": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "email": "string"
+  "CreatedByData": {
+    "UserId": 0,
+    "FirstName": "string",
+    "LastName": "string",
+    "Photo": "string",
+    "Email": "string"
   },
-  "modifiedByData": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "email": "string"
+  "ModifiedByData": {
+    "UserId": 0,
+    "FirstName": "string",
+    "LastName": "string",
+    "Photo": "string",
+    "Email": "string"
   },
-  "serviceList": [
+  "ServiceList": [
     {
-      "billingInvoiceServiceID": 0,
-      "billingProposalID_FK": 0,
-      "serviceID_FK": 0,
-      "categoryId": 0,
-      "title": "string",
-      "startDate": "2019-08-24T14:15:22Z",
-      "endDate": "2019-08-24T14:15:22Z",
-      "unitCost": 0,
-      "duration1": "string",
-      "duration2": "string",
-      "visit": 0,
-      "session": 0,
-      "discount": 0,
-      "serviceDescription": "string",
-      "categoryName": "string"
+      "BillingInvoiceServiceID": 0,
+      "BillingProposalID_FK": 0,
+      "ServiceID_FK": 0,
+      "CategoryId": 0,
+      "Title": "string",
+      "StartDate": "2019-08-24T14:15:22Z",
+      "EndDate": "2019-08-24T14:15:22Z",
+      "UnitCost": 0,
+      "Duration1": "string",
+      "Duration2": "string",
+      "Visit": 0,
+      "Session": 0,
+      "Discount": 0,
+      "ServiceDescription": "string",
+      "CategoryName": "string"
     }
   ]
 }
@@ -6733,31 +5151,31 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|billingProposalID|integer(int32)|false|none|none|
-|patientID_FK|integer(int32)|false|none|none|
-|proposalNumber|string|false|none|none|
-|title|string|false|none|none|
-|sendEmail|boolean¦null|false|none|none|
-|emailPatient|boolean¦null|false|none|none|
-|emailTo|string¦null|false|none|none|
-|emailCC|string¦null|false|none|none|
-|emailBCC|string¦null|false|none|none|
-|currencyID_FK|integer(int32)|false|none|none|
-|currencyCode|string|false|none|none|
-|totalCost|number(decimal)|false|none|none|
-|status|string|false|none|none|
-|groupNumber|string|false|none|none|
-|version|integer|false|none|none|
-|createdDate|string(date-time)|false|none|none|
-|createdBy_FK|integer(int32)|false|none|none|
-|modifiedDate|string(date-time)¦null|false|none|none|
-|modifiedBy_FK|integer(int32)¦null|false|none|none|
-|isDeleted|boolean|false|none|none|
-|proposalType|string|false|none|none|
-|patientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
-|createdByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
-|modifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
-|serviceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
+|BillingProposalID|integer(int32)|false|none|none|
+|PatientID_FK|integer(int32)|false|none|none|
+|ProposalNumber|string|false|none|none|
+|Title|string|false|none|none|
+|SendEmail|boolean¦null|false|none|none|
+|EmailPatient|boolean¦null|false|none|none|
+|EmailTo|string¦null|false|none|none|
+|EmailCC|string¦null|false|none|none|
+|EmailBCC|string¦null|false|none|none|
+|CurrencyID_FK|integer(int32)|false|none|none|
+|CurrencyCode|string|false|none|none|
+|TotalCost|number(decimal)|false|none|none|
+|Status|string|false|none|none|
+|GroupNumber|string|false|none|none|
+|Version|integer|false|none|none|
+|CreatedDate|string(date-time)|false|none|none|
+|CreatedBy_FK|integer(int32)|false|none|none|
+|ModifiedDate|string(date-time)¦null|false|none|none|
+|ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|IsDeleted|boolean|false|none|none|
+|ProposalType|string|false|none|none|
+|PatientData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientdto)|false|none|none|
+|CreatedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)|false|none|none|
+|ModifiedByData|[C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposaluserdto)¦null|false|none|none|
+|ServiceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto">C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientDto</h2>
 <!-- backwards compatibility -->
@@ -6768,16 +5186,16 @@ and
 
 ```json
 {
-  "patientID": 0,
-  "firstName": "string",
-  "lastName": "string",
-  "photo": "string",
-  "mailingAddress1": "string",
-  "mailingAddress2": "string",
-  "mailingAddress3": "string",
-  "mailingPostalCode": "string",
-  "profile": {
-    "email": "string"
+  "PatientID": 0,
+  "FirstName": "string",
+  "LastName": "string",
+  "Photo": "string",
+  "MailingAddress1": "string",
+  "MailingAddress2": "string",
+  "MailingAddress3": "string",
+  "MailingPostalCode": "string",
+  "Profile": {
+    "Email": "string"
   }
 }
 
@@ -6787,15 +5205,15 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|patientID|integer(int32)|false|none|none|
-|firstName|string|false|none|none|
-|lastName|string|false|none|none|
-|photo|string¦null|false|none|none|
-|mailingAddress1|string¦null|false|none|none|
-|mailingAddress2|string¦null|false|none|none|
-|mailingAddress3|string¦null|false|none|none|
-|mailingPostalCode|string¦null|false|none|none|
-|profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
+|PatientID|integer(int32)|false|none|none|
+|FirstName|string|false|none|none|
+|LastName|string|false|none|none|
+|Photo|string¦null|false|none|none|
+|MailingAddress1|string¦null|false|none|none|
+|MailingAddress2|string¦null|false|none|none|
+|MailingAddress3|string¦null|false|none|none|
+|MailingPostalCode|string¦null|false|none|none|
+|Profile|[C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalpatientprofiledto)¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto">C4WX1APIFeaturesBillingProposalDtosBillingProposalPatientProfileDto</h2>
 <!-- backwards compatibility -->
@@ -6806,7 +5224,7 @@ and
 
 ```json
 {
-  "email": "string"
+  "Email": "string"
 }
 
 ```
@@ -6815,7 +5233,7 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|email|string¦null|false|none|none|
+|Email|string¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto">C4WX1APIFeaturesBillingProposalDtosBillingProposalUserDto</h2>
 <!-- backwards compatibility -->
@@ -6826,11 +5244,11 @@ and
 
 ```json
 {
-  "userId": 0,
-  "firstName": "string",
-  "lastName": "string",
-  "photo": "string",
-  "email": "string"
+  "UserId": 0,
+  "FirstName": "string",
+  "LastName": "string",
+  "Photo": "string",
+  "Email": "string"
 }
 
 ```
@@ -6839,11 +5257,11 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|userId|integer(int32)|false|none|none|
-|firstName|string|false|none|none|
-|lastName|string|false|none|none|
-|photo|string¦null|false|none|none|
-|email|string|false|none|none|
+|UserId|integer(int32)|false|none|none|
+|FirstName|string|false|none|none|
+|LastName|string|false|none|none|
+|Photo|string¦null|false|none|none|
+|Email|string|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosGetActiveBillingProposalListDto">C4WX1APIFeaturesBillingProposalDtosGetActiveBillingProposalListDto</h2>
 <!-- backwards compatibility -->
@@ -6960,7 +5378,7 @@ and
 
 ```json
 {
-  "userId": 1
+  "UserId": 1
 }
 
 ```
@@ -6969,7 +5387,7 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|userId|integer(int32)|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesBillingProposalDtosCreateBillingProposalDto">C4WX1APIFeaturesBillingProposalDtosCreateBillingProposalDto</h2>
 <!-- backwards compatibility -->
@@ -6980,36 +5398,36 @@ and
 
 ```json
 {
-  "patientID_FK": 1,
-  "title": "Title",
-  "sendEmail": true,
-  "emailPatient": true,
-  "emailTo": "test-to@gmail.com",
-  "emailCC": "test-cc@gmail.com",
-  "emailBCC": "test-bcc@gmail.com",
-  "currencyID_FK": 1,
-  "status": "Active",
-  "groupNumber": "1",
-  "version": 1,
-  "proposalType": "ProposalType",
-  "userId": 1,
-  "serviceList": [
+  "PatientID_FK": 1,
+  "Title": "Title",
+  "SendEmail": true,
+  "EmailPatient": true,
+  "EmailTo": "test-to@gmail.com",
+  "EmailCC": "test-cc@gmail.com",
+  "EmailBCC": "test-bcc@gmail.com",
+  "CurrencyID_FK": 1,
+  "Status": "Active",
+  "GroupNumber": "1",
+  "Version": 1,
+  "ProposalType": "ProposalType",
+  "UserId": 1,
+  "ServiceList": [
     {
-      "billingInvoiceServiceID": 0,
-      "billingProposalID_FK": 0,
-      "serviceID_FK": 1,
-      "categoryId": 0,
-      "title": null,
-      "startDate": "2025-02-21T20:43:16.8364914+08:00",
-      "endDate": "2025-02-21T20:43:16.8364935+08:00",
-      "unitCost": 0,
-      "duration1": "Duration1",
-      "duration2": "Duration2",
-      "visit": 1,
-      "session": 0,
-      "discount": 0,
-      "serviceDescription": "ServiceDescription",
-      "categoryName": null
+      "BillingInvoiceServiceID": 0,
+      "BillingProposalID_FK": 0,
+      "ServiceID_FK": 1,
+      "CategoryId": 0,
+      "Title": null,
+      "StartDate": "2025-02-27T23:51:34.5585733+08:00",
+      "EndDate": "2025-02-27T23:51:34.558576+08:00",
+      "UnitCost": 0,
+      "Duration1": "Duration1",
+      "Duration2": "Duration2",
+      "Visit": 1,
+      "Session": 0,
+      "Discount": 0,
+      "ServiceDescription": "ServiceDescription",
+      "CategoryName": null
     }
   ]
 }
@@ -7020,531 +5438,20 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|patientID_FK|integer(int32)|false|none|none|
-|title|string|false|none|none|
-|sendEmail|boolean¦null|false|none|none|
-|emailPatient|boolean¦null|false|none|none|
-|emailTo|string¦null|false|none|none|
-|emailCC|string¦null|false|none|none|
-|emailBCC|string¦null|false|none|none|
-|currencyID_FK|integer(int32)|false|none|none|
-|status|string|false|none|none|
-|groupNumber|string|false|none|none|
-|version|integer|false|none|none|
-|proposalType|string|false|none|none|
-|userId|integer(int32)|false|none|none|
-|serviceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceDto">C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosbillinginvoicedto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosbillinginvoicedto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosbillinginvoicedto"></a>
-
-```json
-{
-  "billingInvoiceID": 0,
-  "patientID_FK": 0,
-  "invoiceNumber": "string",
-  "invoiceDueDate": "2019-08-24T14:15:22Z",
-  "caseNumber": "string",
-  "initialCareAssessmentID_FK": 0,
-  "careReportID_FK": 0,
-  "consumable": true,
-  "sendEmail": true,
-  "emailPatient": true,
-  "emailTo": "string",
-  "emailCC": "string",
-  "emailBCC": "string",
-  "currencyID_FK": 0,
-  "totalCost": 0,
-  "status": "string",
-  "groupNumber": "string",
-  "version": 0,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "isDeleted": true,
-  "invoiceDate": "2019-08-24T14:15:22Z",
-  "currencyCode": "string",
-  "patientData": {
-    "patientID": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "caseID": "string",
-    "profile": {
-      "email": "string",
-      "billingAddress1": "string",
-      "billingAddress2": "string",
-      "billingAddress3": "string",
-      "billingPostalCode": "string"
-    }
-  },
-  "createdByData": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "email": "string"
-  },
-  "modifiedByData": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string",
-    "email": "string"
-  },
-  "serviceList": [
-    {
-      "billingInvoiceServiceID": 0,
-      "proposalID_FK": 0,
-      "serviceID_FK": 0,
-      "unitCost": 0,
-      "session": 0,
-      "discount": 0,
-      "title": "string",
-      "categoryName": "string",
-      "billingProposalData": {
-        "billingProposalID": 0,
-        "proposalNumber": "string",
-        "patientID_FK": 0,
-        "title": "string",
-        "proposalType": "string"
-      }
-    }
-  ],
-  "consumableList": [
-    {
-      "billingInvoiceConsumableID": 0,
-      "itemID_FK": 0,
-      "unitPrice": 0,
-      "quantity": 0,
-      "billingInvoiceItemDto": {
-        "itemID": 0,
-        "categoryID_FK": 0,
-        "categoryName": "string",
-        "itemName": "string"
-      }
-    }
-  ]
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|billingInvoiceID|integer(int32)|false|none|none|
-|patientID_FK|integer(int32)|false|none|none|
-|invoiceNumber|string|false|none|none|
-|invoiceDueDate|string(date-time)¦null|false|none|none|
-|caseNumber|string¦null|false|none|none|
-|initialCareAssessmentID_FK|integer(int32)¦null|false|none|none|
-|careReportID_FK|integer(int32)¦null|false|none|none|
-|consumable|boolean¦null|false|none|none|
-|sendEmail|boolean¦null|false|none|none|
-|emailPatient|boolean¦null|false|none|none|
-|emailTo|string¦null|false|none|none|
-|emailCC|string¦null|false|none|none|
-|emailBCC|string¦null|false|none|none|
-|currencyID_FK|integer(int32)|false|none|none|
-|totalCost|number(decimal)|false|none|none|
-|status|string|false|none|none|
-|groupNumber|string|false|none|none|
-|version|integer|false|none|none|
-|createdDate|string(date-time)|false|none|none|
-|createdBy_FK|integer(int32)|false|none|none|
-|modifiedDate|string(date-time)¦null|false|none|none|
-|modifiedBy_FK|integer(int32)¦null|false|none|none|
-|isDeleted|boolean|false|none|none|
-|invoiceDate|string(date-time)¦null|false|none|none|
-|currencyCode|string|false|none|none|
-|patientData|[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoicepatientdto)|false|none|none|
-|createdByData|[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceUserDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceuserdto)|false|none|none|
-|modifiedByData|[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceUserDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceuserdto)¦null|false|none|none|
-|serviceList|[[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceServiceDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceservicedto)]|false|none|none|
-|consumableList|[[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceConsumableDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceconsumabledto)]|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientDto">C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosbillinginvoicepatientdto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosbillinginvoicepatientdto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosbillinginvoicepatientdto"></a>
-
-```json
-{
-  "patientID": 0,
-  "firstName": "string",
-  "lastName": "string",
-  "photo": "string",
-  "caseID": "string",
-  "profile": {
-    "email": "string",
-    "billingAddress1": "string",
-    "billingAddress2": "string",
-    "billingAddress3": "string",
-    "billingPostalCode": "string"
-  }
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|patientID|integer(int32)|false|none|none|
-|firstName|string|false|none|none|
-|lastName|string|false|none|none|
-|photo|string¦null|false|none|none|
-|caseID|string¦null|false|none|none|
-|profile|[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientProfileDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoicepatientprofiledto)¦null|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientProfileDto">C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientProfileDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosbillinginvoicepatientprofiledto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoicePatientProfileDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosbillinginvoicepatientprofiledto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosbillinginvoicepatientprofiledto"></a>
-
-```json
-{
-  "email": "string",
-  "billingAddress1": "string",
-  "billingAddress2": "string",
-  "billingAddress3": "string",
-  "billingPostalCode": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|email|string¦null|false|none|none|
-|billingAddress1|string¦null|false|none|none|
-|billingAddress2|string¦null|false|none|none|
-|billingAddress3|string¦null|false|none|none|
-|billingPostalCode|string¦null|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceUserDto">C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceUserDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceuserdto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceUserDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosbillinginvoiceuserdto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosbillinginvoiceuserdto"></a>
-
-```json
-{
-  "userId": 0,
-  "firstName": "string",
-  "lastName": "string",
-  "photo": "string",
-  "email": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|userId|integer(int32)|false|none|none|
-|firstName|string|false|none|none|
-|lastName|string|false|none|none|
-|photo|string¦null|false|none|none|
-|email|string|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceServiceDto">C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceServiceDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceservicedto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceServiceDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosbillinginvoiceservicedto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosbillinginvoiceservicedto"></a>
-
-```json
-{
-  "billingInvoiceServiceID": 0,
-  "proposalID_FK": 0,
-  "serviceID_FK": 0,
-  "unitCost": 0,
-  "session": 0,
-  "discount": 0,
-  "title": "string",
-  "categoryName": "string",
-  "billingProposalData": {
-    "billingProposalID": 0,
-    "proposalNumber": "string",
-    "patientID_FK": 0,
-    "title": "string",
-    "proposalType": "string"
-  }
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|billingInvoiceServiceID|integer(int32)|false|none|none|
-|proposalID_FK|integer(int32)¦null|false|none|none|
-|serviceID_FK|integer(int32)|false|none|none|
-|unitCost|number(decimal)|false|none|none|
-|session|integer(int32)|false|none|none|
-|discount|number(decimal)|false|none|none|
-|title|string|false|none|none|
-|categoryName|string|false|none|none|
-|billingProposalData|[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceProposalDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceproposaldto)¦null|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceProposalDto">C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceProposalDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceproposaldto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceProposalDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosbillinginvoiceproposaldto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosbillinginvoiceproposaldto"></a>
-
-```json
-{
-  "billingProposalID": 0,
-  "proposalNumber": "string",
-  "patientID_FK": 0,
-  "title": "string",
-  "proposalType": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|billingProposalID|integer(int32)|false|none|none|
-|proposalNumber|string|false|none|none|
-|patientID_FK|integer(int32)|false|none|none|
-|title|string|false|none|none|
-|proposalType|string|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceConsumableDto">C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceConsumableDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceconsumabledto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceConsumableDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosbillinginvoiceconsumabledto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosbillinginvoiceconsumabledto"></a>
-
-```json
-{
-  "billingInvoiceConsumableID": 0,
-  "itemID_FK": 0,
-  "unitPrice": 0,
-  "quantity": 0,
-  "billingInvoiceItemDto": {
-    "itemID": 0,
-    "categoryID_FK": 0,
-    "categoryName": "string",
-    "itemName": "string"
-  }
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|billingInvoiceConsumableID|integer(int32)|false|none|none|
-|itemID_FK|integer(int32)|false|none|none|
-|unitPrice|number(decimal)|false|none|none|
-|quantity|integer(int32)|false|none|none|
-|billingInvoiceItemDto|[C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceItemDto](#schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceitemdto)|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceItemDto">C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceItemDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosbillinginvoiceitemdto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosBillingInvoiceItemDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosbillinginvoiceitemdto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosbillinginvoiceitemdto"></a>
-
-```json
-{
-  "itemID": 0,
-  "categoryID_FK": 0,
-  "categoryName": "string",
-  "itemName": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|itemID|integer(int32)|false|none|none|
-|categoryID_FK|integer(int32)|false|none|none|
-|categoryName|string|false|none|none|
-|itemName|string|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesBillingInvoiceDtosGetBillingInvoiceDto">C4WX1APIFeaturesBillingInvoiceDtosGetBillingInvoiceDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesbillinginvoicedtosgetbillinginvoicedto"></a>
-<a id="schema_C4WX1APIFeaturesBillingInvoiceDtosGetBillingInvoiceDto"></a>
-<a id="tocSc4wx1apifeaturesbillinginvoicedtosgetbillinginvoicedto"></a>
-<a id="tocsc4wx1apifeaturesbillinginvoicedtosgetbillinginvoicedto"></a>
-
-```json
-{}
-
-```
-
-### Properties
-
-allOf
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[C4WX1APIFeaturesSharedDtosGetByIdDto](#schemac4wx1apifeaturesshareddtosgetbyiddto)|false|none|none|
-
-and
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|object|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryDto">C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesauditenquirydtosauditenquirydto"></a>
-<a id="schema_C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryDto"></a>
-<a id="tocSc4wx1apifeaturesauditenquirydtosauditenquirydto"></a>
-<a id="tocsc4wx1apifeaturesauditenquirydtosauditenquirydto"></a>
-
-```json
-{
-  "auditAction": "string",
-  "actionTime": "2019-08-24T14:15:22Z",
-  "enquiryID": 0,
-  "careManagerAssignedID_FK": 0,
-  "enquirySourceID_FK": 0,
-  "firstName": "string",
-  "lastName": "string",
-  "dateOfBirth": "2019-08-24T14:15:22Z",
-  "raceID_FK": 0,
-  "identificationNumber": "string",
-  "preferredLanguageID_FK": 0,
-  "genderID_FK": 0,
-  "patientAddress1": "string",
-  "patientAddress2": "string",
-  "patientAddress3": "string",
-  "postalCode": "string",
-  "nameOfCaller": "string",
-  "contactNumberOfCaller": "string",
-  "emailOfCaller": "string",
-  "preferredAppointmentDateTime": "2019-08-24T14:15:22Z",
-  "medicalHistory": "string",
-  "caregiverAtHomeID_FK": 0,
-  "servicesRequiredID_FK": 0,
-  "status": "string",
-  "remarks": "string",
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "isDeleted": true,
-  "otherRace": "string",
-  "otherPreferredLanguage": "string",
-  "userOrganizationID_FK": 0,
-  "caseNumber": "string",
-  "note": "string",
-  "orderID": "string",
-  "modifiedBy": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string"
-  },
-  "createdBy": {
-    "userId": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "photo": "string"
-  }
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|auditAction|string|false|none|none|
-|actionTime|string(date-time)|false|none|none|
-|enquiryID|integer(int32)|false|none|none|
-|careManagerAssignedID_FK|integer(int32)¦null|false|none|none|
-|enquirySourceID_FK|integer(int32)¦null|false|none|none|
-|firstName|string¦null|false|none|none|
-|lastName|string¦null|false|none|none|
-|dateOfBirth|string(date-time)¦null|false|none|none|
-|raceID_FK|integer(int32)¦null|false|none|none|
-|identificationNumber|string¦null|false|none|none|
-|preferredLanguageID_FK|integer(int32)¦null|false|none|none|
-|genderID_FK|integer(int32)¦null|false|none|none|
-|patientAddress1|string¦null|false|none|none|
-|patientAddress2|string¦null|false|none|none|
-|patientAddress3|string¦null|false|none|none|
-|postalCode|string¦null|false|none|none|
-|nameOfCaller|string¦null|false|none|none|
-|contactNumberOfCaller|string¦null|false|none|none|
-|emailOfCaller|string¦null|false|none|none|
-|preferredAppointmentDateTime|string(date-time)¦null|false|none|none|
-|medicalHistory|string¦null|false|none|none|
-|caregiverAtHomeID_FK|integer(int32)¦null|false|none|none|
-|servicesRequiredID_FK|integer(int32)¦null|false|none|none|
-|status|string¦null|false|none|none|
-|remarks|string¦null|false|none|none|
-|createdDate|string(date-time)¦null|false|none|none|
-|createdBy_FK|integer(int32)¦null|false|none|none|
-|modifiedDate|string(date-time)¦null|false|none|none|
-|modifiedBy_FK|integer(int32)¦null|false|none|none|
-|isDeleted|boolean¦null|false|none|none|
-|otherRace|string¦null|false|none|none|
-|otherPreferredLanguage|string¦null|false|none|none|
-|userOrganizationID_FK|integer(int32)¦null|false|none|none|
-|caseNumber|string¦null|false|none|none|
-|note|string¦null|false|none|none|
-|orderID|string¦null|false|none|none|
-|modifiedBy|[C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryUserDto](#schemac4wx1apifeaturesauditenquirydtosauditenquiryuserdto)¦null|false|none|none|
-|createdBy|[C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryUserDto](#schemac4wx1apifeaturesauditenquirydtosauditenquiryuserdto)¦null|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryUserDto">C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryUserDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesauditenquirydtosauditenquiryuserdto"></a>
-<a id="schema_C4WX1APIFeaturesAuditEnquiryDtosAuditEnquiryUserDto"></a>
-<a id="tocSc4wx1apifeaturesauditenquirydtosauditenquiryuserdto"></a>
-<a id="tocsc4wx1apifeaturesauditenquirydtosauditenquiryuserdto"></a>
-
-```json
-{
-  "userId": 0,
-  "firstName": "string",
-  "lastName": "string",
-  "photo": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|userId|integer(int32)|false|none|none|
-|firstName|string|false|none|none|
-|lastName|string|false|none|none|
-|photo|string¦null|false|none|none|
+|PatientID_FK|integer(int32)|false|none|none|
+|Title|string|false|none|none|
+|SendEmail|boolean¦null|false|none|none|
+|EmailPatient|boolean¦null|false|none|none|
+|EmailTo|string¦null|false|none|none|
+|EmailCC|string¦null|false|none|none|
+|EmailBCC|string¦null|false|none|none|
+|CurrencyID_FK|integer(int32)|false|none|none|
+|Status|string|false|none|none|
+|GroupNumber|string|false|none|none|
+|Version|integer|false|none|none|
+|ProposalType|string|false|none|none|
+|UserId|integer(int32)|false|none|none|
+|ServiceList|[[C4WX1APIFeaturesBillingProposalDtosBillingProposalServiceDto](#schemac4wx1apifeaturesbillingproposaldtosbillingproposalservicedto)]|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesAPIAccessKeyDtosAPIAccessKeyDto">C4WX1APIFeaturesAPIAccessKeyDtosAPIAccessKeyDto</h2>
 <!-- backwards compatibility -->
@@ -7555,13 +5462,13 @@ and
 
 ```json
 {
-  "apiAccessKeyID": 0,
-  "tokenCode": "string",
-  "accessKey": "string",
-  "expiryDate": "2019-08-24T14:15:22Z",
-  "createdDate": "2019-08-24T14:15:22Z",
-  "updatedDate": "2019-08-24T14:15:22Z",
-  "userId_FK": 0
+  "APIAccessKeyID": 0,
+  "TokenCode": "string",
+  "AccessKey": "string",
+  "ExpiryDate": "2019-08-24T14:15:22Z",
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "UpdatedDate": "2019-08-24T14:15:22Z",
+  "UserId_FK": 0
 }
 
 ```
@@ -7570,13 +5477,13 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|apiAccessKeyID|integer(int32)|false|none|none|
-|tokenCode|string|false|none|none|
-|accessKey|string|false|none|none|
-|expiryDate|string(date-time)|false|none|none|
-|createdDate|string(date-time)|false|none|none|
-|updatedDate|string(date-time)¦null|false|none|none|
-|userId_FK|integer(int32)¦null|false|none|none|
+|APIAccessKeyID|integer(int32)|false|none|none|
+|TokenCode|string|false|none|none|
+|AccessKey|string|false|none|none|
+|ExpiryDate|string(date-time)|false|none|none|
+|CreatedDate|string(date-time)|false|none|none|
+|UpdatedDate|string(date-time)¦null|false|none|none|
+|UserId_FK|integer(int32)¦null|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesAPIAccessKeyDtosGetAPIAccessKeyDto">C4WX1APIFeaturesAPIAccessKeyDtosGetAPIAccessKeyDto</h2>
 <!-- backwards compatibility -->
@@ -7613,8 +5520,8 @@ and
 
 ```json
 {
-  "code": "string",
-  "userId": 0
+  "Code": "string",
+  "UserId": 0
 }
 
 ```
@@ -7623,8 +5530,8 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|code|string|false|none|none|
-|userId|integer(int32)|false|none|none|
+|Code|string|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesActivityDtosUpdateActivityDto">C4WX1APIFeaturesActivityDtosUpdateActivityDto</h2>
 <!-- backwards compatibility -->
@@ -7635,11 +5542,11 @@ and
 
 ```json
 {
-  "problemListID_FK": 1,
-  "diseaseID_FK": 1,
-  "activityDetail": "Activity Detail",
-  "diseaseSubInfoID_FK": 1,
-  "userId": 1
+  "ProblemListID_FK": 1,
+  "DiseaseID_FK": 1,
+  "ActivityDetail": "Activity Detail",
+  "DiseaseSubInfoID_FK": 1,
+  "UserId": 1
 }
 
 ```
@@ -7648,11 +5555,11 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|problemListID_FK|integer(int32)|false|none|none|
-|diseaseID_FK|integer(int32)|false|none|none|
-|activityDetail|string|false|none|none|
-|diseaseSubInfoID_FK|integer(int32)¦null|false|none|none|
-|userId|integer(int32)|false|none|none|
+|ProblemListID_FK|integer(int32)|false|none|none|
+|DiseaseID_FK|integer(int32)|false|none|none|
+|ActivityDetail|string|false|none|none|
+|DiseaseSubInfoID_FK|integer(int32)¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesActivityDtosActivityDto">C4WX1APIFeaturesActivityDtosActivityDto</h2>
 <!-- backwards compatibility -->
@@ -7663,17 +5570,17 @@ and
 
 ```json
 {
-  "activityID": 0,
-  "problemListID_FK": 0,
-  "diseaseID_FK": 0,
-  "activityDetail": "string",
-  "isDeleted": true,
-  "createdDate": "2019-08-24T14:15:22Z",
-  "createdBy_FK": 0,
-  "modifiedDate": "2019-08-24T14:15:22Z",
-  "modifiedBy_FK": 0,
-  "diseaseSubInfoID_FK": 0,
-  "canDelete": true
+  "ActivityID": 0,
+  "ProblemListID_FK": 0,
+  "DiseaseID_FK": 0,
+  "ActivityDetail": "string",
+  "IsDeleted": true,
+  "CreatedDate": "2019-08-24T14:15:22Z",
+  "CreatedBy_FK": 0,
+  "ModifiedDate": "2019-08-24T14:15:22Z",
+  "ModifiedBy_FK": 0,
+  "DiseaseSubInfoID_FK": 0,
+  "CanDelete": true
 }
 
 ```
@@ -7682,37 +5589,17 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|activityID|integer(int32)|false|none|none|
-|problemListID_FK|integer(int32)|false|none|none|
-|diseaseID_FK|integer(int32)|false|none|none|
-|activityDetail|string|false|none|none|
-|isDeleted|boolean|false|none|none|
-|createdDate|string(date-time)¦null|false|none|none|
-|createdBy_FK|integer(int32)¦null|false|none|none|
-|modifiedDate|string(date-time)¦null|false|none|none|
-|modifiedBy_FK|integer(int32)¦null|false|none|none|
-|diseaseSubInfoID_FK|integer(int32)¦null|false|none|none|
-|canDelete|boolean|false|none|none|
-
-<h2 id="tocS_C4WX1APIFeaturesActivityDtosDeleteActivityDto">C4WX1APIFeaturesActivityDtosDeleteActivityDto</h2>
-<!-- backwards compatibility -->
-<a id="schemac4wx1apifeaturesactivitydtosdeleteactivitydto"></a>
-<a id="schema_C4WX1APIFeaturesActivityDtosDeleteActivityDto"></a>
-<a id="tocSc4wx1apifeaturesactivitydtosdeleteactivitydto"></a>
-<a id="tocsc4wx1apifeaturesactivitydtosdeleteactivitydto"></a>
-
-```json
-{
-  "userID": 1
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|userID|integer(int32)|false|none|none|
+|ActivityID|integer(int32)|false|none|none|
+|ProblemListID_FK|integer(int32)|false|none|none|
+|DiseaseID_FK|integer(int32)|false|none|none|
+|ActivityDetail|string|false|none|none|
+|IsDeleted|boolean|false|none|none|
+|CreatedDate|string(date-time)¦null|false|none|none|
+|CreatedBy_FK|integer(int32)¦null|false|none|none|
+|ModifiedDate|string(date-time)¦null|false|none|none|
+|ModifiedBy_FK|integer(int32)¦null|false|none|none|
+|DiseaseSubInfoID_FK|integer(int32)¦null|false|none|none|
+|CanDelete|boolean|false|none|none|
 
 <h2 id="tocS_C4WX1APIFeaturesActivityDtosCreateActivityDto">C4WX1APIFeaturesActivityDtosCreateActivityDto</h2>
 <!-- backwards compatibility -->
@@ -7723,11 +5610,11 @@ and
 
 ```json
 {
-  "problemListID_FK": 1,
-  "diseaseID_FK": 1,
-  "activityDetail": "Activity Detail",
-  "diseaseSubInfoID_FK": 1,
-  "userId": 1
+  "ProblemListID_FK": 1,
+  "DiseaseID_FK": 1,
+  "ActivityDetail": "Activity Detail",
+  "DiseaseSubInfoID_FK": 1,
+  "UserId": 1
 }
 
 ```
@@ -7736,9 +5623,9 @@ and
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|problemListID_FK|integer(int32)|false|none|none|
-|diseaseID_FK|integer(int32)|false|none|none|
-|activityDetail|string|false|none|none|
-|diseaseSubInfoID_FK|integer(int32)¦null|false|none|none|
-|userId|integer(int32)|false|none|none|
+|ProblemListID_FK|integer(int32)|false|none|none|
+|DiseaseID_FK|integer(int32)|false|none|none|
+|ActivityDetail|string|false|none|none|
+|DiseaseSubInfoID_FK|integer(int32)¦null|false|none|none|
+|UserId|integer(int32)|false|none|none|
 
