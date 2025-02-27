@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.CarePlanSubGoal.Dtos
 {
-    public class CreateCarePlanSubGoalDto
+    public sealed class CreateCarePlanSubGoalDto
     {
         public int CarePlanSubID_FK { get; set; }
         public string? CarePlanSubGoalName { get; set; }
