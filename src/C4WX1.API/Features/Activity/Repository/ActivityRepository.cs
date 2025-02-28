@@ -7,7 +7,7 @@ namespace C4WX1.API.Features.Activity.Repository
     public class ActivityRepository(IConfiguration configuration)
         : IActivityRepository
     {
-        private readonly string connectionString = configuration.GetConnectionString("Default");
+        private readonly string? connectionString = configuration.GetConnectionString("Default");
 
         public async Task<bool> CanDeleteAsync(int activityId)
         {

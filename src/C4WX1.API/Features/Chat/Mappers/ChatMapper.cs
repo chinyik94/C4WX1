@@ -23,13 +23,15 @@ namespace C4WX1.API.Features.Chat.Mappers
                 Lastname = e.CreatedBy_FKNavigation.Lastname,
                 Photo = e.CreatedBy_FKNavigation.Photo
             },
-            PatientData = new ChatPatientDto
-            {
-                PatientID = e.PatientID_FKNavigation.PatientID,
-                Firstname = e.PatientID_FKNavigation.Firstname,
-                Lastname = e.PatientID_FKNavigation.Lastname,
-                Photo = e.PatientID_FKNavigation.Photo
-            },
+            PatientData = e.PatientID_FKNavigation == null
+                ? null
+                : new ChatPatientDto
+                {
+                    PatientID = e.PatientID_FKNavigation.PatientID,
+                    Firstname = e.PatientID_FKNavigation.Firstname,
+                    Lastname = e.PatientID_FKNavigation.Lastname,
+                    Photo = e.PatientID_FKNavigation.Photo
+                },
             CommentList = e.InverseParentID_FKNavigation
                 .Where(y => !y.IsDeleted)
                 .OrderByDescending(y => y.CreatedDate)

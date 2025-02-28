@@ -9,7 +9,7 @@ namespace C4WX1.API.Features.Chat.Repository
     public class ChatRepository(
         IConfiguration configuration) : IChatRepository
     {
-        private readonly string connectionString = configuration.GetConnectionString("Default");
+        private readonly string? connectionString = configuration.GetConnectionString("Default");
 
         public async Task<bool> CanLoadMoreAsync(int? patientId, int? userId, int minChatId)
         {
