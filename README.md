@@ -9,7 +9,7 @@ This Web Service aims to resolve the following:
 - Reduce CARES workload by separating DB calls
 
 ## Technologies Used
-- .NET 9
+- .NET 8
 - EF Core with Npgsql
 - FastEndpoints
 - Serilog

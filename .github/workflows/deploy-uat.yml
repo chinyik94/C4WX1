@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/C4WX1.API/**'
       - 'src/C4WX1.Database/**'
+      - 'tests/**'
       - '.github/workflows/deploy-uat.yml'
 
 env:
@@ -26,6 +27,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Run Tests
+        run: |
+          dotnet test
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83

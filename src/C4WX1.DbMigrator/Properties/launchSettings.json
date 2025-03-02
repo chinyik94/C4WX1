@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "C4WX1.DbMigrator": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
