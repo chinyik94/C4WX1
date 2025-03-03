@@ -35,7 +35,7 @@ try
         .SwaggerDocument();
 
     builder.Services.AddSerilog();
-
+    builder.Services.AddHealthChecks();
     builder.Services.AddDbContext<THCC_C4WDEVContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
@@ -67,6 +67,7 @@ try
         })
         .UseSwaggerGen();
 
+    app.MapHealthChecks("api/healthz");
     app.UseMetricServer();
     app.UseHttpMetrics(options =>
     {
