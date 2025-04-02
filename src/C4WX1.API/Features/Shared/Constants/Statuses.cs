@@ -9,5 +9,8 @@
         public const string PendingAck = "Pending Ack";
         public const string Paid = nameof(Paid);
         public const string Outstanding = nameof(Outstanding);
+        public const string Discharge = nameof(Discharge);
+        public const string DischargeRIP = "Discharge RIP";
+        public const string Active = nameof(Active);
     }
 }

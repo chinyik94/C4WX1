@@ -1,32 +1,29 @@
 ﻿using C4WX1.API.Features.SysConfig.Dtos;
 using C4WX1.API.Features.SysConfig.Get;
-using FastEndpoints;
-using FastEndpoints.Testing;
-using Shouldly;
-using System.Net;
 using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.Tests.SysConfig
 {
     [Collection<SysConfigTestsCollection>]
     [Priority(2)]
-    public class GetTests(C4WX1App app) : TestBase
+    public class GetTests(SysConfigAppFixture app) : TestBase
     {
         [Fact, Priority(1)]
         public async Task WithExistingConfigName()
         {
+            var expected = app.Control;
             var (resp, result) = await app.Client.GETAsync<Get, GetSysConfigDto, SysConfigDto>(
                 new()
                 {
-                    ConfigName = SysConfigDataHelper.ConfigName
+                    ConfigName = expected.ConfigName
                 });
 
             resp.StatusCode.ShouldBe(HttpStatusCode.OK);
             result.ShouldNotBeNull();
-            result.ConfigName.ShouldBe(SysConfigDataHelper.ConfigName);
-            result.ConfigValue.ShouldBe(SysConfigDataHelper.ConfigValue);
-            result.IsConfigurable.ShouldBe(SysConfigDataHelper.IsConfigurable);
-            result.Description.ShouldBe(SysConfigDataHelper.Description);
+            result.ConfigName.ShouldBe(expected.ConfigName);
+            result.ConfigValue.ShouldBe(expected.ConfigValue);
+            result.IsConfigurable.ShouldBe(expected.IsConfigurable);
+            result.Description.ShouldBe(expected.Description);
         }
 
         [Fact, Priority(2)]
@@ -35,7 +32,7 @@ namespace C4WX1.Tests.SysConfig
             var (resp, result) = await app.Client.GETAsync<Get, GetSysConfigDto, SysConfigDto>(
                 new()
                 {
-                    ConfigName = "NonExistentConfigName"
+                    ConfigName = SysConfigFaker.ConfigName()
                 });
             resp.StatusCode.ShouldBe(HttpStatusCode.NotFound);
             result.ShouldBeNull();

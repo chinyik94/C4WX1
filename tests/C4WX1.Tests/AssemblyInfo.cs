@@ -1,3 +1,1 @@
-﻿using FastEndpoints.Testing;
-
-[assembly: EnableAdvancedTesting]
+﻿[assembly: EnableAdvancedTesting]

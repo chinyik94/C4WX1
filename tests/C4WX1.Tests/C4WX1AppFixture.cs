@@ -1,6 +1,7 @@
+using C4WX1.API.Features.Shared.Constants;
 using C4WX1.Database.Models;
+using C4WX1.DbMigrator.DataSeeders;
 using C4WX1.DbMigrator.Migrators;
-using FastEndpoints.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,13 +9,17 @@ using Testcontainers.PostgreSql;
 
 namespace C4WX1.Tests
 {
-    public class C4WX1App : AppFixture<Program>
+    public class C4WX1AppFixture : AppFixture<Program>
     {
         private const string DbName = "C4WX1-test-db";
         private const string RootUsername = "root";
         private const string RootPassword = "root";
 
         private PostgreSqlContainer _container = null!;
+
+        public int CreateCount { get; private set; } = 10;
+        public int ExpectedCount(int pageSize = PaginationDefaults.Size) 
+            => Math.Min(CreateCount + 1, pageSize);
 
         protected override async ValueTask PreSetupAsync()
         {
@@ -33,7 +38,7 @@ namespace C4WX1.Tests
 
         protected override async ValueTask SetupAsync()
         {
-            await C4WX1DbMigrator.MigrateAndSeedAsync(_container.GetConnectionString());
+            await C4WX1DbMigrator.MigrateAndSeedForTestsAsync(_container.GetConnectionString());
 
             await base.SetupAsync();
         }
