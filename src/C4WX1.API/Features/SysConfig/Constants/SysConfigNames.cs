@@ -2,8 +2,8 @@
 {
     public class SysConfigNames
     {
-        public const string MinLength = nameof(MinLength);
-        public const string MaxLength = nameof(MaxLength);
+        public const string PasswordMin = nameof(PasswordMin);
+        public const string PasswordMax = nameof(PasswordMax);
         public const string PasswordNumberLength = nameof(PasswordNumberLength);
         public const string PasswordUpperLength = nameof(PasswordUpperLength);
         public const string PasswordSpecialLength = nameof(PasswordSpecialLength);

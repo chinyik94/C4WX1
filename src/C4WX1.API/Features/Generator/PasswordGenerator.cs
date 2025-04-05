@@ -15,19 +15,19 @@ namespace C4WX1.API.Features.Generator
             var rnd = new Random(seed);
 
             var passwordSysConfigs = await dbContext.SysConfig
-                .Where(x => x.ConfigName == SysConfigNames.MinLength
-                    || x.ConfigName == SysConfigNames.MaxLength
+                .Where(x => x.ConfigName == SysConfigNames.PasswordMin
+                    || x.ConfigName == SysConfigNames.PasswordMax
                     || x.ConfigName == SysConfigNames.PasswordNumberLength
                     || x.ConfigName == SysConfigNames.PasswordUpperLength
                     || x.ConfigName == SysConfigNames.PasswordSpecialLength
                     || x.ConfigName == SysConfigNames.PasswordSpecialCharacters)
                 .ToListAsync();
 
-            var minLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.MinLength).ConfigValue, out int parsedMinLength)
+            var minLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.PasswordMin).ConfigValue, out int parsedMinLength)
                 ? 8
                 : parsedMinLength;
 
-            var maxLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.MaxLength).ConfigValue, out int parsedMaxLength)
+            var maxLength = !int.TryParse(passwordSysConfigs.First(x => x.ConfigName == SysConfigNames.PasswordMax).ConfigValue, out int parsedMaxLength)
                 ? 16
                 : parsedMaxLength;
 

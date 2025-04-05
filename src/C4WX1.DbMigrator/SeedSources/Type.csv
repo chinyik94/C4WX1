@@ -1,0 +1,11 @@
+code,codeValue,parentCode,ordering,created,updated
+API,API Group,,0,2023-08-01 10:31:31.723,
+NotifyType,Notification Types,,0,2023-08-01 10:31:31.770,
+NotifyToast,Notification (Toast),NotifyType,1,2023-08-01 10:31:31.787,
+APIToken,ew64tX2TXMcgKj7r3NC2eA==,API,1,2023-08-01 10:31:31.757,
+NotifyEmail,Notification (Email),NotifyType,2,2023-08-01 10:31:31.787,
+NotifySMS,Notification (SMS),NotifyType,3,2023-08-01 10:31:31.787,
+NotifyVSGroup,Notification Vital Sign Groups,,0,2023-08-01 10:31:31.787,
+NotifyVSEmail,Notification Group (Email),NotifyVSGroup,2,2023-08-01 10:31:31.787,
+NotifyVSSMS,Notification Group (SMS),NotifyVSGroup,3,2023-08-01 10:31:31.787,
+NotifyVSToast,Notification Group (Toast),NotifyVSGroup,1,2023-08-01 10:31:31.787,

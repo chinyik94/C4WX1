@@ -32,7 +32,8 @@ namespace C4WX1.DbMigrator.DataSeeders
             using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,
-                TrimOptions = TrimOptions.Trim
+                TrimOptions = TrimOptions.Trim,
+                MissingFieldFound = null,
             });
 
             await foreach (var record in csv.GetRecordsAsync<SysConfig>())

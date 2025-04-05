@@ -7,37 +7,39 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.APIAccessKey.Create
+namespace C4WX1.API.Features.APIAccessKey.Get
 {
-    public class CreateAPIAccessKeySummary : EndpointSummary
+    public class GetAPIAccessKeyByCodeSummary : EndpointSummary
     {
-        public CreateAPIAccessKeySummary()
+        public GetAPIAccessKeyByCodeSummary()
         {
-            Summary = "Create APIAccessKey";
-            Description = "Create a new APIAccessKey";
-            Responses[200] = "APIAccessKey created successfully";
+            Summary = "Get APIAccessKey";
+            Description = "Get APIAccessKey by Type Code";
+            Responses[200] = "APIAccessKey retrieved successfully";
             Responses[404] = "APIAccessKey not found";
         }
     }
 
-    public class Create(
+    public class GetByCode(
         THCC_C4WDEVContext dbContext,
         IPasswordGenerator passwordGenerator,
         ISecurityService securityService)
-        : Endpoint<CreateAPIAccessKeyDto, APIAccessKeyDto, APIAccessKeyMapper>
+        : Endpoint<GetAPIAccessKeyByCodeDto, APIAccessKeyDto, APIAccessKeyMapper>
     {
         public override void Configure()
         {
-            Post("api-access-key");
+            Get("api-access-key/code/{code}");
             Description(b => b.Produces(404));
-            Summary(new CreateAPIAccessKeySummary());
+            Summary(new GetAPIAccessKeyByCodeSummary());
         }
 
-        public override async Task HandleAsync(CreateAPIAccessKeyDto req, CancellationToken ct)
+        public override async Task HandleAsync(GetAPIAccessKeyByCodeDto req, CancellationToken ct)
         {
-            var type = await dbContext.Types
-                .FirstOrDefaultAsync(t => t.code == req.Code, ct);
-            if (type == null)
+            var typeCode = await dbContext.Types
+                .Where(x => x.code == req.Code)
+                .Select(x => x.code)
+                .FirstOrDefaultAsync(ct);
+            if (string.IsNullOrWhiteSpace(typeCode))
             {
                 await SendNotFoundAsync(ct);
                 return;
@@ -49,7 +51,7 @@ namespace C4WX1.API.Features.APIAccessKey.Create
             {
                 AccessKey = encryptedPassword,
                 CreatedDate = DateTime.Now,
-                TokenCode = type.code,
+                TokenCode = req.Code,
                 ExpiryDate = DateTime.Now.AddDays(1),
                 UserId_FK = req.UserId
             };
