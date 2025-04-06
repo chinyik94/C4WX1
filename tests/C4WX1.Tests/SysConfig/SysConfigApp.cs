@@ -1,8 +1,4 @@
-﻿using C4WX1.API.Features.SysConfig.Dtos;
-using Dapper;
-using Npgsql;
-
-namespace C4WX1.Tests.SysConfig
+﻿namespace C4WX1.Tests.SysConfig
 {
     public class SysConfigApp : C4WX1App
     {

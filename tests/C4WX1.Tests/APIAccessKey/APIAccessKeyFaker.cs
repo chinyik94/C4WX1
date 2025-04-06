@@ -1,5 +1,4 @@
-﻿using Bogus;
-using C4WX1.API.Features.APIAccessKey.Dtos;
+﻿using C4WX1.API.Features.APIAccessKey.Dtos;
 
 namespace C4WX1.Tests.APIAccessKey
 {

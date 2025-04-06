@@ -23,7 +23,7 @@ namespace C4WX1.API.Features.C4WDeviceToken.Get
     {
         public override void Configure()
         {
-            Get("c4w-device-token/old-device-token");
+            Get("c4w-device-token/old-device-token/{OldDeviceToken}");
             Description(b => b.Produces(404));
             Summary(new GetC4WDeviceTokenByOldDeviceTokenSummary());
         }
@@ -31,7 +31,7 @@ namespace C4WX1.API.Features.C4WDeviceToken.Get
         public override async Task HandleAsync(GetC4WDeviceTokenByOldDeviceTokenDto req, CancellationToken ct)
         {
             var dto = await dbContext.C4WDeviceToken
-                .Where(x => !x.IsDeleted && x.NewDeviceToken == req.OldDeviceToken)
+                .Where(x => !x.IsDeleted && x.OldDeviceToken == req.OldDeviceToken)
                 .Select(x => Map.FromEntity(x))
                 .FirstOrDefaultAsync(ct);
             if (dto == null)

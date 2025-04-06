@@ -1,9 +1,7 @@
 ﻿using C4WX1.Database.Models;
 using C4WX1.DbMigrator.DataSeeders;
-using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
 using Serilog;
 
 namespace C4WX1.Tests.APIAccessKey
