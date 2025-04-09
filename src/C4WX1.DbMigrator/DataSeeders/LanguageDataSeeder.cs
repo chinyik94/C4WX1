@@ -1,7 +1,6 @@
 ﻿using C4WX1.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.DbMigrator.DataSeeders
 {
@@ -9,12 +8,13 @@ namespace C4WX1.DbMigrator.DataSeeders
         THCC_C4WDEVContext dbContext,
         ILogger<LanguageDataSeeder> logger)
     {
-        public async Task SeedAsync()
+        public async Task<int> SeedAsync()
         {
+            var numberOfRecords = 0;
             if (await dbContext.Language.AnyAsync())
             {
                 logger.LogInformation("Language is already seeded.");
-                return;
+                return numberOfRecords;
             }
 
             logger.LogInformation("Start seeding Language...");
@@ -31,7 +31,8 @@ namespace C4WX1.DbMigrator.DataSeeders
                 FullName = "Portuguese (Brazil)"
             });
 
-            await dbContext.SaveChangesAsync();
+            numberOfRecords = await dbContext.SaveChangesAsync();
+            return numberOfRecords;
         }
     }
 }

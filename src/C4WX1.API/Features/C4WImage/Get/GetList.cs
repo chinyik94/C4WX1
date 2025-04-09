@@ -49,8 +49,8 @@ namespace C4WX1.API.Features.C4WImage.Get
                     && x.CreatedDate <= endDate)
                 .Sort(orderBy)
                 .Select(x => Map.FromEntity(x))
-                .Take(startRowIndex)
-                .Skip(pageSize)
+                .Skip(startRowIndex)
+                .Take(pageSize)
                 .ToListAsync(ct);
 
             await SendOkAsync(dtos, cancellation: ct);

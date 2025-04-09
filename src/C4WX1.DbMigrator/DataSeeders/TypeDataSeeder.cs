@@ -3,7 +3,6 @@ using CsvHelper.Configuration;
 using CsvHelper;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
-using Task = System.Threading.Tasks.Task;
 using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.DbMigrator.DataSeeders
@@ -12,19 +11,20 @@ namespace C4WX1.DbMigrator.DataSeeders
         THCC_C4WDEVContext dbContext,
         ILogger<TypeDataSeeder> logger)
     {
-        public async Task SeedAsync()
+        public async Task<int> SeedAsync()
         {
+            var numberOfRecords = 0;
             if (await dbContext.Types.AnyAsync())
             {
                 logger.LogInformation("Type is already seeded.");
-                return;
+                return numberOfRecords;
             }
 
             var csvFilePath = Path.Combine(Directory.GetCurrentDirectory(), "SeedSources", "Type.csv");
             if (!File.Exists(csvFilePath))
             {
                 logger.LogError("Type data file cannot be found.");
-                return;
+                return numberOfRecords;
             }
 
             logger.LogInformation("Start seeding Type...");
@@ -48,7 +48,8 @@ namespace C4WX1.DbMigrator.DataSeeders
                     updated = x.updated
                 });
             await dbContext.Types.AddRangeAsync(types);
-            await dbContext.SaveChangesAsync();
+            numberOfRecords = await dbContext.SaveChangesAsync();
+            return numberOfRecords;
         }
     }
 }

@@ -1,37 +1,42 @@
 ﻿using C4WX1.API.Features.APIAccessKey.Dtos;
 using C4WX1.API.Features.APIAccessKey.Get;
+using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.APIAccessKey
 {
-    public class APIAccessKeyTests(APIAccessKeyApp app) 
-        : TestBase<APIAccessKeyApp>
+    [Collection<C4WX1TestCollection>]
+    public class APIAccessKeyTests(C4WX1App app) : TestBase
     {
-        [Fact, Priority(1)]
-        public async Task Get_APIAccessKey_ByCode()
+        [Fact]
+        public async Task GetByCode_WithExistingCode()
         {
-            var (resp1, res1) = await app.Client.GETAsync<GetByCode, GetAPIAccessKeyByCodeDto, APIAccessKeyDto>(
+            var (resp, res) = await app.Client.GETAsync<GetByCode, GetAPIAccessKeyByCodeDto, APIAccessKeyDto>(
                 new()
                 {
                     Code = "APIToken",
                     UserId = APIAccessKeyFaker.UserId()
                 });
 
-            resp1.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res1.ShouldNotBeNull();
-
-            var (resp2, res2) = await app.Client.GETAsync<GetByCode, GetAPIAccessKeyByCodeDto, APIAccessKeyDto>(
-                APIAccessKeyFaker.GetByCodeDto());
-            resp2.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-            res2.ShouldBeNull();
+            resp.StatusCode.ShouldBe(HttpStatusCode.OK);
+            res.ShouldNotBeNull();
         }
 
-        [Fact, Priority(2)]
-        public async Task Get_APIAccessKey_ByAccessKey()
+        [Fact]
+        public async Task GetByCode_WithNonExistentCode()
         {
-            var (resp1, res1) = await app.Client.GETAsync<GetByAccessKey, GetAPIAccessKeyByAccessKeyDto, APIAccessKeyDto>(
+            var (resp, res) = await app.Client.GETAsync<GetByCode, GetAPIAccessKeyByCodeDto, APIAccessKeyDto>(
+                APIAccessKeyFaker.GetByCodeDto());
+            resp.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+            res.ShouldBeNull();
+        }
+
+        [Fact]
+        public async Task GeyByAccessKey_WithInvalidAccessKey()
+        {
+            var (resp, res) = await app.Client.GETAsync<GetByAccessKey, GetAPIAccessKeyByAccessKeyDto, APIAccessKeyDto>(
                 APIAccessKeyFaker.GetByAccessKeyDto());
-            resp1.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-            res1.ShouldBeNull();
+            resp.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+            res.ShouldBeNull();
         }
     }
 }

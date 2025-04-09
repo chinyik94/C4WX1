@@ -25,7 +25,7 @@ namespace C4WX1.API.Features.C4WDeviceToken.Create
     }
 
     public class Create(THCC_C4WDEVContext dbContext)
-        : EndpointWithMapper<CreateC4WDeviceTokenDto, CreateC4WDeviceTokenMapper>
+        : Endpoint<CreateC4WDeviceTokenDto, int, CreateC4WDeviceTokenMapper>
     {
         public override void Configure()
         {
@@ -38,7 +38,7 @@ namespace C4WX1.API.Features.C4WDeviceToken.Create
             var entity = Map.ToEntity(req);
             dbContext.C4WDeviceToken.Add(entity);
             await dbContext.SaveChangesAsync(ct);
-            await SendNoContentAsync(ct);
+            await SendOkAsync(entity.C4WDeviceTokenId, cancellation: ct);
         }
     }
 }

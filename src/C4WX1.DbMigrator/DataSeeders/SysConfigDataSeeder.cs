@@ -4,7 +4,6 @@ using CsvHelper.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
-using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.DbMigrator.DataSeeders
 {
@@ -12,19 +11,21 @@ namespace C4WX1.DbMigrator.DataSeeders
         THCC_C4WDEVContext dbContext,
         ILogger<SysConfigDataSeeder> logger)
     {
-        public async Task SeedAsync()
+        public async Task<int> SeedAsync()
         {
+            var numberOfRecords = 0;
+
             if (await dbContext.SysConfig.AnyAsync())
             {
                 logger.LogInformation("SysConfig is already seeded.");
-                return;
+                return numberOfRecords;
             }
 
             var csvFilePath = Path.Combine(Directory.GetCurrentDirectory(), "SeedSources", "SysConfig.csv");
             if (!File.Exists(csvFilePath))
             {
                 logger.LogError("SysConfig data file cannot be found.");
-                return;
+                return numberOfRecords;
             }
 
             logger.LogInformation("Start seeding SysConfig...");
@@ -40,8 +41,8 @@ namespace C4WX1.DbMigrator.DataSeeders
             {
                 dbContext.SysConfig.Add(record);
             }
-
-            await dbContext.SaveChangesAsync();
+            numberOfRecords = await dbContext.SaveChangesAsync();
+            return numberOfRecords;
         }
     }
 }

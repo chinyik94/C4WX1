@@ -29,7 +29,7 @@ namespace C4WX1.API.Features.C4WImage.Create
     }
 
     public class Create(THCC_C4WDEVContext dbContext)
-        : EndpointWithMapper<CreateC4WImageDto, CreateC4WImageMapper>
+        : Endpoint<CreateC4WImageDto, int, CreateC4WImageMapper>
     {
         public override void Configure()
         {
@@ -42,7 +42,7 @@ namespace C4WX1.API.Features.C4WImage.Create
             var entity = Map.ToEntity(req);
             dbContext.C4WImage.Add(entity);
             await dbContext.SaveChangesAsync(ct);
-            await SendNoContentAsync(ct);
+            await SendOkAsync(entity.C4WImageId, cancellation: ct);
         }
     }
 }

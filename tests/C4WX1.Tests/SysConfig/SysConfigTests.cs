@@ -1,185 +1,363 @@
-﻿using C4WX1.API.Features.SysConfig.Create;
+﻿using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.SysConfig.Dtos;
 using C4WX1.API.Features.SysConfig.Get;
 using C4WX1.API.Features.SysConfig.Update;
+using C4WX1.Tests.Shared;
+using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.Tests.SysConfig
 {
-    public class SysConfigTests(SysConfigApp app, SysConfigState state) 
-        : TestBase<SysConfigApp, SysConfigState>
+    [Collection<C4WX1TestCollection>]
+    public class SysConfigTests(C4WX1App app, C4WX1State state)
+        : TestBase
     {
-        [Fact, Priority(1)]
-        public async Task Create_SysConfigs()
+        private Database.Models.SysConfig NewControlData => new()
         {
-            var controlData = state.Control;
-            var controlRequest = new CreateSysConfigDto
-            {
-                ConfigName = controlData.ConfigName,
-                ConfigValue = controlData.ConfigValue,
-                IsConfigurable = controlData.IsConfigurable,
-                Description = controlData.Description
-            };
-            var controlResponse = await app.Client.POSTAsync<Create, CreateSysConfigDto>(controlRequest);
-            controlResponse.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+            ConfigName = "Control-ConfigName",
+            ConfigValue = "Control-ConfigValue",
+            IsConfigurable = true,
+            Description = "Control-Description",
+            ModifiedDate = DateTime.Now,
+            ModifiedBy_FK = 1
+        };
 
-            var randomRequests = Enumerable.Range(0, app.CreateCount)
-                .Select(x => SysConfigFaker.CreateDto());
-            foreach (var request in randomRequests)
-            {
-                var response = await app.Client.POSTAsync<Create, CreateSysConfigDto>(request);
-                response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
-            }
+        private async Task AddTestDataAsync(IEnumerable<Database.Models.SysConfig> testData)
+        {
+            await using var dbContext = app.CreateDbContext();
+            dbContext.SysConfig.AddRange(testData);
+            await dbContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        [Fact, Priority(2)]
-        public async Task Get_SysConfig()
+        private async Task RemoveTestDataAsync(IEnumerable<Database.Models.SysConfig> testData)
         {
-            var expected = state.Control;
-            var (resp1, res1) = await app.Client.GETAsync<Get, GetSysConfigDto, SysConfigDto>(
+            await using var dbContext = app.CreateDbContext();
+            var configNames = testData.Select(x => x.ConfigName);
+            var entitiesToRemove = dbContext.SysConfig
+                .Where(x => configNames.Contains(x.ConfigName));
+            dbContext.SysConfig.RemoveRange(entitiesToRemove);
+            await dbContext.SaveChangesAsync(TestContext.Current.CancellationToken);
+        }
+
+        [Fact]
+        public async Task Get_WithExistingConfigName()
+        {
+            var expected = NewControlData;
+            await AddTestDataAsync([expected]);
+
+            var (resp, res) = await app.Client.GETAsync<Get, GetSysConfigDto, SysConfigDto>(
                 new()
                 {
                     ConfigName = expected.ConfigName
                 });
 
-            resp1.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res1.ShouldNotBeNull();
-            res1.ConfigName.ShouldBe(expected.ConfigName);
-            res1.ConfigValue.ShouldBe(expected.ConfigValue);
-            res1.IsConfigurable.ShouldBe(expected.IsConfigurable);
-            res1.Description.ShouldBe(expected.Description);
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldNotBeNull();
+            res.ConfigName.ShouldBe(expected.ConfigName);
+            res.ConfigValue.ShouldBe(expected.ConfigValue);
+            res.IsConfigurable.ShouldBe(expected.IsConfigurable);
+            res.Description.ShouldBe(expected.Description);
 
-            var (resp2, res2) = await app.Client.GETAsync<Get, GetSysConfigDto, SysConfigDto>(
+            await RemoveTestDataAsync([expected]);
+        }
+
+        [Fact]
+        public async Task Get_WithNonExistentConfigName()
+        {
+            var (resp, res) = await app.Client.GETAsync<Get, GetSysConfigDto, SysConfigDto>(
                 new()
                 {
                     ConfigName = SysConfigFaker.ConfigName()
                 });
-            resp2.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-            res2.ShouldBeNull();
+            resp.IsSuccessStatusCode.ShouldBeFalse();
+            res.ShouldBeNull();
         }
 
-        [Fact, Priority(3)]
-        public async Task Get_SysConfig_Count()
+        [Fact]
+        public async Task Get_WithControlConfigName_ButControlDataNotInsertYet()
+        {
+            var (resp, res) = await app.Client.GETAsync<Get, GetSysConfigDto, SysConfigDto>(
+                new()
+                {
+                    ConfigName = NewControlData.ConfigName
+                });
+            resp.IsSuccessStatusCode.ShouldBeFalse();
+            res.ShouldBeNull();
+        }
+
+        [Fact]
+        public async Task GetCount_BeforeAddingDummies()
         {
             var (resp, res) = await app.Client.GETAsync<GetCount, int>();
-            resp.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res.ShouldBeGreaterThan(0);
-            res.ShouldBe(app.CreateCount + 1);
+
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldBe(app.SysConfigCount);
         }
 
-        [Fact, Priority(4)]
-        public async Task Get_SysConfig_AllList()
+        [Fact]
+        public async Task GetCount_AfterAddingDummies()
+        {
+            var createCount = state.CreateCount;
+            var dummies = new List<Database.Models.SysConfig>();
+            for (var i = 0; i < createCount; i++)
+            {
+                dummies.Add(SysConfigFaker.Dummy());
+            }
+            await AddTestDataAsync(dummies);
+
+            var (resp, res) = await app.Client.GETAsync<GetCount, int>();
+
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldBe(app.SysConfigCount + createCount);
+            
+            await RemoveTestDataAsync(dummies);
+        }
+
+        [Fact]
+        public async Task GetAllList_BeforeAddingDummyData()
         {
             var (resp, res) = await app.Client.GETAsync<GetAllList, IEnumerable<SysConfigDto>>();
-            resp.StatusCode.ShouldBe(HttpStatusCode.OK);
+
+            resp.IsSuccessStatusCode.ShouldBeTrue();
             res.ShouldNotBeNull();
             res.ShouldNotBeEmpty();
-            res.Count().ShouldBe(app.CreateCount + 1);
+            res.Count().ShouldBe(app.SysConfigCount);
         }
 
-        [Fact, Priority(5)]
-        public async Task Get_SysConfig_List()
+        [Fact]
+        public async Task GetAllList_AfterAddingDummyData()
         {
-            var (resp1, res1) = await app.Client.GETAsync<GetList, IEnumerable<SysConfigDto>>();
-            resp1.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res1.ShouldNotBeNull();
-            res1.ShouldNotBeEmpty();
-            res1.Count().ShouldBe(app.ExpectedCount());
-            res1.Select(x => x.ConfigName).ShouldBeInOrder(SortDirection.Descending);
+            var createCount = state.CreateCount;
+            var dummies = new List<Database.Models.SysConfig>();
+            for (var i = 0; i < createCount; i++)
+            {
+                dummies.Add(SysConfigFaker.Dummy());
+            }
+            await AddTestDataAsync(dummies);
 
-            var expectedConfigName = state.Control.ConfigName;
-            var (resp2, res2) = await app.Client
+            var (resp, res) = await app.Client.GETAsync<GetAllList, IEnumerable<SysConfigDto>>();
+
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldNotBeNull();
+            res.ShouldNotBeEmpty();
+            res.Count().ShouldBe(app.SysConfigCount + createCount);
+
+            await RemoveTestDataAsync(dummies);
+        }
+
+        [Fact]
+        public async Task GetList_WithDefaultPaginationSize_AndDefaultOrderBy()
+        {
+            var expectedCount = Math.Min(app.SysConfigCount, PaginationDefaults.Size);
+
+            var (resp, res) = await app.Client.GETAsync<GetList, IEnumerable<SysConfigDto>>();
+
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldNotBeNull();
+            res.ShouldNotBeEmpty();
+            res.Count().ShouldBe(expectedCount);
+            res.Select(x => x.ConfigName).ShouldBeInOrder(SortDirection.Descending);
+        }
+
+        [Fact]
+        public async Task GetList_WithControlConfigName()
+        {
+            var expected = NewControlData;
+            await AddTestDataAsync([expected]);
+
+            var (resp, res) = await app.Client
                 .GETAsync<GetList, GetSysConfigListDto, IEnumerable<SysConfigDto>>(
                 new()
                 {
-                    ConfigName = expectedConfigName
+                    ConfigName = expected.ConfigName
                 });
-            resp2.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res2.ShouldNotBeNull();
-            res2.ShouldNotBeEmpty();
-            res2.Count().ShouldBe(1);
-            res2.All(x => x.ConfigName == expectedConfigName).ShouldBeTrue();
-            res2.Select(x => x.ConfigName).ShouldBeInOrder(SortDirection.Descending);
 
-            var expectedConfigValue = state.Control.ConfigValue;
-            var (resp3, res3) = await app.Client
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldNotBeNull();
+            res.ShouldNotBeEmpty();
+            res.Count().ShouldBe(1);
+            res.All(x => x.ConfigName == expected.ConfigName).ShouldBeTrue();
+            res.All(x => x.ConfigValue == expected.ConfigValue).ShouldBeTrue();
+            res.All(x => x.IsConfigurable == expected.IsConfigurable).ShouldBeTrue();
+            res.All(x => x.Description == expected.Description).ShouldBeTrue();
+
+            await RemoveTestDataAsync([expected]);
+        }
+
+        [Fact]
+        public async Task GetList_WithControlConfigValue()
+        {
+            var expected = NewControlData;
+            await AddTestDataAsync([expected]);
+
+            var (resp, res) = await app.Client
                 .GETAsync<GetList, GetSysConfigListDto, IEnumerable<SysConfigDto>>(
                 new()
                 {
-                    ConfigValue = expectedConfigValue
+                    ConfigValue = expected.ConfigValue
                 });
-            resp3.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res3.ShouldNotBeNull();
-            res3.ShouldNotBeEmpty();
-            res3.Count().ShouldBe(1);
-            res3.All(x => x.ConfigValue == expectedConfigValue).ShouldBeTrue();
-            res3.Select(x => x.ConfigName).ShouldBeInOrder(SortDirection.Descending);
 
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldNotBeNull();
+            res.ShouldNotBeEmpty();
+            res.Count().ShouldBe(1);
+            res.All(x => x.ConfigName == expected.ConfigName).ShouldBeTrue();
+            res.All(x => x.ConfigValue == expected.ConfigValue).ShouldBeTrue();
+            res.All(x => x.IsConfigurable == expected.IsConfigurable).ShouldBeTrue();
+            res.All(x => x.Description == expected.Description).ShouldBeTrue();
+
+            await RemoveTestDataAsync([expected]);
+        }
+
+        [Fact]
+        public async Task GetList_WithPageSizeMoreThanDataCount()
+        {
             var pageSize = 100;
-            var (resp4, res4) = await app.Client
+            while (pageSize <= app.SysConfigCount)
+            {
+                pageSize += 100;
+            }
+            var expectedCount = Math.Min(app.SysConfigCount, pageSize);
+
+            var (resp, res) = await app.Client
                 .GETAsync<GetList, GetSysConfigListDto, IEnumerable<SysConfigDto>>(
                 new()
                 {
                     PageSize = pageSize
                 });
-            resp4.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res4.ShouldNotBeNull();
-            res4.ShouldNotBeEmpty();
-            res4.Count().ShouldBeLessThanOrEqualTo(app.ExpectedCount(pageSize));
-            res4.Select(x => x.ConfigName).ShouldBeInOrder(SortDirection.Descending);
 
-            pageSize = 5;
-            var (resp5, res5) = await app.Client
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldNotBeNull();
+            res.ShouldNotBeEmpty();
+            res.Count().ShouldBeLessThanOrEqualTo(expectedCount);
+            res.Select(x => x.ConfigName).ShouldBeInOrder(SortDirection.Descending);
+        }
+
+        [Fact]
+        public async Task GetList_WithPageSizeLessThanDataCount()
+        {
+            var pageSize = 5;
+            while (pageSize >= app.SysConfigCount)
+            {
+                pageSize -= 1;
+            }
+            var expectedCount = Math.Min(app.SysConfigCount, pageSize);
+
+            var (resp, res) = await app.Client
                 .GETAsync<GetList, GetSysConfigListDto, IEnumerable<SysConfigDto>>(
                 new()
                 {
                     PageSize = pageSize
                 });
-            resp5.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res5.ShouldNotBeNull();
-            res5.ShouldNotBeEmpty();
-            res5.Count().ShouldBeLessThanOrEqualTo(app.ExpectedCount(pageSize));
-            res5.Select(x => x.ConfigName).ShouldBeInOrder(SortDirection.Descending);
 
-            var (resp6, res6) = await app.Client
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldNotBeNull();
+            res.ShouldNotBeEmpty();
+            res.Count().ShouldBeLessThanOrEqualTo(expectedCount);
+            res.Select(x => x.ConfigName).ShouldBeInOrder(SortDirection.Descending);
+        }
+
+        [Fact]
+        public async Task GetList_WithOrderBy()
+        {
+            var expectedCount = Math.Min(app.SysConfigCount, PaginationDefaults.Size);
+
+            var (resp, res) = await app.Client
                 .GETAsync<GetList, GetSysConfigListDto, IEnumerable<SysConfigDto>>(
                 new()
                 {
                     OrderBy = "ConfigValue asc"
                 });
-            resp6.StatusCode.ShouldBe(HttpStatusCode.OK);
-            res6.ShouldNotBeNull();
-            res6.ShouldNotBeEmpty();
-            res6.Count().ShouldBe(app.ExpectedCount());
-            res6.Select(x => x.ConfigValue).ShouldBeInOrder(SortDirection.Ascending);
+
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+            res.ShouldNotBeNull();
+            res.ShouldNotBeEmpty();
+            res.Count().ShouldBe(expectedCount);
+            res.Select(x => x.ConfigValue).ShouldBeInOrder(SortDirection.Ascending);
         }
 
-        [Fact, Priority(5)]
-        public async Task Update_SysConfig()
+        [Fact]
+        public async Task Update_Single_WithControlConfigName()
         {
-            var resp1 = await app.Client.PUTAsync<Update, IEnumerable<UpdateSysConfigDto>>(
-                [
-                    SysConfigFaker.UpdateDto(),
-                    SysConfigFaker.UpdateDto(),
-                ]);
+            await AddTestDataAsync([NewControlData]);
 
-            resp1.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-
-            var controlData = state.Control.ConfigName;
-            var resp2 = await app.Client.PUTAsync<Update, IEnumerable<UpdateSysConfigDto>>(
+            var resp = await app.Client.PUTAsync<Update, IEnumerable<UpdateSysConfigDto>>(
                 [
-                    new() {
-                        ConfigName = controlData,
+                    new UpdateSysConfigDto
+                    {
+                        ConfigName = NewControlData.ConfigName,
                         ConfigValue = SysConfigFaker.ConfigValue(),
                         UserID = SysConfigFaker.UserId()
-                    },
-                    new() {
-                        ConfigName = controlData,
-                        ConfigValue = SysConfigFaker.ConfigValue(),
-                        UserID = SysConfigFaker.UserId()
-                    },
+                    }
                 ]);
 
-            resp2.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+
+            await RemoveTestDataAsync([NewControlData]);
+        }
+
+        [Fact]
+        public async Task Update_Batch()
+        {
+            var dummies = new List<Database.Models.SysConfig>();
+            var req = new List<UpdateSysConfigDto>();
+            for (var i = 0; i < state.CreateCount; i++)
+            {
+                var dummy = SysConfigFaker.Dummy();
+                dummies.Add(dummy);
+                req.Add(new UpdateSysConfigDto
+                {
+                    ConfigName = dummy.ConfigName,
+                    ConfigValue = SysConfigFaker.ConfigValue(),
+                    UserID = SysConfigFaker.UserId()
+                });
+            }
+            await AddTestDataAsync(dummies);
+
+            var updatedDummies = dummies
+                .Select(x => new UpdateSysConfigDto
+                {
+                    ConfigName = x.ConfigName,
+                    ConfigValue = SysConfigFaker.ConfigValue(),
+                    UserID = SysConfigFaker.UserId()
+                });
+
+            var resp = await app.Client.PUTAsync<Update, IEnumerable<UpdateSysConfigDto>>(
+                req);
+
+            resp.IsSuccessStatusCode.ShouldBeTrue();
+
+            await RemoveTestDataAsync(dummies);
+        }
+
+        [Fact]
+        public async Task Update_WithDummyConfigName()
+        {
+            var resp = await app.Client.PUTAsync<Update, IEnumerable<UpdateSysConfigDto>>(
+                [
+                    new UpdateSysConfigDto
+                    {
+                        ConfigName = SysConfigFaker.ConfigName(),
+                        ConfigValue = SysConfigFaker.ConfigValue(),
+                        UserID = SysConfigFaker.UserId()
+                    }
+                ]);
+
+            resp.IsSuccessStatusCode.ShouldBeFalse();
+        }
+
+        [Fact]
+        public async Task Update_WithControlConfigName_ButControlDataNotYetAdded()
+        {
+            var resp = await app.Client.PUTAsync<Update, IEnumerable<UpdateSysConfigDto>>(
+                [
+                    new UpdateSysConfigDto
+                    {
+                        ConfigName = NewControlData.ConfigName,
+                        ConfigValue = SysConfigFaker.ConfigValue(),
+                        UserID = SysConfigFaker.UserId()
+                    }
+                ]);
+            resp.IsSuccessStatusCode.ShouldBeFalse();
         }
     }
 }
