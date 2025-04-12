@@ -5,122 +5,121 @@ using C4WX1.API.Features.C4WDeviceToken.Update;
 using C4WX1.Tests.Shared;
 using Microsoft.EntityFrameworkCore;
 
-namespace C4WX1.Tests.C4WDeviceToken
+namespace C4WX1.Tests.C4WDeviceToken;
+
+[Collection<C4WX1TestCollection>]
+public class C4WDeviceTokenTests(C4WX1App app, C4WX1State state)
+    : TestBase
 {
-    [Collection<C4WX1TestCollection>]
-    public class C4WDeviceTokenTests(C4WX1App app, C4WX1State state)
-        : TestBase
+    private CreateC4WDeviceTokenDto NewControlData => new()
     {
-        private CreateC4WDeviceTokenDto NewControlData => new()
-        {
-            OldDeviceToken = "Control-OldDeviceToken",
-            NewDeviceToken = "Control-NewDeviceToken",
-            ClientEnvironment = "Control-ClientEnvironment",
-            Device = "Control-Device",
-            UserId = 1
-        };
+        OldDeviceToken = "Control-OldDeviceToken",
+        NewDeviceToken = "Control-NewDeviceToken",
+        ClientEnvironment = "Control-ClientEnvironment",
+        Device = "Control-Device",
+        UserId = 1
+    };
 
-        private UpdateC4WDeviceTokenDto UpdatedControlData => new()
-        {
-            OldDeviceToken = "Updated-Control-OldDeviceToken",
-            NewDeviceToken = "Updated-Control-NewDeviceToken",
-            ClientEnvironment = "Updated-Control-ClientEnvironment",
-            Device = "Updated-Control-Device",
-            UserId = 1
-        };
+    private UpdateC4WDeviceTokenDto UpdatedControlData => new()
+    {
+        OldDeviceToken = "Updated-Control-OldDeviceToken",
+        NewDeviceToken = "Updated-Control-NewDeviceToken",
+        ClientEnvironment = "Updated-Control-ClientEnvironment",
+        Device = "Updated-Control-Device",
+        UserId = 1
+    };
 
-        private async Task<int> SetupAsync(CreateC4WDeviceTokenDto testData)
+    private async Task<int> SetupAsync(CreateC4WDeviceTokenDto testData)
+    {
+        var (resp, res) = await app.Client.POSTAsync<Create, CreateC4WDeviceTokenDto, int>(
+            testData);
+        resp.IsSuccessStatusCode.ShouldBeTrue();
+        res.ShouldBeGreaterThan(0);
+        state.InsertedIds.Add(res);
+        return res;
+    }
+
+    private async Task CleanupAsync()
+    {
+        await using var dbContext = app.CreateDbContext();
+        await dbContext.Database.ExecuteSqlRawAsync("""
+            TRUNCATE TABLE "C4WDeviceToken";
+            """);
+    }
+
+    [Fact]
+    public async Task Create()
+    {
+        state.InsertedIds = [];
+        for (int i = 0; i < state.CreateCount; i++)
         {
-            var (resp, res) = await app.Client.POSTAsync<Create, CreateC4WDeviceTokenDto, int>(
-                testData);
-            resp.IsSuccessStatusCode.ShouldBeTrue();
-            res.ShouldBeGreaterThan(0);
-            state.InsertedIds.Add(res);
-            return res;
+            var (resp2, res2) = await app.Client.POSTAsync<Create, CreateC4WDeviceTokenDto, int>(
+                C4WDeviceTokenFaker.CreateDto());
+            resp2.IsSuccessStatusCode.ShouldBeTrue();
+            res2.ShouldBeGreaterThan(0);
+            state.InsertedIds.Add(res2);
         }
 
-        private async Task CleanupAsync()
-        {
-            await using var dbContext = app.CreateDbContext();
-            await dbContext.Database.ExecuteSqlRawAsync("""
-                TRUNCATE TABLE "C4WDeviceToken";
-                """);
-        }
+        await CleanupAsync();
+    }
 
-        [Fact]
-        public async Task Create()
-        {
-            state.InsertedIds = [];
-            for (int i = 0; i < state.CreateCount; i++)
+    [Fact]
+    public async Task GetByOldDeviceToken_WithExistingOldDeviceToken()
+    {
+        state.InsertedIds = [];
+        var expected = NewControlData;
+        var id = await SetupAsync(expected);
+
+        expected.OldDeviceToken.ShouldNotBeNullOrWhiteSpace();
+        var (resp2, res2) = await app.Client.GETAsync<GetByOldDeviceToken, GetC4WDeviceTokenByOldDeviceTokenDto, C4WDeviceTokenDto>(
+            new()
             {
-                var (resp2, res2) = await app.Client.POSTAsync<Create, CreateC4WDeviceTokenDto, int>(
-                    C4WDeviceTokenFaker.CreateDto());
-                resp2.IsSuccessStatusCode.ShouldBeTrue();
-                res2.ShouldBeGreaterThan(0);
-                state.InsertedIds.Add(res2);
-            }
+                OldDeviceToken = expected.OldDeviceToken
+            });
+        resp2.IsSuccessStatusCode.ShouldBeTrue();
+        res2.ShouldNotBeNull();
+        res2.C4WDeviceTokenId.ShouldBeGreaterThan(0);
+        res2.C4WDeviceTokenId.ShouldBe(id);
+        res2.OldDeviceToken.ShouldBe(expected.OldDeviceToken);
+        res2.NewDeviceToken.ShouldBe(expected.NewDeviceToken);
+        res2.ClientEnvironment.ShouldBe(expected.ClientEnvironment);
+        res2.Device.ShouldBe(expected.Device);
 
-            await CleanupAsync();
-        }
+        await CleanupAsync();
+    }
 
-        [Fact]
-        public async Task GetByOldDeviceToken_WithExistingOldDeviceToken()
-        {
-            state.InsertedIds = [];
-            var expected = NewControlData;
-            var id = await SetupAsync(expected);
+    [Fact]
+    public async Task GetByOldDeviceToken_WithNonExistentOldDeviceToken()
+    {
+        var (resp, res) = await app.Client.GETAsync<GetByOldDeviceToken, GetC4WDeviceTokenByOldDeviceTokenDto, C4WDeviceTokenDto>(
+            new()
+            {
+                OldDeviceToken = C4WDeviceTokenFaker.OldDeviceToken()
+            });
+        resp.IsSuccessStatusCode.ShouldBeFalse();
+        res.ShouldBeNull();
+    }
 
-            expected.OldDeviceToken.ShouldNotBeNullOrWhiteSpace();
-            var (resp2, res2) = await app.Client.GETAsync<GetByOldDeviceToken, GetC4WDeviceTokenByOldDeviceTokenDto, C4WDeviceTokenDto>(
-                new()
-                {
-                    OldDeviceToken = expected.OldDeviceToken
-                });
-            resp2.IsSuccessStatusCode.ShouldBeTrue();
-            res2.ShouldNotBeNull();
-            res2.C4WDeviceTokenId.ShouldBeGreaterThan(0);
-            res2.C4WDeviceTokenId.ShouldBe(id);
-            res2.OldDeviceToken.ShouldBe(expected.OldDeviceToken);
-            res2.NewDeviceToken.ShouldBe(expected.NewDeviceToken);
-            res2.ClientEnvironment.ShouldBe(expected.ClientEnvironment);
-            res2.Device.ShouldBe(expected.Device);
+    [Fact]
+    public async Task Update_WithExistingId()
+    {
+        state.InsertedIds = [];
+        var id = await SetupAsync(NewControlData);
 
-            await CleanupAsync();
-        }
+        var req = UpdatedControlData;
+        req.C4WDeviceTokenId = id;
+        var resp2 = await app.Client.PUTAsync<Update, UpdateC4WDeviceTokenDto>(req);
+        resp2.IsSuccessStatusCode.ShouldBeTrue();
 
-        [Fact]
-        public async Task GetByOldDeviceToken_WithNonExistentOldDeviceToken()
-        {
-            var (resp, res) = await app.Client.GETAsync<GetByOldDeviceToken, GetC4WDeviceTokenByOldDeviceTokenDto, C4WDeviceTokenDto>(
-                new()
-                {
-                    OldDeviceToken = C4WDeviceTokenFaker.OldDeviceToken()
-                });
-            resp.IsSuccessStatusCode.ShouldBeFalse();
-            res.ShouldBeNull();
-        }
+        await CleanupAsync();
+    }
 
-        [Fact]
-        public async Task Update_WithExistingId()
-        {
-            state.InsertedIds = [];
-            var id = await SetupAsync(NewControlData);
-
-            var req = UpdatedControlData;
-            req.C4WDeviceTokenId = id;
-            var resp2 = await app.Client.PUTAsync<Update, UpdateC4WDeviceTokenDto>(req);
-            resp2.IsSuccessStatusCode.ShouldBeTrue();
-
-            await CleanupAsync();
-        }
-
-        [Fact]
-        public async Task Update_WithNonExistentId()
-        {
-            var req = UpdatedControlData;
-            req.C4WDeviceTokenId = C4WDeviceTokenFaker.Id();
-            var resp = await app.Client.PUTAsync<Update, UpdateC4WDeviceTokenDto>(req);
-            resp.IsSuccessStatusCode.ShouldBeFalse();
-        }
+    [Fact]
+    public async Task Update_WithNonExistentId()
+    {
+        var req = UpdatedControlData;
+        req.C4WDeviceTokenId = C4WDeviceTokenFaker.Id();
+        var resp = await app.Client.PUTAsync<Update, UpdateC4WDeviceTokenDto>(req);
+        resp.IsSuccessStatusCode.ShouldBeFalse();
     }
 }

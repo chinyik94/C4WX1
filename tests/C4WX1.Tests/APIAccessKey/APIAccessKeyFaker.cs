@@ -1,19 +1,18 @@
 ﻿using C4WX1.API.Features.APIAccessKey.Dtos;
 using C4WX1.Tests.Shared;
 
-namespace C4WX1.Tests.APIAccessKey
-{
-    public class APIAccessKeyFaker : C4WX1Faker
-    {
-        public static GetAPIAccessKeyByCodeDto GetByCodeDto() =>
-            new Faker<GetAPIAccessKeyByCodeDto>()
-                .RuleFor(x => x.Code, f => f.Random.AlphaNumeric(10))
-                .RuleFor(x => x.UserId, f => f.Random.Int())
-                .Generate();
+namespace C4WX1.Tests.APIAccessKey;
 
-        public static GetAPIAccessKeyByAccessKeyDto GetByAccessKeyDto() =>
-            new Faker<GetAPIAccessKeyByAccessKeyDto>()
-                .RuleFor(x => x.AccessKey, f => f.Random.AlphaNumeric(10))
-                .Generate();
-    }
+public class APIAccessKeyFaker : C4WX1Faker
+{
+    public static GetAPIAccessKeyByCodeDto GetByCodeDto() =>
+        new Faker<GetAPIAccessKeyByCodeDto>()
+            .RuleFor(x => x.Code, f => f.Random.AlphaNumeric(10))
+            .RuleFor(x => x.UserId, f => f.Random.Int())
+            .Generate();
+
+    public static GetAPIAccessKeyByAccessKeyDto GetByAccessKeyDto() =>
+        new Faker<GetAPIAccessKeyByAccessKeyDto>()
+            .RuleFor(x => x.AccessKey, f => f.Random.AlphaNumeric(10))
+            .Generate();
 }

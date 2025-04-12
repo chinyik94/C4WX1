@@ -1,7 +1,6 @@
-﻿namespace C4WX1.API.Features.Generator
+﻿namespace C4WX1.API.Features.Generator;
+
+public interface IPasswordGenerator
 {
-    public interface IPasswordGenerator
-    {
-        Task<string> GenerateAsync();
-    }
+    Task<string> GenerateAsync();
 }

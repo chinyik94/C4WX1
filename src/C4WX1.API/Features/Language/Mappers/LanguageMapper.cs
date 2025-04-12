@@ -1,15 +1,14 @@
 ﻿using C4WX1.API.Features.Language.Dtos;
 using FastEndpoints;
 
-namespace C4WX1.API.Features.Language.Mappers
+namespace C4WX1.API.Features.Language.Mappers;
+
+public class LanguageMapper : ResponseMapper<LanguageDto, Database.Models.Language>
 {
-    public class LanguageMapper : ResponseMapper<LanguageDto, Database.Models.Language>
+    public override LanguageDto FromEntity(Database.Models.Language e) => new()
     {
-        public override LanguageDto FromEntity(Database.Models.Language e) => new()
-        {
-            LanguageId = e.LanguageId,
-            Name = e.Name,
-            FullName = e.FullName
-        };
-    }
+        LanguageId = e.LanguageId,
+        Name = e.Name,
+        FullName = e.FullName
+    };
 }

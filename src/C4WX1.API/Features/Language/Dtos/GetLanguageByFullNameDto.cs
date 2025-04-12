@@ -1,10 +1,9 @@
 ﻿using FastEndpoints;
 
-namespace C4WX1.API.Features.Language.Dtos
+namespace C4WX1.API.Features.Language.Dtos;
+
+public class GetLanguageByFullNameDto
 {
-    public class GetLanguageByFullNameDto
-    {
-        [QueryParam]
-        public string FullName { get; set; } = null!;
-    }
+    [QueryParam]
+    public string FullName { get; set; } = null!;
 }

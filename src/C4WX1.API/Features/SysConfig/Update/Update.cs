@@ -4,67 +4,66 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.SysConfig.Update
+namespace C4WX1.API.Features.SysConfig.Update;
+
+public class UpdateSysConfigSummary : EndpointSummary
 {
-    public class UpdateSysConfigSummary : EndpointSummary
+    public UpdateSysConfigSummary()
     {
-        public UpdateSysConfigSummary()
+        Summary = "Update SysConfig";
+        Description = "Update one or multiple existing SysConfigs";
+        ExampleRequest = new List<UpdateSysConfigDto>
         {
-            Summary = "Update SysConfig";
-            Description = "Update one or multiple existing SysConfigs";
-            ExampleRequest = new List<UpdateSysConfigDto>
-            {
-                new() {
-                    ConfigName = "Config1",
-                    ConfigValue = "Value1",
-                    UserID = 1
-                },
-                new() {
-                    ConfigName = "Config2",
-                    ConfigValue = "Value2",
-                    UserID = 1
-                },
-            };
-            Responses[204] = "SysConfig updated successfully";
-            Responses[404] = "SysConfig not found";
-        }
+            new() {
+                ConfigName = "Config1",
+                ConfigValue = "Value1",
+                UserID = 1
+            },
+            new() {
+                ConfigName = "Config2",
+                ConfigValue = "Value2",
+                UserID = 1
+            },
+        };
+        Responses[204] = "SysConfig updated successfully";
+        Responses[404] = "SysConfig not found";
+    }
+}
+
+public class Update(THCC_C4WDEVContext dbContext)
+    : Endpoint<List<UpdateSysConfigDto>>
+{
+    public override void Configure()
+    {
+        Put("sysconfig");
+        Description(b => b.Produces(404));
+        Summary(new UpdateSysConfigSummary());
     }
 
-    public class Update(THCC_C4WDEVContext dbContext)
-        : Endpoint<List<UpdateSysConfigDto>>
+    public override async Task HandleAsync(List<UpdateSysConfigDto> req, CancellationToken ct)
     {
-        public override void Configure()
+        var configNames = req.Select(r => r.ConfigName);
+        var entityDict = await dbContext.SysConfig
+            .Where(x => configNames.Contains(x.ConfigName))
+            .ToDictionaryAsync(x => x.ConfigName, ct);
+
+        if (entityDict == null || entityDict.Count == 0)
         {
-            Put("sysconfig");
-            Description(b => b.Produces(404));
-            Summary(new UpdateSysConfigSummary());
+            await SendNotFoundAsync(ct);
+            return;
         }
 
-        public override async Task HandleAsync(List<UpdateSysConfigDto> req, CancellationToken ct)
+        foreach (var request in req)
         {
-            var configNames = req.Select(r => r.ConfigName);
-            var entityDict = await dbContext.SysConfig
-                .Where(x => configNames.Contains(x.ConfigName))
-                .ToDictionaryAsync(x => x.ConfigName, ct);
-
-            if (entityDict == null || entityDict.Count == 0)
+            if (entityDict.TryGetValue(request.ConfigName, out var entity))
             {
-                await SendNotFoundAsync(ct);
-                return;
+                entity.ConfigValue = request.ConfigValue;
+                entity.ModifiedBy_FK = request.UserID;
+                entity.ModifiedDate = DateTime.Now;
             }
-
-            foreach (var request in req)
-            {
-                if (entityDict.TryGetValue(request.ConfigName, out var entity))
-                {
-                    entity.ConfigValue = request.ConfigValue;
-                    entity.ModifiedBy_FK = request.UserID;
-                    entity.ModifiedDate = DateTime.Now;
-                }
-            }
-
-            await dbContext.SaveChangesAsync(ct);
-            await SendNoContentAsync(ct);
         }
+
+        await dbContext.SaveChangesAsync(ct);
+        await SendNoContentAsync(ct);
     }
 }

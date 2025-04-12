@@ -6,46 +6,45 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.Branch.Get
+namespace C4WX1.API.Features.Branch.Get;
+
+public class GetBranchListForControlSummary : EndpointSummary
 {
-    public class GetBranchListForControlSummary : EndpointSummary
+    public GetBranchListForControlSummary()
     {
-        public GetBranchListForControlSummary()
-        {
-            Summary = "Get Branch List for Control";
-            Description = "Get sorted Branch List for Control";
-            Responses[200] = "Branch List retrieved successfully";
-        }
+        Summary = "Get Branch List for Control";
+        Description = "Get sorted Branch List for Control";
+        Responses[200] = "Branch List retrieved successfully";
+    }
+}
+
+public class GetListForControl(
+    THCC_C4WDEVContext dbContext,
+    IBranchRepository repository)
+    : EndpointWithoutRequest<IEnumerable<BranchDto>, BranchMapper>
+{
+    public override void Configure()
+    {
+        Get("branch/for-control");
+        Summary(new GetBranchListForControlSummary());
     }
 
-    public class GetListForControl(
-        THCC_C4WDEVContext dbContext,
-        IBranchRepository repository)
-        : EndpointWithoutRequest<IEnumerable<BranchDto>, BranchMapper>
+    public override async Task HandleAsync(CancellationToken ct)
     {
-        public override void Configure()
+        var dtos = await dbContext.Branch
+            .Where(x => !x.IsDeleted)
+            .OrderBy(x => x.IsSystemUsed)
+            .ThenBy(x => x.BranchName)
+            .Select(x => Map.FromEntity(x))
+            .ToListAsync(ct);
+        var branchIds = dtos.Select(x => x.BranchID);
+        var canDeleteDict = await repository.BatchCanDeleteBranchAsync(branchIds);
+        foreach (var dto in dtos)
         {
-            Get("branch/for-control");
-            Summary(new GetBranchListForControlSummary());
+            dto.CanDelete = canDeleteDict.TryGetValue(dto.BranchID, out var canDelete)
+                && canDelete;
         }
 
-        public override async Task HandleAsync(CancellationToken ct)
-        {
-            var dtos = await dbContext.Branch
-                .Where(x => !x.IsDeleted)
-                .OrderBy(x => x.IsSystemUsed)
-                .ThenBy(x => x.BranchName)
-                .Select(x => Map.FromEntity(x))
-                .ToListAsync(ct);
-            var branchIds = dtos.Select(x => x.BranchID);
-            var canDeleteDict = await repository.BatchCanDeleteBranchAsync(branchIds);
-            foreach (var dto in dtos)
-            {
-                dto.CanDelete = canDeleteDict.TryGetValue(dto.BranchID, out var canDelete)
-                    && canDelete;
-            }
-
-            await SendOkAsync(dtos, cancellation: ct);
-        }
+        await SendOkAsync(dtos, cancellation: ct);
     }
 }

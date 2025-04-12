@@ -6,42 +6,41 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.C4WImage.Get
+namespace C4WX1.API.Features.C4WImage.Get;
+
+public class GetC4WImageByIdSummary : EndpointSummary
 {
-    public class GetC4WImageByIdSummary : EndpointSummary
+    public GetC4WImageByIdSummary()
     {
-        public GetC4WImageByIdSummary()
-        {
-            Summary = "Get C4W Image";
-            Description = "Get a C4W Image by its ID";
-            Responses[200] = "C4W Image retrieved successfully";
-            Responses[404] = "C4W Image not found";
-        }
+        Summary = "Get C4W Image";
+        Description = "Get a C4W Image by its ID";
+        Responses[200] = "C4W Image retrieved successfully";
+        Responses[404] = "C4W Image not found";
+    }
+}
+
+public class GetById(THCC_C4WDEVContext dbContext)
+    : Endpoint<GetByIdDto, C4WImageDto, C4WImageMapper>
+{
+    public override void Configure()
+    {
+        Get("c4w-image/{id}");
+        Description(b => b.Produces(404));
+        Summary(new GetC4WImageByIdSummary());
     }
 
-    public class GetById(THCC_C4WDEVContext dbContext)
-        : Endpoint<GetByIdDto, C4WImageDto, C4WImageMapper>
+    public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)
     {
-        public override void Configure()
+        var dto = await dbContext.C4WImage
+            .Where(x => !x.IsDeleted && x.C4WImageId == req.Id)
+            .Select(x => Map.FromEntity(x))
+            .FirstOrDefaultAsync(ct);
+        if (dto == null)
         {
-            Get("c4w-image/{id}");
-            Description(b => b.Produces(404));
-            Summary(new GetC4WImageByIdSummary());
+            await SendNotFoundAsync(ct);
+            return;
         }
 
-        public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)
-        {
-            var dto = await dbContext.C4WImage
-                .Where(x => !x.IsDeleted && x.C4WImageId == req.Id)
-                .Select(x => Map.FromEntity(x))
-                .FirstOrDefaultAsync(ct);
-            if (dto == null)
-            {
-                await SendNotFoundAsync(ct);
-                return;
-            }
-
-            await SendOkAsync(dto, cancellation: ct);
-        }
+        await SendOkAsync(dto, cancellation: ct);
     }
 }

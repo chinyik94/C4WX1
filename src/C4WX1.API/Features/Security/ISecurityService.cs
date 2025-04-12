@@ -1,8 +1,7 @@
-﻿namespace C4WX1.API.Features.Security
+﻿namespace C4WX1.API.Features.Security;
+
+public interface ISecurityService
 {
-    public interface ISecurityService
-    {
-        string Encrypt(string plainText);
-        string Decrypt(string cipherText, string passPhrase);
-    }
+    string Encrypt(string plainText);
+    string Decrypt(string cipherText, string passPhrase);
 }

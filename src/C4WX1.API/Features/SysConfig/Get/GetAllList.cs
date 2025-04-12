@@ -5,34 +5,33 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.SysConfig.Get
+namespace C4WX1.API.Features.SysConfig.Get;
+
+public class GetAllSysConfigListSummary : EndpointSummary
 {
-    public class GetAllSysConfigListSummary : EndpointSummary
+    public GetAllSysConfigListSummary()
     {
-        public GetAllSysConfigListSummary()
-        {
-            Summary = "Get All SysConfig";
-            Description = "Get all SysConfigs";
-            Responses[200] = "SysConfig List retrieved successfully";
-        }
+        Summary = "Get All SysConfig";
+        Description = "Get all SysConfigs";
+        Responses[200] = "SysConfig List retrieved successfully";
+    }
+}
+
+public class GetAllList(THCC_C4WDEVContext dbContext) 
+    : EndpointWithoutRequest<IEnumerable<SysConfigDto>, SysConfigGetMapper>
+{
+    public override void Configure()
+    {
+        Get("sysconfig/all");
+        Summary(new GetAllSysConfigListSummary());
     }
 
-    public class GetAllList(THCC_C4WDEVContext dbContext) 
-        : EndpointWithoutRequest<IEnumerable<SysConfigDto>, SysConfigGetMapper>
+    public override async Task HandleAsync(CancellationToken ct)
     {
-        public override void Configure()
-        {
-            Get("sysconfig/all");
-            Summary(new GetAllSysConfigListSummary());
-        }
+        var dtos = await dbContext.SysConfig
+            .Select(x => Map.FromEntity(x))
+            .ToListAsync(ct);
 
-        public override async Task HandleAsync(CancellationToken ct)
-        {
-            var dtos = await dbContext.SysConfig
-                .Select(x => Map.FromEntity(x))
-                .ToListAsync(ct);
-
-            await SendAsync(dtos, cancellation: ct);
-        }
+        await SendAsync(dtos, cancellation: ct);
     }
 }

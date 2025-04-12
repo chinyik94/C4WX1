@@ -5,65 +5,64 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.BillingProposal.Update
+namespace C4WX1.API.Features.BillingProposal.Update;
+
+public class UpdateBillingProposalStatusSummary : EndpointSummary
 {
-    public class UpdateBillingProposalStatusSummary : EndpointSummary
+    public UpdateBillingProposalStatusSummary()
     {
-        public UpdateBillingProposalStatusSummary()
+        Summary = "Update Billing Proposal Status";
+        Description = "Update Billing Proposal Status by its ID";
+        ExampleRequest = new UpdateBillingProposalStatusDto
         {
-            Summary = "Update Billing Proposal Status";
-            Description = "Update Billing Proposal Status by its ID";
-            ExampleRequest = new UpdateBillingProposalStatusDto
-            {
-                Id = 1,
-                UserId = 1,
-                Status = "Success"
-            };
-            Responses[200] = "Billing Proposal Status updated successfully";
-            Responses[400] = "Billing Proposal not found";
-            Responses[404] = "Billing Proposal Status invalid";
-        }
+            Id = 1,
+            UserId = 1,
+            Status = "Success"
+        };
+        Responses[200] = "Billing Proposal Status updated successfully";
+        Responses[400] = "Billing Proposal not found";
+        Responses[404] = "Billing Proposal Status invalid";
+    }
+}
+
+public class UpdateStatus(THCC_C4WDEVContext dbContext)
+    : Endpoint<UpdateBillingProposalStatusDto>
+{
+    private readonly string[] _acceptedStatuses = [
+        BillingProposalStatuses.Success,
+        BillingProposalStatuses.Fail
+        ];
+
+    public override void Configure()
+    {
+        Put("billing-proposal/{id}/status");
+        Description(b => b
+            .ProducesProblemFE(400)
+            .Produces(404));
+        Summary(new UpdateBillingProposalStatusSummary());
     }
 
-    public class UpdateStatus(THCC_C4WDEVContext dbContext)
-        : Endpoint<UpdateBillingProposalStatusDto>
+    public override async Task HandleAsync(UpdateBillingProposalStatusDto req, CancellationToken ct)
     {
-        private readonly string[] _acceptedStatuses = [
-            BillingProposalStatuses.Success,
-            BillingProposalStatuses.Fail
-            ];
-
-        public override void Configure()
+        if (!_acceptedStatuses.Contains(req.Status))
         {
-            Put("billing-proposal/{id}/status");
-            Description(b => b
-                .ProducesProblemFE(400)
-                .Produces(404));
-            Summary(new UpdateBillingProposalStatusSummary());
+            ThrowError("Invalid Billing Proposal Status");
+            return;
         }
 
-        public override async Task HandleAsync(UpdateBillingProposalStatusDto req, CancellationToken ct)
+        var entity = await dbContext.BillingProposal
+            .Where(x => !x.IsDeleted && x.BillingProposalID == req.Id)
+            .FirstOrDefaultAsync(ct);
+        if (entity == null)
         {
-            if (!_acceptedStatuses.Contains(req.Status))
-            {
-                ThrowError("Invalid Billing Proposal Status");
-                return;
-            }
-
-            var entity = await dbContext.BillingProposal
-                .Where(x => !x.IsDeleted && x.BillingProposalID == req.Id)
-                .FirstOrDefaultAsync(ct);
-            if (entity == null)
-            {
-                await SendNotFoundAsync(ct);
-                return;
-            }
-
-            entity.Status = req.Status;
-            entity.ModifiedBy_FK = req.UserId;
-            entity.ModifiedDate = DateTime.Now;
-            await dbContext.SaveChangesAsync(ct);
-            await SendNoContentAsync(ct);
+            await SendNotFoundAsync(ct);
+            return;
         }
+
+        entity.Status = req.Status;
+        entity.ModifiedBy_FK = req.UserId;
+        entity.ModifiedDate = DateTime.Now;
+        await dbContext.SaveChangesAsync(ct);
+        await SendNoContentAsync(ct);
     }
 }

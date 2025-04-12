@@ -1,7 +1,6 @@
-﻿namespace C4WX1.API.Features.BillingProposal.Dtos
+﻿namespace C4WX1.API.Features.BillingProposal.Dtos;
+
+public sealed class BillingProposalPatientProfileDto
 {
-    public sealed class BillingProposalPatientProfileDto
-    {
-        public string? Email { get; set; }
-    }
+    public string? Email { get; set; }
 }

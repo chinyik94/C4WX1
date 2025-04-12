@@ -6,42 +6,41 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.BillingProposal.Get
+namespace C4WX1.API.Features.BillingProposal.Get;
+
+public class GetBillingProposalSummary : EndpointSummary
 {
-    public class GetBillingProposalSummary : EndpointSummary
+    public GetBillingProposalSummary()
     {
-        public GetBillingProposalSummary()
-        {
-            Summary = "Get Billing Proposal";
-            Description = "Get Billing Proposal by its ID";
-            Responses[200] = "Billing Proposal retrieved succesfully";
-            Responses[404] = "Billing Proposal not found";
-        }
+        Summary = "Get Billing Proposal";
+        Description = "Get Billing Proposal by its ID";
+        Responses[200] = "Billing Proposal retrieved succesfully";
+        Responses[404] = "Billing Proposal not found";
+    }
+}
+
+public class GetById(THCC_C4WDEVContext dbContext)
+    : Endpoint<GetByIdDto, BillingProposalDto, BillingProposalMapper>
+{
+    public override void Configure()
+    {
+        Get("billing-proposal/{id}");
+        Description(b => b.Produces(404));
+        Summary(new GetBillingProposalSummary());
     }
 
-    public class GetById(THCC_C4WDEVContext dbContext)
-        : Endpoint<GetByIdDto, BillingProposalDto, BillingProposalMapper>
+    public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)
     {
-        public override void Configure()
-        {
-            Get("billing-proposal/{id}");
-            Description(b => b.Produces(404));
-            Summary(new GetBillingProposalSummary());
-        }
+        var dto = await dbContext.BillingProposal
+            .Where(x => !x.IsDeleted && x.BillingProposalID == req.Id)
+            .Select(x => Map.FromEntity(x))
+            .FirstOrDefaultAsync(ct);
 
-        public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)
+        if (dto == null)
         {
-            var dto = await dbContext.BillingProposal
-                .Where(x => !x.IsDeleted && x.BillingProposalID == req.Id)
-                .Select(x => Map.FromEntity(x))
-                .FirstOrDefaultAsync(ct);
-
-            if (dto == null)
-            {
-                await SendNotFoundAsync(ct);
-                return;
-            }
-            await SendOkAsync(dto, cancellation: ct);
+            await SendNotFoundAsync(ct);
+            return;
         }
+        await SendOkAsync(dto, cancellation: ct);
     }
 }

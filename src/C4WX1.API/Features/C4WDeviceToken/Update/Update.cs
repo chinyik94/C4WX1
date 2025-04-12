@@ -5,52 +5,51 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.C4WDeviceToken.Update
+namespace C4WX1.API.Features.C4WDeviceToken.Update;
+
+public class UpdateC4WDeviceTokenSummary : EndpointSummary
 {
-    public class UpdateC4WDeviceTokenSummary : EndpointSummary
+    public UpdateC4WDeviceTokenSummary()
     {
-        public UpdateC4WDeviceTokenSummary()
+        Summary = "Update C4W Device Token";
+        Description = "Update an existing C4W Device Token";
+        ExampleRequest = new UpdateC4WDeviceTokenDto
         {
-            Summary = "Update C4W Device Token";
-            Description = "Update an existing C4W Device Token";
-            ExampleRequest = new UpdateC4WDeviceTokenDto
-            {
-                C4WDeviceTokenId = 1,
-                OldDeviceToken = "Old token",
-                NewDeviceToken = "New token",
-                ClientEnvironment = "test env",
-                Device = "IPhone",
-                UserId = 1
-            };
-            Responses[204] = "C4W Device Token updated successfully";
-            Responses[404] = "C4W Device Token not found";
-        }
+            C4WDeviceTokenId = 1,
+            OldDeviceToken = "Old token",
+            NewDeviceToken = "New token",
+            ClientEnvironment = "test env",
+            Device = "IPhone",
+            UserId = 1
+        };
+        Responses[204] = "C4W Device Token updated successfully";
+        Responses[404] = "C4W Device Token not found";
+    }
+}
+
+public class Update(THCC_C4WDEVContext dbContext)
+    : EndpointWithMapper<UpdateC4WDeviceTokenDto, UpdateC4WDeviceTokenMapper>
+{
+    public override void Configure()
+    {
+        Put("c4w-device-token/{c4WDeviceTokenId}");
+        Summary(new UpdateC4WDeviceTokenSummary());
     }
 
-    public class Update(THCC_C4WDEVContext dbContext)
-        : EndpointWithMapper<UpdateC4WDeviceTokenDto, UpdateC4WDeviceTokenMapper>
+    public override async Task HandleAsync(UpdateC4WDeviceTokenDto req, CancellationToken ct)
     {
-        public override void Configure()
+        var entity = await dbContext.C4WDeviceToken
+            .FirstOrDefaultAsync(
+                x => !x.IsDeleted && x.C4WDeviceTokenId == req.C4WDeviceTokenId,
+                ct);
+        if (entity == null)
         {
-            Put("c4w-device-token/{c4WDeviceTokenId}");
-            Summary(new UpdateC4WDeviceTokenSummary());
+            await SendNotFoundAsync(ct);
+            return;
         }
 
-        public override async Task HandleAsync(UpdateC4WDeviceTokenDto req, CancellationToken ct)
-        {
-            var entity = await dbContext.C4WDeviceToken
-                .FirstOrDefaultAsync(
-                    x => !x.IsDeleted && x.C4WDeviceTokenId == req.C4WDeviceTokenId,
-                    ct);
-            if (entity == null)
-            {
-                await SendNotFoundAsync(ct);
-                return;
-            }
-
-            entity = Map.UpdateEntity(req, entity);
-            await dbContext.SaveChangesAsync(ct);
-            await SendNoContentAsync(ct);
-        }
+        entity = Map.UpdateEntity(req, entity);
+        await dbContext.SaveChangesAsync(ct);
+        await SendNoContentAsync(ct);
     }
 }

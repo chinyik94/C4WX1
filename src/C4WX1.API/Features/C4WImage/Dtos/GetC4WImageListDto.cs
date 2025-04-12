@@ -1,14 +1,13 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
 using FastEndpoints;
 
-namespace C4WX1.API.Features.C4WImage.Dtos
-{
-    public sealed class GetC4WImageListDto : GetListDto
-    {
-        [QueryParam]
-        public DateTime FromDate { get; set; }
+namespace C4WX1.API.Features.C4WImage.Dtos;
 
-        [QueryParam]
-        public DateTime ToDate { get; set; }
-    }
+public sealed class GetC4WImageListDto : GetListDto
+{
+    [QueryParam]
+    public DateTime FromDate { get; set; }
+
+    [QueryParam]
+    public DateTime ToDate { get; set; }
 }

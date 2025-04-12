@@ -7,58 +7,57 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.APIAccessKey.Get
+namespace C4WX1.API.Features.APIAccessKey.Get;
+
+public class GetAPIAccessKeyByCodeSummary : EndpointSummary
 {
-    public class GetAPIAccessKeyByCodeSummary : EndpointSummary
+    public GetAPIAccessKeyByCodeSummary()
     {
-        public GetAPIAccessKeyByCodeSummary()
-        {
-            Summary = "Get APIAccessKey";
-            Description = "Get APIAccessKey by Type Code";
-            Responses[200] = "APIAccessKey retrieved successfully";
-            Responses[404] = "APIAccessKey not found";
-        }
+        Summary = "Get APIAccessKey";
+        Description = "Get APIAccessKey by Type Code";
+        Responses[200] = "APIAccessKey retrieved successfully";
+        Responses[404] = "APIAccessKey not found";
+    }
+}
+
+public class GetByCode(
+    THCC_C4WDEVContext dbContext,
+    IPasswordGenerator passwordGenerator,
+    ISecurityService securityService)
+    : Endpoint<GetAPIAccessKeyByCodeDto, APIAccessKeyDto, APIAccessKeyMapper>
+{
+    public override void Configure()
+    {
+        Get("api-access-key/code/{code}");
+        Description(b => b.Produces(404));
+        Summary(new GetAPIAccessKeyByCodeSummary());
     }
 
-    public class GetByCode(
-        THCC_C4WDEVContext dbContext,
-        IPasswordGenerator passwordGenerator,
-        ISecurityService securityService)
-        : Endpoint<GetAPIAccessKeyByCodeDto, APIAccessKeyDto, APIAccessKeyMapper>
+    public override async Task HandleAsync(GetAPIAccessKeyByCodeDto req, CancellationToken ct)
     {
-        public override void Configure()
+        var typeCode = await dbContext.Types
+            .Where(x => x.code == req.Code)
+            .Select(x => x.code)
+            .FirstOrDefaultAsync(ct);
+        if (string.IsNullOrWhiteSpace(typeCode))
         {
-            Get("api-access-key/code/{code}");
-            Description(b => b.Produces(404));
-            Summary(new GetAPIAccessKeyByCodeSummary());
+            await SendNotFoundAsync(ct);
+            return;
         }
 
-        public override async Task HandleAsync(GetAPIAccessKeyByCodeDto req, CancellationToken ct)
+        var password = await passwordGenerator.GenerateAsync();
+        var encryptedPassword = securityService.Encrypt(password);
+        var entity = new Database.Models.APIAccessKey
         {
-            var typeCode = await dbContext.Types
-                .Where(x => x.code == req.Code)
-                .Select(x => x.code)
-                .FirstOrDefaultAsync(ct);
-            if (string.IsNullOrWhiteSpace(typeCode))
-            {
-                await SendNotFoundAsync(ct);
-                return;
-            }
-
-            var password = await passwordGenerator.GenerateAsync();
-            var encryptedPassword = securityService.Encrypt(password);
-            var entity = new Database.Models.APIAccessKey
-            {
-                AccessKey = encryptedPassword,
-                CreatedDate = DateTime.Now,
-                TokenCode = req.Code,
-                ExpiryDate = DateTime.Now.AddDays(1),
-                UserId_FK = req.UserId
-            };
-            dbContext.APIAccessKey.Add(entity);
-            await dbContext.SaveChangesAsync(ct);
-            var dto = Map.FromEntity(entity);
-            await SendAsync(dto, cancellation: ct);
-        }
+            AccessKey = encryptedPassword,
+            CreatedDate = DateTime.Now,
+            TokenCode = req.Code,
+            ExpiryDate = DateTime.Now.AddDays(1),
+            UserId_FK = req.UserId
+        };
+        dbContext.APIAccessKey.Add(entity);
+        await dbContext.SaveChangesAsync(ct);
+        var dto = Map.FromEntity(entity);
+        await SendAsync(dto, cancellation: ct);
     }
 }

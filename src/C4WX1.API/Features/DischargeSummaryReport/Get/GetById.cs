@@ -6,44 +6,43 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.DischargeSummaryReport.Get
+namespace C4WX1.API.Features.DischargeSummaryReport.Get;
+
+public class GetByIdSummary : EndpointSummary
 {
-    public class GetByIdSummary : EndpointSummary
+    public GetByIdSummary()
     {
-        public GetByIdSummary()
-        {
-            Summary = "Get Discharge Summary Report";
-            Description = "Get an Discharge Summary Report by its ID";
-            Responses[200] = "Discharge Summary Report retrieved successfully";
-            Responses[404] = "Discharge Summary Report not found";
-        }
+        Summary = "Get Discharge Summary Report";
+        Description = "Get an Discharge Summary Report by its ID";
+        Responses[200] = "Discharge Summary Report retrieved successfully";
+        Responses[404] = "Discharge Summary Report not found";
+    }
+}
+
+public class GetById(
+    THCC_C4WDEVContext dbContext)
+    : Endpoint<GetByIdDto, DischargeSummaryReportDto, DischargeSummaryReportMapper>
+{
+    public override void Configure()
+    {
+        Get("discharge-summary-report/{Id}");
+        Description(b => b.Produces(404));
+        Summary(new GetByIdSummary());
     }
 
-    public class GetById(
-        THCC_C4WDEVContext dbContext)
-        : Endpoint<GetByIdDto, DischargeSummaryReportDto, DischargeSummaryReportMapper>
+    public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)
     {
-        public override void Configure()
+        var dto = await dbContext.DischargeSummaryReport
+            .Where(x => !x.IsDeleted && x.DischargeSummaryReportId == req.Id)
+            .Select(x => Map.FromEntity(x))
+            .FirstOrDefaultAsync(ct);
+
+        if (dto == null)
         {
-            Get("discharge-summary-report/{Id}");
-            Description(b => b.Produces(404));
-            Summary(new GetByIdSummary());
+            await SendNotFoundAsync(ct);
+            return;
         }
 
-        public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)
-        {
-            var dto = await dbContext.DischargeSummaryReport
-                .Where(x => !x.IsDeleted && x.DischargeSummaryReportId == req.Id)
-                .Select(x => Map.FromEntity(x))
-                .FirstOrDefaultAsync(ct);
-
-            if (dto == null)
-            {
-                await SendNotFoundAsync(ct);
-                return;
-            }
-
-            await SendOkAsync(dto, cancellation: ct);
-        }
+        await SendOkAsync(dto, cancellation: ct);
     }
 }

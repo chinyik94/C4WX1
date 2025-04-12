@@ -1,7 +1,6 @@
-﻿namespace C4WX1.API.Features.DischargeSummaryReport.Dtos
+﻿namespace C4WX1.API.Features.DischargeSummaryReport.Dtos;
+
+public class GetByPatientIdDto
 {
-    public class GetByPatientIdDto
-    {
-        public int PatientId { get; set; }
-    }
+    public int PatientId { get; set; }
 }

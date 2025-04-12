@@ -5,49 +5,48 @@ using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.CarePlanSubGoal.Update
+namespace C4WX1.API.Features.CarePlanSubGoal.Update;
+
+public class UpdateCarePlanSubGoalSummary : EndpointSummary
 {
-    public class UpdateCarePlanSubGoalSummary : EndpointSummary
+    public UpdateCarePlanSubGoalSummary()
     {
-        public UpdateCarePlanSubGoalSummary()
+        Summary = "Update Care Plan Sub Goal";
+        Description = "Update a new Care Plan Sub Goal";
+        ExampleRequest = new UpdateCarePlanSubGoalDto
         {
-            Summary = "Update Care Plan Sub Goal";
-            Description = "Update a new Care Plan Sub Goal";
-            ExampleRequest = new UpdateCarePlanSubGoalDto
-            {
-                CarePlanSubGoalID = 1,
-                CarePlanSubGoalName = "care plan sub goal",
-                CarePlanSubID_FK = 1,
-                UserId = 1
-            };
-            Responses[204] = "Care Plan Sub Goal updated successfully";
-            Responses[404] = "Care Plan Sub Goal not found";
-        }
+            CarePlanSubGoalID = 1,
+            CarePlanSubGoalName = "care plan sub goal",
+            CarePlanSubID_FK = 1,
+            UserId = 1
+        };
+        Responses[204] = "Care Plan Sub Goal updated successfully";
+        Responses[404] = "Care Plan Sub Goal not found";
+    }
+}
+
+public class Update(THCC_C4WDEVContext dbContext)
+    : EndpointWithMapper<UpdateCarePlanSubGoalDto, UpdateCarePlanSubGoalMapper>
+{
+    public override void Configure()
+    {
+        Put("care-plan-sub-goal/{carePlanSubGoalID}");
+        Description(b => b.Produces(404));
+        Summary(new UpdateCarePlanSubGoalSummary());
     }
 
-    public class Update(THCC_C4WDEVContext dbContext)
-        : EndpointWithMapper<UpdateCarePlanSubGoalDto, UpdateCarePlanSubGoalMapper>
+    public override async Task HandleAsync(UpdateCarePlanSubGoalDto req, CancellationToken ct)
     {
-        public override void Configure()
+        var entity = await dbContext.CarePlanSubGoal
+            .FirstOrDefaultAsync(x => x.CarePlanSubGoalID == req.CarePlanSubGoalID, ct);
+        if (entity == null)
         {
-            Put("care-plan-sub-goal/{carePlanSubGoalID}");
-            Description(b => b.Produces(404));
-            Summary(new UpdateCarePlanSubGoalSummary());
+            await SendNotFoundAsync(ct);
+            return;
         }
 
-        public override async Task HandleAsync(UpdateCarePlanSubGoalDto req, CancellationToken ct)
-        {
-            var entity = await dbContext.CarePlanSubGoal
-                .FirstOrDefaultAsync(x => x.CarePlanSubGoalID == req.CarePlanSubGoalID, ct);
-            if (entity == null)
-            {
-                await SendNotFoundAsync(ct);
-                return;
-            }
-
-            entity = Map.UpdateEntity(req, entity);
-            await dbContext.SaveChangesAsync(ct);
-            await SendNoContentAsync(ct);
-        }
+        entity = Map.UpdateEntity(req, entity);
+        await dbContext.SaveChangesAsync(ct);
+        await SendNoContentAsync(ct);
     }
 }

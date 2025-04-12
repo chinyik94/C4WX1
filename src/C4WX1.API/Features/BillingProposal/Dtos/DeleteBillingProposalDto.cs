@@ -1,8 +1,7 @@
-﻿namespace C4WX1.API.Features.BillingProposal.Dtos
+﻿namespace C4WX1.API.Features.BillingProposal.Dtos;
+
+public sealed class DeleteBillingProposalDto
 {
-    public sealed class DeleteBillingProposalDto
-    {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-    }
+    public int Id { get; set; }
+    public int UserId { get; set; }
 }
