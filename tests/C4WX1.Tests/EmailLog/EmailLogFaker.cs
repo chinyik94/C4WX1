@@ -1,10 +1,5 @@
 ﻿using C4WX1.API.Features.EmailLog.Dtos;
 using C4WX1.Tests.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C4WX1.Tests.EmailLog;
 

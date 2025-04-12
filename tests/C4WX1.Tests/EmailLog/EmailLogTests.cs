@@ -5,11 +5,6 @@ using C4WX1.API.Features.EmailLog.Get;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.Tests.Shared;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C4WX1.Tests.EmailLog;
 
