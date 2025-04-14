@@ -1,7 +1,5 @@
-﻿using C4WX1.API.Features.C4WImage.Create;
-using C4WX1.API.Features.C4WImage.Dtos;
-using C4WX1.API.Features.C4WImage.Get;
-using C4WX1.API.Features.C4WImage.Update;
+﻿using C4WX1.API.Features.C4WImage.Dtos;
+using C4WX1.API.Features.C4WImage.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Tests.Shared;

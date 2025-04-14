@@ -1,7 +1,5 @@
-﻿using C4WX1.API.Features.C4WDeviceToken.Create;
-using C4WX1.API.Features.C4WDeviceToken.Dtos;
-using C4WX1.API.Features.C4WDeviceToken.Get;
-using C4WX1.API.Features.C4WDeviceToken.Update;
+﻿using C4WX1.API.Features.C4WDeviceToken.Dtos;
+using C4WX1.API.Features.C4WDeviceToken.Endpoints;
 using C4WX1.Tests.Shared;
 using Microsoft.EntityFrameworkCore;
 

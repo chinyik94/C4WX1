@@ -1,7 +1,5 @@
-﻿using C4WX1.API.Features.DischargeSummaryReport.Create;
-using C4WX1.API.Features.DischargeSummaryReport.Dtos;
-using C4WX1.API.Features.DischargeSummaryReport.Get;
-using C4WX1.API.Features.DischargeSummaryReport.Update;
+﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
+using C4WX1.API.Features.DischargeSummaryReport.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Tests.Shared;

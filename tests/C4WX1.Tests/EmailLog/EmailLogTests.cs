@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.EmailLog.Constants;
-using C4WX1.API.Features.EmailLog.Create;
 using C4WX1.API.Features.EmailLog.Dtos;
-using C4WX1.API.Features.EmailLog.Get;
+using C4WX1.API.Features.EmailLog.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.Tests.Shared;
 using Microsoft.EntityFrameworkCore;

@@ -32,8 +32,8 @@ public static class QueryExtensions
                 ? query.OrderByDescending(x => x.Status)
                 : query.OrderBy(x => x.Status),
             BranchSortColumns.Currency => isDescending
-                ? query.OrderByDescending(x => x.CurrencyID_FKNavigation.CodeName)
-                : query.OrderBy(x => x.CurrencyID_FKNavigation.CodeName),
+                ? query.OrderByDescending(x => x.CurrencyID_FKNavigation != null ? x.CurrencyID_FKNavigation.CodeName : null)
+                : query.OrderBy(x => x.CurrencyID_FKNavigation != null ? x.CurrencyID_FKNavigation.CodeName : null),
             _ => isDescending
                 ? query.OrderByDescending(x => x.BranchName)
                 : query.OrderBy(x => x.BranchName)
