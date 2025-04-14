@@ -30,8 +30,8 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
         EscalationPeriod = 2,
         EscalationEmail = "updated-control-EscalationEmail",
         EmailtoCMContent = "updated-control-EmailtoCMContent",
-        SCMList = [3, 4, 5],
-        EscPersonList = [3, 4, 5]
+        SCMList = [4, 5, 6],
+        EscPersonList = [4, 5, 6]
     };
 
     private async Task<int> SetupAsync(CreateEnquiryConfigDto testData)
@@ -51,6 +51,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
             EnquiryConfigFaker.DummyUser,
             EnquiryConfigFaker.DummyUser,
             EnquiryConfigFaker.DummyUser,
+            EnquiryConfigFaker.DummyUser,
             EnquiryConfigFaker.DummyUser
             ]);
         await dbContext.SaveChangesAsync();
@@ -60,10 +61,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
     {
         await using var dbContext = app.CreateDbContext();
         await dbContext.Database.ExecuteSqlRawAsync("""
-            TRUNCATE TABLE "Users" CASCADE;
-            TRUNCATE TABLE "EnquirySCM" CASCADE;
-            TRUNCATE TABLE "EnquiryEscPerson" CASCADE;
-            TRUNCATE TABLE "EnquiryConfig" CASCADE;
+            TRUNCATE TABLE "Users", "EnquiryConfig", "EnquirySCM", "EnquiryEscPerson" RESTART IDENTITY CASCADE;
             """);
     }
 
@@ -80,7 +78,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
         await CleanupAsync();
     }
 
-    //[Fact]
+    [Fact]
     public async Task GetById_WithNonExistentId()
     {
         var (resp, res) = await app.Client
@@ -122,7 +120,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
         await CleanupAsync();
     }
 
-    //[Fact]
+    [Fact]
     public async Task Update_WithNonExistentId()
     {
         var dummy = UpdateControl;

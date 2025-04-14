@@ -43,6 +43,8 @@ public class Update(THCC_C4WDEVContext dbContext)
     public override async Task HandleAsync(UpdateEnquiryConfigDto req, CancellationToken ct)
     {
         var entity = await dbContext.EnquiryConfig
+            .Include(x => x.EnquirySCM)
+            .Include(x => x.EnquiryEscPerson)
             .Where(x => !(x.IsDeleted ?? false) && x.EnquiryConfigID == req.Id)
             .FirstOrDefaultAsync(ct);
         if (entity == null)
@@ -53,7 +55,8 @@ public class Update(THCC_C4WDEVContext dbContext)
 
         entity = Map.UpdateEntity(req, entity);
         var scmsToRemove = entity.EnquirySCM
-            .Where(x => !req.SCMList.Any(y => y == x.UserID_FK));
+            .Where(x => !req.SCMList.Any(y => y == x.UserID_FK))
+            .ToList();
         foreach (var scm in scmsToRemove)
         {
             entity.EnquirySCM.Remove(scm);
@@ -69,7 +72,8 @@ public class Update(THCC_C4WDEVContext dbContext)
         }
 
         var escPersonsToRemove = entity.EnquiryEscPerson
-            .Where(x => !req.EscPersonList.Any(y => y == x.UserID_FK));
+            .Where(x => !req.EscPersonList.Any(y => y == x.UserID_FK))
+            .ToList();
         foreach (var escPerson in escPersonsToRemove)
         {
             entity.EnquiryEscPerson.Remove(escPerson);
