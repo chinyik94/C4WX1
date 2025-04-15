@@ -1,8 +1,6 @@
-﻿using C4WX1.Tests.Shared;
+﻿namespace C4WX1.Tests.SysConfig;
 
-namespace C4WX1.Tests.SysConfig;
-
-public class SysConfigFaker : C4WX1Faker
+public class SysConfigFaker
 {
     public static Database.Models.SysConfig Dummy() => 
         new Faker<Database.Models.SysConfig>()

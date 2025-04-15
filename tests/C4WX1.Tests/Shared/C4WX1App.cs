@@ -1,6 +1,8 @@
+using C4WX1.API.Features.Branch.Repository;
 using C4WX1.Database.Models;
 using C4WX1.DbMigrator.DataSeeders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Testcontainers.PostgreSql;
@@ -58,7 +60,16 @@ public class C4WX1App : AppFixture<Program>
                 options.UseNpgsql(_container.GetConnectionString()));
             services.AddTransient<SysConfigDataSeeder>()
                 .AddTransient<LanguageDataSeeder>()
-                .AddTransient<TypeDataSeeder>();
+                .AddTransient<TypeDataSeeder>()
+                .AddTransient<IBranchRepository, BranchRepository>();
+        });
+        a.ConfigureAppConfiguration((context, config) =>
+        {
+            config.AddInMemoryCollection(
+            [
+                new KeyValuePair<string, string?>("ConnectionStrings:Default",
+                    _container.GetConnectionString())
+            ]);
         });
 
         var host = a.Build();

@@ -1,9 +1,8 @@
 ﻿using C4WX1.API.Features.C4WDeviceToken.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.C4WDeviceToken;
 
-public class C4WDeviceTokenFaker : C4WX1Faker
+public class C4WDeviceTokenFaker
 {
     public static string OldDeviceToken() => new Faker().Random.AlphaNumeric(10);
 

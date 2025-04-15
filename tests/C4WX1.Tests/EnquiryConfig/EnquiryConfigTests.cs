@@ -47,12 +47,12 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
     {
         using var dbContext = app.CreateDbContext();
         await dbContext.Users.AddRangeAsync([
-            EnquiryConfigFaker.DummyUser,
-            EnquiryConfigFaker.DummyUser,
-            EnquiryConfigFaker.DummyUser,
-            EnquiryConfigFaker.DummyUser,
-            EnquiryConfigFaker.DummyUser,
-            EnquiryConfigFaker.DummyUser
+            C4WX1Faker.DummyUser,
+            C4WX1Faker.DummyUser,
+            C4WX1Faker.DummyUser,
+            C4WX1Faker.DummyUser,
+            C4WX1Faker.DummyUser,
+            C4WX1Faker.DummyUser
             ]);
         await dbContext.SaveChangesAsync();
     }
@@ -61,7 +61,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
     {
         await using var dbContext = app.CreateDbContext();
         await dbContext.Database.ExecuteSqlRawAsync("""
-            TRUNCATE TABLE "Users", "EnquiryConfig", "EnquirySCM", "EnquiryEscPerson" RESTART IDENTITY CASCADE;
+            TRUNCATE TABLE "Users", "EnquiryConfig" RESTART IDENTITY CASCADE;
             """);
     }
 

@@ -1,9 +1,8 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.DischargeSummaryReport;
 
-public class DischargeSummaryReportFaker : C4WX1Faker
+public class DischargeSummaryReportFaker
 {
     public static CreateDischargeSummaryReportDto CreateDto()
         => new Faker<CreateDischargeSummaryReportDto>()

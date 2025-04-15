@@ -1,9 +1,8 @@
 ﻿using C4WX1.API.Features.APIAccessKey.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.APIAccessKey;
 
-public class APIAccessKeyFaker : C4WX1Faker
+public class APIAccessKeyFaker
 {
     public static GetAPIAccessKeyByCodeDto GetByCodeDto() =>
         new Faker<GetAPIAccessKeyByCodeDto>()

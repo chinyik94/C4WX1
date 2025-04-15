@@ -33,7 +33,6 @@ public class C4WDeviceTokenTests(C4WX1App app, C4WX1State state)
             testData);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
-        state.InsertedIds.Add(res);
         return res;
     }
 
@@ -48,14 +47,12 @@ public class C4WDeviceTokenTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task Create()
     {
-        state.InsertedIds = [];
         for (int i = 0; i < state.CreateCount; i++)
         {
             var (resp2, res2) = await app.Client.POSTAsync<Create, CreateC4WDeviceTokenDto, int>(
                 C4WDeviceTokenFaker.CreateDto());
             resp2.IsSuccessStatusCode.ShouldBeTrue();
             res2.ShouldBeGreaterThan(0);
-            state.InsertedIds.Add(res2);
         }
 
         await CleanupAsync();
@@ -64,7 +61,6 @@ public class C4WDeviceTokenTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetByOldDeviceToken_WithExistingOldDeviceToken()
     {
-        state.InsertedIds = [];
         var expected = NewControlData;
         var id = await SetupAsync(expected);
 
@@ -101,7 +97,6 @@ public class C4WDeviceTokenTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task Update_WithExistingId()
     {
-        state.InsertedIds = [];
         var id = await SetupAsync(NewControlData);
 
         var req = UpdatedControlData;
@@ -116,7 +111,7 @@ public class C4WDeviceTokenTests(C4WX1App app, C4WX1State state)
     public async Task Update_WithNonExistentId()
     {
         var req = UpdatedControlData;
-        req.C4WDeviceTokenId = C4WDeviceTokenFaker.Id();
+        req.C4WDeviceTokenId = C4WX1Faker.Id();
         var resp = await app.Client.PUTAsync<Update, UpdateC4WDeviceTokenDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
     }

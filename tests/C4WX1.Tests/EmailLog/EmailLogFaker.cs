@@ -1,9 +1,8 @@
 ﻿using C4WX1.API.Features.EmailLog.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.EmailLog;
 
-public class EmailLogFaker : C4WX1Faker
+public class EmailLogFaker
 {
     public static CreateEmailLogDto CreateDummy => new Faker<CreateEmailLogDto>()
         .RuleFor(x => x.msgBCC, f => f.Random.AlphaNumeric(10))

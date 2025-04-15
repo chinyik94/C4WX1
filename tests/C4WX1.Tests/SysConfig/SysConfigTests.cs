@@ -285,7 +285,7 @@ public class SysConfigTests(C4WX1App app, C4WX1State state)
                 {
                     ConfigName = NewControlData.ConfigName,
                     ConfigValue = SysConfigFaker.ConfigValue(),
-                    UserID = SysConfigFaker.UserId()
+                    UserID = C4WX1Faker.UserId()
                 }
             ]);
 
@@ -307,7 +307,7 @@ public class SysConfigTests(C4WX1App app, C4WX1State state)
             {
                 ConfigName = dummy.ConfigName,
                 ConfigValue = SysConfigFaker.ConfigValue(),
-                UserID = SysConfigFaker.UserId()
+                UserID = C4WX1Faker.UserId()
             });
         }
         await AddTestDataAsync(dummies);
@@ -317,7 +317,7 @@ public class SysConfigTests(C4WX1App app, C4WX1State state)
             {
                 ConfigName = x.ConfigName,
                 ConfigValue = SysConfigFaker.ConfigValue(),
-                UserID = SysConfigFaker.UserId()
+                UserID = C4WX1Faker.UserId()
             });
 
         var resp = await app.Client.PUTAsync<Update, IEnumerable<UpdateSysConfigDto>>(
@@ -337,7 +337,7 @@ public class SysConfigTests(C4WX1App app, C4WX1State state)
                 {
                     ConfigName = SysConfigFaker.ConfigName(),
                     ConfigValue = SysConfigFaker.ConfigValue(),
-                    UserID = SysConfigFaker.UserId()
+                    UserID = C4WX1Faker.UserId()
                 }
             ]);
 
@@ -353,7 +353,7 @@ public class SysConfigTests(C4WX1App app, C4WX1State state)
                 {
                     ConfigName = NewControlData.ConfigName,
                     ConfigValue = SysConfigFaker.ConfigValue(),
-                    UserID = SysConfigFaker.UserId()
+                    UserID = C4WX1Faker.UserId()
                 }
             ]);
         resp.IsSuccessStatusCode.ShouldBeFalse();

@@ -1,9 +1,8 @@
 ﻿using C4WX1.API.Features.C4WImage.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.C4WImage;
 
-public class C4WImageFaker : C4WX1Faker
+public class C4WImageFaker
 {
     public static CreateC4WImageDto CreateDto() => new Faker<CreateC4WImageDto>()
         .RuleFor(x => x.WoundImageName, f => f.Random.AlphaNumeric(10))

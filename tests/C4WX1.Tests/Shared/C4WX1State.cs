@@ -3,6 +3,4 @@
 public class C4WX1State : StateFixture
 {
     public int CreateCount { get; } = C4WX1Faker.CreateCount();
-
-    public List<int> InsertedIds { get; set; } = [];
 }

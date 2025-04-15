@@ -53,7 +53,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
             testData);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
-        state.InsertedIds.Add(res);
         return res;
     }
 
@@ -68,7 +67,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task Create()
     {
-        state.InsertedIds = [];
         var reqs = Enumerable.Range(0, state.CreateCount)
             .Select(x => DischargeSummaryReportFaker.CreateDto());
 
@@ -78,7 +76,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
                 req);
             resp.IsSuccessStatusCode.ShouldBeTrue();
             res.ShouldBeGreaterThan(0);
-            state.InsertedIds.Add(res);
         }
 
         await CleanupAsync();
@@ -87,7 +84,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetCount()
     {
-        state.InsertedIds = [];
         var createCount = state.CreateCount;
         for (int i = 0; i < createCount; i++)
         {
@@ -109,7 +105,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetList()
     {
-        state.InsertedIds = [];
         var createCount = state.CreateCount;
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
         for (int i = 0; i < createCount; i++)
@@ -133,7 +128,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetCanAdd_WithExistingPatientId_AndExistingStatusIsActive()
     {
-        state.InsertedIds = [];
         await SetupAsync(NewControlData);
 
         var (resp, res) = await app.Client.GETAsync<GetCanAdd, GetCanAddDto, bool>(
@@ -161,7 +155,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetById_WithExistingId()
     {
-        state.InsertedIds = [];
         var id = await SetupAsync(NewControlData);
 
         var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, DischargeSummaryReportDto>(
@@ -187,7 +180,7 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     public async Task GetById_WithNonExistentId()
     {
         var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, DischargeSummaryReportDto>(
-            DischargeSummaryReportFaker.GetByIdDto());
+            C4WX1Faker.GetByIdDto());
 
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
@@ -196,7 +189,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetByPatientId_WithExistingPatientId()
     {
-        state.InsertedIds = [];
         await SetupAsync(NewControlData);
 
         var (resp, res) = await app.Client.GETAsync<GetByPatientId, GetByPatientIdDto, DischargeSummaryReportDto>(
@@ -231,7 +223,6 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task Update_WithExistingId()
     {
-        state.InsertedIds = [];
         var id = await SetupAsync(NewControlData);
 
         var req = UpdatedControlData;
@@ -247,7 +238,7 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     public async Task Update_WithNonExistentId()
     {
         var req = UpdatedControlData;
-        req.DischargeSummaryReportID = DischargeSummaryReportFaker.Id();
+        req.DischargeSummaryReportID = C4WX1Faker.Id();
         var resp = await app.Client.PUTAsync<Update, UpdateDischargeSummaryReportDto>(req);
 
         resp.IsSuccessStatusCode.ShouldBeFalse();
