@@ -34,11 +34,14 @@ public class GetList(
     public override async Task HandleAsync(GetListDto req, CancellationToken ct)
     {
         var dtos = await dbContext.Branch
+            .Include(x => x.CurrencyID_FKNavigation)
+            .Include(x => x.UserBranch)
+                .ThenInclude(x => x.UserID_FKNavigation)
             .Where(x => !x.IsDeleted)
             .Sort(req.OrderBy)
             .Select(x => Map.FromEntity(x))
             .ToListAsync(ct);
-        var branchIds = dtos.Select(x => x.BranchID);
+        var branchIds = dtos.Select(x => x.BranchID).ToArray();
         var canDeleteDict = await repository.BatchCanDeleteBranchAsync(branchIds);
         foreach (var dto in dtos)
         {

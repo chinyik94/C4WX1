@@ -24,7 +24,7 @@ public class BranchRepository(IConfiguration configuration)
         return canDelete;
     }
 
-    public async Task<Dictionary<int, bool>> BatchCanDeleteBranchAsync(IEnumerable<int> branchIds)
+    public async Task<Dictionary<int, bool>> BatchCanDeleteBranchAsync(int[] branchIds)
     {
         if (string.IsNullOrWhiteSpace(connectionString))
         {

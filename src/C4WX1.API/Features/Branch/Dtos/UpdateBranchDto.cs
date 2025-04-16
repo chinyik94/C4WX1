@@ -12,5 +12,5 @@ public sealed class UpdateBranchDto
     public string Status { get; set; } = null!;
     public int? CurrencyID_FK { get; set; }
     public int UserId { get; set; }
-    public ICollection<BranchUserDto> UserDataList { get; set; } = [];
+    public ICollection<int> UserDataList { get; set; } = [];
 }

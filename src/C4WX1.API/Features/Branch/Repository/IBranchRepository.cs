@@ -3,5 +3,5 @@
 public interface IBranchRepository
 {
     Task<bool> CanDeleteBranchAsync(int branchId);
-    Task<Dictionary<int, bool>> BatchCanDeleteBranchAsync(IEnumerable<int> branchIds);
+    Task<Dictionary<int, bool>> BatchCanDeleteBranchAsync(int[] branchIds);
 }

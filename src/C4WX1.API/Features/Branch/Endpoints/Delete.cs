@@ -40,7 +40,10 @@ public class Delete(
 
     public override async Task HandleAsync(DeleteBranchDto req, CancellationToken ct)
     {
-        var canDelete = await repository.CanDeleteBranchAsync(req.Id);
+        var canDeleteBranch = await repository.CanDeleteBranchAsync(req.Id);
+        var canDelete = await dbContext.Branch
+            .Where(x => !x.IsDeleted && x.BranchID == req.Id && canDeleteBranch)
+            .AnyAsync(ct);
         if (!canDelete)
         {
             ThrowError("UNABLE_DELETE");
@@ -60,6 +63,6 @@ public class Delete(
         entity.ModifiedDate = DateTime.Now;
 
         await dbContext.SaveChangesAsync(ct);
-        await SendOkAsync(ct);
+        await SendNoContentAsync(ct);
     }
 }

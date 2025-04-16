@@ -25,9 +25,7 @@ public class UpdateBranchSummary : EndpointSummary
             Status = "Active",
             CurrencyID_FK = 1,
             UserId = 1,
-            UserDataList = [
-                new BranchUserDto { UserId = 1}
-                ]
+            UserDataList = [1, 2, 3]
         };
         Responses[204] = "Branch updated successfully";
         Responses[400] = "Branch data invalid";
@@ -50,7 +48,6 @@ public class Update(THCC_C4WDEVContext dbContext)
     public override async Task HandleAsync(UpdateBranchDto req, CancellationToken ct)
     {
         var hasDuplicate = await dbContext.Branch
-            .Include(x => x.UserBranch)
             .AnyAsync(x => !x.IsDeleted
                 && x.BranchName == req.BranchName
                 && x.BranchID != req.BranchID,
@@ -62,6 +59,7 @@ public class Update(THCC_C4WDEVContext dbContext)
         }
 
         var entity = await dbContext.Branch
+            .Include(x => x.UserBranch)
             .FirstOrDefaultAsync(x => !x.IsDeleted
                 && x.BranchID == req.BranchID,
                 ct);
@@ -73,9 +71,8 @@ public class Update(THCC_C4WDEVContext dbContext)
         entity = Map.UpdateEntity(req, entity);
 
         var existingUsers = entity.UserBranch.Select(x => x.UserID_FK).ToHashSet();
-        var incomingUsers = req.UserDataList.Select(x => x.UserId).ToHashSet();
         var validUsers = (await dbContext.Users
-            .Where(x => !x.IsDeleted && incomingUsers.Contains(x.UserId))
+            .Where(x => !x.IsDeleted && req.UserDataList.Contains(x.UserId))
             .Select(x => x.UserId)
             .ToListAsync(ct))
             .ToHashSet();
@@ -88,7 +85,7 @@ public class Update(THCC_C4WDEVContext dbContext)
                 BranchID_FK = entity.BranchID
             });
         var usersToRemove = entity.UserBranch
-            .Where(x => !incomingUsers.Contains(x.UserID_FK));
+            .Where(x => !req.UserDataList.Contains(x.UserID_FK));
 
         dbContext.UserBranch.RemoveRange(usersToRemove);
         foreach (var item in usersToAdd)

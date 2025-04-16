@@ -25,9 +25,7 @@ public class CreateBranchSummary : EndpointSummary
             Status = "Active",
             CurrencyID_FK = 1,
             UserId = 1,
-            UserDataList = [
-                new BranchUserDto { UserId = 1}
-                ]
+            UserDataList = [1, 2, 3]
         };
         Responses[204] = "Branch created successfully";
         Responses[400] = "Branch data invalid";
@@ -35,7 +33,7 @@ public class CreateBranchSummary : EndpointSummary
 }
 
 public class Create(THCC_C4WDEVContext dbContext)
-    : EndpointWithMapper<CreateBranchDto, CreateBranchMapper>
+    : Endpoint<CreateBranchDto, int, CreateBranchMapper>
 {
     public override void Configure()
     {
@@ -57,22 +55,20 @@ public class Create(THCC_C4WDEVContext dbContext)
         }
 
         var entity = Map.ToEntity(req);
-        var validUsers = (await dbContext.Users
-            .Where(x => !x.IsDeleted && req.UserDataList.Select(y => y.UserId).Contains(x.UserId))
+        var validUserIds = await dbContext.Users
+            .Where(x => !x.IsDeleted && req.UserDataList.Contains(x.UserId))
             .Select(x => x.UserId)
-            .ToListAsync(ct))
-            .ToHashSet();
-
-        entity.UserBranch = req.UserDataList
-            .Where(x => validUsers.Contains(x.UserId))
-            .Select(x => new UserBranch
+            .ToListAsync(ct);
+        foreach (var userId in validUserIds)
+        {
+            entity.UserBranch.Add(new UserBranch
             {
-                UserID_FK = x.UserId
-            })
-            .ToList();
+                UserID_FK = userId
+            });
+        }
 
         dbContext.Branch.Add(entity);
         await dbContext.SaveChangesAsync(ct);
-        await SendOkAsync(ct);
+        await SendOkAsync(entity.BranchID, cancellation: ct);
     }
 }

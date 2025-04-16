@@ -37,7 +37,7 @@ public class GetListForControl(
             .ThenBy(x => x.BranchName)
             .Select(x => Map.FromEntity(x))
             .ToListAsync(ct);
-        var branchIds = dtos.Select(x => x.BranchID);
+        var branchIds = dtos.Select(x => x.BranchID).ToArray();
         var canDeleteDict = await repository.BatchCanDeleteBranchAsync(branchIds);
         foreach (var dto in dtos)
         {
