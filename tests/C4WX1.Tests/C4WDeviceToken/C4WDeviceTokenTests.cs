@@ -111,7 +111,7 @@ public class C4WDeviceTokenTests(C4WX1App app, C4WX1State state)
     public async Task Update_WithNonExistentId()
     {
         var req = UpdatedControlData;
-        req.C4WDeviceTokenId = C4WX1Faker.Id();
+        req.C4WDeviceTokenId = C4WX1Faker.Id;
         var resp = await app.Client.PUTAsync<Update, UpdateC4WDeviceTokenDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
     }

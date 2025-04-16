@@ -14,7 +14,7 @@ public class APIAccessKeyTests(C4WX1App app) : TestBase
             new()
             {
                 Code = "APIToken",
-                UserId = C4WX1Faker.UserId()
+                UserId = C4WX1Faker.UserId
             });
 
         resp.StatusCode.ShouldBe(HttpStatusCode.OK);

@@ -197,7 +197,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var resp7 = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
             new DeleteBranchDto
             {
-                Id = C4WX1Faker.Id(),
+                Id = C4WX1Faker.Id,
                 UserId = 1
             });
         resp7.IsSuccessStatusCode.ShouldBeFalse();
@@ -211,7 +211,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var resp = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
             new DeleteBranchDto
             {
-                Id = C4WX1Faker.Id(),
+                Id = C4WX1Faker.Id,
                 UserId = 1
             });
         resp.IsSuccessStatusCode.ShouldBeFalse();
@@ -289,7 +289,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
             .GETAsync<GetById, GetByIdDto, BranchDto>(
                 new()
                 {
-                    Id = C4WX1Faker.Id(),
+                    Id = C4WX1Faker.Id,
                 });
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
@@ -544,7 +544,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
                 Contact = BranchFaker.DummyContact,
                 Email = BranchFaker.DummyEmail,
                 Status = Statuses.Active,
-                UserId = C4WX1Faker.Id(),
+                UserId = C4WX1Faker.Id,
                 UserDataList = []
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -569,7 +569,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
                 Contact = BranchFaker.DummyContact,
                 Email = BranchFaker.DummyEmail,
                 Status = Statuses.Active,
-                UserId = C4WX1Faker.Id(),
+                UserId = C4WX1Faker.Id,
                 UserDataList = [4, 5, 6]
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();

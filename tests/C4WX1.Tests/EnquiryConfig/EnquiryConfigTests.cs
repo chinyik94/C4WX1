@@ -85,7 +85,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
             .GETAsync<GetById, GetByIdDto, EnquiryConfigDto>(
             new()
             {
-                Id = C4WX1Faker.Id(),
+                Id = C4WX1Faker.Id,
             });
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
@@ -124,7 +124,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
     public async Task Update_WithNonExistentId()
     {
         var dummy = UpdateControl;
-        dummy.Id = C4WX1Faker.Id();
+        dummy.Id = C4WX1Faker.Id;
         var resp = await app.Client
             .PUTAsync<Update, UpdateEnquiryConfigDto>(dummy);
 

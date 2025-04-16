@@ -180,7 +180,7 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     public async Task GetById_WithNonExistentId()
     {
         var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, DischargeSummaryReportDto>(
-            C4WX1Faker.GetByIdDto());
+            C4WX1Faker.GetByIdDto);
 
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
@@ -238,7 +238,7 @@ public class DischargeSummaryReportTests(C4WX1App app, C4WX1State state)
     public async Task Update_WithNonExistentId()
     {
         var req = UpdatedControlData;
-        req.DischargeSummaryReportID = C4WX1Faker.Id();
+        req.DischargeSummaryReportID = C4WX1Faker.Id;
         var resp = await app.Client.PUTAsync<Update, UpdateDischargeSummaryReportDto>(req);
 
         resp.IsSuccessStatusCode.ShouldBeFalse();
