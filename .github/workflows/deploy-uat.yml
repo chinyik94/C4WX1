@@ -35,7 +35,8 @@ jobs:
 
       - name: Run Tests
         run: |
-          dotnet test
+          dotnet tool install -g dotnet-trx
+          dotnet test --logger trx; trx --output
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
