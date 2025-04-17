@@ -42,7 +42,6 @@ public class GetById(
             .Where(x => !x.IsDeleted && x.BranchID == req.Id)
             .Select(x => Map.FromEntity(x))
             .FirstOrDefaultAsync(ct);
-
         if (dto == null)
         {
             await SendNotFoundAsync(ct);

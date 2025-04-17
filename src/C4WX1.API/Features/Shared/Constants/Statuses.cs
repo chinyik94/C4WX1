@@ -12,4 +12,5 @@ public class Statuses
     public const string Discharge = nameof(Discharge);
     public const string DischargeRIP = "Discharge RIP";
     public const string Active = nameof(Active);
+    public const string Locked = nameof(Locked);
 }

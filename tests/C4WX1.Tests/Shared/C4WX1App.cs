@@ -1,4 +1,4 @@
-using C4WX1.API.Features.Branch.Repository;
+using C4WX1.API.Extensions;
 using C4WX1.Database.Models;
 using C4WX1.DbMigrator.DataSeeders;
 using Microsoft.EntityFrameworkCore;
@@ -61,7 +61,7 @@ public class C4WX1App : AppFixture<Program>
             services.AddTransient<SysConfigDataSeeder>()
                 .AddTransient<LanguageDataSeeder>()
                 .AddTransient<TypeDataSeeder>()
-                .AddTransient<IBranchRepository, BranchRepository>();
+                .AddAppServices();
         });
         a.ConfigureAppConfiguration((context, config) =>
         {
