@@ -3,5 +3,5 @@
 public interface IActivityRepository
 {
     Task<bool> CanDeleteAsync(int activityId);
-    Task<Dictionary<int, bool>> BatchCanDeleteAsync(IEnumerable<int> activityIds);
+    Task<Dictionary<int, bool>> BatchCanDeleteAsync(int[] activityIds);
 }

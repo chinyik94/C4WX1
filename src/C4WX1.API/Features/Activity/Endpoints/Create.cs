@@ -25,7 +25,7 @@ public class CreateActivitySummary : EndpointSummary
 }
 
 public class Create(THCC_C4WDEVContext dbContext)
-    : EndpointWithMapper<CreateActivityDto, CreateActivityMapper>
+    : Endpoint<CreateActivityDto, int, CreateActivityMapper>
 {
     public override void Configure()
     {
@@ -38,6 +38,6 @@ public class Create(THCC_C4WDEVContext dbContext)
         var entity = Map.ToEntity(req);
         dbContext.Activity.Add(entity);
         await dbContext.SaveChangesAsync(ct);
-        await SendNoContentAsync(ct);
+        await SendOkAsync(entity.ActivityID, cancellation: ct);
     }
 }

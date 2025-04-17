@@ -45,6 +45,7 @@ public class GetList(
         var isDescending = order[1].Equals(SortDirections.Default, StringComparison.OrdinalIgnoreCase);
 
         var query = dbContext.Activity
+            .Include(x => x.ProblemListID_FKNavigation)
             .Where(x => !x.IsDeleted);
         query = sortColumn switch
         {
@@ -68,7 +69,7 @@ public class GetList(
             return;
         }
 
-        var activityIds = dtos.Select(x => x.ActivityID);
+        var activityIds = dtos.Select(x => x.ActivityID).ToArray();
         var canDeleteDict = await repository.BatchCanDeleteAsync(activityIds);
         foreach (var dto in dtos)
         {

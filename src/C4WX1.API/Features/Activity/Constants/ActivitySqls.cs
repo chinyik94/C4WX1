@@ -3,7 +3,7 @@
 public class ActivitySqls
 {
     public const string CanDelete = """
-        SELECT "fn_CanDeleteActivity(@ActivityId)"
+        SELECT "fn_CanDeleteActivity"(@ActivityId)
         """;
     public const string BatchCanDelete = """
         SELECT id, "fn_CanDeleteActivity"(id) AS can_delete

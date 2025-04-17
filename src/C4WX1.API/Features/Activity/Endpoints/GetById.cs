@@ -34,17 +34,17 @@ public class GetById(
 
     public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)
     {
-        var entity = await dbContext.Activity
-            .FirstOrDefaultAsync(x => x.ActivityID == req.Id && !x.IsDeleted, ct);
-        if (entity == null)
+        var dto = await dbContext.Activity
+            .Where(x => x.ActivityID == req.Id && !x.IsDeleted)
+            .Select(x => Map.FromEntity(x))
+            .FirstOrDefaultAsync(ct);
+        if (dto == null)
         {
             await SendNotFoundAsync(ct);
             return;
         }
 
-        var dto = Map.FromEntity(entity);
         dto.CanDelete = await repository.CanDeleteAsync(dto.ActivityID);
-
         await SendAsync(dto, cancellation: ct);
     }
 }

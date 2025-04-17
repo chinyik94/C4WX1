@@ -24,7 +24,7 @@ public class ActivityRepository(IConfiguration configuration)
         return canDelete;
     }
 
-    public async Task<Dictionary<int, bool>> BatchCanDeleteAsync(IEnumerable<int> activityIds)
+    public async Task<Dictionary<int, bool>> BatchCanDeleteAsync(int[] activityIds)
     {
         if (string.IsNullOrWhiteSpace(connectionString))
         {
