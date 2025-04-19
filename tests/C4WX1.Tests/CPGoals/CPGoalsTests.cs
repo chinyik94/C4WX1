@@ -1,13 +1,9 @@
 ﻿using C4WX1.API.Features.CPGoals.Dtos;
 using C4WX1.API.Features.CPGoals.Endpoints;
+using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Tests.Shared;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C4WX1.Tests.CPGoals;
 
@@ -162,7 +158,7 @@ public class CPGoalsTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CPGoalsDto>>(
             new()
             {
-                OrderBy = "default desc"
+                OrderBy = state.DefaultDescOrderby
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -171,7 +167,7 @@ public class CPGoalsTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CPGoalsDto>>(
             new()
             {
-                OrderBy = "default asc"
+                OrderBy = state.DefaultAscOrderby
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
@@ -201,7 +197,7 @@ public class CPGoalsTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CPGoalsDto>>(
             new()
             {
-                OrderBy = "DiseaseName desc"
+                OrderBy = $"DiseaseName {SortDirections.Desc}"
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -210,7 +206,7 @@ public class CPGoalsTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CPGoalsDto>>(
             new()
             {
-                OrderBy = "DiseaseName asc"
+                OrderBy = $"DiseaseName {SortDirections.Asc}"
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
@@ -224,7 +220,7 @@ public class CPGoalsTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupDependenciesAsync();
         var createCount = state.CreateCount;
-        var pageSize = 5;
+        var pageSize = state.LowPageSize;
         var expectedCount = Math.Min(createCount, pageSize);
         var dummies = Enumerable.Range(0, createCount)
             .Select(x => new CreateCPGoalsDto
@@ -246,7 +242,7 @@ public class CPGoalsTests(C4WX1App app, C4WX1State state) : TestBase
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
 
-        pageSize = 100;
+        pageSize = state.HighPageSize;
         expectedCount = Math.Min(createCount, pageSize);
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CPGoalsDto>>(
             new()

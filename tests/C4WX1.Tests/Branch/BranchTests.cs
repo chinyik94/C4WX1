@@ -327,7 +327,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = "test desc"
+                OrderBy = state.DefaultDescOrderby
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -336,7 +336,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = "test asc"
+                OrderBy = state.DefaultAscOrderby
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
@@ -359,7 +359,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Address} desc"
+                OrderBy = $"{BranchSortColumns.Address} {SortDirections.Desc}"
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -368,7 +368,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Address} asc"
+                OrderBy = $"{BranchSortColumns.Address} {SortDirections.Asc}"
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
@@ -391,7 +391,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Contact} desc"
+                OrderBy = $"{BranchSortColumns.Contact} {SortDirections.Desc}"
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -400,7 +400,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Contact} asc"
+                OrderBy = $"{BranchSortColumns.Contact} {SortDirections.Asc}"
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
@@ -423,7 +423,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Email} desc"
+                OrderBy = $"{BranchSortColumns.Email} {SortDirections.Desc}"
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -432,7 +432,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Email} asc"
+                OrderBy = $"{BranchSortColumns.Email} {SortDirections.Asc}"
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
@@ -455,7 +455,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Status} desc"
+                OrderBy = $"{BranchSortColumns.Status} {SortDirections.Desc}"
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -464,7 +464,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Status} asc"
+                OrderBy = $"{BranchSortColumns.Status} {SortDirections.Asc}"
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
@@ -487,7 +487,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Currency} desc"
+                OrderBy = $"{BranchSortColumns.Currency} {SortDirections.Desc}"
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -496,7 +496,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
             {
-                OrderBy = $"{BranchSortColumns.Currency} asc"
+                OrderBy = $"{BranchSortColumns.Currency} {SortDirections.Asc}"
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);

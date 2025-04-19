@@ -1,6 +1,7 @@
 ﻿using C4WX1.API.Features.EmailLog.Dtos;
 using C4WX1.API.Features.EmailLog.Extensions;
 using C4WX1.API.Features.EmailLog.Mappers;
+using C4WX1.API.Features.Shared.Constants;
 using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
@@ -29,8 +30,8 @@ public class GetList(THCC_C4WDEVContext dbContext)
 
     public override async Task HandleAsync(GetEmailLogListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? 1;
-        var pageSize = req.PageSize ?? 10;
+        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
+        var pageSize = req.PageSize ?? PaginationDefaults.Size;
         var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
 
         var query = dbContext.EmailLog

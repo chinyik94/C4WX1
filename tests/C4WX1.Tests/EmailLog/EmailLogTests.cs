@@ -484,9 +484,9 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     }
 
     [Fact]
-    public async Task GetList_WithPageSizeLessThanCreateCount()
+    public async Task GetList_WithPageSize()
     {
-        var pageSize = 5;
+        var pageSize = state.LowPageSize;
         var createCount = state.CreateCount;
         var dummies = Enumerable.Range(0, createCount)
             .Select(x => EmailLogFaker.CreateDummy);
@@ -508,33 +508,19 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
         res.Count().ShouldBe(expectedCount);
         res.Select(x => x.EmailLogId).ShouldBeInOrder(SortDirection.Descending);
 
-        await CleanupAsync();
-    }
-
-    [Fact]
-    public async Task GetList_WithPageSizeMoreThanCreateCount()
-    {
-        var pageSize = 100;
-        var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        var expectedCount = Math.Min(createCount, pageSize);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
-
-        var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
+        var pageSize2 = state.HighPageSize;
+        var expectedCount2 = Math.Min(createCount, pageSize2);
+        var (resp2, res2) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
             {
-                PageSize = pageSize,
+                PageSize = pageSize2,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
-        resp.IsSuccessStatusCode.ShouldBeTrue();
-        res.Count().ShouldBeGreaterThan(0);
-        res.Count().ShouldBe(expectedCount);
-        res.Select(x => x.EmailLogId).ShouldBeInOrder(SortDirection.Descending);
+        resp2.IsSuccessStatusCode.ShouldBeTrue();
+        res2.Count().ShouldBeGreaterThan(0);
+        res2.Count().ShouldBe(expectedCount2);
+        res2.Select(x => x.EmailLogId).ShouldBeInOrder(SortDirection.Descending);
 
         await CleanupAsync();
     }

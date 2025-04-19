@@ -120,9 +120,9 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     }
 
     [Fact]
-    public async Task GetList_WithPageSizeMoreThanCreateCount()
+    public async Task GetList_WithPageSize()
     {
-        var pageSize = 100;
+        var pageSize = state.HighPageSize;
         var createCount = state.CreateCount;
         for (int i = 0; i < createCount; i++)
         {
@@ -145,31 +145,20 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
         res.Count().ShouldBeLessThanOrEqualTo(expectedCount);
         res.Select(x => x.C4WImageId).ShouldBeInOrder(SortDirection.Descending);
 
-        await CleanupAsync();
-    }
-
-    [Fact]
-    public async Task GetList_WithPageSizeLessThanCreateCount()
-    {
-        var pageSize = 5;
-        var createCount = state.CreateCount;
-        for (int i = 0; i < createCount; i++)
-        {
-            await SetupAsync(C4WImageFaker.CreateDto());
-        }
-        var expectedCount = Math.Min(createCount, pageSize);
-        var req = new GetC4WImageListDto
+        var pageSize2 = state.LowPageSize;
+        var expectedCount2 = Math.Min(createCount, pageSize2);
+        var req2 = new GetC4WImageListDto
         {
             FromDate = DateTime.Now.AddDays(-1),
             ToDate = DateTime.Now.AddDays(1),
-            PageSize = pageSize
+            PageSize = pageSize2
         };
-        var (resp, res) = await app.Client.GETAsync<GetList, GetC4WImageListDto, IEnumerable<C4WImageDto>>(
-            req);
-        resp.IsSuccessStatusCode.ShouldBeTrue();
-        res.ShouldNotBeNull();
-        res.ShouldNotBeEmpty();
-        res.Count().ShouldBeLessThanOrEqualTo(expectedCount);
+        var (resp2, res2) = await app.Client.GETAsync<GetList, GetC4WImageListDto, IEnumerable<C4WImageDto>>(
+            req2);
+        resp2.IsSuccessStatusCode.ShouldBeTrue();
+        res2.ShouldNotBeNull();
+        res2.ShouldNotBeEmpty();
+        res2.Count().ShouldBeLessThanOrEqualTo(expectedCount2);
         res.Select(x => x.C4WImageId).ShouldBeInOrder(SortDirection.Descending);
 
         await CleanupAsync();
@@ -188,7 +177,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
         {
             FromDate = DateTime.Now.AddDays(-1),
             ToDate = DateTime.Now.AddDays(1),
-            OrderBy = "C4WImageId asc"
+            OrderBy = $"C4WImageId {SortDirections.Asc}"
         };
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetC4WImageListDto, IEnumerable<C4WImageDto>>(

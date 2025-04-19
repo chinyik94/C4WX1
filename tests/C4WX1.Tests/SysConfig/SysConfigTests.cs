@@ -210,10 +210,10 @@ public class SysConfigTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetList_WithPageSizeMoreThanDataCount()
     {
-        var pageSize = 100;
+        var pageSize = state.HighPageSize;
         while (pageSize <= app.SysConfigCount)
         {
-            pageSize += 100;
+            pageSize += state.HighPageSize;
         }
         var expectedCount = Math.Min(app.SysConfigCount, pageSize);
 
@@ -234,7 +234,7 @@ public class SysConfigTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetList_WithPageSizeLessThanDataCount()
     {
-        var pageSize = 5;
+        var pageSize = state.LowPageSize;
         while (pageSize >= app.SysConfigCount)
         {
             pageSize -= 1;
@@ -264,7 +264,7 @@ public class SysConfigTests(C4WX1App app, C4WX1State state)
             .GETAsync<GetList, GetSysConfigListDto, IEnumerable<SysConfigDto>>(
             new()
             {
-                OrderBy = "ConfigValue asc"
+                OrderBy = $"ConfigValue {SortDirections.Asc}"
             });
 
         resp.IsSuccessStatusCode.ShouldBeTrue();

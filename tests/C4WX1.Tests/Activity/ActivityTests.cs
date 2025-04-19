@@ -185,7 +185,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<ActivityDto>>(
             new()
             {
-                OrderBy = $"default desc"
+                OrderBy = state.DefaultDescOrderby
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
@@ -195,7 +195,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<ActivityDto>>(
             new()
             {
-                OrderBy = $"default asc"
+                OrderBy = state.DefaultAscOrderby
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.ShouldNotBeNull();
@@ -235,7 +235,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithPageSize()
     {
         await SetupDependenciesAsync();
-        var pageSize = 5;
+        var pageSize = state.LowPageSize;
         var createCount = state.CreateCount;
         var expectedCount = Math.Min(createCount, pageSize);
         for (int i = 0; i < createCount; i++)
@@ -254,7 +254,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
         res.ShouldNotBeNull();
         res.Count().ShouldBe(expectedCount);
 
-        pageSize = 100;
+        pageSize = state.HighPageSize;
         expectedCount = Math.Min(createCount, pageSize);
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<ActivityDto>>(
             new()

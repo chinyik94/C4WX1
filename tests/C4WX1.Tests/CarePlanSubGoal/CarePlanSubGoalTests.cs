@@ -161,7 +161,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
             await SetupAsync(dummy);
         }
 
-        var pageSize = 5;
+        var pageSize = state.LowPageSize;
         var expectedCount = Math.Min(createCount, pageSize);
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CarePlanSubGoalDto>>(
             new()
@@ -172,7 +172,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
         res.Count().ShouldBe(expectedCount);
         res.Select(x => x.CarePlanSubGoalName).ShouldBeInOrder(SortDirection.Descending);
 
-        var pageSize2 = 100;
+        var pageSize2 = state.HighPageSize;
         var expectedCount2 = Math.Min(createCount, pageSize2);
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CarePlanSubGoalDto>>(
             new()
@@ -207,7 +207,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CarePlanSubGoalDto>>(
             new()
             {
-                OrderBy = "default desc"
+                OrderBy = state.DefaultDescOrderby
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -216,7 +216,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CarePlanSubGoalDto>>(
             new()
             {
-                OrderBy = "default asc"
+                OrderBy = state.DefaultAscOrderby
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
