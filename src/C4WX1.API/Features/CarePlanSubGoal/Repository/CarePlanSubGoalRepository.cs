@@ -10,7 +10,7 @@ public class CarePlanSubGoalRepository(IConfiguration configuration)
 
     private readonly string? connectionString = configuration.GetConnectionString("Default");
 
-    public async Task<Dictionary<int, bool>> BatchCanDeleteAsync(IEnumerable<int> ids)
+    public async Task<Dictionary<int, bool>> BatchCanDeleteAsync(int[] ids)
     {
         if (string.IsNullOrWhiteSpace(connectionString))
         {

@@ -4,7 +4,7 @@ using C4WX1.Database.Models;
 using FastEndpoints;
 using Task = System.Threading.Tasks.Task;
 
-namespace C4WX1.API.Features.CarePlanSubGoal.Create;
+namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 
 public class CreateCarePlanSubGoalSummary : EndpointSummary
 {
@@ -18,12 +18,12 @@ public class CreateCarePlanSubGoalSummary : EndpointSummary
             CarePlanSubID_FK = 1,
             UserId = 1
         };
-        Responses[204] = "Care Plan Sub Goal created successfully";
+        Responses[200] = "Care Plan Sub Goal created successfully";
     }
 }
 
 public class Create(THCC_C4WDEVContext dbContext)
-    : EndpointWithMapper<CreateCarePlanSubGoalDto, CreateCarePlanSubGoalMapper>
+    : Endpoint<CreateCarePlanSubGoalDto, int, CreateCarePlanSubGoalMapper>
 {
     public override void Configure()
     {
@@ -36,6 +36,6 @@ public class Create(THCC_C4WDEVContext dbContext)
         var entity = Map.ToEntity(req);
         dbContext.CarePlanSubGoal.Add(entity);
         await dbContext.SaveChangesAsync(ct);
-        await SendNoContentAsync(ct);
+        await SendOkAsync(entity.CarePlanSubGoalID, cancellation: ct);
     }
 }

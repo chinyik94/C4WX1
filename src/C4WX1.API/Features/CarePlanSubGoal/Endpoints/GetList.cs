@@ -2,6 +2,7 @@
 using C4WX1.API.Features.CarePlanSubGoal.Extensions;
 using C4WX1.API.Features.CarePlanSubGoal.Mappers;
 using C4WX1.API.Features.CarePlanSubGoal.Repository;
+using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Database.Models;
 using FastEndpoints;
@@ -33,19 +34,19 @@ public class GetList(
 
     public override async Task HandleAsync(GetListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? 1;
-        var pageSize = req.PageSize ?? 10;
+        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
+        var pageSize = req.PageSize ?? PaginationDefaults.Size;
         var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
 
         var dtos = await dbContext.CarePlanSubGoal
             .Where(x => !(x.IsDeleted ?? false))
             .Sort(req.OrderBy)
-            .Take(startRowIndex)
-            .Skip(pageSize)
+            .Skip(startRowIndex)
+            .Take(pageSize)
             .Select(x => Map.FromEntity(x))
             .ToListAsync(ct);
 
-        var ids = dtos.Select(x => x.CarePlanSubGoalID);
+        var ids = dtos.Select(x => x.CarePlanSubGoalID).ToArray();
         var canDeleteDict = await repository.BatchCanDeleteAsync(ids);
         foreach (var dto in dtos)
         {

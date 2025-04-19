@@ -2,6 +2,6 @@
 
 public interface ICarePlanSubGoalRepository
 {
-    Task<Dictionary<int, bool>> BatchCanDeleteAsync(IEnumerable<int> ids);
+    Task<Dictionary<int, bool>> BatchCanDeleteAsync(int[] ids);
     Task<bool> CanDeleteAsync(int id);
 }
