@@ -3,6 +3,7 @@ using C4WX1.API.Features.Branch.Repository;
 using C4WX1.API.Features.CarePlanSubGoal.Repository;
 using C4WX1.API.Features.Chat.Repository;
 using C4WX1.API.Features.CPGoals.Repository;
+using C4WX1.API.Features.ExternalDoctor.Repositories;
 using C4WX1.API.Features.Generator;
 using C4WX1.API.Features.Security;
 using C4WX1.API.Features.SysConfig.Repository;
@@ -22,7 +23,8 @@ public static class ServiceCollectionExtensions
             .AddTransient<IChatRepository, ChatRepository>()
             .AddTransient<IBranchRepository, BranchRepository>()
             .AddTransient<ICarePlanSubGoalRepository, CarePlanSubGoalRepository>()
-            .AddTransient<ICPGoalsRepository, CPGoalsRepository>();
+            .AddTransient<ICPGoalsRepository, CPGoalsRepository>()
+            .AddTransient<IExternalDoctorRepository, ExternalDoctorRepository>();
 
         return services;
     }

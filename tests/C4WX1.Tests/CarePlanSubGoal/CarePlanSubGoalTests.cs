@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 using C4WX1.API.Features.CarePlanSubGoal.Dtos;
 using C4WX1.Tests.Shared;
-using Microsoft.EntityFrameworkCore;
 using C4WX1.API.Features.Shared.Dtos;
 
 namespace C4WX1.Tests.CarePlanSubGoal;

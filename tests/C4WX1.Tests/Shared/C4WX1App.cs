@@ -1,7 +1,6 @@
 using C4WX1.API.Extensions;
 using C4WX1.Database.Models;
 using C4WX1.DbMigrator.DataSeeders;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

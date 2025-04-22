@@ -4,7 +4,6 @@ using C4WX1.API.Features.Branch.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Tests.Shared;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.Tests.Branch;
 

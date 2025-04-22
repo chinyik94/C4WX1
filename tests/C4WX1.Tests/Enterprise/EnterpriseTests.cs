@@ -5,7 +5,7 @@ using C4WX1.Tests.Shared;
 namespace C4WX1.Tests.Enterprise;
 
 [Collection<C4WX1TestCollection>]
-public class EnterpriseTests(C4WX1App app, C4WX1State state) : TestBase
+public class EnterpriseTests(C4WX1App app) : TestBase
 {
     //Temprorily remove test as SysConfig data is encrypted differently
     //[Fact]

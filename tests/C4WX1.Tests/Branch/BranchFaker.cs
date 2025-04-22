@@ -13,7 +13,7 @@ public class BranchFaker
         .RuleFor(x => x.CodeName, f => f.Lorem.Word())
         .Generate();
 
-    public static string DummyStatus => new Faker().Lorem.Word();
+    public static string DummyStatus => new Faker().Random.String2(10);
 
     public static string DummyAlphaNumeric => new Faker().Random.AlphaNumeric(10);
 

@@ -2,7 +2,6 @@
 using C4WX1.API.Features.EnquiryConfig.Endpoints;
 using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Tests.Shared;
-using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.Tests.EnquiryConfig;
