@@ -42,6 +42,7 @@ public class Create(THCC_C4WDEVContext dbContext)
         if (isDuplicate)
         {
             ThrowError("DOCTOR_EXISTS");
+            return;
         }
 
         var isDuplicateUser = await dbContext.Users
@@ -50,6 +51,7 @@ public class Create(THCC_C4WDEVContext dbContext)
         if (isDuplicateUser)
         {
             ThrowError("DOCTOR_USER_EXISTS");
+            return;
         }
 
         var entity = Map.ToEntity(req);

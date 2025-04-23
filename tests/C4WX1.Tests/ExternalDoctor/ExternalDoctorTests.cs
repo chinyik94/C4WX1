@@ -87,7 +87,6 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
 
     private async Task<int> SetupAsync(CreateExternalDoctorDto testData)
     {
-        await SetupDependenciesAsync();
         var (resp, res) = await app.Client.POSTAsync<Create, CreateExternalDoctorDto, int>(testData);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
@@ -98,9 +97,11 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Create_WithoutExistingDoctorAndDoctorUser()
     {
         await SetupDependenciesAsync();
+
         var (resp, res) = await app.Client.POSTAsync<Create, CreateExternalDoctorDto, int>(Control);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
+
         await CleanupAsync();
     }
 
@@ -152,13 +153,16 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Update_WithExistingId_WithExistingDoctor()
     {
-        await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        await SetupUserAsync();
+        await SetupAsync(Control);
+        var control2 = Control;
+        control2.Name = "control2-Name";
+        var id2 = await SetupAsync(control2);
 
         var resp = await app.Client.PUTAsync<Update, UpdateExternalDoctorDto>(
             new()
             {
-                Id = C4WX1Faker.Id,
+                Id = id2,
                 Name = Control.Name,
                 Email = "updated-control-Email",
                 Contact = "updated-control-Contact",
@@ -173,9 +177,8 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Update_WithExistingId_WithExistingDoctorUser()
     {
-        await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
         await SetupUserAsync();
+        var id = await SetupAsync(Control);
 
         var resp = await app.Client.PUTAsync<Update, UpdateExternalDoctorDto>(
             new()
@@ -206,6 +209,8 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
                 UserId = 1
             });
         resp.IsSuccessStatusCode.ShouldBeFalse();
+
+        await CleanupAsync();
     }
 
     [Fact]
@@ -239,6 +244,8 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
+
+        await CleanupAsync();
     }
 
     [Fact]
@@ -266,12 +273,14 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
                 Id = C4WX1Faker.Id
             });
         resp.IsSuccessStatusCode.ShouldBeFalse();
+
+        await CleanupAsync();
     }
 
     [Fact]
     public async Task GetCount_WithoutSearch()
     {
-        await SetupDependenciesAsync();
+        await SetupUserAsync();
         var createCount = state.CreateCount;
         var dummies = Enumerable.Range(0, createCount)
             .Select(x => ExternalDoctorFaker.DummyCreate);
@@ -288,7 +297,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetCount_WithSearch()
     {
-        await SetupDependenciesAsync();
+        await SetupUserAsync();
         var createCount = state.CreateCount;
         var dummies = Enumerable.Range(0, createCount)
             .Select(x => ExternalDoctorFaker.DummyCreate);
@@ -326,7 +335,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetList()
     {
-        await SetupDependenciesAsync();
+        await SetupUserAsync();
         var createCount = state.CreateCount;
         var dummies = Enumerable.Range(0, createCount)
             .Select(x => ExternalDoctorFaker.DummyCreate);
@@ -347,7 +356,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetList_WithSearch()
     {
-        await SetupDependenciesAsync();
+        await SetupUserAsync();
         var createCount = state.CreateCount;
         var dummies = Enumerable.Range(0, createCount)
             .Select(x => ExternalDoctorFaker.DummyCreate);
@@ -388,7 +397,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetList_WithPageSize()
     {
-        await SetupDependenciesAsync();
+        await SetupUserAsync();
         var createCount = state.CreateCount;
         var dummies = Enumerable.Range(0, createCount)
             .Select(x => ExternalDoctorFaker.DummyCreate);
@@ -416,12 +425,14 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         res2.ShouldNotBeNull();
         res2.Count().ShouldBe(expectedCount2);
         res2.Select(x => x.Name).ShouldBeInOrder(SortDirection.Descending);
+
+        await CleanupAsync();
     }
 
     [Fact]
     public async Task GetList_WithOrderBy()
     {
-        await SetupDependenciesAsync();
+        await SetupUserAsync();
         var createCount = state.CreateCount;
         var dummies = Enumerable.Range(0, createCount)
             .Select(x => ExternalDoctorFaker.DummyCreate);
@@ -515,9 +526,8 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task ChangeToUser()
     {
-        await SetupDependenciesAsync();
-        await SetupAsync(Control);
         await SetupUserAsync();
+        await SetupAsync(Control);
 
         var resp = await app.Client.POSTAsync<ChangeToUser, ChangeExternalDoctorToUserDto>(
             new()
@@ -558,5 +568,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
                 UserId = 1
             });
         resp.IsSuccessStatusCode.ShouldBeFalse();
+
+        await CleanupAsync();
     }
 }
