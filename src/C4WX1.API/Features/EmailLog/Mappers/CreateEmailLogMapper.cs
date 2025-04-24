@@ -22,6 +22,6 @@ public class CreateEmailLogMapper
         smtpLogin = r.smtpLogin,
         smtpPassword = r.smtpPassword,
         smtpPort = r.smtpPort,
-        smtpServerAddress = r.smtpServerAddress
+        smtpServerAddress = r.smtpServerAddress,
     };
 }

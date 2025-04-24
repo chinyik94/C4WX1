@@ -1,9 +1,9 @@
-﻿namespace C4WX1.API.Features.CarePlanSubGoal.Dtos;
+﻿using C4WX1.API.Features.Shared.Dtos;
 
-public sealed class UpdateCarePlanSubGoalDto
+namespace C4WX1.API.Features.CarePlanSubGoal.Dtos;
+
+public sealed class UpdateCarePlanSubGoalDto : UpdateDto
 {
-    public int CarePlanSubGoalID { get; set; }
     public int CarePlanSubID_FK { get; set; }
     public string? CarePlanSubGoalName { get; set; }
-    public int UserId { get; set; }
 }

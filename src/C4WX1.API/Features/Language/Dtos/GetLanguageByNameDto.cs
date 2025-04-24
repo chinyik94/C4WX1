@@ -2,7 +2,7 @@
 
 namespace C4WX1.API.Features.Language.Dtos;
 
-public class GetLanguageByNameDto
+public sealed class GetLanguageByNameDto
 {
     [QueryParam]
     public string Name { get; set; } = null!;

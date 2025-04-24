@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.DischargeSummaryReport.Dtos;
 
-public class DischargeSummaryReportUserDto
+public sealed class DischargeSummaryReportUserDto
 {
     public int UserId { get; set; }
     public string Firstname { get; set; } = null!;

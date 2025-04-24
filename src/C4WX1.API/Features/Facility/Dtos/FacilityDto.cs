@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.Facility.Dtos;
 
-public class FacilityDto
+public sealed class FacilityDto
 {
     public int FacilityID { get; set; }
     public string FacilityName { get; set; } = null!;

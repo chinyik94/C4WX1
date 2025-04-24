@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.EmailLog.Dtos;
 
-public class EmailLogDto
+public sealed class EmailLogDto
 {
     public int EmailLogId { get; set; }
     public string? description { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.EmailLog.Dtos;
 
-public class CreateEmailLogDto
+public sealed class CreateEmailLogDto
 {
     public string? msgBCC { get; set; }
     public string? msgCC { get; set; }

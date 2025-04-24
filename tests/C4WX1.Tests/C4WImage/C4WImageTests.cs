@@ -258,7 +258,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     {
         var id = await SetupAsync(NewControlData);
         var req = UpdatedControlData;
-        req.C4WImageId = id;
+        req.Id = id;
 
         var resp = await app.Client.PUTAsync<Update, UpdateC4WImageDto>(req);
 
@@ -271,7 +271,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     public async Task Update_WithNonExistentId()
     {
         var req = UpdatedControlData;
-        req.C4WImageId = C4WX1Faker.Id;
+        req.Id = C4WX1Faker.Id;
 
         var resp = await app.Client.PUTAsync<Update, UpdateC4WImageDto>(req);
 

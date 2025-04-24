@@ -275,7 +275,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
 
         var resp = await app.Client.PUTAsync<Update, UpdateActivityDto>(new()
         {
-            ActivityID = id,
+            Id = id,
             ActivityDetail = "updated-control-ActivityDetail",
             ProblemListID_FK = 1,
             DiseaseID_FK = 1,
@@ -291,7 +291,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var resp = await app.Client.PUTAsync<Update, UpdateActivityDto>(new()
         {
-            ActivityID = C4WX1Faker.Id,
+            Id = C4WX1Faker.Id,
             ActivityDetail = "updated-control-ActivityDetail",
             ProblemListID_FK = 1,
             DiseaseID_FK = 1,

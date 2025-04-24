@@ -2,7 +2,7 @@
 
 namespace C4WX1.API.Features.Facility.Dtos;
 
-public class GetFacilityCountDto
+public sealed class GetFacilityCountDto
 {
     [QueryParam]
     public string? Keyword { get; set; }

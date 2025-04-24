@@ -1,10 +1,11 @@
-﻿namespace C4WX1.API.Features.C4WDeviceToken.Dtos;
+﻿using C4WX1.API.Features.Shared.Dtos;
 
-public sealed class CreateC4WDeviceTokenDto
+namespace C4WX1.API.Features.C4WDeviceToken.Dtos;
+
+public sealed class CreateC4WDeviceTokenDto : CreateDto
 {
     public string? OldDeviceToken { get; set; }
     public string? NewDeviceToken { get; set; }
     public string? ClientEnvironment { get; set; }
     public string? Device { get; set; }
-    public int UserId { get; set; }
 }

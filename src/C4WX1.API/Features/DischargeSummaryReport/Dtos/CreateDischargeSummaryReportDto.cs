@@ -1,6 +1,8 @@
-﻿namespace C4WX1.API.Features.DischargeSummaryReport.Dtos;
+﻿using C4WX1.API.Features.Shared.Dtos;
 
-public class CreateDischargeSummaryReportDto
+namespace C4WX1.API.Features.DischargeSummaryReport.Dtos;
+
+public sealed class CreateDischargeSummaryReportDto : CreateDto
 {
     public int PatientID_FK { get; set; }
     public DateTime? DischargeDate { get; set; }
@@ -8,6 +10,5 @@ public class CreateDischargeSummaryReportDto
     public DateTime? VisitDateEnd { get; set; }
     public int? VisitedBy_FK { get; set; }
     public string SummaryCaseNote { get; set; } = null!;
-    public int? UserId { get; set; }
     public ICollection<DischargeSummaryReportAttachmentDto> AttachmentList { get; set; } = [];
 }

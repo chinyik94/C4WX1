@@ -1,7 +1,8 @@
-﻿namespace C4WX1.API.Features.APIAccessKey.Dtos;
+﻿using C4WX1.API.Features.Shared.Dtos;
 
-public sealed class CreateAPIAccessKeyDto
+namespace C4WX1.API.Features.APIAccessKey.Dtos;
+
+public sealed class CreateAPIAccessKeyDto : CreateDto
 {
     public string Code { get; set; } = string.Empty;
-    public int UserId { get; set; }
 }

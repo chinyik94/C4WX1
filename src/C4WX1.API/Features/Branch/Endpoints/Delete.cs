@@ -1,5 +1,5 @@
-﻿using C4WX1.API.Features.Branch.Dtos;
-using C4WX1.API.Features.Branch.Repository;
+﻿using C4WX1.API.Features.Branch.Repository;
+using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Database.Models;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ public class DeleteBranchSummary : EndpointSummary
     {
         Summary = "Delete Branch";
         Description = "Delete an existing Branch by its ID";
-        ExampleRequest = new DeleteBranchDto
+        ExampleRequest = new DeleteByIdDto
         {
             Id = 1,
             UserId = 1
@@ -27,7 +27,7 @@ public class DeleteBranchSummary : EndpointSummary
 public class Delete(
     THCC_C4WDEVContext dbContext,
     IBranchRepository repository)
-    : Endpoint<DeleteBranchDto>
+    : Endpoint<DeleteByIdDto>
 {
     public override void Configure()
     {
@@ -38,7 +38,7 @@ public class Delete(
         Summary(new DeleteBranchSummary());
     }
 
-    public override async Task HandleAsync(DeleteBranchDto req, CancellationToken ct)
+    public override async Task HandleAsync(DeleteByIdDto req, CancellationToken ct)
     {
         var canDeleteBranch = await repository.CanDeleteBranchAsync(req.Id);
         var canDelete = await dbContext.Branch

@@ -1,6 +1,6 @@
 ﻿namespace C4WX1.API.Features.DischargeSummaryReport.Dtos;
 
-public class DischargeSummaryReportAttachmentDto
+public sealed class DischargeSummaryReportAttachmentDto
 {
     public int DischargeSummaryReportAttachmentID { get; set; }
     public string? Physical { get; set; }

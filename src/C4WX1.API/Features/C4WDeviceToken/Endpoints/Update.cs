@@ -15,7 +15,7 @@ public class UpdateC4WDeviceTokenSummary : EndpointSummary
         Description = "Update an existing C4W Device Token";
         ExampleRequest = new UpdateC4WDeviceTokenDto
         {
-            C4WDeviceTokenId = 1,
+            Id = 1,
             OldDeviceToken = "Old token",
             NewDeviceToken = "New token",
             ClientEnvironment = "test env",
@@ -32,7 +32,7 @@ public class Update(THCC_C4WDEVContext dbContext)
 {
     public override void Configure()
     {
-        Put("c4w-device-token/{c4WDeviceTokenId}");
+        Put("c4w-device-token/{id}");
         Summary(new UpdateC4WDeviceTokenSummary());
     }
 
@@ -40,7 +40,7 @@ public class Update(THCC_C4WDEVContext dbContext)
     {
         var entity = await dbContext.C4WDeviceToken
             .FirstOrDefaultAsync(
-                x => !x.IsDeleted && x.C4WDeviceTokenId == req.C4WDeviceTokenId,
+                x => !x.IsDeleted && x.C4WDeviceTokenId == req.Id,
                 ct);
         if (entity == null)
         {

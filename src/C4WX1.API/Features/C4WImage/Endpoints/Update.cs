@@ -15,7 +15,7 @@ public class UpdateC4WImageSummary : EndpointSummary
         Description = "Update an existing C4W Image";
         ExampleRequest = new UpdateC4WImageDto
         {
-            C4WImageId = 1,
+            Id = 1,
             WoundImageName = "wound image name",
             WoundImageData = "wound image data",
             WoundBedImageName = "wound bed image name",
@@ -36,7 +36,7 @@ public class Update(THCC_C4WDEVContext dbContext)
 {
     public override void Configure()
     {
-        Put("c4w-image/{c4wImageId}");
+        Put("c4w-image/{id}");
         Description(b => b.Produces(404));
         Summary(new UpdateC4WImageSummary());
     }
@@ -45,7 +45,7 @@ public class Update(THCC_C4WDEVContext dbContext)
     {
         var entity = await dbContext.C4WImage
             .FirstOrDefaultAsync(
-                x => !x.IsDeleted && x.C4WImageId == req.C4WImageId,
+                x => !x.IsDeleted && x.C4WImageId == req.Id,
                 ct);
         if (entity == null)
         {

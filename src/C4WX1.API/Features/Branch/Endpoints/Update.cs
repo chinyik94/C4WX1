@@ -15,7 +15,7 @@ public class UpdateBranchSummary : EndpointSummary
         Description = "Update an existing Branch by its ID";
         ExampleRequest = new UpdateBranchDto
         {
-            BranchID = 1,
+            Id = 1,
             BranchName = "BranchName",
             Address1 = "Address1",
             Address2 = "Address2",
@@ -38,7 +38,7 @@ public class Update(THCC_C4WDEVContext dbContext)
 {
     public override void Configure()
     {
-        Put("branch/{branchID}");
+        Put("branch/{id}");
         Description(b => b
             .ProducesProblemFE(400)
             .Produces(404));
@@ -50,7 +50,7 @@ public class Update(THCC_C4WDEVContext dbContext)
         var hasDuplicate = await dbContext.Branch
             .AnyAsync(x => !x.IsDeleted
                 && x.BranchName == req.BranchName
-                && x.BranchID != req.BranchID,
+                && x.BranchID != req.Id,
                 ct);
         if (hasDuplicate)
         {
@@ -61,7 +61,7 @@ public class Update(THCC_C4WDEVContext dbContext)
         var entity = await dbContext.Branch
             .Include(x => x.UserBranch)
             .FirstOrDefaultAsync(x => !x.IsDeleted
-                && x.BranchID == req.BranchID,
+                && x.BranchID == req.Id,
                 ct);
         if (entity == null)
         {

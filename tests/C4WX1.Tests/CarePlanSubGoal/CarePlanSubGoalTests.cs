@@ -233,7 +233,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
         var resp = await app.Client.PUTAsync<Update, UpdateCarePlanSubGoalDto>(
             new UpdateCarePlanSubGoalDto
             {
-                CarePlanSubGoalID = id,
+                Id = id,
                 CarePlanSubGoalName = "updated-CarePlanSubGoalName",
                 CarePlanSubID_FK = Control.CarePlanSubID_FK,
                 UserId = Control.UserId
@@ -249,7 +249,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
         var resp = await app.Client.PUTAsync<Update, UpdateCarePlanSubGoalDto>(
             new UpdateCarePlanSubGoalDto
             {
-                CarePlanSubGoalID = C4WX1Faker.Id,
+                Id = C4WX1Faker.Id,
                 CarePlanSubGoalName = "updated-CarePlanSubGoalName",
                 CarePlanSubID_FK = Control.CarePlanSubID_FK,
                 UserId = Control.UserId

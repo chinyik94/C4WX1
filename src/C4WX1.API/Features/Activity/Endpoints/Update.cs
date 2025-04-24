@@ -15,7 +15,7 @@ public class UpdateActivitySummary : EndpointSummary
         Description = "Update an existing Activity";
         ExampleRequest = new UpdateActivityDto
         {
-            ActivityID = 1,
+            Id = 1,
             ProblemListID_FK = 1,
             DiseaseID_FK = 1,
             ActivityDetail = "Activity Detail",
@@ -32,7 +32,7 @@ public class Update(THCC_C4WDEVContext dbContext)
 {
     public override void Configure()
     {
-        Put("activity/{activityID}");
+        Put("activity/{id}");
         Description(b => b.Produces(404));
         Summary(new UpdateActivitySummary());
     }
@@ -40,7 +40,7 @@ public class Update(THCC_C4WDEVContext dbContext)
     public override async Task HandleAsync(UpdateActivityDto req, CancellationToken ct)
     {
         var entity = await dbContext.Activity
-            .FirstOrDefaultAsync(a => a.ActivityID == req.ActivityID && !a.IsDeleted, ct);
+            .FirstOrDefaultAsync(a => a.ActivityID == req.Id && !a.IsDeleted, ct);
         if (entity == null)
         {
             await SendNotFoundAsync(ct);

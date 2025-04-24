@@ -2,7 +2,7 @@
 
 namespace C4WX1.API.Features.EmailLog.Dtos;
 
-public class GetEmailLogCountDto
+public sealed class GetEmailLogCountDto
 {
     [QueryParam]
     public string? MsgFrom { get; set; }

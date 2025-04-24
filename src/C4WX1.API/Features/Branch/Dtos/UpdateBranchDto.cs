@@ -1,8 +1,9 @@
-﻿namespace C4WX1.API.Features.Branch.Dtos;
+﻿using C4WX1.API.Features.Shared.Dtos;
 
-public sealed class UpdateBranchDto
+namespace C4WX1.API.Features.Branch.Dtos;
+
+public sealed class UpdateBranchDto : UpdateDto
 {
-    public int BranchID { get; set; }
     public string BranchName { get; set; } = null!;
     public string? Address1 { get; set; }
     public string? Address2 { get; set; }
@@ -11,6 +12,5 @@ public sealed class UpdateBranchDto
     public string? Email { get; set; }
     public string Status { get; set; } = null!;
     public int? CurrencyID_FK { get; set; }
-    public int UserId { get; set; }
     public ICollection<int> UserDataList { get; set; } = [];
 }

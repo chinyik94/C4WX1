@@ -15,7 +15,7 @@ public class UpdateDischargeSummaryReportSummary : EndpointSummary
         Description = "Update an existing Discharge Summary Report by its ID";
         ExampleRequest = new UpdateDischargeSummaryReportDto
         {
-            DischargeSummaryReportID = 1,
+            Id = 1,
             DischargeDate = DateTime.Now,
             PatientID_FK = 1,
             VisitDateEnd = DateTime.Now,
@@ -42,7 +42,7 @@ public class Update(THCC_C4WDEVContext dbContext)
 {
     public override void Configure()
     {
-        Put("discharge-summary-report/{dischargeSummaryReportID}");
+        Put("discharge-summary-report/{id}");
         Description(b => b
             .Produces(404));
         Summary(new UpdateDischargeSummaryReportSummary());
@@ -52,7 +52,7 @@ public class Update(THCC_C4WDEVContext dbContext)
     {
         var entity = await dbContext.DischargeSummaryReport
             .Include(x => x.DischargeSummaryReportAttachment)
-            .FirstOrDefaultAsync(x => x.DischargeSummaryReportId == req.DischargeSummaryReportID, ct);
+            .FirstOrDefaultAsync(x => x.DischargeSummaryReportId == req.Id, ct);
         if (entity == null)
         {
             await SendNotFoundAsync(ct);

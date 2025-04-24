@@ -122,8 +122,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var id = await SetupAsync(Control);
 
         await UpdateForCanDeleteAsync(id, isDeleted: false, isSystemUsed: false, BranchFaker.DummyStatus);
-        var resp = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = id,
                 UserId = 1
@@ -140,8 +140,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var id = await SetupAsync(Control);
 
         await UpdateForCanDeleteAsync(id, isDeleted: false, isSystemUsed: true, Statuses.Active);
-        var resp = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = id,
                 UserId = 1
@@ -149,8 +149,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         resp.IsSuccessStatusCode.ShouldBeFalse();
 
         await UpdateForCanDeleteAsync(id, isDeleted: false, isSystemUsed: true, Statuses.Locked);
-        var resp2 = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp2 = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = id,
                 UserId = 1
@@ -158,8 +158,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         resp2.IsSuccessStatusCode.ShouldBeFalse();
 
         await UpdateForCanDeleteAsync(id, isDeleted: false, isSystemUsed: false, Statuses.Active);
-        var resp3 = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp3 = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = id,
                 UserId = 1
@@ -167,8 +167,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         resp3.IsSuccessStatusCode.ShouldBeFalse();
 
         await UpdateForCanDeleteAsync(id, isDeleted: true, isSystemUsed: false, Statuses.Locked);
-        var resp4 = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp4 = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = id,
                 UserId = 1
@@ -176,8 +176,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         resp4.IsSuccessStatusCode.ShouldBeFalse();
 
         await UpdateForCanDeleteAsync(id, isDeleted: true, isSystemUsed: true, Statuses.Active);
-        var resp5 = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp5 = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = id,
                 UserId = 1
@@ -185,16 +185,16 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         resp5.IsSuccessStatusCode.ShouldBeFalse();
 
         await UpdateForCanDeleteAsync(id, isDeleted: true, isSystemUsed: true, Statuses.Locked);
-        var resp6 = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp6 = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = id,
                 UserId = 1
             });
         resp6.IsSuccessStatusCode.ShouldBeFalse();
 
-        var resp7 = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp7 = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = C4WX1Faker.Id,
                 UserId = 1
@@ -207,8 +207,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Delete_WithNonExistentId()
     {
-        var resp = await app.Client.DELETEAsync<Delete, DeleteBranchDto>(
-            new DeleteBranchDto
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
+            new DeleteByIdDto
             {
                 Id = C4WX1Faker.Id,
                 UserId = 1
@@ -535,7 +535,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var resp = await app.Client.PUTAsync<Update, UpdateBranchDto>(
             new()
             {
-                BranchID = id,
+                Id = id,
                 BranchName = BranchFaker.DummyAlphaNumeric,
                 Address1 = BranchFaker.DummyAddress,
                 Address2 = BranchFaker.DummyAddress,
@@ -560,7 +560,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         var resp = await app.Client.PUTAsync<Update, UpdateBranchDto>(
             new()
             {
-                BranchID = id,
+                Id = id,
                 BranchName = BranchFaker.DummyAlphaNumeric,
                 Address1 = BranchFaker.DummyAddress,
                 Address2 = BranchFaker.DummyAddress,
