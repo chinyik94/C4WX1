@@ -9,7 +9,6 @@ public static class QueryExtensions
         this IQueryable<Database.Models.Facility> query,
         string? orderBy)
     {
-
         if (string.IsNullOrWhiteSpace(orderBy))
         {
             orderBy = SortDirections.Default;

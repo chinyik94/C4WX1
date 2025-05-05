@@ -310,7 +310,9 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
             new());
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
-        res.Select(x => x.FacilityName).ShouldBeInOrder(SortDirection.Descending);
+        res.Select(x => x.FacilityName)
+            .SequenceEqual(res.Select(x => x.FacilityName).OrderByDescending(x => x))
+            .ShouldBeTrue();
 
         await CleanupAsync();
     }
@@ -338,7 +340,9 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
-        res.Select(x => x.FacilityName).ShouldBeInOrder(SortDirection.Descending);
+        res.Select(x => x.FacilityName)
+            .SequenceEqual(res.Select(x => x.FacilityName).OrderByDescending(x => x))
+            .ShouldBeTrue();
 
         var expectedCount2 = Math.Min(createCount, state.HighPageSize);
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
@@ -348,7 +352,9 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount2);
-        res2.Select(x => x.FacilityName).ShouldBeInOrder(SortDirection.Descending);
+        res2.Select(x => x.FacilityName)
+            .SequenceEqual(res2.Select(x => x.FacilityName).OrderByDescending(x => x))
+            .ShouldBeTrue();
 
         await CleanupAsync();
     }
@@ -376,7 +382,9 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
-        res.Select(x => x.FacilityName).ShouldBeInOrder(SortDirection.Ascending);
+        res.Select(x => x.FacilityName)
+            .SequenceEqual(res.Select(x => x.FacilityName).OrderBy(x => x))
+            .ShouldBeTrue();
 
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
             new()
@@ -385,7 +393,9 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
-        res2.Select(x => x.FacilityName).ShouldBeInOrder(SortDirection.Descending);
+        res2.Select(x => x.FacilityName)
+            .SequenceEqual(res2.Select(x => x.FacilityName).OrderByDescending(x => x))
+            .ShouldBeTrue();
 
         var (resp3, res3) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
             new()
@@ -394,7 +404,9 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp3.IsSuccessStatusCode.ShouldBeTrue();
         res3.Count().ShouldBe(expectedCount);
-        res3.Select(x => x.OrganizationName).ShouldBeInOrder(SortDirection.Descending);
+        res3.Select(x => x.OrganizationName)
+            .SequenceEqual(res3.Select(x => x.OrganizationName).OrderByDescending(x => x))
+            .ShouldBeTrue();
 
         var (resp4, res4) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
             new()
@@ -403,7 +415,9 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp4.IsSuccessStatusCode.ShouldBeTrue();
         res4.Count().ShouldBe(expectedCount);
-        res4.Select(x => x.OrganizationName).ShouldBeInOrder(SortDirection.Ascending);
+        res4.Select(x => x.OrganizationName)
+            .SequenceEqual(res4.Select(x => x.OrganizationName).OrderBy(x => x))
+            .ShouldBeTrue();
 
         await CleanupAsync();
     }
