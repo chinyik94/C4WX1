@@ -1,6 +1,5 @@
 ﻿using C4WX1.API.Features.Chat.Dtos;
 using C4WX1.API.Features.Chat.Repository;
-using FastEndpoints;
 
 namespace C4WX1.API.Features.Chat.Endpoints;
 

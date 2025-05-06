@@ -1,6 +1,4 @@
-﻿using FastEndpoints;
-
-namespace C4WX1.API.Features.BillingProposal.Dtos;
+﻿namespace C4WX1.API.Features.BillingProposal.Dtos;
 
 public sealed class GetHistoryBillingProposalListDto
 {

@@ -1,5 +1,4 @@
 ﻿using C4WX1.API.Features.Branch.Dtos;
-using FastEndpoints;
 
 namespace C4WX1.API.Features.Branch.Mappers;
 

@@ -1,6 +1,4 @@
-﻿using FastEndpoints;
-
-namespace C4WX1.API.Features.Shared.Dtos;
+﻿namespace C4WX1.API.Features.Shared.Dtos;
 
 public class GetListDto
 {

@@ -1,5 +1,4 @@
 ﻿using C4WX1.API.Features.C4WDeviceToken.Dtos;
-using FastEndpoints;
 
 namespace C4WX1.API.Features.C4WDeviceToken.Mappers;
 

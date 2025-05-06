@@ -1,6 +1,5 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
 using C4WX1.API.Features.Shared.Constants;
-using FastEndpoints;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Mappers;
 

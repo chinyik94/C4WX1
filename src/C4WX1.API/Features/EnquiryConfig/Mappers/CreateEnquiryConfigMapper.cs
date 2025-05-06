@@ -1,5 +1,4 @@
 ﻿using C4WX1.API.Features.EnquiryConfig.Dtos;
-using FastEndpoints;
 
 namespace C4WX1.API.Features.EnquiryConfig.Mappers;
 

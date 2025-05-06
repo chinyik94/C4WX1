@@ -1,5 +1,4 @@
 ﻿using C4WX1.API.Features.Activity.Dtos;
-using FastEndpoints;
 
 namespace C4WX1.API.Features.Activity.Mappers;
 

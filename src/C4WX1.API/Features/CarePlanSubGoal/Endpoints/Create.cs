@@ -1,8 +1,6 @@
 ﻿using C4WX1.API.Features.CarePlanSubGoal.Dtos;
 using C4WX1.API.Features.CarePlanSubGoal.Mappers;
 using C4WX1.Database.Models;
-using FastEndpoints;
-using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 

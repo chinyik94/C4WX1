@@ -1,8 +1,6 @@
 ﻿using C4WX1.API.Features.GeoFencing.Dtos;
 using C4WX1.API.Features.GeoFencing.Mappers;
 using C4WX1.Database.Models;
-using FastEndpoints;
-using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.GeoFencing.Endpoints;
 

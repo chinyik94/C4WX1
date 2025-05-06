@@ -1,7 +1,5 @@
 ﻿using C4WX1.API.Features.ErrorLog.Dtos;
 using C4WX1.Database.Models;
-using FastEndpoints;
-using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.ErrorLog.Endpoints;
 

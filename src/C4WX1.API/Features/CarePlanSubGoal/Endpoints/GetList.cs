@@ -5,9 +5,7 @@ using C4WX1.API.Features.CarePlanSubGoal.Repository;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Database.Models;
-using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
-using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 

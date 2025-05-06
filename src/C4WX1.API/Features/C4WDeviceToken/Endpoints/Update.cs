@@ -1,9 +1,7 @@
 ﻿using C4WX1.API.Features.C4WDeviceToken.Dtos;
 using C4WX1.API.Features.C4WDeviceToken.Mappers;
 using C4WX1.Database.Models;
-using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
-using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.API.Features.C4WDeviceToken.Endpoints;
 

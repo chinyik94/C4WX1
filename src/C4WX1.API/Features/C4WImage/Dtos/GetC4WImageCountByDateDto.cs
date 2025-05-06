@@ -1,6 +1,4 @@
-﻿using FastEndpoints;
-
-namespace C4WX1.API.Features.C4WImage.Dtos;
+﻿namespace C4WX1.API.Features.C4WImage.Dtos;
 
 public sealed class GetC4WImageCountByDateDto
 {

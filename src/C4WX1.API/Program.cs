@@ -1,6 +1,5 @@
 using C4WX1.API.Extensions;
 using C4WX1.Database.Models;
-using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.EntityFrameworkCore;
 using Prometheus;

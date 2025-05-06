@@ -1,5 +1,4 @@
-﻿using C4WX1.API.Features.BillingProposal.Constants;
-using C4WX1.API.Features.DischargeSummaryReport.Constants;
+﻿using C4WX1.API.Features.DischargeSummaryReport.Constants;
 using C4WX1.API.Features.Shared.Constants;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Extensions;

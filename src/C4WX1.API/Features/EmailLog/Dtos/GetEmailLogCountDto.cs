@@ -1,6 +1,4 @@
-﻿using FastEndpoints;
-
-namespace C4WX1.API.Features.EmailLog.Dtos;
+﻿namespace C4WX1.API.Features.EmailLog.Dtos;
 
 public sealed class GetEmailLogCountDto
 {

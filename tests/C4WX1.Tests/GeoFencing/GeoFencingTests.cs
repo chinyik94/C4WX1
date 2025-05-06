@@ -4,7 +4,6 @@ using C4WX1.API.Features.GeoFencing.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.Tests.Shared;
-using Org.BouncyCastle.Ocsp;
 
 namespace C4WX1.Tests.GeoFencing;
 

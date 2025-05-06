@@ -1,6 +1,4 @@
-﻿using FastEndpoints;
-
-namespace C4WX1.API.Features.Facility.Dtos;
+﻿namespace C4WX1.API.Features.Facility.Dtos;
 
 public sealed class GetFacilityCountDto
 {
