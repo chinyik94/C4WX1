@@ -5,9 +5,9 @@ namespace C4WX1.Tests.ExternalDoctor;
 
 public class ExternalDoctorFaker
 {
-    public static string Name => new Faker().Person.FullName;
+    public static string Name => new Faker().Random.String2(10);
     public static string Email => new Faker().Internet.Email();
-    public static string Contact => new Faker().Phone.PhoneNumber("###-###-####");
+    public static string Contact => new Faker().Random.AlphaNumeric(10);
 
     public static CreateExternalDoctorDto DummyCreate => new()
     {

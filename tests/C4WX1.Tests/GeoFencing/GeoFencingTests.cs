@@ -163,7 +163,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp, res) = await app.Client.GETAsync<GetAllList, IEnumerable<GeoFencingDto>>();
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(createCount);
-        res.Select(x => x.IP).ShouldBeInOrder(SortDirection.Ascending);
+        res.Select(x => x.IP).ShouldBeInOrder();
 
         await CleanupAsync();
     }
@@ -230,9 +230,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
-        res.Select(x => x.IP)
-            .SequenceEqual(res.Select(x => x.IP).OrderBy(x => x))
-            .ShouldBeTrue();
+        res.Select(x => x.IP).ShouldBeInOrder();
 
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<GeoFencingDto>>(
             new()
@@ -241,9 +239,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
-        res2.Select(x => x.IP)
-            .SequenceEqual(res2.Select(x => x.IP).OrderByDescending(x => x))
-            .ShouldBeTrue();
+        res2.Select(x => x.IP).ShouldBeInOrder(SortDirection.Descending);
 
         var (resp3, res3) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<GeoFencingDto>>(
             new()
@@ -252,9 +248,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp3.IsSuccessStatusCode.ShouldBeTrue();
         res3.Count().ShouldBe(expectedCount);
-        res3.Select(x => x.IP)
-            .SequenceEqual(res3.Select(x => x.IP).OrderBy(x => x))
-            .ShouldBeTrue();
+        res3.Select(x => x.IP).ShouldBeInOrder();
 
         var (resp4, res4) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<GeoFencingDto>>(
             new()
@@ -263,9 +257,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp4.IsSuccessStatusCode.ShouldBeTrue();
         res4.Count().ShouldBe(expectedCount);
-        res4.Select(x => x.IP)
-            .SequenceEqual(res4.Select(x => x.IP).OrderByDescending(x => x))
-            .ShouldBeTrue();
+        res4.Select(x => x.IP).ShouldBeInOrder(SortDirection.Descending);
 
         var (resp5, res5) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<GeoFencingDto>>(
             new()
@@ -274,9 +266,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp5.IsSuccessStatusCode.ShouldBeTrue();
         res5.Count().ShouldBe(expectedCount);
-        res5.Select(x => x.Description)
-            .SequenceEqual(res5.Select(x => x.Description).OrderBy(x => x))
-            .ShouldBeTrue();
+        res5.Select(x => x.Description).ShouldBeInOrder();
 
         var (resp6, res6) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<GeoFencingDto>>(
             new()
@@ -285,9 +275,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp6.IsSuccessStatusCode.ShouldBeTrue();
         res6.Count().ShouldBe(expectedCount);
-        res6.Select(x => x.Description)
-            .SequenceEqual(res6.Select(x => x.Description).OrderByDescending(x => x))
-            .ShouldBeTrue();
+        res6.Select(x => x.Description).ShouldBeInOrder(SortDirection.Descending);
 
         await CleanupAsync();
     }
