@@ -1,0 +1,55 @@
+﻿using C4WX1.API.Features.Intervention.Dtos;
+using C4WX1.API.Features.Intervention.Extensions;
+using C4WX1.API.Features.Intervention.Mappers;
+using C4WX1.API.Features.Intervention.Repository;
+using C4WX1.API.Features.Shared.Dtos;
+using C4WX1.API.Features.Shared.Extensions;
+using C4WX1.Database.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace C4WX1.API.Features.Intervention.Endpoints;
+
+public class GetInterventionListSummary 
+    : C4WX1GetListSummary<Database.Models.Intervention>
+{
+    public GetInterventionListSummary() { }
+}
+
+public class GetList(
+    THCC_C4WDEVContext dbContext,
+    IInterventionRepository repository)
+    : Endpoint<GetListDto, IEnumerable<InterventionDto>, InterventionMapper>
+{
+    public override void Configure()
+    {
+        Get("intervention");
+        Summary(new GetInterventionListSummary());
+    }
+
+    public override async Task HandleAsync(GetListDto req, CancellationToken ct)
+    {
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
+        var dtos = await dbContext.Intervention
+            .Include(x => x.DiseaseID_FKNavigation)
+            .Where(x => !x.IsDeleted)
+            .Sort(req.OrderBy)
+            .Skip(startRowIndex)
+            .Take(pageSize)
+            .Select(x => Map.FromEntity(x))
+            .ToListAsync(ct);
+        if (dtos.Count == 0)
+        {
+            await SendOkAsync(dtos, ct);
+            return;
+        }
+
+        var interventionIds = dtos.Select(x => x.InterventionID).ToArray();
+        var canDeleteDict = await repository.BatchCanDeleteAsync(interventionIds);
+        foreach (var dto in dtos)
+        {
+            dto.CanDelete = canDeleteDict.TryGetValue(dto.InterventionID, out var canDelete)
+                && canDelete;
+        }
+        await SendOkAsync(dtos, ct);
+    }
+}

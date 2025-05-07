@@ -13,6 +13,8 @@ public class C4WX1Faker
 
     public static int UserId => new Faker().Random.Int(1);
 
+    public static string ShortString => new Faker().Random.String2(10);
+
     public static Database.Models.Users DummyUser => new Faker<Database.Models.Users>()
         .RuleFor(x => x.Email, f => f.Internet.Email())
         .RuleFor(x => x.Password, f => f.Internet.Password())
