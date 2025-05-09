@@ -1,23 +1,11 @@
 ﻿using C4WX1.API.Features.BillingProposal.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.BillingProposal.Endpoints;
 
-public class DeleteBillingProposalSummary : EndpointSummary
+public class DeleteBillingProposalSummary 
+    : C4WX1DeleteSummary<Database.Models.BillingProposal>
 {
-    public DeleteBillingProposalSummary()
-    {
-        Summary = "Delete Billing Proposal";
-        Description = "Delete Billing Proposal by its ID";
-        ExampleRequest = new DeleteBillingProposalDto
-        {
-            Id = 1,
-            UserId = 1,
-        };
-        Responses[200] = "Billing Proposal deleted successfully";
-        Responses[404] = "Billing Proposal not found";
-    }
+    public DeleteBillingProposalSummary() { }
 }
 
 public class Delete(THCC_C4WDEVContext dbContext)

@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.BillingProposal.Dtos;
 using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.BillingProposal.Update;
 
-public class UpdateBillingProposalSummary : EndpointSummary
+public class UpdateBillingProposalSummary 
+    : C4WX1UpdateSummary<Database.Models.BillingProposal>
 {
-    public UpdateBillingProposalSummary()
+    public UpdateBillingProposalSummary() : base()
     {
-        Summary = "Update Billing Proposal";
-        Description = "Update Billing Proposal by its ID";
         ExampleRequest = new UpdateBillingProposalDto
         {
             Id = 1,
@@ -41,8 +38,6 @@ public class UpdateBillingProposalSummary : EndpointSummary
                 }
                 ]
         };
-        Responses[204] = "Billing Proposal updated successfully";
-        Responses[404] = "Billing Proposal not found";
     }
 }
 

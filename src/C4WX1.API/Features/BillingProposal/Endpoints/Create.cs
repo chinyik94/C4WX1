@@ -1,17 +1,14 @@
 ﻿using C4WX1.API.Features.BillingProposal.Dtos;
 using C4WX1.API.Features.BillingProposal.Mappers;
 using C4WX1.API.Features.SysConfig.Repository;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.BillingProposal.Endpoints;
 
-public class CreateBillingProposalSummary : EndpointSummary
+public class CreateBillingProposalSummary
+    : C4WX1CreateSummary<Database.Models.BillingProposal>
 {
-    public CreateBillingProposalSummary()
+    public CreateBillingProposalSummary() : base()
     {
-        Summary = "Create Billing Proposal";
-        Description = "Create new Billing Proposal";
         ExampleRequest = new CreateBillingProposalDto
         {
             PatientID_FK = 1,
@@ -41,7 +38,6 @@ public class CreateBillingProposalSummary : EndpointSummary
                 }
                 ]
         };
-        Responses[200] = "Billing Proposal created successfully";
     }
 }
 

@@ -3,8 +3,6 @@ using C4WX1.API.Features.Security;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Extensions;
 using C4WX1.API.Features.SysConfig.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Enterprise.Endpoints;
 

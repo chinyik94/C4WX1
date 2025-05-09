@@ -1,17 +1,11 @@
 ﻿using C4WX1.API.Features.Facility.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Facility.Endpoints;
 
-public class GetFacilityCountSummary : EndpointSummary
+public class GetFacilityCountSummary 
+    : C4WX1GetCountSummary<Database.Models.Facility>
 {
-    public GetFacilityCountSummary()
-    {
-        Summary = "Get the count of facilities";
-        Description = "Get the count of facilities";
-        Responses[200] = "Facility count retrieved successfully";
-    }
+    public GetFacilityCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

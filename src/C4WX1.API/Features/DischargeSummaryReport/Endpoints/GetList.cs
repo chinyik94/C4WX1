@@ -1,19 +1,13 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
 using C4WX1.API.Features.DischargeSummaryReport.Extensions;
-using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Endpoints;
 
-public class GetListSummary : EndpointSummary
+public class GetListSummary 
+    : C4WX1GetListSummary<Database.Models.DischargeSummaryReport>
 {
-    public GetListSummary()
-    {
-        Summary = "Get Disharge Summary Report List";
-        Description = "Get a filtered, paged and sorted list of Disharge Summary Reports";
-        Responses[200] = "Disharge Summary Report List retrieved successfully";
-    }
+    public GetListSummary() { }
 }
 
 public class GetList(
@@ -28,10 +22,7 @@ public class GetList(
 
     public override async Task HandleAsync(GetDischargeSummaryReportListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
-        var pageSize = req.PageSize ?? PaginationDefaults.Size;
-        var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
         var dtos = await dbContext.DischargeSummaryReport
             .Where(x => x.PatientID_FK == req.PatientId)
             .Sort(req.OrderBy)

@@ -1,6 +1,4 @@
 ﻿using C4WX1.API.Features.SysConfig.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Text;
 
 namespace C4WX1.API.Features.Generator;

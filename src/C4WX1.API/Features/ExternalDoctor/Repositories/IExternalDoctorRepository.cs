@@ -1,7 +1,7 @@
-﻿namespace C4WX1.API.Features.ExternalDoctor.Repositories;
+﻿using C4WX1.API.Features.Shared.Repository;
 
-public interface IExternalDoctorRepository
+namespace C4WX1.API.Features.ExternalDoctor.Repositories;
+
+public interface IExternalDoctorRepository : IDeletableRepository
 {
-    Task<bool> CanDeleteAsync(int id);
-    Task<Dictionary<int, bool>> BatchCanDeleteAsync(int[] ids);
 }

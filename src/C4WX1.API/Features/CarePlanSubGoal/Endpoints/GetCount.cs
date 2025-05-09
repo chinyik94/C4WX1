@@ -1,16 +1,9 @@
-﻿using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 
-namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
-
-public class GetCarePlanSubGoalCountSummary : EndpointSummary
+public class GetCarePlanSubGoalCountSummary 
+    : C4WX1GetCountSummary<Database.Models.CarePlanSubGoal>
 {
-    public GetCarePlanSubGoalCountSummary()
-    {
-        Summary = "Get Care Plan Sub Goal Count";
-        Description = "Get Care Plan Sub Goal Count";
-        Responses[200] = "Care Plan Sub Goal Count retrieved successfully";
-    }
+    public GetCarePlanSubGoalCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

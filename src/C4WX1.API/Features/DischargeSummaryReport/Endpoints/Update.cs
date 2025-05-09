@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
 using C4WX1.API.Features.DischargeSummaryReport.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Endpoints;
 
-public class UpdateDischargeSummaryReportSummary : EndpointSummary
+public class UpdateDischargeSummaryReportSummary 
+    : C4WX1UpdateSummary<Database.Models.DischargeSummaryReport>
 {
-    public UpdateDischargeSummaryReportSummary()
+    public UpdateDischargeSummaryReportSummary() : base()
     {
-        Summary = "Update Discharge Summary Report";
-        Description = "Update an existing Discharge Summary Report by its ID";
         ExampleRequest = new UpdateDischargeSummaryReportDto
         {
             Id = 1,
@@ -30,8 +27,6 @@ public class UpdateDischargeSummaryReportSummary : EndpointSummary
                 }
             ]
         };
-        Responses[204] = "Discharge Summary Report updated successfully";
-        Responses[404] = "Discharge Summary Report not found";
     }
 }
 

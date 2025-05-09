@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.CarePlanSubGoal.Dtos;
 using C4WX1.API.Features.CarePlanSubGoal.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 
-public class UpdateCarePlanSubGoalSummary : EndpointSummary
+public class UpdateCarePlanSubGoalSummary 
+    : C4WX1UpdateSummary<Database.Models.CarePlanSubGoal>
 {
-    public UpdateCarePlanSubGoalSummary()
+    public UpdateCarePlanSubGoalSummary() : base()
     {
-        Summary = "Update Care Plan Sub Goal";
-        Description = "Update a new Care Plan Sub Goal";
         ExampleRequest = new UpdateCarePlanSubGoalDto
         {
             Id = 1,
@@ -18,8 +15,6 @@ public class UpdateCarePlanSubGoalSummary : EndpointSummary
             CarePlanSubID_FK = 1,
             UserId = 1
         };
-        Responses[204] = "Care Plan Sub Goal updated successfully";
-        Responses[404] = "Care Plan Sub Goal not found";
     }
 }
 

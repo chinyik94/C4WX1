@@ -1,16 +1,9 @@
-﻿using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿namespace C4WX1.API.Features.SysConfig.Endpoints;
 
-namespace C4WX1.API.Features.SysConfig.Endpoints;
-
-public class GetSysConfigCountSummary : EndpointSummary
+public class GetSysConfigCountSummary 
+    : C4WX1GetCountSummary<Database.Models.SysConfig>
 {
-    public GetSysConfigCountSummary()
-    {
-        Summary = "Get SysConfig Count";
-        Description = "Get the number of SysConfigs";
-        Responses[200] = "Number of SysConfigs retrieved successfully";
-    }
+    public GetSysConfigCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext) 

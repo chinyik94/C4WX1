@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.ExternalDoctor.Dtos;
 using C4WX1.API.Features.ExternalDoctor.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.ExternalDoctor.Endpoints;
 
-public class UpdateExternalDoctorSummary : EndpointSummary
+public class UpdateExternalDoctorSummary 
+    : C4WX1UpdateSummary<Database.Models.ExternalDoctor>
 {
-    public UpdateExternalDoctorSummary()
+    public UpdateExternalDoctorSummary() : base()
     {
-        Summary = "Update External Doctor";
-        Description = "Update an existing External Doctor";
         ExampleRequest = new UpdateExternalDoctorDto
         {
             Name = "Name",
@@ -19,9 +16,7 @@ public class UpdateExternalDoctorSummary : EndpointSummary
             ClinicianTypeID_FK = 1,
             UserId = 1
         };
-        Responses[204] = "External Doctor updated successfully";
         Responses[400] = "Invalid request";
-        Responses[404] = "External Doctor not found";
     }
 }
 

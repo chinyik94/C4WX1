@@ -1,6 +1,5 @@
 ﻿using C4WX1.API.Features.ErrorLog.Dtos;
 using C4WX1.API.Features.ErrorLog.Endpoints;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.ErrorLog;
 

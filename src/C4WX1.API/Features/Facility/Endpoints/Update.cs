@@ -1,18 +1,20 @@
 ﻿using C4WX1.API.Features.Facility.Dtos;
 using C4WX1.API.Features.Facility.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Facility.Endpoints;
 
-public class UpdateFacilitySummary : EndpointSummary
+public class UpdateFacilitySummary 
+    : C4WX1UpdateSummary<Database.Models.Facility>
 {
-    public UpdateFacilitySummary()
+    public UpdateFacilitySummary() : base()
     {
-        Summary = "Update facility";
-        Description = "Update an existing facility by its ID";
-        Responses[204] = "Facility updated successfully";
-        Responses[404] = "Facility not found";
+        ExampleRequest = new UpdateFacilityDto
+        {
+            Id = 1,
+            FacilityName = "example-FacilityName",
+            OrganizationID_FK = 1,
+            UserId = 1
+        };
     }
 }
 

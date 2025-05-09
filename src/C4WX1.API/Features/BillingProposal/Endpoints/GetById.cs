@@ -1,20 +1,13 @@
 ﻿using C4WX1.API.Features.BillingProposal.Dtos;
 using C4WX1.API.Features.BillingProposal.Mappers;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.BillingProposal.Endpoints;
 
-public class GetBillingProposalSummary : EndpointSummary
+public class GetBillingProposalSummary 
+    : C4WX1GetByIdSummary<Database.Models.BillingProposal>
 {
-    public GetBillingProposalSummary()
-    {
-        Summary = "Get Billing Proposal";
-        Description = "Get Billing Proposal by its ID";
-        Responses[200] = "Billing Proposal retrieved succesfully";
-        Responses[404] = "Billing Proposal not found";
-    }
+    public GetBillingProposalSummary() { }
 }
 
 public class GetById(THCC_C4WDEVContext dbContext)

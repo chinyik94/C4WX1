@@ -1,24 +1,19 @@
 ﻿using C4WX1.API.Features.IntegrationApiRequestLog.Dtos;
 using C4WX1.API.Features.IntegrationApiRequestLog.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.IntegrationApiRequestLog.Endpoints;
 
-public class UpdateIntegrationApiRequestLogSummary : EndpointSummary
+public class UpdateIntegrationApiRequestLogSummary 
+    : C4WX1UpdateSummary<Database.Models.IntegrationApiRequestLog>
 {
-    public UpdateIntegrationApiRequestLogSummary()
+    public UpdateIntegrationApiRequestLogSummary() : base()
     {
-        Summary = "Update IntegrationApiRequestLog";
-        Description = "Update an existing IntegrationApiRequestLog by its ID";
         ExampleRequest = new UpdateIntegrationApiRequestLogDto
         {
             Id = 1,
             Status = "example-Status",
             UserId = 1,
         };
-        Responses[204] = "IntegrationApiRequestLog updated successfully";
-        Responses[404] = "IntegrationApiRequestLog not found";
     }
 }
 

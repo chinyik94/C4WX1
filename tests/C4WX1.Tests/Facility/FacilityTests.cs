@@ -3,7 +3,6 @@ using C4WX1.API.Features.Facility.Dtos;
 using C4WX1.API.Features.Facility.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.Facility;
 
@@ -11,23 +10,6 @@ namespace C4WX1.Tests.Facility;
 public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
 {
     private readonly string ControlOrganizationName = "control-OrganizationName";
-
-    private CreateFacilityDto Control => new()
-    {
-        FacilityName = "control-FacilityName",
-        OrganizationID_FK = 1,
-        UserId = 1,
-    };
-
-    private CreateFacilityByIntegrationSourceDto ControlIntegrationSource => new()
-    {
-        FacilityName = "control-FacilityName",
-        OrganizationID_FK = 1,
-        UserId = 1,
-        IntegrationSource = "control-IntegrationSource",
-        C_Id = "1",
-        Remarks = "control-Remarks",
-    };
 
     private async Task SetupDependenciesAsync()
     {
@@ -94,6 +76,14 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
         return res;
     }
 
+    private async Task SetupDummiesAsync(int createCount)
+    {
+        var createTasks = Enumerable.Range(0, createCount)
+            .Select(x => FacilityFaker.CreateDummy)
+            .Select(SetupAsync);
+        await Task.WhenAll(createTasks);
+    }
+
     private async Task<int> SetupWithIntegrationSourceAsync(CreateFacilityByIntegrationSourceDto testData)
     {
         var (resp, res) = await app.Client.POSTAsync<CreateByIntegrationSource, CreateFacilityByIntegrationSourceDto, int>(
@@ -108,7 +98,7 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupDependenciesAsync();
 
-        var (resp, res) = await app.Client.POSTAsync<Create, CreateFacilityDto, int>(Control);
+        var (resp, res) = await app.Client.POSTAsync<Create, CreateFacilityDto, int>(FacilityFaker.CreateDto);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -121,7 +111,7 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
         await SetupDependenciesAsync();
 
         var (resp, res) = await app.Client.POSTAsync<CreateByIntegrationSource, CreateFacilityByIntegrationSourceDto, int>(
-            ControlIntegrationSource);
+            FacilityFaker.CreateByIntegrationSourceDto);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -132,14 +122,10 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task DeleteAsync_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(FacilityFaker.CreateDto);
 
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new()
-            {
-                Id = id,
-                UserId = 1,
-            });
+        var req = C4WX1Faker.DeleteDto(id);
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
 
         await CleanupAsync();
@@ -148,12 +134,8 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task DeleteAsync_WithNonExistentId()
     {
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new()
-            {
-                Id = C4WX1Faker.Id,
-                UserId = 1,
-            });
+        var req = C4WX1Faker.DeleteDto();
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
 
         await CleanupAsync();
@@ -163,23 +145,23 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetByCId_WithExistingCId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupWithIntegrationSourceAsync(ControlIntegrationSource);
+        var id = await SetupWithIntegrationSourceAsync(FacilityFaker.CreateByIntegrationSourceDto);
         await SetupUserDependenciesAsync(id);
 
         var (resp, res) = await app.Client.GETAsync<GetByCId, GetFacilityByCIdDto, FacilityDto>(
             new()
             {
-                CId = ControlIntegrationSource.C_Id!,
+                CId = FacilityFaker.CreateByIntegrationSourceDto.C_Id!,
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
         res.FacilityID.ShouldBe(id);
-        res.FacilityName.ShouldBe(ControlIntegrationSource.FacilityName);
-        res.OrganizationID_FK.ShouldBe(ControlIntegrationSource.OrganizationID_FK);
+        res.FacilityName.ShouldBe(FacilityFaker.CreateByIntegrationSourceDto.FacilityName);
+        res.OrganizationID_FK.ShouldBe(FacilityFaker.CreateByIntegrationSourceDto.OrganizationID_FK);
         res.OrganizationName.ShouldBe(ControlOrganizationName);
-        res.C_id.ShouldBe(ControlIntegrationSource.C_Id);
-        res.Remarks.ShouldBe(ControlIntegrationSource.Remarks);
-        res.IntegrationSource.ShouldBe(ControlIntegrationSource.IntegrationSource);
+        res.C_id.ShouldBe(FacilityFaker.CreateByIntegrationSourceDto.C_Id);
+        res.Remarks.ShouldBe(FacilityFaker.CreateByIntegrationSourceDto.Remarks);
+        res.IntegrationSource.ShouldBe(FacilityFaker.CreateByIntegrationSourceDto.IntegrationSource);
 
         await CleanupAsync();
     }
@@ -203,15 +185,7 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetFacilityCountDto, int>(
             new());
@@ -226,21 +200,13 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
-        await SetupAsync(Control);
+        await SetupDummiesAsync(createCount);
+        await SetupAsync(FacilityFaker.CreateDto);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetFacilityCountDto, int>(
             new()
             {
-                Keyword = Control.FacilityName,
+                Keyword = FacilityFaker.CreateDto.FacilityName,
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBe(1);
@@ -261,20 +227,12 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetFacilityCountDto, int>(
             new()
             {
-                OrganizationId = Control.OrganizationID_FK,
+                OrganizationId = FacilityFaker.CreateDto.OrganizationID_FK,
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBe(createCount);
@@ -295,15 +253,7 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
+        await SetupDummiesAsync(createCount);
         var expectedCount = Math.Min(createCount, state.DefaultPageSize);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
@@ -320,15 +270,7 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
+        await SetupDummiesAsync(createCount);
 
         var expectedCount = Math.Min(createCount, state.LowPageSize);
         var (resp, res) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
@@ -358,15 +300,7 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
+        await SetupDummiesAsync(createCount);
         var expectedCount = Math.Min(createCount, state.DefaultPageSize);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
@@ -413,21 +347,13 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
-        await SetupAsync(Control);
+        await SetupDummiesAsync(createCount);
+        await SetupAsync(FacilityFaker.CreateDto);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
             new()
             {
-                Keyword = Control.FacilityName,
+                Keyword = FacilityFaker.CreateDto.FacilityName,
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(1);
@@ -448,21 +374,13 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
+        await SetupDummiesAsync(createCount);
         var expectedCount = Math.Min(createCount, state.DefaultPageSize);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetFacilityListDto, IEnumerable<FacilityDto>>(
             new()
             {
-                OrganizationId = Control.OrganizationID_FK,
+                OrganizationId = FacilityFaker.CreateDto.OrganizationID_FK,
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
@@ -483,21 +401,13 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
-        var id = await SetupWithIntegrationSourceAsync(ControlIntegrationSource);
+        await SetupDummiesAsync(createCount);
+        var id = await SetupWithIntegrationSourceAsync(FacilityFaker.CreateByIntegrationSourceDto);
 
         var (resp, res) = await app.Client.GETAsync<GetListByIntegrationSource, GetFacilityListByIntegrationSourceDto, IEnumerable<FacilityDto>>(
             new()
             {
-                IntegrationSource = ControlIntegrationSource.IntegrationSource!,
+                IntegrationSource = FacilityFaker.CreateByIntegrationSourceDto.IntegrationSource!,
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(1);
@@ -510,21 +420,13 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
-        var id = await SetupWithIntegrationSourceAsync(ControlIntegrationSource);
+        await SetupDummiesAsync(createCount);
+        var id = await SetupWithIntegrationSourceAsync(FacilityFaker.CreateByIntegrationSourceDto);
 
         var (resp, res) = await app.Client.GETAsync<GetListByIntegrationSource, GetFacilityListByIntegrationSourceDto, IEnumerable<FacilityDto>>(
             new()
             {
-                IntegrationSource = ControlIntegrationSource.IntegrationSource!,
+                IntegrationSource = FacilityFaker.CreateByIntegrationSourceDto.IntegrationSource!,
                 FacilityId = id
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -538,20 +440,12 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDependenciesAsync();
-        var createTasks = Enumerable.Range(0, createCount)
-            .Select(x => new CreateFacilityDto
-            {
-                FacilityName = FacilityFaker.FacilityName,
-                OrganizationID_FK = 1,
-                UserId = C4WX1Faker.Id,
-            })
-            .Select(x => SetupAsync(x));
-        await Task.WhenAll(createTasks);
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetListByType, GetFacilityListByTypeDto, IEnumerable<FacilityDto>>(
             new()
             {
-                TypeId = Control.OrganizationID_FK
+                TypeId = FacilityFaker.CreateDto.OrganizationID_FK
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(createCount);
@@ -593,7 +487,7 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Update_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(FacilityFaker.CreateDto);
 
         var resp = await app.Client.PUTAsync<Update, UpdateFacilityDto>(
             new()
@@ -627,7 +521,7 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task UpdateByIntegrationSource_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupWithIntegrationSourceAsync(ControlIntegrationSource);
+        var id = await SetupWithIntegrationSourceAsync(FacilityFaker.CreateByIntegrationSourceDto);
 
         var resp = await app.Client.PUTAsync<UpdateByIntegrationSource, UpdateFacilityByIntegrationSourceDto>(
             new()
@@ -636,8 +530,8 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
                 FacilityName = "control-FacilityName-Updated",
                 OrganizationID_FK = 1,
                 UserId = 1,
-                IntegrationSource = ControlIntegrationSource.IntegrationSource,
-                C_Id = ControlIntegrationSource.C_Id,
+                IntegrationSource = FacilityFaker.CreateByIntegrationSourceDto.IntegrationSource,
+                C_Id = FacilityFaker.CreateByIntegrationSourceDto.C_Id,
                 Remarks = "control-Remarks-Updated",
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -655,8 +549,8 @@ public class FacilityTests(C4WX1App app, C4WX1State state) : TestBase
                 FacilityName = "control-FacilityName-Updated",
                 OrganizationID_FK = 1,
                 UserId = 1,
-                IntegrationSource = ControlIntegrationSource.IntegrationSource,
-                C_Id = ControlIntegrationSource.C_Id,
+                IntegrationSource = FacilityFaker.CreateByIntegrationSourceDto.IntegrationSource,
+                C_Id = FacilityFaker.CreateByIntegrationSourceDto.C_Id,
                 Remarks = "control-Remarks-Updated",
             });
         resp.IsSuccessStatusCode.ShouldBeFalse();

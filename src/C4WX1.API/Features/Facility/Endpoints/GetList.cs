@@ -1,20 +1,14 @@
 ﻿using C4WX1.API.Features.Facility.Dtos;
 using C4WX1.API.Features.Facility.Extensions;
 using C4WX1.API.Features.Facility.Mappers;
-using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.Facility.Endpoints;
 
-public class GetFacilityListSummary : EndpointSummary
+public class GetFacilityListSummary 
+    : C4WX1GetListSummary<Database.Models.Facility>
 {
-    public GetFacilityListSummary()
-    {
-        Summary = "Get a list of facilities";
-        Description = "Get a filtered, sorted and paged list of facilities";
-        Responses[200] = "List of facilities retrieved successfully";
-    }
+    public GetFacilityListSummary() { }
 }
 
 public class GetList(THCC_C4WDEVContext dbContext)
@@ -28,10 +22,7 @@ public class GetList(THCC_C4WDEVContext dbContext)
 
     public override async Task HandleAsync(GetFacilityListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
-        var pageSize = req.PageSize ?? PaginationDefaults.Size;
-        var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
         var query = dbContext.Facility
             .Where(x => !x.IsDeleted);
         if (!string.IsNullOrEmpty(req.Keyword))

@@ -1,17 +1,11 @@
 ﻿using C4WX1.API.Features.ExternalDoctor.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.ExternalDoctor.Endpoints;
 
-public class GetExternalDoctorCountSummary : EndpointSummary
+public class GetExternalDoctorCountSummary 
+    : C4WX1GetCountSummary<Database.Models.ExternalDoctor>
 {
-    public GetExternalDoctorCountSummary()
-    {
-        Summary = "Get the count of external doctors";
-        Description = "Get the count of external doctors";
-        Responses[200] = "Count of external doctors retrieved successfully";
-    }
+    public GetExternalDoctorCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

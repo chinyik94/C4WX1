@@ -1,15 +1,13 @@
 ﻿using C4WX1.API.Features.C4WDeviceToken.Dtos;
 using C4WX1.API.Features.C4WDeviceToken.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.C4WDeviceToken.Endpoints;
 
-public class CreateC4WDeviceTokenSummary : EndpointSummary
+public class CreateC4WDeviceTokenSummary 
+    : C4WX1CreateSummary<Database.Models.C4WDeviceToken>
 {
-    public CreateC4WDeviceTokenSummary()
+    public CreateC4WDeviceTokenSummary() : base()
     {
-        Summary = "Create C4W Device Token";
-        Description = "Create a new C4W Device Token";
         ExampleRequest = new CreateC4WDeviceTokenDto
         {
             OldDeviceToken = "Old Token",
@@ -18,7 +16,6 @@ public class CreateC4WDeviceTokenSummary : EndpointSummary
             Device = "Iphone",
             UserId = 1
         };
-        Responses[200] = "C4W Device Token created successfully";
     }
 }
 

@@ -1,20 +1,13 @@
 ﻿using C4WX1.API.Features.Language.Dtos;
 using C4WX1.API.Features.Language.Mappers;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Language.Endpoints;
 
-public class GetLanguageByIdSummary : EndpointSummary
+public class GetLanguageByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.Language>
 {
-    public GetLanguageByIdSummary()
-    {
-        Summary = "Get Language";
-        Description = "Get a language by its Id";
-        Responses[200] = "Language retrieved successfully";
-        Responses[404] = "Language not found";
-    }
+    public GetLanguageByIdSummary() { }
 }
 
 public class GetById(THCC_C4WDEVContext dbContext)

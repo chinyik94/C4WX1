@@ -17,7 +17,7 @@ public class BranchFaker
 
     public static string DummyAlphaNumeric => new Faker().Random.AlphaNumeric(10);
 
-    public static CreateBranchDto DummyCreateDto => new Faker<CreateBranchDto>()
+    public static CreateBranchDto CreateDummy => new Faker<CreateBranchDto>()
         .RuleFor(x => x.BranchName, f => f.Random.AlphaNumeric(10))
         .RuleFor(x => x.Status, f => Statuses.Active)
         .RuleFor(x => x.UserId, f => f.Random.Int())
@@ -29,4 +29,18 @@ public class BranchFaker
     public static string DummyEmail => new Faker().Internet.Email();
 
     public static string DummyContact => new Faker().Phone.PhoneNumber();
+
+    public static CreateBranchDto CreateDto => new()
+    {
+        BranchID = 0,
+        BranchName = "control-BranchName",
+        Address1 = "control-Address1",
+        Address2 = "control-Address2",
+        Address3 = "control-Address3",
+        Contact = "control-Contact",
+        Email = "control-Email",
+        Status = Statuses.Active,
+        UserId = 1,
+        UserDataList = [1, 2, 3]
+    };
 }

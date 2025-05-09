@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.C4WDeviceToken.Dtos;
 using C4WX1.API.Features.C4WDeviceToken.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.C4WDeviceToken.Endpoints;
 
-public class UpdateC4WDeviceTokenSummary : EndpointSummary
+public class UpdateC4WDeviceTokenSummary 
+    : C4WX1UpdateSummary<Database.Models.C4WDeviceToken>
 {
-    public UpdateC4WDeviceTokenSummary()
+    public UpdateC4WDeviceTokenSummary() : base()
     {
-        Summary = "Update C4W Device Token";
-        Description = "Update an existing C4W Device Token";
         ExampleRequest = new UpdateC4WDeviceTokenDto
         {
             Id = 1,
@@ -20,8 +17,6 @@ public class UpdateC4WDeviceTokenSummary : EndpointSummary
             Device = "IPhone",
             UserId = 1
         };
-        Responses[204] = "C4W Device Token updated successfully";
-        Responses[404] = "C4W Device Token not found";
     }
 }
 

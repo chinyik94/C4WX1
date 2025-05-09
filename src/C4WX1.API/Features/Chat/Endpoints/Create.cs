@@ -1,17 +1,14 @@
 ﻿using C4WX1.API.Features.Chat.Dtos;
 using C4WX1.API.Features.Chat.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace C4WX1.API.Features.Chat.Endpoints;
 
-public class CreateChatSummary : EndpointSummary
+public class CreateChatSummary 
+    : C4WX1CreateSummary<Database.Models.Chat>
 {
-    public CreateChatSummary()
+    public CreateChatSummary() : base()
     {
-        Summary = "Create Chat";
-        Description = "Create a new Chat";
         ExampleRequest = new CreateChatDto
         {
             Attachment = "Attachment",
@@ -22,7 +19,6 @@ public class CreateChatSummary : EndpointSummary
             Comment = "Comment",
             Family = true
         };
-        Responses[200] = "Chat created successfully";
         Responses[400] = "Invalid request";
         Responses[404] = "Chat not found";
     }

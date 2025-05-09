@@ -20,4 +20,22 @@ public class EmailLogFaker
         .RuleFor(x => x.smtpPort, f => f.Random.AlphaNumeric(10))
         .RuleFor(x => x.smtpServerAddress, f => f.Random.AlphaNumeric(10))
         .Generate();
+
+    public static CreateEmailLogDto CreateDto => new()
+    {
+        msgBCC = "control-msgBcc",
+        msgCC = "control-msgcc",
+        msgTo = "control-msgTo",
+        msgSubj = "control-msgSub",
+        msgBody = "control-msgBody",
+        msgFromName = "control-msgFromName",
+        msgFrom = "control-msgFrom",
+        isHtml = false,
+        attachmentName = "control-attachmentName",
+        isSent = false,
+        smtpLogin = "control-smtpLogin",
+        smtpPassword = "control-smtpPassword",
+        smtpPort = "control-smtpPort",
+        smtpServerAddress = "control-smtpServerAddress"
+    };
 }

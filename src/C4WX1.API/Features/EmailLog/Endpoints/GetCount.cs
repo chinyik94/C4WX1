@@ -1,17 +1,11 @@
 ﻿using C4WX1.API.Features.EmailLog.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.EmailLog.Endpoints;
 
-public class GetEmailLogCountSummary : EndpointSummary
+public class GetEmailLogCountSummary
+    : C4WX1GetCountSummary<Database.Models.EmailLog>
 {
-    public GetEmailLogCountSummary()
-    {
-        Summary = "Get Email Log Count";
-        Description = "Get Email Log Count";
-        Responses[200] = "Email Log Count retrieved successfully";
-    }
+    public GetEmailLogCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

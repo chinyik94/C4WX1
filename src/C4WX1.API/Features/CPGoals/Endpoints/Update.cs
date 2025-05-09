@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.CPGoals.Dtos;
 using C4WX1.API.Features.CPGoals.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.CPGoals.Endpoints;
 
-public class UpdateCPGoalsSummary : EndpointSummary
+public class UpdateCPGoalsSummary 
+    : C4WX1UpdateSummary<Database.Models.CPGoals>
 {
-    public UpdateCPGoalsSummary()
+    public UpdateCPGoalsSummary() : base()
     {
-        Summary = "Update CP Goals";
-        Description = "Update an existing CP Goals";
         ExampleRequest = new UpdateCPGoalsDto
         {
             Id = 1,
@@ -18,7 +15,6 @@ public class UpdateCPGoalsSummary : EndpointSummary
             DiseaseID_FK = 1,
             UserId = 1
         };
-        Responses[204] = "CP Goals updated successfully";
     }
 }
 

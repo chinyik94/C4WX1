@@ -1,6 +1,5 @@
 ﻿using C4WX1.API.Features.Intervention.Dtos;
 using C4WX1.API.Features.Intervention.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.Intervention.Endpoints;
 

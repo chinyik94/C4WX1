@@ -1,38 +1,16 @@
-﻿using C4WX1.API.Features.CPGoals.Constants;
-using Dapper;
-using Npgsql;
+﻿using C4WX1.API.Features.Shared.Constants;
+using C4WX1.API.Features.Shared.Repository;
 
 namespace C4WX1.API.Features.CPGoals.Repository;
 
 public class CPGoalsRepository(IConfiguration configuration) 
-    : ICPGoalsRepository
+    : C4WX1Repository(configuration), ICPGoalsRepository
 {
-    private readonly string? connectionString = configuration.GetConnectionString("Default");
+    private const string CanDeleteFuncName = "fn_CanDeleteCPGoals";
 
-    public async Task<Dictionary<int, bool>> BatchCanDeleteAsync(int[] ids)
-    {
-        if (string.IsNullOrWhiteSpace(connectionString))
-        {
-            throw new Exception("Invalid connection string");
-        }
+    protected override string CanDeleteSql
+        => C4WX1CanDeleteSqls.CanDelete(CanDeleteFuncName);
 
-        using var connection = new NpgsqlConnection(connectionString);
-        var results = await connection.QueryAsync<(int Id, bool CanDelete)>(
-            Sqls.BatchCanDelete,
-            new { CPGoalsIds = ids });
-        return results.ToDictionary(x => x.Id, x => x.CanDelete);
-    }
-
-    public async Task<bool> CanDeleteAsync(int id)
-    {
-        if (string.IsNullOrWhiteSpace(connectionString))
-        {
-            throw new Exception("Invalid connection string");
-        }
-        using var connection = new NpgsqlConnection(connectionString);
-        var result = await connection.QuerySingleAsync<bool>(
-            Sqls.CanDelete,
-            new { CPGoalsId = id });
-        return result;
-    }
+    protected override string BatchCanDeleteSql
+        => C4WX1CanDeleteSqls.BatchCanDelete(CanDeleteFuncName);
 }

@@ -1,20 +1,14 @@
 ﻿using C4WX1.API.Features.EmailLog.Dtos;
 using C4WX1.API.Features.EmailLog.Extensions;
 using C4WX1.API.Features.EmailLog.Mappers;
-using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.EmailLog.Endpoints;
 
-public class GetEmailLogListSummary : EndpointSummary
+public class GetEmailLogListSummary 
+    : C4WX1GetListSummary<Database.Models.EmailLog>
 {
-    public GetEmailLogListSummary()
-    {
-        Summary = "Get Email Log List";
-        Description = "Get a filtered, sorted and paged List of Email Log";
-        Responses[200] = "Email Log List retrieved successfully";
-    }
+    public GetEmailLogListSummary() { }
 }
 
 public class GetList(THCC_C4WDEVContext dbContext)
@@ -28,10 +22,7 @@ public class GetList(THCC_C4WDEVContext dbContext)
 
     public override async Task HandleAsync(GetEmailLogListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
-        var pageSize = req.PageSize ?? PaginationDefaults.Size;
-        var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
         var query = dbContext.EmailLog
             .Where(x =>
                 (string.IsNullOrWhiteSpace(req.MsgFrom)

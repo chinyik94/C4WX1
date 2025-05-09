@@ -2,20 +2,13 @@
 using C4WX1.API.Features.ExternalDoctor.Mappers;
 using C4WX1.API.Features.ExternalDoctor.Repositories;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.ExternalDoctor.Endpoints;
 
-public class GetExternalDoctorByIdSummary : EndpointSummary
+public class GetExternalDoctorByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.ExternalDoctor>
 {
-    public GetExternalDoctorByIdSummary()
-    {
-        Summary = "Get External Doctor";
-        Description = "Get External Doctor by its ID";
-        Responses[200] = "External Doctor retrieved successfully";
-        Responses[404] = "External Doctor not found";
-    }
+    public GetExternalDoctorByIdSummary() { }
 }
 
 public class GetById(

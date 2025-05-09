@@ -1,5 +1,4 @@
 ﻿using C4WX1.API.Features.IntegrationApiRequestLog.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.IntegrationApiRequestLog;
 
@@ -14,4 +13,15 @@ public class IntegrationApiRequestLogFaker
         .RuleFor(x => x.Status, f => f.Random.String2(10))
         .RuleFor(x => x.UserId, f => C4WX1Faker.Id)
         .Generate();
+
+    public static CreateIntegrationApiRequestLogDto CreateControl => new()
+    {
+        IntegrationSource = "control-IntegrationSource",
+        FacilityId = "1",
+        ResidentId = "1",
+        Url = "control-Url",
+        Content = "control-Content",
+        Status = "control-Status",
+        UserId = 1
+    };
 }

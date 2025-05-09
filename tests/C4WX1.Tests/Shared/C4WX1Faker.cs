@@ -6,14 +6,13 @@ public class C4WX1Faker
 {
     public static int CreateCount => new Faker().Random.Int(10, 20);
 
-    public static GetByIdDto GetByIdDto => new Faker<GetByIdDto>()
-            .RuleFor(x => x.Id, f => f.Random.Int(1));
-
     public static int Id => new Faker().Random.Int(1);
 
     public static int UserId => new Faker().Random.Int(1);
 
     public static string ShortString => new Faker().Random.String2(10);
+
+    public static string AlphaNumeric => new Faker().Random.AlphaNumeric(10);
 
     public static Database.Models.Users DummyUser => new Faker<Database.Models.Users>()
         .RuleFor(x => x.Email, f => f.Internet.Email())
@@ -22,4 +21,15 @@ public class C4WX1Faker
         .RuleFor(x => x.Lastname, f => f.Internet.UserName())
         .RuleFor(x => x.Status, f => f.Lorem.Word())
         .Generate();
+
+    public static DeleteByIdDto DeleteDto(int? id = null) => new()
+    {
+        Id = id ?? Id,
+        UserId = 1
+    };
+
+    public static GetByIdDto GetByIdDto(int? id = null) => new()
+    {
+        Id = id ?? Id,
+    };
 }

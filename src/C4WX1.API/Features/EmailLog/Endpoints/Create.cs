@@ -1,15 +1,13 @@
 ﻿using C4WX1.API.Features.EmailLog.Dtos;
 using C4WX1.API.Features.EmailLog.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.EmailLog.Endpoints;
 
-public class CreateEmailLogSummary : EndpointSummary
+public class CreateEmailLogSummary 
+    : C4WX1CreateSummary<Database.Models.EmailLog>
 {
-    public CreateEmailLogSummary()
+    public CreateEmailLogSummary() : base()
     {
-        Summary = "Create Email Log";
-        Description = "Create a new Email Log";
         ExampleRequest = new CreateEmailLogDto
         {
             msgBCC = "bcc@test.com",
@@ -27,7 +25,6 @@ public class CreateEmailLogSummary : EndpointSummary
             smtpPort = "25",
             smtpServerAddress = "smtp@test.com"
         };
-        Responses[200] = "Email Log created successfully";
     }
 }
 

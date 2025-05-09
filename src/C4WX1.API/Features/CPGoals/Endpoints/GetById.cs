@@ -2,20 +2,13 @@
 using C4WX1.API.Features.CPGoals.Mappers;
 using C4WX1.API.Features.CPGoals.Repository;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.CPGoals.Endpoints;
 
-public class GetCPGoalsByIdSummary : EndpointSummary
+public class GetCPGoalsByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.CPGoals>
 {
-    public GetCPGoalsByIdSummary()
-    {
-        Summary = "Get CPGoals";
-        Description = "Get CPGoals by its ID";
-        Responses[200] = "CPGoals retrieved successfully";
-        Responses[404] = "CPGoals not found";
-    }
+    public GetCPGoalsByIdSummary() { }
 }
 
 public class GetById(THCC_C4WDEVContext dbContext, ICPGoalsRepository repository)

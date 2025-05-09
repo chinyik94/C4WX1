@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.Branch.Dtos;
 using C4WX1.API.Features.Branch.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Branch.Endpoints;
 
-public class CreateBranchSummary : EndpointSummary
+public class CreateBranchSummary 
+    : C4WX1CreateSummary<Database.Models.Branch>
 {
-    public CreateBranchSummary()
+    public CreateBranchSummary() : base()
     {
-        Summary = "Create Branch";
-        Description = "Create a new Branch";
         ExampleRequest = new CreateBranchDto
         {
             BranchID = 0,
@@ -25,8 +22,6 @@ public class CreateBranchSummary : EndpointSummary
             UserId = 1,
             UserDataList = [1, 2, 3]
         };
-        Responses[204] = "Branch created successfully";
-        Responses[400] = "Branch data invalid";
     }
 }
 

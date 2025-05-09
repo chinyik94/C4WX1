@@ -1,7 +1,5 @@
 ﻿using C4WX1.API.Features.Language.Dtos;
 using C4WX1.API.Features.Language.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Language.Endpoints;
 

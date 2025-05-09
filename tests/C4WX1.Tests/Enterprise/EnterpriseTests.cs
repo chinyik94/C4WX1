@@ -1,6 +1,5 @@
 ﻿using C4WX1.API.Features.Enterprise.Dtos;
 using C4WX1.API.Features.Enterprise.Endpoints;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.Enterprise;
 

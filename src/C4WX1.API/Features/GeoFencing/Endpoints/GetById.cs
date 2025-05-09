@@ -1,20 +1,13 @@
 ﻿using C4WX1.API.Features.GeoFencing.Dtos;
 using C4WX1.API.Features.GeoFencing.Mappers;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.GeoFencing.Endpoints;
 
-public class GetGeoFencingByIdSummary : EndpointSummary
+public class GetGeoFencingByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.GeoFencing>
 {
-    public GetGeoFencingByIdSummary()
-    {
-        Summary = "Get GeoFencing";
-        Description = "Get GeoFencing by its ID";
-        Responses[200] = "GeoFencing retrieved successfully";
-        Responses[404] = "GeoFencing not found";
-    }
+    public GetGeoFencingByIdSummary() { }
 }
 
 public class GetById(THCC_C4WDEVContext dbContext)

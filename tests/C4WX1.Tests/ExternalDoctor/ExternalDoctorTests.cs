@@ -1,10 +1,8 @@
-﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
-using C4WX1.API.Features.ExternalDoctor.Constants;
+﻿using C4WX1.API.Features.ExternalDoctor.Constants;
 using C4WX1.API.Features.ExternalDoctor.Dtos;
 using C4WX1.API.Features.ExternalDoctor.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Shared;
 using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.Tests.ExternalDoctor;
@@ -12,14 +10,6 @@ namespace C4WX1.Tests.ExternalDoctor;
 [Collection<C4WX1TestCollection>]
 public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
 {
-    private CreateExternalDoctorDto Control => new()
-    {
-        Name = "control Name",
-        Email = "control-Email",
-        Contact = "control-Contact",
-        ClinicianTypeID_FK = 1,
-        UserId = 1
-    };
     private readonly string UserFirstName = "Test";
     private readonly string UserLastName = "User";
 
@@ -93,12 +83,20 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         return res;
     }
 
+    private async Task SetupDummiesAsync(int createCount)
+    {
+        var createTasks = Enumerable.Range(0, createCount)
+            .Select(x => ExternalDoctorFaker.DummyCreate)
+            .Select(SetupAsync);
+        await Task.WhenAll(createTasks);
+    }
+
     [Fact]
     public async Task Create_WithoutExistingDoctorAndDoctorUser()
     {
         await SetupDependenciesAsync();
 
-        var (resp, res) = await app.Client.POSTAsync<Create, CreateExternalDoctorDto, int>(Control);
+        var (resp, res) = await app.Client.POSTAsync<Create, CreateExternalDoctorDto, int>(ExternalDoctorFaker.CreateDto);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -109,8 +107,8 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Create_WithExistingDoctor()
     {
         await SetupDependenciesAsync();
-        await SetupAsync(Control);
-        var (resp, res) = await app.Client.POSTAsync<Create, CreateExternalDoctorDto, int>(Control);
+        await SetupAsync(ExternalDoctorFaker.CreateDto);
+        var (resp, res) = await app.Client.POSTAsync<Create, CreateExternalDoctorDto, int>(ExternalDoctorFaker.CreateDto);
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBe(0);
         await CleanupAsync();
@@ -121,7 +119,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupDependenciesAsync();
         await SetupUserAsync();
-        var control = Control;
+        var control = ExternalDoctorFaker.CreateDto;
         control.Name = $"{UserFirstName} {UserLastName}";
         var (resp, res) = await app.Client.POSTAsync<Create, CreateExternalDoctorDto, int>(control);
         resp.IsSuccessStatusCode.ShouldBeFalse();
@@ -133,7 +131,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Update_WithExistingId_WithoutExistingDoctorAndDoctorUser()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(ExternalDoctorFaker.CreateDto);
 
         var resp = await app.Client.PUTAsync<Update, UpdateExternalDoctorDto>(
             new()
@@ -154,8 +152,8 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Update_WithExistingId_WithExistingDoctor()
     {
         await SetupUserAsync();
-        await SetupAsync(Control);
-        var control2 = Control;
+        await SetupAsync(ExternalDoctorFaker.CreateDto);
+        var control2 = ExternalDoctorFaker.CreateDto;
         control2.Name = "control2-Name";
         var id2 = await SetupAsync(control2);
 
@@ -163,7 +161,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
             new()
             {
                 Id = id2,
-                Name = Control.Name,
+                Name = ExternalDoctorFaker.CreateDto.Name,
                 Email = "updated-control-Email",
                 Contact = "updated-control-Contact",
                 ClinicianTypeID_FK = 1,
@@ -178,7 +176,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Update_WithExistingId_WithExistingDoctorUser()
     {
         await SetupUserAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(ExternalDoctorFaker.CreateDto);
 
         var resp = await app.Client.PUTAsync<Update, UpdateExternalDoctorDto>(
             new()
@@ -217,19 +215,16 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetById_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(ExternalDoctorFaker.CreateDto);
 
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, ExternalDoctorDto>(
-            new()
-            {
-                Id = id
-            });
+        var req = C4WX1Faker.GetByIdDto(id);
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, ExternalDoctorDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
-        res!.Name.ShouldBe(Control.Name);
-        res.Email.ShouldBe(Control.Email);
-        res.Contact.ShouldBe(Control.Contact);
-        res.ClinicianTypeID_FK.ShouldBe(Control.ClinicianTypeID_FK);
+        res!.Name.ShouldBe(ExternalDoctorFaker.CreateDto.Name);
+        res.Email.ShouldBe(ExternalDoctorFaker.CreateDto.Email);
+        res.Contact.ShouldBe(ExternalDoctorFaker.CreateDto.Contact);
+        res.ClinicianTypeID_FK.ShouldBe(ExternalDoctorFaker.CreateDto.ClinicianTypeID_FK);
 
         await CleanupAsync();
     }
@@ -237,11 +232,8 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetById_WithNonExistentId()
     {
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, ExternalDoctorDto>(
-            new()
-            {
-                Id = C4WX1Faker.Id
-            });
+        var req = C4WX1Faker.GetByIdDto();
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, ExternalDoctorDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
 
@@ -252,13 +244,10 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Delete_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(ExternalDoctorFaker.CreateDto);
+        var req = C4WX1Faker.DeleteDto(id);
 
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new()
-            {
-                Id = id
-            });
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
 
         await CleanupAsync();
@@ -267,11 +256,8 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Delete_WithNonExistentId()
     {
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new()
-            {
-                Id = C4WX1Faker.Id
-            });
+        var req = C4WX1Faker.DeleteDto();
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
 
         await CleanupAsync();
@@ -303,12 +289,12 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
             .Select(x => ExternalDoctorFaker.DummyCreate);
         var tasks = dummies.Select(x => SetupAsync(x));
         await Task.WhenAll(tasks);
-        await SetupAsync(Control);
+        await SetupAsync(ExternalDoctorFaker.CreateDto);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetExternalDoctorCountDto, int>(
             new()
             {
-                Search = Control.Name
+                Search = ExternalDoctorFaker.CreateDto.Name
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBe(1);
@@ -316,7 +302,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetCount, GetExternalDoctorCountDto, int>(
             new()
             {
-                Search = Control.Email
+                Search = ExternalDoctorFaker.CreateDto.Email
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.ShouldBe(1);
@@ -324,7 +310,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp3, res3) = await app.Client.GETAsync<GetCount, GetExternalDoctorCountDto, int>(
             new()
             {
-                Search = Control.Contact
+                Search = ExternalDoctorFaker.CreateDto.Contact
             });
         resp3.IsSuccessStatusCode.ShouldBeTrue();
         res3.ShouldBe(1);
@@ -337,10 +323,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupUserAsync();
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => ExternalDoctorFaker.DummyCreate);
-        var tasks = dummies.Select(x => SetupAsync(x));
-        await Task.WhenAll(tasks);
+        await SetupDummiesAsync(createCount);
 
         var expectedCount = Math.Min(createCount, state.DefaultPageSize);
         var (resp, res) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
@@ -358,16 +341,13 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupUserAsync();
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => ExternalDoctorFaker.DummyCreate);
-        var tasks = dummies.Select(x => SetupAsync(x));
-        await Task.WhenAll(tasks);
-        await SetupAsync(Control);
+        await SetupDummiesAsync(createCount);
+        await SetupAsync(ExternalDoctorFaker.CreateDto);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
             new()
             {
-                Search = Control.Name
+                Search = ExternalDoctorFaker.CreateDto.Name
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
@@ -376,7 +356,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
             new()
             {
-                Search = Control.Email
+                Search = ExternalDoctorFaker.CreateDto.Email
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.ShouldNotBeNull();
@@ -385,7 +365,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         var (resp3, res3) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
             new()
             {
-                Search = Control.Contact
+                Search = ExternalDoctorFaker.CreateDto.Contact
             });
         resp3.IsSuccessStatusCode.ShouldBeTrue();
         res3.ShouldNotBeNull();
@@ -399,10 +379,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupUserAsync();
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => ExternalDoctorFaker.DummyCreate);
-        var tasks = dummies.Select(x => SetupAsync(x));
-        await Task.WhenAll(tasks);
+        await SetupDummiesAsync(createCount);
 
         var expectedCount = Math.Min(createCount, state.LowPageSize);
         var (resp, res) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
@@ -434,10 +411,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupUserAsync();
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => ExternalDoctorFaker.DummyCreate);
-        var tasks = dummies.Select(x => SetupAsync(x));
-        await Task.WhenAll(tasks);
+        await SetupDummiesAsync(createCount);
         var expectedCount = Math.Min(createCount, state.DefaultPageSize);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
@@ -458,7 +432,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.ShouldNotBeNull();
         res2.Count().ShouldBe(expectedCount);
-        res2.Select(x => x.Name).ShouldBeInOrder(SortDirection.Ascending);
+        res2.Select(x => x.Name).ShouldBeInOrder();
 
         var (resp3, res3) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
             new()
@@ -478,7 +452,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         resp4.IsSuccessStatusCode.ShouldBeTrue();
         res4.ShouldNotBeNull();
         res4.Count().ShouldBe(expectedCount);
-        res4.Select(x => x.Email).ShouldBeInOrder(SortDirection.Ascending);
+        res4.Select(x => x.Email).ShouldBeInOrder();
 
         var (resp5, res5) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
             new()
@@ -498,7 +472,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         resp6.IsSuccessStatusCode.ShouldBeTrue();
         res6.ShouldNotBeNull();
         res6.Count().ShouldBe(expectedCount);
-        res6.Select(x => x.Contact).ShouldBeInOrder(SortDirection.Ascending);
+        res6.Select(x => x.Contact).ShouldBeInOrder();
 
         var (resp7, res7) = await app.Client.GETAsync<GetList, GetExternalDoctorListDto, IEnumerable<ExternalDoctorDto>>(
             new()
@@ -518,7 +492,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         resp8.IsSuccessStatusCode.ShouldBeTrue();
         res8.ShouldNotBeNull();
         res8.Count().ShouldBe(expectedCount);
-        res8.Select(x => x.ClinicianTypeName).ShouldBeInOrder(SortDirection.Ascending);
+        res8.Select(x => x.ClinicianTypeName).ShouldBeInOrder();
 
         await CleanupAsync();
     }
@@ -527,12 +501,12 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task ChangeToUser()
     {
         await SetupUserAsync();
-        await SetupAsync(Control);
+        await SetupAsync(ExternalDoctorFaker.CreateDto);
 
         var resp = await app.Client.POSTAsync<ChangeToUser, ChangeExternalDoctorToUserDto>(
             new()
             {
-                ExternalName = Control.Name,
+                ExternalName = ExternalDoctorFaker.CreateDto.Name,
                 UserName = $"{UserFirstName} {UserLastName}",
                 UserId = 1
             });
@@ -545,11 +519,11 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task ChangeToUser_WithoutExistingUser()
     {
         await SetupDependenciesAsync();
-        await SetupAsync(Control);
+        await SetupAsync(ExternalDoctorFaker.CreateDto);
         var resp = await app.Client.POSTAsync<ChangeToUser, ChangeExternalDoctorToUserDto>(
             new()
             {
-                ExternalName = Control.Name,
+                ExternalName = ExternalDoctorFaker.CreateDto.Name,
                 UserName = $"{UserFirstName} {UserLastName}",
                 UserId = 1
             });
@@ -563,7 +537,7 @@ public class ExternalDoctorTests(C4WX1App app, C4WX1State state) : TestBase
         var resp = await app.Client.POSTAsync<ChangeToUser, ChangeExternalDoctorToUserDto>(
             new()
             {
-                ExternalName = Control.Name,
+                ExternalName = ExternalDoctorFaker.CreateDto.Name,
                 UserName = $"{UserFirstName} {UserLastName}",
                 UserId = 1
             });

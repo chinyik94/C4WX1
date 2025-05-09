@@ -1,15 +1,13 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
 using C4WX1.API.Features.DischargeSummaryReport.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Endpoints;
 
-public class CreateDischargeSummaryReportSummary : EndpointSummary
+public class CreateDischargeSummaryReportSummary 
+    : C4WX1CreateSummary<Database.Models.DischargeSummaryReport>
 {
-    public CreateDischargeSummaryReportSummary()
+    public CreateDischargeSummaryReportSummary() : base()
     {
-        Summary = "Create Discharge Summary Report";
-        Description = "Create a new Discharge Summary Report";
         ExampleRequest = new CreateDischargeSummaryReportDto()
         {
             DischargeDate = DateTime.Now,
@@ -28,7 +26,6 @@ public class CreateDischargeSummaryReportSummary : EndpointSummary
                 }
             ]
         };
-        Responses[204] = "Discharge Summary Report created successfully";
     }
 }
 

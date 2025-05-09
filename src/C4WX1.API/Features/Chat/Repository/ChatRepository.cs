@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.Chat.Constants;
 using C4WX1.API.Features.Chat.Dtos;
 using Dapper;
-using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
 namespace C4WX1.API.Features.Chat.Repository;

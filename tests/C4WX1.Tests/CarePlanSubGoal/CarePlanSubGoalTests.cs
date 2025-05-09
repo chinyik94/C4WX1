@@ -1,20 +1,13 @@
 ﻿using C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 using C4WX1.API.Features.CarePlanSubGoal.Dtos;
-using C4WX1.Tests.Shared;
 using C4WX1.API.Features.Shared.Dtos;
+using Org.BouncyCastle.Crypto;
 
 namespace C4WX1.Tests.CarePlanSubGoal;
 
 [Collection<C4WX1TestCollection>]
 public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
 {
-    private CreateCarePlanSubGoalDto Control => new()
-    {
-        CarePlanSubGoalName = "control-CarePlanSubGoalName",
-        CarePlanSubID_FK = 1,
-        UserId = 1
-    };
-
     private async Task SetupDependenciesAsync()
     {
         using var dbContext = app.CreateDbContext();
@@ -39,6 +32,14 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
         return res;
     }
 
+    private async Task SetupDummiesAsync(int createCount)
+    {
+        var createTasks = Enumerable.Range(0, createCount)
+            .Select(x => CarePlanSubGoalFaker.CreateDummy)
+            .Select(SetupAsync);
+        await Task.WhenAll(createTasks);
+    }
+
     private async Task CleanupAsync()
     {
         using var dbContext = app.CreateDbContext();
@@ -52,7 +53,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupDependenciesAsync();
 
-        var (resp, res) = await app.Client.POSTAsync<Create, CreateCarePlanSubGoalDto, int>(Control);
+        var (resp, res) = await app.Client.POSTAsync<Create, CreateCarePlanSubGoalDto, int>(CarePlanSubGoalFaker.CreateDto);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -63,14 +64,10 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Delete_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(CarePlanSubGoalFaker.CreateDto);
+        var req = C4WX1Faker.DeleteDto(id);
 
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new()
-            {
-                Id = id,
-                UserId = 1
-            });
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
 
         await CleanupAsync();
@@ -79,12 +76,8 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Delete_WithNonExistentId()
     {
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new()
-            {
-                Id = C4WX1Faker.Id,
-                UserId = 1
-            });
+        var req = C4WX1Faker.DeleteDto();
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
     }
 
@@ -92,17 +85,14 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetById_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(CarePlanSubGoalFaker.CreateDto);
+        var req = C4WX1Faker.GetByIdDto(id);
 
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, CarePlanSubGoalDto>(
-            new()
-            {
-                Id = id
-            });
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, CarePlanSubGoalDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
         res.CarePlanSubGoalID.ShouldBe(id);
-        res.CarePlanSubGoalName.ShouldBe(Control.CarePlanSubGoalName);
+        res.CarePlanSubGoalName.ShouldBe(CarePlanSubGoalFaker.CreateDto.CarePlanSubGoalName);
 
         await CleanupAsync();
     }
@@ -110,11 +100,8 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetById_WithNonExistentId()
     {
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, CarePlanSubGoalDto>(
-            new()
-            {
-                Id = C4WX1Faker.Id
-            });
+        var req = C4WX1Faker.GetByIdDto();
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, CarePlanSubGoalDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
     }
@@ -124,17 +111,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupDependenciesAsync();
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => new CreateCarePlanSubGoalDto
-            {
-                CarePlanSubID_FK = 1,
-                CarePlanSubGoalName = CarePlanSubGoalFaker.CarePlanSubGoalName,
-                UserId = 1
-            });
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, int>();
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -148,17 +125,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupDependenciesAsync();
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => new CreateCarePlanSubGoalDto
-            {
-                CarePlanSubID_FK = 1,
-                CarePlanSubGoalName = CarePlanSubGoalFaker.CarePlanSubGoalName,
-                UserId = 1
-            });
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var pageSize = state.LowPageSize;
         var expectedCount = Math.Min(createCount, pageSize);
@@ -190,17 +157,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupDependenciesAsync();
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => new CreateCarePlanSubGoalDto
-            {
-                CarePlanSubID_FK = 1,
-                CarePlanSubGoalName = CarePlanSubGoalFaker.CarePlanSubGoalName,
-                UserId = 1
-            });
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var expectedCount = Math.Min(createCount, state.DefaultPageSize);
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<CarePlanSubGoalDto>>(
@@ -219,7 +176,7 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.Count().ShouldBe(expectedCount);
-        res2.Select(x => x.CarePlanSubGoalName).ShouldBeInOrder(SortDirection.Ascending);
+        res2.Select(x => x.CarePlanSubGoalName).ShouldBeInOrder();
 
         await CleanupAsync();
     }
@@ -228,16 +185,10 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Update_WtihExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(CarePlanSubGoalFaker.CreateDto);
+        var req = CarePlanSubGoalFaker.UpdateDto(id);
 
-        var resp = await app.Client.PUTAsync<Update, UpdateCarePlanSubGoalDto>(
-            new UpdateCarePlanSubGoalDto
-            {
-                Id = id,
-                CarePlanSubGoalName = "updated-CarePlanSubGoalName",
-                CarePlanSubID_FK = Control.CarePlanSubID_FK,
-                UserId = Control.UserId
-            });
+        var resp = await app.Client.PUTAsync<Update, UpdateCarePlanSubGoalDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
 
         await CleanupAsync();
@@ -246,14 +197,8 @@ public class CarePlanSubGoalTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Update_WithNonExistentId()
     {
-        var resp = await app.Client.PUTAsync<Update, UpdateCarePlanSubGoalDto>(
-            new UpdateCarePlanSubGoalDto
-            {
-                Id = C4WX1Faker.Id,
-                CarePlanSubGoalName = "updated-CarePlanSubGoalName",
-                CarePlanSubID_FK = Control.CarePlanSubID_FK,
-                UserId = Control.UserId
-            });
+        var req = CarePlanSubGoalFaker.UpdateDto();
+        var resp = await app.Client.PUTAsync<Update, UpdateCarePlanSubGoalDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
     }
 }

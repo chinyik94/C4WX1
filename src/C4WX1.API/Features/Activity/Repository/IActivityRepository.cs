@@ -1,7 +1,7 @@
-﻿namespace C4WX1.API.Features.Activity.Repository;
+﻿using C4WX1.API.Features.Shared.Repository;
 
-public interface IActivityRepository
+namespace C4WX1.API.Features.Activity.Repository;
+
+public interface IActivityRepository : IDeletableRepository
 {
-    Task<bool> CanDeleteAsync(int activityId);
-    Task<Dictionary<int, bool>> BatchCanDeleteAsync(int[] activityIds);
 }

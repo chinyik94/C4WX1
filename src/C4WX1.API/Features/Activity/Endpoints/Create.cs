@@ -1,15 +1,13 @@
 ﻿using C4WX1.API.Features.Activity.Dtos;
 using C4WX1.API.Features.Activity.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.Activity.Endpoints;
 
-public class CreateActivitySummary : EndpointSummary
+public class CreateActivitySummary 
+    : C4WX1CreateSummary<Database.Models.Activity>
 {
-    public CreateActivitySummary()
+    public CreateActivitySummary() : base()
     {
-        Summary = "Create Activity";
-        Description = "Create a new Activity";
         ExampleRequest = new CreateActivityDto
         {
             ProblemListID_FK = 1,
@@ -18,7 +16,6 @@ public class CreateActivitySummary : EndpointSummary
             DiseaseSubInfoID_FK = 1,
             UserId = 1
         };
-        Responses[204] = "Activity created successfully";
     }
 }
 

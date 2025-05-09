@@ -3,19 +3,13 @@ using C4WX1.API.Features.Branch.Extensions;
 using C4WX1.API.Features.Branch.Mappers;
 using C4WX1.API.Features.Branch.Repository;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Branch.Endpoints;
 
-public class GetBranchListSummary : EndpointSummary
+public class GetBranchListSummary 
+    : C4WX1GetListSummary<Database.Models.Branch>
 {
-    public GetBranchListSummary()
-    {
-        Summary = "Get Branch List";
-        Description = "Get a paged and sorted Branch List";
-        Responses[200] = "Branch List retrieved successfully";
-    }
+    public GetBranchListSummary() { }
 }
 
 public class GetList(
@@ -40,7 +34,7 @@ public class GetList(
             .Select(x => Map.FromEntity(x))
             .ToListAsync(ct);
         var branchIds = dtos.Select(x => x.BranchID).ToArray();
-        var canDeleteDict = await repository.BatchCanDeleteBranchAsync(branchIds);
+        var canDeleteDict = await repository.BatchCanDeleteAsync(branchIds);
         foreach (var dto in dtos)
         {
             dto.CanDelete = canDeleteDict.TryGetValue(dto.BranchID, out var canDelete)

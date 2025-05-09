@@ -1,18 +1,11 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.GeoFencing.Endpoints;
 
-public class DeleteGeoFencingSummary : EndpointSummary
+public class DeleteGeoFencingSummary 
+    : C4WX1DeleteSummary<Database.Models.GeoFencing>
 {
-    public DeleteGeoFencingSummary()
-    {
-        Summary = "Delete GeoFencing";
-        Description = "Delete an existing GeoFencing by its ID";
-        Responses[200] = "GeoFencing deleted successfully";
-        Responses[400] = "GeoFencing unable to be deleted";
-    }
+    public DeleteGeoFencingSummary() { }
 }
 
 public class Delete(THCC_C4WDEVContext dbContext)

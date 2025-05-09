@@ -1,18 +1,11 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Activity.Endpoints;
 
-public class DeleteActivitySummary : EndpointSummary
+public class DeleteActivitySummary 
+    : C4WX1DeleteSummary<Database.Models.Activity>
 {
-    public DeleteActivitySummary()
-    {
-        Summary = "Delete Activity";
-        Description = "Delete an existing Activity";
-        Responses[204] = "Activity deleted successfully";
-        Responses[404] = "Activity not found";
-    }
+    public DeleteActivitySummary() { }
 }
 
 public class Delete(THCC_C4WDEVContext dbContext)

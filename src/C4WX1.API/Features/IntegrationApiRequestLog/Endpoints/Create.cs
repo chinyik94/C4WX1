@@ -1,15 +1,13 @@
 ﻿using C4WX1.API.Features.IntegrationApiRequestLog.Dtos;
 using C4WX1.API.Features.IntegrationApiRequestLog.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.IntegrationApiRequestLog.Endpoints;
 
-public class CreateIntegrationApiRequestLogSummary : EndpointSummary
+public class CreateIntegrationApiRequestLogSummary 
+    : C4WX1CreateSummary<Database.Models.IntegrationApiRequestLog>
 {
-    public CreateIntegrationApiRequestLogSummary()
+    public CreateIntegrationApiRequestLogSummary() : base()
     {
-        Summary = "Create IntegrationApiRequestLog";
-        Description = "Create a new IntegrationApiRequestLog";
         ExampleRequest = new CreateIntegrationApiRequestLogDto
         {
             IntegrationSource = "example-IntegrationSource",
@@ -20,7 +18,6 @@ public class CreateIntegrationApiRequestLogSummary : EndpointSummary
             Status = "example-Status",
             UserId = 1
         };
-        Responses[200] = "IntegrationApiRequestLog created successfully";
     }
 }
 

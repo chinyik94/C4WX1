@@ -3,20 +3,12 @@ using C4WX1.API.Features.GeoFencing.Dtos;
 using C4WX1.API.Features.GeoFencing.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.GeoFencing;
 
 [Collection<C4WX1TestCollection>]
 public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
 {
-    private CreateGeoFencingDto Control => new()
-    {
-        IP = "control-IP",
-        Description = "control-Description",
-        UserId = 1
-    };
-
     private async Task<int> SetupAsync(CreateGeoFencingDto testData)
     {
         var (resp, res) = await app.Client.POSTAsync<Create, CreateGeoFencingDto, int>(testData);
@@ -45,7 +37,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Create()
     {
-        var (resp, res) = await app.Client.POSTAsync<Create, CreateGeoFencingDto, int>(Control);
+        var (resp, res) = await app.Client.POSTAsync<Create, CreateGeoFencingDto, int>(GeoFencingFaker.CreateDto);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -55,15 +47,9 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Update_WithExistingId()
     {
-        var id = await SetupAsync(Control);
-        var resp = await app.Client.PUTAsync<Update, UpdateGeoFencingDto>(
-            new()
-            {
-                Id = id,
-                IP = "updated-IP",
-                Description = "updated-Description",
-                UserId = 1
-            });
+        var id = await SetupAsync(GeoFencingFaker.CreateDto);
+        var req = GeoFencingFaker.UpdateDto(id);
+        var resp = await app.Client.PUTAsync<Update, UpdateGeoFencingDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
 
         await CleanupAsync();
@@ -72,27 +58,17 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Update_WithNonExistentId()
     {
-        var resp = await app.Client.PUTAsync<Update, UpdateGeoFencingDto>(
-            new()
-            {
-                Id = C4WX1Faker.Id,
-                IP = "updated-IP",
-                Description = "updated-Description",
-                UserId = 1
-            });
+        var req = GeoFencingFaker.UpdateDto();
+        var resp = await app.Client.PUTAsync<Update, UpdateGeoFencingDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
     }
 
     [Fact]
     public async Task Delete_WithExistingId()
     {
-        var id = await SetupAsync(Control);
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new()
-            {
-                Id = id,
-                UserId = 1
-            });
+        var id = await SetupAsync(GeoFencingFaker.CreateDto);
+        var req = C4WX1Faker.DeleteDto(id);
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
 
         await CleanupAsync();
@@ -101,29 +77,22 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Delete_WithNonExistentId()
     {
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new()
-            {
-                Id = C4WX1Faker.Id,
-                UserId = 1
-            });
+        var req = C4WX1Faker.DeleteDto();
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
     }
 
     [Fact]
     public async Task GetById_WithExistingId()
     {
-        var id = await SetupAsync(Control);
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, GeoFencingDto>(
-            new()
-            {
-                Id = id,
-            });
+        var id = await SetupAsync(GeoFencingFaker.CreateDto);
+        var req = C4WX1Faker.GetByIdDto(id);
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, GeoFencingDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
-        res.IP.ShouldBe(Control.IP);
-        res.Description.ShouldBe(Control.Description);
-        res.CreatedBy_FK.ShouldBe(Control.UserId);
+        res.IP.ShouldBe(GeoFencingFaker.CreateDto.IP);
+        res.Description.ShouldBe(GeoFencingFaker.CreateDto.Description);
+        res.CreatedBy_FK.ShouldBe(GeoFencingFaker.CreateDto.UserId);
         res.IsDeleted.ShouldBeFalse();
 
         await CleanupAsync();
@@ -132,11 +101,8 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetById_WithNonExistentId()
     {
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, GeoFencingDto>(
-            new()
-            {
-                Id = C4WX1Faker.Id,
-            });
+        var req = C4WX1Faker.GetByIdDto();
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, GeoFencingDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
     }
@@ -176,10 +142,7 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
         var expectedCount = Math.Min(createCount, state.DefaultPageSize);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<GeoFencingDto>>(
-            new()
-            {
-
-            });
+            new() { });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(expectedCount);
         res.Select(x => x.IP).ShouldBeInOrder(SortDirection.Descending);
@@ -285,12 +248,11 @@ public class GeoFencingTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         await SetupDummiesAsync(createCount);
-        var expectedCount = Math.Min(createCount, state.DefaultPageSize);
 
         var (resp, res) = await app.Client.GETAsync<GetIsWhitelisted, GetGeoFencingIsWhiteListedDto, bool>(
             new()
             {
-                IP = Control.IP
+                IP = GeoFencingFaker.CreateDto.IP
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeFalse();

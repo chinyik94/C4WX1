@@ -1,7 +1,5 @@
 using C4WX1.API.Extensions;
-using C4WX1.Database.Models;
 using FastEndpoints.Swagger;
-using Microsoft.EntityFrameworkCore;
 using Prometheus;
 using Serilog;
 using Serilog.Events;

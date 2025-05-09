@@ -2,8 +2,6 @@
 using C4WX1.API.Features.APIAccessKey.Mappers;
 using C4WX1.API.Features.Generator;
 using C4WX1.API.Features.Security;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.APIAccessKey.Endpoints;
 

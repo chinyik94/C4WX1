@@ -1,21 +1,15 @@
 ﻿using C4WX1.API.Features.GeoFencing.Dtos;
 using C4WX1.API.Features.GeoFencing.Extensions;
 using C4WX1.API.Features.GeoFencing.Mappers;
-using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.GeoFencing.Endpoints;
 
-public class GetGeoFencingListSummary : EndpointSummary
+public class GetGeoFencingListSummary 
+    : C4WX1GetListSummary<Database.Models.GeoFencing>
 {
-    public GetGeoFencingListSummary()
-    {
-        Summary = "Get List of GeoFencing";
-        Description = "Get a filtered, sorted and paged list of GeoFencing";
-        Responses[200] = "GeoFencing List retrieved successfully";
-    }
+    public GetGeoFencingListSummary() { }
 }
 
 public class GetList(THCC_C4WDEVContext dbContext)
@@ -29,10 +23,7 @@ public class GetList(THCC_C4WDEVContext dbContext)
 
     public override async Task HandleAsync(GetListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
-        var pageSize = req.PageSize ?? PaginationDefaults.Size;
-        var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
         var dtos = await dbContext.GeoFencing
             .Where(x => !x.IsDeleted)
             .Sort(req.OrderBy)

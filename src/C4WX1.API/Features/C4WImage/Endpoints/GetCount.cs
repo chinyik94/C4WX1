@@ -1,17 +1,11 @@
 ﻿using C4WX1.API.Features.C4WImage.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.C4WImage.Endpoints;
 
-public class GetC4WImageCountSummary : EndpointSummary
+public class GetC4WImageCountSummary 
+    : C4WX1GetCountSummary<Database.Models.C4WImage>
 {
-    public GetC4WImageCountSummary()
-    {
-        Summary = "Get C4W Image Count";
-        Description = "Get C4W Image Count based on its CreatedDate";
-        Responses[200] = "C4W Image Count retrieved successfully";
-    }
+    public GetC4WImageCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

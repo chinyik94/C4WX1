@@ -4,12 +4,6 @@ namespace C4WX1.API.Features.C4WImage.Extensions;
 
 public static class QueryExtensions
 {
-    /// <summary>
-    /// Sorts and returns an iqueryable.
-    /// </summary>
-    /// <param name="query">The query.</param>
-    /// <param name="orderBy">The order by.</param>
-    /// <returns><![CDATA[IQueryable<Database.Models.C4WImage>]]></returns>
     public static IQueryable<Database.Models.C4WImage> Sort(
         this IQueryable<Database.Models.C4WImage> query,
         string? orderBy)

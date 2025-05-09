@@ -1,20 +1,13 @@
 ﻿using C4WX1.API.Features.EnquiryConfig.Dtos;
 using C4WX1.API.Features.EnquiryConfig.Mappers;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.EnquiryConfig.Endpoints;
 
-public class GetEnquiryConfigByIdSummary : EndpointSummary
+public class GetEnquiryConfigByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.EnquiryConfig>
 {
-    public GetEnquiryConfigByIdSummary()
-    {
-        Summary = "Get Enquiry Config";
-        Description = "Get Enquiry Config by its ID";
-        Responses[200] = "Enquiry Config retrieved successfully";
-        Responses[404] = "Enquiry Config not found";
-    }
+    public GetEnquiryConfigByIdSummary() { }
 }
 
 public class GetById(THCC_C4WDEVContext dbContext)

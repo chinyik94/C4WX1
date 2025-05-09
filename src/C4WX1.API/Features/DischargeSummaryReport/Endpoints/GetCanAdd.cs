@@ -1,7 +1,5 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
 using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Endpoints;
 

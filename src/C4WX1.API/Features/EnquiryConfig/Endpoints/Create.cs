@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.EnquiryConfig.Dtos;
 using C4WX1.API.Features.EnquiryConfig.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.EnquiryConfig.Endpoints;
 
-public class CreateEnquiryConfigSummary : EndpointSummary
+public class CreateEnquiryConfigSummary 
+    : C4WX1CreateSummary<Database.Models.EnquiryConfig>
 {
-    public CreateEnquiryConfigSummary()
+    public CreateEnquiryConfigSummary() : base()
     {
-        Summary = "Create Enquiry Config";
-        Description = "Create a new Enquiry Config";
         ExampleRequest = new CreateEnquiryConfigDto
         {
             SCMID_FK = 1,
@@ -23,7 +20,6 @@ public class CreateEnquiryConfigSummary : EndpointSummary
             SCMList = [1, 2, 3],
             EscPersonList = [1, 2, 3],
         };
-        Responses[200] = "Enquiry Config created successfully";
     }
 }
 

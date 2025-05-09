@@ -1,24 +1,14 @@
 ﻿using C4WX1.API.Features.Branch.Repository;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Branch.Endpoints;
 
-public class DeleteBranchSummary : EndpointSummary
+public class DeleteBranchSummary 
+    : C4WX1DeleteSummary<Database.Models.Branch>
 {
-    public DeleteBranchSummary()
+    public DeleteBranchSummary() : base()
     {
-        Summary = "Delete Branch";
-        Description = "Delete an existing Branch by its ID";
-        ExampleRequest = new DeleteByIdDto
-        {
-            Id = 1,
-            UserId = 1
-        };
-        Responses[204] = "Branch deleted successfully";
         Responses[400] = "Branch cannot be deleted";
-        Responses[404] = "Branch not found";
     }
 }
 
@@ -38,7 +28,7 @@ public class Delete(
 
     public override async Task HandleAsync(DeleteByIdDto req, CancellationToken ct)
     {
-        var canDeleteBranch = await repository.CanDeleteBranchAsync(req.Id);
+        var canDeleteBranch = await repository.CanDeleteAsync(req.Id);
         var canDelete = await dbContext.Branch
             .Where(x => !x.IsDeleted && x.BranchID == req.Id && canDeleteBranch)
             .AnyAsync(ct);

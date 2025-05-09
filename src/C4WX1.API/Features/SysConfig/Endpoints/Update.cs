@@ -1,15 +1,12 @@
 ﻿using C4WX1.API.Features.SysConfig.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.SysConfig.Endpoints;
 
-public class UpdateSysConfigSummary : EndpointSummary
+public class UpdateSysConfigSummary 
+    : C4WX1UpdateSummary<Database.Models.SysConfig>
 {
-    public UpdateSysConfigSummary()
+    public UpdateSysConfigSummary() : base()
     {
-        Summary = "Update SysConfig";
-        Description = "Update one or multiple existing SysConfigs";
         ExampleRequest = new List<UpdateSysConfigDto>
         {
             new() {
@@ -23,8 +20,6 @@ public class UpdateSysConfigSummary : EndpointSummary
                 UserID = 1
             },
         };
-        Responses[204] = "SysConfig updated successfully";
-        Responses[404] = "SysConfig not found";
     }
 }
 

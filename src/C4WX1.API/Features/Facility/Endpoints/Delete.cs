@@ -1,18 +1,11 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Facility.Endpoints;
 
-public class DeleteFacilitySummary : EndpointSummary
+public class DeleteFacilitySummary 
+    : C4WX1DeleteSummary<Database.Models.Facility>
 {
-    public DeleteFacilitySummary()
-    {
-        Summary = "Delete a facility";
-        Description = "Delete an existing facility by its ID";
-        Responses[204] = "Facility deleted successfully";
-        Responses[404] = "Facility not found";
-    }
+    public DeleteFacilitySummary() { }
 }
 
 public class Delete(THCC_C4WDEVContext dbContext)

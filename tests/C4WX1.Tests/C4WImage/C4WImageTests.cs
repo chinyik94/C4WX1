@@ -2,7 +2,6 @@
 using C4WX1.API.Features.C4WImage.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.C4WImage;
 
@@ -10,32 +9,6 @@ namespace C4WX1.Tests.C4WImage;
 public class C4WImageTests(C4WX1App app, C4WX1State state)
     : TestBase
 {
-    private CreateC4WImageDto NewControlData => new()
-    {
-        WoundImageName = "Control-WoundImageName",
-        WoundImageData = "Control-WoundImageData",
-        WoundBedImageName = "Control-WoundBedImageName",
-        WoundBedImageData = "Control-WoundBedImageData",
-        TissueImageName = "Control-TissueImageName",
-        TissueImageData = "Control-TissueImageData",
-        DepthImageName = "Control-DepthImageName",
-        DepthImageData = "Control-DepthImageData",
-        UserId = 1
-    };
-
-    private UpdateC4WImageDto UpdatedControlData => new()
-    {
-        WoundImageName = "Updated-Control-WoundImageName",
-        WoundImageData = "Updated-Control-WoundImageData",
-        WoundBedImageName = "Updated-Control-WoundBedImageName",
-        WoundBedImageData = "Updated-Control-WoundBedImageData",
-        TissueImageName = "Updated-Control-TissueImageName",
-        TissueImageData = "Updated-Control-TissueImageData",
-        DepthImageName = "Updated-Control-DepthImageName",
-        DepthImageData = "Updated-Control-DepthImageData",
-        UserId = 1
-    };
-
     private async Task<int> SetupAsync(CreateC4WImageDto testData)
     {
         var (resp, res) = await app.Client.POSTAsync<Create, CreateC4WImageDto, int>(
@@ -43,6 +16,14 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
         return res;
+    }
+
+    private async Task SetupDummiesAsync(int createCount)
+    {
+        var createTasks = Enumerable.Range(0, createCount)
+            .Select(x => C4WImageFaker.CreateDummy)
+            .Select(SetupAsync);
+        await Task.WhenAll(createTasks);
     }
 
     private async Task CleanupAsync()
@@ -58,7 +39,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     {
         for (int i = 0; i < state.CreateCount; i++)
         {
-            var req = C4WImageFaker.CreateDto();
+            var req = C4WImageFaker.CreateDummy;
             var (resp, res) = await app.Client.POSTAsync<Create, CreateC4WImageDto, int>(req);
             resp.IsSuccessStatusCode.ShouldBeTrue();
             res.ShouldBeGreaterThan(0);
@@ -71,10 +52,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     public async Task GetList_WithInRangeDates()
     {
         var createCount = state.CreateCount;
-        for (int i = 0; i < createCount; i++)
-        {
-            await SetupAsync(C4WImageFaker.CreateDto());
-        }
+        await SetupDummiesAsync(createCount);
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
         var req = new GetC4WImageListDto
         {
@@ -98,10 +76,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     public async Task GetList_WithOutOfRangeDates()
     {
         var createCount = state.CreateCount;
-        for (int i = 0; i < createCount; i++)
-        {
-            await SetupAsync(C4WImageFaker.CreateDto());
-        }
+        await SetupDummiesAsync(createCount);
         var req = new GetC4WImageListDto
         {
             FromDate = DateTime.Now.AddDays(2),
@@ -123,10 +98,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     {
         var pageSize = state.HighPageSize;
         var createCount = state.CreateCount;
-        for (int i = 0; i < createCount; i++)
-        {
-            await SetupAsync(C4WImageFaker.CreateDto());
-        }
+        await SetupDummiesAsync(createCount);
         var expectedCount = Math.Min(createCount, pageSize);
         var req = new GetC4WImageListDto
         {
@@ -167,10 +139,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     public async Task GetList_WithSpecificOrder()
     {
         var createCount = state.CreateCount;
-        for (int i = 0; i < createCount; i++)
-        {
-            await SetupAsync(C4WImageFaker.CreateDto());
-        }
+        await SetupDummiesAsync(createCount);
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
         var req = new GetC4WImageListDto
         {
@@ -186,7 +155,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
         res.ShouldNotBeNull();
         res.ShouldNotBeEmpty();
         res.Count().ShouldBeLessThanOrEqualTo(expectedCount);
-        res.Select(x => x.C4WImageId).ShouldBeInOrder(SortDirection.Ascending);
+        res.Select(x => x.C4WImageId).ShouldBeInOrder();
 
         await CleanupAsync();
     }
@@ -195,10 +164,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     public async Task GetCount()
     {
         var createCount = state.CreateCount;
-        for (int i = 0; i < createCount; i++)
-        {
-            await SetupAsync(C4WImageFaker.CreateDto());
-        }
+        await SetupDummiesAsync(createCount);
         var req = new GetC4WImageCountByDateDto
         {
             FromDate = DateTime.Now.AddDays(-1),
@@ -215,26 +181,23 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetById_WithExistingId()
     {
-        var id = await SetupAsync(NewControlData);
+        var id = await SetupAsync(C4WImageFaker.CreateDto);
+        var req = C4WX1Faker.GetByIdDto(id);
 
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, C4WImageDto>(
-            new()
-            {
-                Id = id
-            });
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, C4WImageDto>(req);
 
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
         res.C4WImageId.ShouldBe(id);
-        res.WoundImageName.ShouldBe(NewControlData.WoundImageName);
-        res.WoundImageData.ShouldBe(NewControlData.WoundImageData);
-        res.WoundBedImageName.ShouldBe(NewControlData.WoundBedImageName);
-        res.WoundBedImageData.ShouldBe(NewControlData.WoundBedImageData);
-        res.TissueImageName.ShouldBe(NewControlData.TissueImageName);
-        res.TissueImageData.ShouldBe(NewControlData.TissueImageData);
-        res.DepthImageName.ShouldBe(NewControlData.DepthImageName);
-        res.DepthImageData.ShouldBe(NewControlData.DepthImageData);
-        res.CreatedBy_FK.ShouldBe(NewControlData.UserId);
+        res.WoundImageName.ShouldBe(C4WImageFaker.CreateDto.WoundImageName);
+        res.WoundImageData.ShouldBe(C4WImageFaker.CreateDto.WoundImageData);
+        res.WoundBedImageName.ShouldBe(C4WImageFaker.CreateDto.WoundBedImageName);
+        res.WoundBedImageData.ShouldBe(C4WImageFaker.CreateDto.WoundBedImageData);
+        res.TissueImageName.ShouldBe(C4WImageFaker.CreateDto.TissueImageName);
+        res.TissueImageData.ShouldBe(C4WImageFaker.CreateDto.TissueImageData);
+        res.DepthImageName.ShouldBe(C4WImageFaker.CreateDto.DepthImageName);
+        res.DepthImageData.ShouldBe(C4WImageFaker.CreateDto.DepthImageData);
+        res.CreatedBy_FK.ShouldBe(C4WImageFaker.CreateDto.UserId);
         
         await CleanupAsync();
     }
@@ -242,13 +205,8 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task GetById_WithNonExistentId()
     {
-        var req = new GetByIdDto
-        {
-            Id = C4WX1Faker.Id
-        };
-
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, C4WImageDto>(
-            req);
+        var req = C4WX1Faker.GetByIdDto();
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, C4WImageDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
     }
@@ -256,9 +214,8 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task Update_WithExistingId()
     {
-        var id = await SetupAsync(NewControlData);
-        var req = UpdatedControlData;
-        req.Id = id;
+        var id = await SetupAsync(C4WImageFaker.CreateDto);
+        var req = C4WImageFaker.UpdateDto(id);
 
         var resp = await app.Client.PUTAsync<Update, UpdateC4WImageDto>(req);
 
@@ -270,8 +227,7 @@ public class C4WImageTests(C4WX1App app, C4WX1State state)
     [Fact]
     public async Task Update_WithNonExistentId()
     {
-        var req = UpdatedControlData;
-        req.Id = C4WX1Faker.Id;
+        var req = C4WImageFaker.UpdateDto();
 
         var resp = await app.Client.PUTAsync<Update, UpdateC4WImageDto>(req);
 

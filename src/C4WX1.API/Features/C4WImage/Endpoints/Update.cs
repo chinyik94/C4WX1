@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.C4WImage.Dtos;
 using C4WX1.API.Features.C4WImage.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.C4WImage.Endpoints;
 
-public class UpdateC4WImageSummary : EndpointSummary
+public class UpdateC4WImageSummary 
+    : C4WX1UpdateSummary<Database.Models.C4WImage>
 {
-    public UpdateC4WImageSummary()
+    public UpdateC4WImageSummary() : base()
     {
-        Summary = "Update C4W Image";
-        Description = "Update an existing C4W Image";
         ExampleRequest = new UpdateC4WImageDto
         {
             Id = 1,
@@ -24,8 +21,6 @@ public class UpdateC4WImageSummary : EndpointSummary
             DepthImageData = "depth image data",
             UserId = 1
         };
-        Responses[204] = "C4W Image updated successfully";
-        Responses[404] = "C4W Image not found";
     }
 }
 

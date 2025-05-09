@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.EnquiryConfig.Dtos;
 using C4WX1.API.Features.EnquiryConfig.Endpoints;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Shared;
 using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.Tests.EnquiryConfig;
@@ -9,30 +8,6 @@ namespace C4WX1.Tests.EnquiryConfig;
 [Collection<C4WX1TestCollection>]
 public class EnquiryConfigTests(C4WX1App app) : TestBase
 {
-    private CreateEnquiryConfigDto Control => new()
-    {
-        SCMID_FK = 1,
-        EmailContent = "control-EmailContent",
-        EscalatingPersonID_FK = 1,
-        EscalationPeriod = 1,
-        EscalationEmail = "control-EscalationEmail",
-        EmailtoCMContent = "control-EmailtoCMContent",
-        SCMList = [1, 2, 3],
-        EscPersonList = [1, 2, 3]
-    };
-
-    private UpdateEnquiryConfigDto UpdateControl => new()
-    {
-        SCMID_FK = 2,
-        EmailContent = "updated-control-EmailContent",
-        EscalatingPersonID_FK = 2,
-        EscalationPeriod = 2,
-        EscalationEmail = "updated-control-EscalationEmail",
-        EmailtoCMContent = "updated-control-EmailtoCMContent",
-        SCMList = [4, 5, 6],
-        EscPersonList = [4, 5, 6]
-    };
-
     private async Task<int> SetupAsync(CreateEnquiryConfigDto testData)
     {
         var (resp, res) = await app.Client
@@ -70,7 +45,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
         await SetupUserAsync();
 
         var (resp, res) = await app.Client
-            .POSTAsync<Create, CreateEnquiryConfigDto, int>(Control);
+            .POSTAsync<Create, CreateEnquiryConfigDto, int>(EnquiryConfigFaker.CreateDto);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -95,7 +70,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
     [Fact]
     public async Task GetById_WithExistingId()
     {
-        var expected = Control;
+        var expected = EnquiryConfigFaker.CreateDto;
         await SetupUserAsync();
         var id = await SetupAsync(expected);
 
@@ -122,8 +97,7 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
     [Fact]
     public async Task Update_WithNonExistentId()
     {
-        var dummy = UpdateControl;
-        dummy.Id = C4WX1Faker.Id;
+        var dummy = EnquiryConfigFaker.UpdateDto();
         var resp = await app.Client
             .PUTAsync<Update, UpdateEnquiryConfigDto>(dummy);
 
@@ -136,9 +110,8 @@ public class EnquiryConfigTests(C4WX1App app) : TestBase
     public async Task Update_WithExistingId()
     {
         await SetupUserAsync();
-        var id = await SetupAsync(Control);
-        var expected = UpdateControl;
-        expected.Id = id;
+        var id = await SetupAsync(EnquiryConfigFaker.CreateDto);
+        var expected = EnquiryConfigFaker.UpdateDto(id);
 
         var resp = await app.Client
             .PUTAsync<Update, UpdateEnquiryConfigDto>(expected);

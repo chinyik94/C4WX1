@@ -1,8 +1,6 @@
 ﻿using C4WX1.API.Features.BillingProposal.Dtos;
 using C4WX1.API.Features.BillingProposal.Mappers;
 using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.BillingProposal.Endpoints;
 

@@ -1,7 +1,5 @@
 ﻿using C4WX1.API.Features.GeoFencing.Dtos;
 using C4WX1.API.Features.GeoFencing.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.GeoFencing.Endpoints;
 

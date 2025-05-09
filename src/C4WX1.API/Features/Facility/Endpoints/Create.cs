@@ -1,16 +1,19 @@
 ﻿using C4WX1.API.Features.Facility.Dtos;
 using C4WX1.API.Features.Facility.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.Facility.Endpoints;
 
-public class CreateFacilitySummary : EndpointSummary
+public class CreateFacilitySummary 
+    : C4WX1CreateSummary<Database.Models.Facility>
 {
-    public CreateFacilitySummary()
+    public CreateFacilitySummary() : base()
     {
-        Summary = "Create a new facility";
-        Description = "Create a new facility";
-        Responses[200] = "Facility created successfully";
+        ExampleRequest = new CreateFacilityDto
+        {
+            FacilityName = "example-FacilityName",
+            OrganizationID_FK = 1,
+            UserId = 1
+        };
     }
 }
 

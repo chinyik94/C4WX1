@@ -1,22 +1,19 @@
 ﻿using C4WX1.API.Features.CPGoals.Dtos;
 using C4WX1.API.Features.CPGoals.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.CPGoals.Endpoints;
 
-public class CreateCPGoalsSummary : EndpointSummary
+public class CreateCPGoalsSummary 
+    : C4WX1CreateSummary<Database.Models.CPGoals>
 {
-    public CreateCPGoalsSummary()
+    public CreateCPGoalsSummary() : base()
     {
-        Summary = "Create CP Goals";
-        Description = "Create a new CP Goals";
         ExampleRequest = new CreateCPGoalsDto
         {
             CPGoalsInfo = "CP Goals Info",
             DiseaseID_FK = 1,
             UserId = 1
         };
-        Responses[200] = "CP Goals created successfully";
     }
 }
 

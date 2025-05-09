@@ -1,16 +1,9 @@
-﻿using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿namespace C4WX1.API.Features.GeoFencing.Endpoints;
 
-namespace C4WX1.API.Features.GeoFencing.Endpoints;
-
-public class GetGeoFencingCountSummary : EndpointSummary
+public class GetGeoFencingCountSummary 
+    : C4WX1GetCountSummary<Database.Models.GeoFencing>
 {
-    public GetGeoFencingCountSummary()
-    {
-        Summary = "Get GeoFencing Count";
-        Description = "Get GeoFencing Count";
-        Responses[200] = "GeoFencing count retrieved successfully";
-    }
+    public GetGeoFencingCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

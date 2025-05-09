@@ -2,36 +2,25 @@
 using C4WX1.API.Features.EmailLog.Dtos;
 using C4WX1.API.Features.EmailLog.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.EmailLog;
 
 [Collection<C4WX1TestCollection>]
 public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
 {
-    private CreateEmailLogDto Control => new()
-    {
-        msgBCC = "control-msgBcc",
-        msgCC = "control-msgcc",
-        msgTo = "control-msgTo",
-        msgSubj = "control-msgSub",
-        msgBody = "control-msgBody",
-        msgFromName = "control-msgFromName",
-        msgFrom = "control-msgFrom",
-        isHtml = false,
-        attachmentName = "control-attachmentName",
-        isSent = false,
-        smtpLogin = "control-smtpLogin",
-        smtpPassword = "control-smtpPassword",
-        smtpPort = "control-smtpPort",
-        smtpServerAddress = "control-smtpServerAddress"
-    };
-
     private async Task SetupAsync(CreateEmailLogDto testData)
     {
         var (resp, res) = await app.Client.POSTAsync<Create, CreateEmailLogDto, int>(testData);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
+    }
+
+    private async Task SetupDummiesAsync(int createCount)
+    {
+        var createTasks = Enumerable.Range(0, createCount)
+            .Select(x => EmailLogFaker.CreateDummy)
+            .Select(SetupAsync);
+        await Task.WhenAll(createTasks);
     }
 
     private async Task CleanupAsync()
@@ -46,7 +35,7 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Create()
     {
         var (resp, res) = await app.Client.POSTAsync<Create, CreateEmailLogDto, int>(
-            Control);
+            EmailLogFaker.CreateDto);
 
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
@@ -57,13 +46,8 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetCount()
     {
-        var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        var createCount = state.CreateCount;
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetEmailLogCountDto, int>(
             new GetEmailLogCountDto
@@ -73,7 +57,7 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
-        res.ShouldBe(expectedCount);
+        res.ShouldBe(createCount);
 
         await CleanupAsync();
     }
@@ -82,22 +66,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetCount_WithControlMsgFrom()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetEmailLogCountDto, int>(
             new GetEmailLogCountDto
             {
-                MsgFrom = Control.msgFrom,
+                MsgFrom = EmailLogFaker.CreateDto.msgFrom,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
@@ -112,22 +91,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetCount_WithControlMsgFromName()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetEmailLogCountDto, int>(
             new GetEmailLogCountDto
             {
-                MsgFromName = Control.msgFromName,
+                MsgFromName = EmailLogFaker.CreateDto.msgFromName,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
@@ -142,22 +116,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetCount_WithControlMsgTo()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetEmailLogCountDto, int>(
             new GetEmailLogCountDto
             {
-                MsgTo = Control.msgTo,
+                MsgTo = EmailLogFaker.CreateDto.msgTo,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
@@ -172,22 +141,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetCount_WithControlMsgSubj()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetEmailLogCountDto, int>(
             new GetEmailLogCountDto
             {
-                MsgSubj = Control.msgSubj,
+                MsgSubj = EmailLogFaker.CreateDto.msgSubj,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
@@ -202,22 +166,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetCount_WithControlData_ButOutsideOfDateRange()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, GetEmailLogCountDto, int>(
             new GetEmailLogCountDto
             {
-                MsgSubj = Control.msgSubj,
+                MsgSubj = EmailLogFaker.CreateDto.msgSubj,
                 FromDate = DateTime.Now.AddDays(-10),
                 ToDate = DateTime.Now.AddDays(-9)
             });
@@ -288,12 +247,7 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var createCount = state.CreateCount;
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
@@ -313,22 +267,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithControlMsgFrom()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
             {
-                MsgFrom = Control.msgFrom,
+                MsgFrom = EmailLogFaker.CreateDto.msgFrom,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
@@ -344,22 +293,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithControlMsgFromName()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
             {
-                MsgFromName = Control.msgFromName,
+                MsgFromName = EmailLogFaker.CreateDto.msgFromName,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
@@ -375,22 +319,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithControlMsgTo()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
             {
-                MsgTo = Control.msgTo,
+                MsgTo = EmailLogFaker.CreateDto.msgTo,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
@@ -406,22 +345,17 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithControlMsgSubj()
     {
         var controls = Enumerable.Range(0, 5)
-            .Select(x => Control);
+            .Select(x => EmailLogFaker.CreateDto);
         foreach (var control in controls)
         {
             await SetupAsync(control);
         }
-        var dummies = Enumerable.Range(0, state.CreateCount)
-            .Select(x => EmailLogFaker.CreateDummy);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(state.CreateCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
             {
-                MsgSubj = Control.msgSubj,
+                MsgSubj = EmailLogFaker.CreateDto.msgSubj,
                 FromDate = DateTime.Now.AddDays(-1),
                 ToDate = DateTime.Now.AddDays(1)
             });
@@ -487,13 +421,8 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     {
         var pageSize = state.LowPageSize;
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => EmailLogFaker.CreateDummy);
         var expectedCount = Math.Min(createCount, pageSize);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
@@ -528,13 +457,8 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithCreatedDateOrderBy()
     {
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => EmailLogFaker.CreateDummy);
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
@@ -567,13 +491,8 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithMsgToOrderBy()
     {
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => EmailLogFaker.CreateDummy);
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto
@@ -606,13 +525,8 @@ public class EmailLogTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithMsgSubjOrderBy()
     {
         var createCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, createCount)
-            .Select(x => EmailLogFaker.CreateDummy);
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetEmailLogListDto, IEnumerable<EmailLogDto>>(
             new GetEmailLogListDto

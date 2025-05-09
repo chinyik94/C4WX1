@@ -1,7 +1,4 @@
-﻿using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace C4WX1.API.Features.Intervention.Endpoints;
+﻿namespace C4WX1.API.Features.Intervention.Endpoints;
 
 public class GetInterventionCountSummary 
     : C4WX1GetCountSummary<Database.Models.Intervention>

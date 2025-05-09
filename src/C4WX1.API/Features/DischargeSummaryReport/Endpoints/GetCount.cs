@@ -1,17 +1,11 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Endpoints;
 
-public class GetCountSummary : EndpointSummary
+public class GetCountSummary 
+    : C4WX1GetCountSummary<Database.Models.DischargeSummaryReport>
 {
-    public GetCountSummary()
-    {
-        Summary = "Get Discharge Summary Report Count";
-        Description = "Get Discharge Summary Report Count";
-        Responses[200] = "Discharge Summary Report Count retrieved successfully";
-    }
+    public GetCountSummary() { }
 }
 
 public class GetCount(

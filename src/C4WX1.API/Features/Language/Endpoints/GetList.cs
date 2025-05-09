@@ -1,18 +1,12 @@
 ﻿using C4WX1.API.Features.Language.Dtos;
 using C4WX1.API.Features.Language.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Language.Endpoints;
 
-public class GetLanguageListSummary : EndpointSummary
+public class GetLanguageListSummary 
+    : C4WX1GetListSummary<Database.Models.Language>
 {
-    public GetLanguageListSummary()
-    {
-        Summary = "Get Language List";
-        Description = "Get a sorted Language List";
-        Responses[200] = "Language List retrieved successfully";
-    }
+    public GetLanguageListSummary() { }
 }
 
 public class GetList(THCC_C4WDEVContext dbContext)

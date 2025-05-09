@@ -3,27 +3,12 @@ using C4WX1.API.Features.Branch.Dtos;
 using C4WX1.API.Features.Branch.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.Branch;
 
 [Collection<C4WX1TestCollection>]
 public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
 {
-    private CreateBranchDto Control => new()
-    {
-        BranchID = 0,
-        BranchName = "control-BranchName",
-        Address1 = "control-Address1",
-        Address2 = "control-Address2",
-        Address3 = "control-Address3",
-        Contact = "control-Contact",
-        Email = "control-Email",
-        Status = Statuses.Active,
-        UserId = 1,
-        UserDataList = [1, 2, 3]
-    };
-
     private async Task SetupUserAsync()
     {
         using var dbContext = app.CreateDbContext();
@@ -83,13 +68,21 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
         await dbContext.SaveChangesAsync();
     }
 
+    private async Task SetupDummiesAsync(int createCount)
+    {
+        var createTasks = Enumerable.Range(0, createCount)
+            .Select(x => BranchFaker.CreateDummy)
+            .Select(SetupAsync);
+        await Task.WhenAll(createTasks);
+    }
+
     [Fact]
     public async Task Create()
     {
         await SetupUserAsync();
 
         var (resp, res) = await app.Client.POSTAsync<Create, CreateBranchDto, int>(
-            Control);
+            BranchFaker.CreateDto);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -101,7 +94,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupUserAsync();
 
-        var control = Control;
+        var control = BranchFaker.CreateDto;
         var (resp, res) = await app.Client.POSTAsync<Create, CreateBranchDto, int>(
             control);
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -119,7 +112,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Delete_WhenBranchIsAbleToDelete()
     {
         await SetupUserAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(BranchFaker.CreateDto);
 
         await UpdateForCanDeleteAsync(id, isDeleted: false, isSystemUsed: false, BranchFaker.DummyStatus);
         var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
@@ -137,7 +130,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Delete_WhenBranchIsNotAbleToDelete()
     {
         await SetupUserAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(BranchFaker.CreateDto);
 
         await UpdateForCanDeleteAsync(id, isDeleted: false, isSystemUsed: true, Statuses.Active);
         var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
@@ -207,12 +200,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Delete_WithNonExistentId()
     {
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(
-            new DeleteByIdDto
-            {
-                Id = C4WX1Faker.Id,
-                UserId = 1
-            });
+        var req = C4WX1Faker.DeleteDto();
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
 
         await CleanupAsync();
@@ -222,28 +211,24 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetById_WithExistingId_WithoutCurrencyID()
     {
         await SetupUserAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(BranchFaker.CreateDto);
+        var req = C4WX1Faker.GetByIdDto(id);
 
-        var (resp, res) = await app.Client
-            .GETAsync<GetById, GetByIdDto, BranchDto>(
-                new()
-                {
-                    Id = id,
-                });
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, BranchDto>(req);
 
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
         res.BranchID.ShouldBe(id);
-        res.BranchName.ShouldBe(Control.BranchName);
-        res.Address1.ShouldBe(Control.Address1);
-        res.Address2.ShouldBe(Control.Address2);
-        res.Address3.ShouldBe(Control.Address3);
-        res.Contact.ShouldBe(Control.Contact);
-        res.Email.ShouldBe(Control.Email);
-        res.Status.ShouldBe(Control.Status);
-        res.CurrencyID_FK.ShouldBe(Control.CurrencyID_FK);
+        res.BranchName.ShouldBe(BranchFaker.CreateDto.BranchName);
+        res.Address1.ShouldBe(BranchFaker.CreateDto.Address1);
+        res.Address2.ShouldBe(BranchFaker.CreateDto.Address2);
+        res.Address3.ShouldBe(BranchFaker.CreateDto.Address3);
+        res.Contact.ShouldBe(BranchFaker.CreateDto.Contact);
+        res.Email.ShouldBe(BranchFaker.CreateDto.Email);
+        res.Status.ShouldBe(BranchFaker.CreateDto.Status);
+        res.CurrencyID_FK.ShouldBe(BranchFaker.CreateDto.CurrencyID_FK);
         res.CurrencyName.ShouldBeEmpty();
-        res.UserDataList.Count.ShouldBe(Control.UserDataList.Count);
+        res.UserDataList.Count.ShouldBe(BranchFaker.CreateDto.UserDataList.Count);
 
         await CleanupAsync();
     }
@@ -253,16 +238,12 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupUserAsync();
         var (currencyId, currencyName) = await SetupCurrencyAsync();
-        var control = Control;
+        var control = BranchFaker.CreateDto;
         control.CurrencyID_FK = currencyId;
         var id = await SetupAsync(control);
+        var req = C4WX1Faker.GetByIdDto(id);
 
-        var (resp, res) = await app.Client
-            .GETAsync<GetById, GetByIdDto, BranchDto>(
-                new()
-                {
-                    Id = id,
-                });
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, BranchDto>(req);
 
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
@@ -284,12 +265,8 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetById_WithNonExistentId()
     {
-        var (resp, res) = await app.Client
-            .GETAsync<GetById, GetByIdDto, BranchDto>(
-                new()
-                {
-                    Id = C4WX1Faker.Id,
-                });
+        var req = C4WX1Faker.GetByIdDto();
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, BranchDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
     }
@@ -298,12 +275,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetCount()
     {
         var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => BranchFaker.DummyCreateDto);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, int>();
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -316,12 +288,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithDefaultSorting()
     {
         var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => BranchFaker.DummyCreateDto);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
@@ -348,12 +315,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithAddressSorting()
     {
         var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => BranchFaker.DummyCreateDto);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
@@ -380,12 +342,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithContactSorting()
     {
         var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => BranchFaker.DummyCreateDto);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
@@ -412,12 +369,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithEmailSorting()
     {
         var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => BranchFaker.DummyCreateDto);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
@@ -444,12 +396,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithStatusSorting()
     {
         var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => BranchFaker.DummyCreateDto);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
@@ -476,12 +423,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetList_WithCurrencySorting()
     {
         var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => BranchFaker.DummyCreateDto);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<BranchDto>>(
             new()
@@ -508,13 +450,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetListForControl()
     {
         var expectedCount = state.CreateCount;
-        var dummies = Enumerable.Range(0, expectedCount)
-            .Select(x => BranchFaker.DummyCreateDto);
-        foreach (var dummy in dummies)
-        {
-            await SetupAsync(dummy);
-        }
-        using var dbContext = app.CreateDbContext();
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetListForControl, IEnumerable<BranchDto>>();
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -528,7 +464,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Update_WithoutUser()
     {
-        var control = Control;
+        var control = BranchFaker.CreateDto;
         control.UserDataList = [];
         var id = await SetupAsync(control);
 
@@ -555,7 +491,7 @@ public class BranchTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Update_WithUsers()
     {
         await SetupUserAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(BranchFaker.CreateDto);
 
         var resp = await app.Client.PUTAsync<Update, UpdateBranchDto>(
             new()

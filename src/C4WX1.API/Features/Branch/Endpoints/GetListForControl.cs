@@ -1,8 +1,6 @@
 ﻿using C4WX1.API.Features.Branch.Dtos;
 using C4WX1.API.Features.Branch.Mappers;
 using C4WX1.API.Features.Branch.Repository;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Branch.Endpoints;
 
@@ -36,7 +34,7 @@ public class GetListForControl(
             .Select(x => Map.FromEntity(x))
             .ToListAsync(ct);
         var branchIds = dtos.Select(x => x.BranchID).ToArray();
-        var canDeleteDict = await repository.BatchCanDeleteBranchAsync(branchIds);
+        var canDeleteDict = await repository.BatchCanDeleteAsync(branchIds);
         foreach (var dto in dtos)
         {
             dto.CanDelete = canDeleteDict.TryGetValue(dto.BranchID, out var canDelete)

@@ -3,20 +3,14 @@ using C4WX1.API.Features.ExternalDoctor.Dtos;
 using C4WX1.API.Features.ExternalDoctor.Extensions;
 using C4WX1.API.Features.ExternalDoctor.Mappers;
 using C4WX1.API.Features.ExternalDoctor.Repositories;
-using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.ExternalDoctor.Endpoints;
 
-public class GetExternalDoctorListSummary : EndpointSummary
+public class GetExternalDoctorListSummary 
+    : C4WX1GetListSummary<Database.Models.ExternalDoctor>
 {
-    public GetExternalDoctorListSummary()
-    {
-        Summary = "Get a list of external doctors";
-        Description = "Get a filtered, sorted and paged list of external doctors";
-        Responses[200] = "External doctors retrieved successfully";
-    }
+    public GetExternalDoctorListSummary() { }
 }
 
 public class GetList(
@@ -32,10 +26,7 @@ public class GetList(
 
     public override async Task HandleAsync(GetExternalDoctorListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
-        var pageSize = req.PageSize ?? PaginationDefaults.Size;
-        var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
         var query = dbContext.ExternalDoctor
             .Include(x => x.ClinicianTypeID_FKNavigation)
             .Where(x => !x.IsDeleted);

@@ -1,17 +1,11 @@
 ﻿using C4WX1.API.Features.BillingProposal.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.BillingProposal.Endpoints;
 
-public class GetBillingProposalCountSummary : EndpointSummary
+public class GetBillingProposalCountSummary 
+    : C4WX1GetCountSummary<Database.Models.BillingProposal>
 {
-    public GetBillingProposalCountSummary()
-    {
-        Summary = "Get Billing Proposal Count";
-        Description = "Get filtered Billing Proposal Count";
-        Responses[200] = "Billing Proposal Count retrieved successfully";
-    }
+    public GetBillingProposalCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

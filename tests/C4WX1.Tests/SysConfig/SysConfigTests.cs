@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.SysConfig.Dtos;
 using C4WX1.API.Features.SysConfig.Endpoints;
-using C4WX1.Tests.Shared;
 using Task = System.Threading.Tasks.Task;
 
 namespace C4WX1.Tests.SysConfig;

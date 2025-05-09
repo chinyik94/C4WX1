@@ -2,20 +2,13 @@
 using C4WX1.API.Features.Branch.Mappers;
 using C4WX1.API.Features.Branch.Repository;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Branch.Endpoints;
 
-public class GetBranchByIdSummary : EndpointSummary
+public class GetBranchByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.Branch>
 {
-    public GetBranchByIdSummary()
-    {
-        Summary = "Get Branch";
-        Description = "Get Branch by its ID";
-        Responses[200] = "Branch retrieved successfully";
-        Responses[404] = "Branch not found";
-    }
+    public GetBranchByIdSummary() { }
 }
 
 public class GetById(
@@ -45,7 +38,7 @@ public class GetById(
             return;
         }
 
-        dto.CanDelete = await repository.CanDeleteBranchAsync(req.Id);
+        dto.CanDelete = await repository.CanDeleteAsync(req.Id);
         await SendOkAsync(dto, cancellation: ct);
     }
 }

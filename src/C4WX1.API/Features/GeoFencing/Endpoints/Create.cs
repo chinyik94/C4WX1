@@ -1,22 +1,19 @@
 ﻿using C4WX1.API.Features.GeoFencing.Dtos;
 using C4WX1.API.Features.GeoFencing.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.GeoFencing.Endpoints;
 
-public class CreateGeoFencingSummary : EndpointSummary
+public class CreateGeoFencingSummary 
+    : C4WX1CreateSummary<Database.Models.GeoFencing>
 {
-    public CreateGeoFencingSummary()
+    public CreateGeoFencingSummary() : base()
     {
-        Summary = "Create GeoFencing";
-        Description = "Create a new GeoFencing";
         ExampleRequest = new CreateGeoFencingDto
         {
             IP = "example-IP",
             Description = "example-Description",
             UserId = 1
         };
-        Responses[200] = "GeoFencing created successfully";
     }
 }
 

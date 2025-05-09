@@ -1,20 +1,14 @@
 ﻿using C4WX1.API.Features.BillingProposal.Dtos;
 using C4WX1.API.Features.BillingProposal.Extensions;
 using C4WX1.API.Features.BillingProposal.Mappers;
-using C4WX1.API.Features.Shared.Constants;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.BillingProposal.Endpoints;
 
-public class GetBillingProposalListSummary : EndpointSummary
+public class GetBillingProposalListSummary 
+    : C4WX1GetListSummary<Database.Models.BillingProposal>
 {
-    public GetBillingProposalListSummary()
-    {
-        Summary = "Get Billing Proposal List";
-        Description = "Get a filtered, paged and sorted list of Billing Proposals";
-        Responses[200] = "Billing Proposal List retrieved successfully";
-    }
+    public GetBillingProposalListSummary() { }
 }
 
 public class GetList(THCC_C4WDEVContext dbContext)
@@ -28,10 +22,7 @@ public class GetList(THCC_C4WDEVContext dbContext)
 
     public override async Task HandleAsync(GetBillingProposalListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
-        var pageSize = req.PageSize ?? PaginationDefaults.Size;
-        var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
         var dtos = await dbContext.BillingProposal
             .Where(x => !x.IsDeleted
                 && !string.IsNullOrWhiteSpace(req.Status)

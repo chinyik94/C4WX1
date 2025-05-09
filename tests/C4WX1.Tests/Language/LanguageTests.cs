@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.Language.Dtos;
 using C4WX1.API.Features.Language.Endpoints;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.Language;
 

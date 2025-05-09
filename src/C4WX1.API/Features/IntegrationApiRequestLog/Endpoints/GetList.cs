@@ -1,18 +1,12 @@
 ﻿using C4WX1.API.Features.IntegrationApiRequestLog.Dtos;
 using C4WX1.API.Features.IntegrationApiRequestLog.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.IntegrationApiRequestLog.Endpoints;
 
-public class GetIntegrationApiRequestLogListSummary : EndpointSummary
+public class GetIntegrationApiRequestLogListSummary 
+    : C4WX1GetListSummary<Database.Models.IntegrationApiRequestLog>
 {
-    public GetIntegrationApiRequestLogListSummary()
-    {
-        Summary = "Get IntegrationApiRequestLog List";
-        Description = "Get a filtered IntegrationApiRequestLog List";
-        Responses[200] = "IntegrationApiRequestLog List retrieved successfully";
-    }
+    public GetIntegrationApiRequestLogListSummary() { }
 }
 
 public class GetList(THCC_C4WDEVContext dbContext)

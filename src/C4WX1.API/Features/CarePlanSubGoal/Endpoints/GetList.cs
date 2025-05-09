@@ -2,21 +2,15 @@
 using C4WX1.API.Features.CarePlanSubGoal.Extensions;
 using C4WX1.API.Features.CarePlanSubGoal.Mappers;
 using C4WX1.API.Features.CarePlanSubGoal.Repository;
-using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 
-public class GetCarePlanSubGoalListSummary : EndpointSummary
+public class GetCarePlanSubGoalListSummary 
+    : C4WX1GetListSummary<Database.Models.CarePlanSubGoal>
 {
-    public GetCarePlanSubGoalListSummary()
-    {
-        Summary = "Get Care Plan Sub Goal List";
-        Description = "Get a paged and sorted Care Plan Sub Goal List";
-        Responses[200] = "Care Plan Sub Goal List retrieved successfully";
-    }
+    public GetCarePlanSubGoalListSummary() { }
 }
 
 public class GetList(
@@ -32,10 +26,7 @@ public class GetList(
 
     public override async Task HandleAsync(GetListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
-        var pageSize = req.PageSize ?? PaginationDefaults.Size;
-        var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
         var dtos = await dbContext.CarePlanSubGoal
             .Where(x => !(x.IsDeleted ?? false))
             .Sort(req.OrderBy)

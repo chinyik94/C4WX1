@@ -1,18 +1,11 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.ExternalDoctor.Endpoints;
 
-public class DeleteExternalDoctorSummary : EndpointSummary
+public class DeleteExternalDoctorSummary 
+    : C4WX1DeleteSummary<Database.Models.ExternalDoctor>
 {
-    public DeleteExternalDoctorSummary()
-    {
-        Summary = "Delete external doctor";
-        Description = "Delete an existing external doctor by its ID";
-        Responses[200] = "External doctor deleted successfully";
-        Responses[404] = "External doctor not found";
-    }
+    public DeleteExternalDoctorSummary() { }
 }
 
 public class Delete(THCC_C4WDEVContext dbContext)

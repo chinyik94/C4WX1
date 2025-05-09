@@ -1,41 +1,16 @@
-﻿using C4WX1.API.Features.Branch.Constants;
-using Dapper;
-using Npgsql;
+﻿using C4WX1.API.Features.Shared.Constants;
+using C4WX1.API.Features.Shared.Repository;
 
 namespace C4WX1.API.Features.Branch.Repository;
 
 public class BranchRepository(IConfiguration configuration)
-    : IBranchRepository
+    : C4WX1Repository(configuration), IBranchRepository
 {
-    private readonly string? connectionString = configuration.GetConnectionString("Default");
+    private const string CanDeleteFuncName = "fn_CanDeleteBranch";
 
-    public async Task<bool> CanDeleteBranchAsync(int branchId)
-    {
-        if (string.IsNullOrWhiteSpace(connectionString))
-        {
-            throw new Exception("Invalid connection string");
-        }
+    protected override string CanDeleteSql
+        => C4WX1CanDeleteSqls.CanDelete(CanDeleteFuncName);
 
-        using var connection = new NpgsqlConnection(connectionString);
-        var canDelete = await connection.QuerySingleAsync<bool>(
-            BranchSqls.CanDelete,
-            new { BranchId = branchId });
-
-        return canDelete;
-    }
-
-    public async Task<Dictionary<int, bool>> BatchCanDeleteBranchAsync(int[] branchIds)
-    {
-        if (string.IsNullOrWhiteSpace(connectionString))
-        {
-            throw new Exception("Invalid connection string");
-        }
-
-        using var connection = new NpgsqlConnection(connectionString);
-        var results = await connection.QueryAsync<(int Id, bool CanDelete)>(
-            BranchSqls.BatchCanDelete,
-            new { BranchIds = branchIds });
-
-        return results.ToDictionary(x => x.Id, x => x.CanDelete);
-    }
+    protected override string BatchCanDeleteSql
+        => C4WX1CanDeleteSqls.BatchCanDelete(CanDeleteFuncName);
 }

@@ -1,18 +1,11 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Chat.Delete;
 
-public class DeleteChatSummary : EndpointSummary
+public class DeleteChatSummary 
+    : C4WX1DeleteSummary<Database.Models.Chat>
 {
-    public DeleteChatSummary()
-    {
-        Summary = "Delete Chat";
-        Description = "Delete an existing Chat";
-        Responses[204] = "Chat deleted successfully";
-        Responses[404] = "Chat not found";
-    }
+    public DeleteChatSummary() { }
 }
 
 public class Delete(THCC_C4WDEVContext dbContext) 

@@ -1,18 +1,11 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 
-public class DeleteCarePlanSubGoalSummary : EndpointSummary
+public class DeleteCarePlanSubGoalSummary 
+    : C4WX1DeleteSummary<Database.Models.CarePlanSubGoal>
 {
-    public DeleteCarePlanSubGoalSummary()
-    {
-        Summary = "Delete Care Plan Sub Goal";
-        Description = "Delete a Care Plan Sub Goal by its ID";
-        Responses[200] = "Care Plan Sub Goal deleted successfully";
-        Responses[404] = "Care Plan Sub Goal not found";
-    }
+    public DeleteCarePlanSubGoalSummary() { }
 }
 
 public class Delete(THCC_C4WDEVContext dbContext)

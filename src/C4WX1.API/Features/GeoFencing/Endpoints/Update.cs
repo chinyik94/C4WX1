@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.GeoFencing.Dtos;
 using C4WX1.API.Features.GeoFencing.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.GeoFencing.Endpoints;
 
-public class UpdateGeoFencingSummary : EndpointSummary
+public class UpdateGeoFencingSummary 
+    : C4WX1UpdateSummary<Database.Models.GeoFencing>
 {
-    public UpdateGeoFencingSummary()
+    public UpdateGeoFencingSummary() : base()
     {
-        Summary = "Update GeoFencing";
-        Description = "Update a existing GeoFencing by its ID";
         ExampleRequest = new UpdateGeoFencingDto
         {
             Id = 1,
@@ -18,9 +15,7 @@ public class UpdateGeoFencingSummary : EndpointSummary
             Description = "example-Description",
             UserId = 1
         };
-        Responses[204] = "GeoFencing created successfully";
         Responses[400] = "Duplicate GeoFencing name";
-        Responses[404] = "GeoFencing not found";
     }
 }
 

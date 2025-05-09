@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.Activity.Dtos;
 using C4WX1.API.Features.Activity.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Activity.Endpoints;
 
-public class UpdateActivitySummary : EndpointSummary
+public class UpdateActivitySummary 
+    : C4WX1UpdateSummary<Database.Models.Activity>
 {
-    public UpdateActivitySummary()
+    public UpdateActivitySummary() : base()
     {
-        Summary = "Update Activity";
-        Description = "Update an existing Activity";
         ExampleRequest = new UpdateActivityDto
         {
             Id = 1,
@@ -20,8 +17,6 @@ public class UpdateActivitySummary : EndpointSummary
             DiseaseSubInfoID_FK = 1,
             UserId = 1
         };
-        Responses[204] = "Activity updated successfully";
-        Responses[404] = "Activity not found";
     }
 }
 

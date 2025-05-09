@@ -3,8 +3,6 @@ using C4WX1.API.Features.Intervention.Dtos;
 using C4WX1.API.Features.Intervention.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Extensions;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.Intervention;
 
@@ -170,6 +168,7 @@ public class InterventionTests(C4WX1App app, C4WX1State state) : TestBase
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
         res.Count().ShouldBe(expectedCount);
+        res.Select(x => x.InterventionInfo).ShouldBeInOrder(SortDirection.Descending);
         await CleanupAsync();
     }
 
@@ -189,7 +188,7 @@ public class InterventionTests(C4WX1App app, C4WX1State state) : TestBase
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
         res.Count().ShouldBe(expectedCount);
-        res.IsDescendingOrder(x => x.InterventionInfo).ShouldBeTrue();
+        res.Select(x => x.InterventionInfo).ShouldBeInOrder(SortDirection.Descending);
 
         var expectedCount2 = Math.Min(createCount, state.HighPageSize);
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<InterventionDto>>(
@@ -200,7 +199,7 @@ public class InterventionTests(C4WX1App app, C4WX1State state) : TestBase
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.ShouldNotBeNull();
         res2.Count().ShouldBe(expectedCount2);
-        res2.IsDescendingOrder(x => x.InterventionInfo).ShouldBeTrue();
+        res2.Select(x => x.InterventionInfo).ShouldBeInOrder(SortDirection.Descending);
 
         await CleanupAsync();
     }
@@ -220,7 +219,7 @@ public class InterventionTests(C4WX1App app, C4WX1State state) : TestBase
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
         res.Count().ShouldBe(expectedCount);
-        res.IsAscendingOrder(x => x.InterventionInfo).ShouldBeTrue();
+        res.Select(x => x.InterventionInfo).ShouldBeInOrder();
 
         var (resp2, res2) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<InterventionDto>>(
             new()
@@ -230,7 +229,7 @@ public class InterventionTests(C4WX1App app, C4WX1State state) : TestBase
         resp2.IsSuccessStatusCode.ShouldBeTrue();
         res2.ShouldNotBeNull();
         res2.Count().ShouldBe(expectedCount);
-        res2.IsDescendingOrder(x => x.InterventionInfo).ShouldBeTrue();
+        res2.Select(x => x.InterventionInfo).ShouldBeInOrder(SortDirection.Descending);
 
         var (resp3, res3) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<InterventionDto>>(
             new()
@@ -240,7 +239,7 @@ public class InterventionTests(C4WX1App app, C4WX1State state) : TestBase
         resp3.IsSuccessStatusCode.ShouldBeTrue();
         res3.ShouldNotBeNull();
         res3.Count().ShouldBe(expectedCount);
-        res3.IsAscendingOrder(x => x.Disease.DiseaseName).ShouldBeTrue();
+        res3.Select(x => x.Disease.DiseaseName).ShouldBeInOrder();
 
         var (resp4, res4) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<InterventionDto>>(
             new()
@@ -250,7 +249,7 @@ public class InterventionTests(C4WX1App app, C4WX1State state) : TestBase
         resp4.IsSuccessStatusCode.ShouldBeTrue();
         res4.ShouldNotBeNull();
         res4.Count().ShouldBe(expectedCount);
-        res4.IsDescendingOrder(x => x.Disease.DiseaseName).ShouldBeTrue();
+        res4.Select(x => x.Disease.DiseaseName).ShouldBeInOrder(SortDirection.Descending);
 
         await CleanupAsync();
     }

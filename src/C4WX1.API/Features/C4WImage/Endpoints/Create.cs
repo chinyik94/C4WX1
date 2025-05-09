@@ -1,15 +1,13 @@
 ﻿using C4WX1.API.Features.C4WImage.Dtos;
 using C4WX1.API.Features.C4WImage.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.C4WImage.Endpoints;
 
-public class CreateC4WImageSummary : EndpointSummary
+public class CreateC4WImageSummary 
+    : C4WX1CreateSummary<Database.Models.C4WImage>
 {
-    public CreateC4WImageSummary()
+    public CreateC4WImageSummary() : base()
     {
-        Summary = "Create C4W Image";
-        Description = "Create a new C4W Image";
         ExampleRequest = new CreateC4WImageDto
         {
             WoundImageName = "wound image name",
@@ -22,7 +20,6 @@ public class CreateC4WImageSummary : EndpointSummary
             DepthImageData = "depth image data",
             UserId = 1
         };
-        Responses[204] = "C4W Image created successfully";
     }
 }
 

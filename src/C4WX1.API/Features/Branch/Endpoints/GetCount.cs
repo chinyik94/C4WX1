@@ -1,16 +1,9 @@
-﻿using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿namespace C4WX1.API.Features.Branch.Endpoints;
 
-namespace C4WX1.API.Features.Branch.Endpoints;
-
-public class GetBranchCountSummary : EndpointSummary
+public class GetBranchCountSummary 
+    : C4WX1GetCountSummary<Database.Models.Branch>
 {
-    public GetBranchCountSummary()
-    {
-        Summary = "Get Branch Count";
-        Description = "Get number of Branch";
-        Responses[200] = "Branch Count retrieved successfully";
-    }
+    public GetBranchCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

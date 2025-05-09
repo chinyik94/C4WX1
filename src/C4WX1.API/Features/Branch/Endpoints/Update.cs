@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.Branch.Dtos;
 using C4WX1.API.Features.Branch.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Branch.Endpoints;
 
-public class UpdateBranchSummary : EndpointSummary
+public class UpdateBranchSummary 
+    : C4WX1UpdateSummary<Database.Models.Branch>
 {
-    public UpdateBranchSummary()
+    public UpdateBranchSummary() : base()
     {
-        Summary = "Update Branch";
-        Description = "Update an existing Branch by its ID";
         ExampleRequest = new UpdateBranchDto
         {
             Id = 1,
@@ -25,9 +22,7 @@ public class UpdateBranchSummary : EndpointSummary
             UserId = 1,
             UserDataList = [1, 2, 3]
         };
-        Responses[204] = "Branch updated successfully";
         Responses[400] = "Branch data invalid";
-        Responses[404] = "Branch not found";
     }
 }
 

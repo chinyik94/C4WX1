@@ -1,7 +1,7 @@
-﻿namespace C4WX1.API.Features.Branch.Repository;
+﻿using C4WX1.API.Features.Shared.Repository;
 
-public interface IBranchRepository
+namespace C4WX1.API.Features.Branch.Repository;
+
+public interface IBranchRepository : IDeletableRepository
 {
-    Task<bool> CanDeleteBranchAsync(int branchId);
-    Task<Dictionary<int, bool>> BatchCanDeleteBranchAsync(int[] branchIds);
 }

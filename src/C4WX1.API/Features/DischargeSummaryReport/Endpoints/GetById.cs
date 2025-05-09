@@ -1,20 +1,13 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
 using C4WX1.API.Features.DischargeSummaryReport.Mappers;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Endpoints;
 
-public class GetByIdSummary : EndpointSummary
+public class GetDischargeSummaryReportByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.DischargeSummaryReport>
 {
-    public GetByIdSummary()
-    {
-        Summary = "Get Discharge Summary Report";
-        Description = "Get an Discharge Summary Report by its ID";
-        Responses[200] = "Discharge Summary Report retrieved successfully";
-        Responses[404] = "Discharge Summary Report not found";
-    }
+    public GetDischargeSummaryReportByIdSummary() { }
 }
 
 public class GetById(
@@ -25,7 +18,7 @@ public class GetById(
     {
         Get("discharge-summary-report/{Id}");
         Description(b => b.Produces(404));
-        Summary(new GetByIdSummary());
+        Summary(new GetDischargeSummaryReportByIdSummary());
     }
 
     public override async Task HandleAsync(GetByIdDto req, CancellationToken ct)

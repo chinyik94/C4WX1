@@ -1,16 +1,9 @@
-﻿using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿namespace C4WX1.API.Features.Activity.Endpoints;
 
-namespace C4WX1.API.Features.Activity.Endpoints;
-
-public class GetActivityCountSummary : EndpointSummary
+public class GetActivityCountSummary 
+    : C4WX1GetCountSummary<Database.Models.Activity>
 {
-    public GetActivityCountSummary()
-    {
-        Summary = "Get Activity Count";
-        Description = "Get the number of activities";
-        Responses[200] = "Number of activities retrieved successfully";
-    }
+    public GetActivityCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

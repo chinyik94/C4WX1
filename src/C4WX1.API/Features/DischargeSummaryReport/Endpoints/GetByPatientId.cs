@@ -1,7 +1,5 @@
 ﻿using C4WX1.API.Features.DischargeSummaryReport.Dtos;
 using C4WX1.API.Features.DischargeSummaryReport.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.DischargeSummaryReport.Endpoints;
 
@@ -24,7 +22,7 @@ public class GetByPatientId(
     {
         Get("discharge-summary-report/patient/{PatientId}");
         Description(b => b.Produces(404));
-        Summary(new GetByIdSummary());
+        Summary(new GetDischargeSummaryReportByIdSummary());
     }
 
     public override async Task HandleAsync(GetByPatientIdDto req, CancellationToken ct)

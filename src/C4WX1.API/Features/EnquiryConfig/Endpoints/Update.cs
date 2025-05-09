@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.EnquiryConfig.Dtos;
 using C4WX1.API.Features.EnquiryConfig.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.EnquiryConfig.Endpoints;
 
-public class UpdateEnquiryConfigSummary : EndpointSummary
+public class UpdateEnquiryConfigSummary 
+    : C4WX1UpdateSummary<Database.Models.EnquiryConfig>
 {
-    public UpdateEnquiryConfigSummary()
+    public UpdateEnquiryConfigSummary() : base()
     {
-        Summary = "Update Enquiry Config";
-        Description = "Update an existing Enquiry Config";
         ExampleRequest = new UpdateEnquiryConfigDto
         {
             Id = 1,
@@ -24,8 +21,6 @@ public class UpdateEnquiryConfigSummary : EndpointSummary
             SCMList = [1, 2, 3],
             EscPersonList = [1, 2, 3],
         };
-        Responses[204] = "Enquiry Config updated successfully";
-        Responses[404] = "Enquiry Config not found";
     }
 }
 

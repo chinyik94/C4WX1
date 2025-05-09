@@ -1,22 +1,19 @@
 ﻿using C4WX1.API.Features.CarePlanSubGoal.Dtos;
 using C4WX1.API.Features.CarePlanSubGoal.Mappers;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 
-public class CreateCarePlanSubGoalSummary : EndpointSummary
+public class CreateCarePlanSubGoalSummary 
+    : C4WX1CreateSummary<Database.Models.CarePlanSubGoal>
 {
-    public CreateCarePlanSubGoalSummary()
+    public CreateCarePlanSubGoalSummary() : base()
     {
-        Summary = "Create Care Plan Sub Goal";
-        Description = "Create a new Care Plan Sub Goal";
         ExampleRequest = new CreateCarePlanSubGoalDto
         {
             CarePlanSubGoalName = "care plan sub goal",
             CarePlanSubID_FK = 1,
             UserId = 1
         };
-        Responses[200] = "Care Plan Sub Goal created successfully";
     }
 }
 

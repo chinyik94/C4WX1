@@ -2,21 +2,12 @@
 using C4WX1.API.Features.Activity.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.Activity;
 
 [Collection<C4WX1TestCollection>]
 public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
 {
-    private CreateActivityDto Control => new()
-    {
-        ProblemListID_FK = 1,
-        DiseaseID_FK = 1,
-        ActivityDetail = "control-ActivityDetail",
-        UserId = 1
-    };
-
     private async Task SetupDependenciesAsync()
     {
         using var dbContext = app.CreateDbContext();
@@ -67,11 +58,19 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
             """);
     }
 
+    private async Task SetupDummiesAsync(int createCount)
+    {
+        var createTasks = Enumerable.Range(0, createCount)
+            .Select(x => ActivityFaker.CreateDummy)
+            .Select(SetupAsync);
+        await Task.WhenAll(createTasks);
+    }
+
     [Fact]
     public async Task Create_WithoutDiseaseSubInfo()
     {
         await SetupDependenciesAsync();
-        var (resp, res) = await app.Client.POSTAsync<Create, CreateActivityDto, int>(Control);
+        var (resp, res) = await app.Client.POSTAsync<Create, CreateActivityDto, int>(ActivityFaker.CreateDto);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -82,7 +81,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Create_WithDiseaseSubInfo()
     {
         await SetupDependenciesAsync();
-        var control = Control;
+        var control = ActivityFaker.CreateDto;
         control.DiseaseSubInfoID_FK = 1;
         var (resp, res) = await app.Client.POSTAsync<Create, CreateActivityDto, int>(control);
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -95,13 +94,10 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Delete_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(ActivityFaker.CreateDto);
+        var req = C4WX1Faker.DeleteDto(id);
 
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(new()
-        {
-            Id = id,
-            UserId = 1
-        });
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
 
         await CleanupAsync();
@@ -110,11 +106,8 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Delete_WithNonExistentId()
     {
-        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(new()
-        {
-            Id = C4WX1Faker.Id,
-            UserId = 1
-        });
+        var req = C4WX1Faker.DeleteDto();
+        var resp = await app.Client.DELETEAsync<Delete, DeleteByIdDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
     }
 
@@ -122,18 +115,16 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task GetById_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, ActivityDto>(new()
-        {
-            Id = id
-        });
+        var id = await SetupAsync(ActivityFaker.CreateDto);
+        var req = C4WX1Faker.GetByIdDto(id);
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, ActivityDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldNotBeNull();
         res.ActivityID.ShouldBe(id);
-        res.ActivityDetail.ShouldBe(Control.ActivityDetail);
-        res.DiseaseID_FK.ShouldBe(Control.DiseaseID_FK);
-        res.DiseaseSubInfoID_FK.ShouldBe(Control.DiseaseSubInfoID_FK);
-        res.ProblemListID_FK.ShouldBe(Control.ProblemListID_FK);
+        res.ActivityDetail.ShouldBe(ActivityFaker.CreateDto.ActivityDetail);
+        res.DiseaseID_FK.ShouldBe(ActivityFaker.CreateDto.DiseaseID_FK);
+        res.DiseaseSubInfoID_FK.ShouldBe(ActivityFaker.CreateDto.DiseaseSubInfoID_FK);
+        res.ProblemListID_FK.ShouldBe(ActivityFaker.CreateDto.ProblemListID_FK);
 
         await CleanupAsync();
     }
@@ -141,10 +132,8 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task GetById_WithNonExistentId()
     {
-        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, ActivityDto>(new()
-        {
-            Id = C4WX1Faker.Id
-        });
+        var req = C4WX1Faker.GetByIdDto();
+        var (resp, res) = await app.Client.GETAsync<GetById, GetByIdDto, ActivityDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
         res.ShouldBeNull();
     }
@@ -154,12 +143,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     {
         await SetupDependenciesAsync();
         var expectedCount = state.CreateCount;
-        for (int i = 0; i < expectedCount; i++)
-        {
-            var dummy = Control;
-            dummy.ActivityDetail = ActivityFaker.DummyActivityDetail;
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(expectedCount);
 
         var (resp, res) = await app.Client.GETAsync<GetCount, int>();
         resp.IsSuccessStatusCode.ShouldBeTrue();
@@ -174,12 +158,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
         await SetupDependenciesAsync();
         var createCount = state.CreateCount;
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
-        for (int i = 0; i < createCount; i++)
-        {
-            var dummy = Control;
-            dummy.ActivityDetail = ActivityFaker.DummyActivityDetail;
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<ActivityDto>>(
             new()
@@ -210,12 +189,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
         await SetupDependenciesAsync();
         var createCount = state.CreateCount;
         var expectedCount = Math.Min(createCount, PaginationDefaults.Size);
-        for (int i = 0; i < createCount; i++)
-        {
-            var dummy = Control;
-            dummy.ActivityDetail = ActivityFaker.DummyActivityDetail;
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<ActivityDto>>(
             new()
@@ -237,12 +211,7 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
         var pageSize = state.LowPageSize;
         var createCount = state.CreateCount;
         var expectedCount = Math.Min(createCount, pageSize);
-        for (int i = 0; i < createCount; i++)
-        {
-            var dummy = Control;
-            dummy.ActivityDetail = ActivityFaker.DummyActivityDetail;
-            await SetupAsync(dummy);
-        }
+        await SetupDummiesAsync(createCount);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetListDto, IEnumerable<ActivityDto>>(
             new()
@@ -271,16 +240,10 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     public async Task Update_WithExistingId()
     {
         await SetupDependenciesAsync();
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(ActivityFaker.CreateDto);
+        var req = ActivityFaker.UpdateDto(id);
 
-        var resp = await app.Client.PUTAsync<Update, UpdateActivityDto>(new()
-        {
-            Id = id,
-            ActivityDetail = "updated-control-ActivityDetail",
-            ProblemListID_FK = 1,
-            DiseaseID_FK = 1,
-            UserId = 1
-        });
+        var resp = await app.Client.PUTAsync<Update, UpdateActivityDto>(req);
         resp.IsSuccessStatusCode.ShouldBeTrue();
 
         await CleanupAsync();
@@ -289,14 +252,8 @@ public class ActivityTests(C4WX1App app, C4WX1State state) : TestBase
     [Fact]
     public async Task Update_WithNonExistentId()
     {
-        var resp = await app.Client.PUTAsync<Update, UpdateActivityDto>(new()
-        {
-            Id = C4WX1Faker.Id,
-            ActivityDetail = "updated-control-ActivityDetail",
-            ProblemListID_FK = 1,
-            DiseaseID_FK = 1,
-            UserId = 1
-        });
+        var req = ActivityFaker.UpdateDto();
+        var resp = await app.Client.PUTAsync<Update, UpdateActivityDto>(req);
         resp.IsSuccessStatusCode.ShouldBeFalse();
     }
 }

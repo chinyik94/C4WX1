@@ -1,18 +1,11 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.CPGoals.Endpoints;
 
-public class DeleteCPGoalsSummary : EndpointSummary
+public class DeleteCPGoalsSummary 
+    : C4WX1DeleteSummary<Database.Models.CPGoals>
 {
-    public DeleteCPGoalsSummary()
-    {
-        Summary = "Delete CPGoals";
-        Description = "Delete CPGoals by its ID";
-        Responses[200] = "CPGoals deleted successfully";
-        Responses[404] = "CPGoals not found";
-    }
+    public DeleteCPGoalsSummary() { }
 }
 
 public class Delete(THCC_C4WDEVContext dbContext)

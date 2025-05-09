@@ -1,20 +1,13 @@
 ﻿using C4WX1.API.Features.C4WImage.Dtos;
 using C4WX1.API.Features.C4WImage.Mappers;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.C4WImage.Endpoints;
 
-public class GetC4WImageByIdSummary : EndpointSummary
+public class GetC4WImageByIdSummary
+    : C4WX1GetByIdSummary<Database.Models.C4WImage>
 {
-    public GetC4WImageByIdSummary()
-    {
-        Summary = "Get C4W Image";
-        Description = "Get a C4W Image by its ID";
-        Responses[200] = "C4W Image retrieved successfully";
-        Responses[404] = "C4W Image not found";
-    }
+    public GetC4WImageByIdSummary() { }
 }
 
 public class GetById(THCC_C4WDEVContext dbContext)

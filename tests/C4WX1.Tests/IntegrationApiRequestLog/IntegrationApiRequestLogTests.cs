@@ -1,23 +1,11 @@
 ﻿using C4WX1.API.Features.IntegrationApiRequestLog.Dtos;
 using C4WX1.API.Features.IntegrationApiRequestLog.Endpoints;
-using C4WX1.Tests.Shared;
 
 namespace C4WX1.Tests.IntegrationApiRequestLog;
 
 [Collection<C4WX1TestCollection>]
 public class IntegrationApiRequestLogTests(C4WX1App app, C4WX1State state) : TestBase
 {
-    private CreateIntegrationApiRequestLogDto Control => new()
-    {
-        IntegrationSource = "control-IntegrationSource",
-        FacilityId = "1",
-        ResidentId = "1",
-        Url = "control-Url",
-        Content = "control-Content",
-        Status = "control-Status",
-        UserId = 1
-    };
-
     private async Task<int> SetupAsync(CreateIntegrationApiRequestLogDto testData)
     {
         var (resp, res) = await app.Client.POSTAsync<Create, CreateIntegrationApiRequestLogDto, int>(testData);
@@ -46,7 +34,8 @@ public class IntegrationApiRequestLogTests(C4WX1App app, C4WX1State state) : Tes
     [Fact]
     public async Task Create()
     {
-        var (resp, res) = await app.Client.POSTAsync<Create, CreateIntegrationApiRequestLogDto, int>(Control);
+        var (resp, res) = await app.Client.POSTAsync<Create, CreateIntegrationApiRequestLogDto, int>(
+            IntegrationApiRequestLogFaker.CreateControl);
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.ShouldBeGreaterThan(0);
 
@@ -58,7 +47,7 @@ public class IntegrationApiRequestLogTests(C4WX1App app, C4WX1State state) : Tes
     {
         var createCount = state.CreateCount;
         await SetupDummiesAsync(createCount);
-        await SetupAsync(Control);
+        await SetupAsync(IntegrationApiRequestLogFaker.CreateControl);
         createCount++;
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetIntegrationApiRequestLogListDto, IEnumerable<IntegrationApiRequestLogDto>>(
@@ -77,23 +66,23 @@ public class IntegrationApiRequestLogTests(C4WX1App app, C4WX1State state) : Tes
     {
         var createCount = state.CreateCount;
         await SetupDummiesAsync(createCount);
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(IntegrationApiRequestLogFaker.CreateControl);
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetIntegrationApiRequestLogListDto, IEnumerable<IntegrationApiRequestLogDto>>(
             new()
             {
-                Status = Control.Status
+                Status = IntegrationApiRequestLogFaker.CreateControl.Status
             });
         resp.IsSuccessStatusCode.ShouldBeTrue();
         res.Count().ShouldBe(1);
         res.First().IntegrationApiRequestLogID.ShouldBe(id);
-        res.First().IntegrationSource.ShouldBe(Control.IntegrationSource);
-        res.First().FacilityId.ShouldBe(Control.FacilityId);
-        res.First().ResidentId.ShouldBe(Control.ResidentId);
-        res.First().Url.ShouldBe(Control.Url);
-        res.First().Content.ShouldBe(Control.Content);
-        res.First().Status.ShouldBe(Control.Status);
-        res.First().CreatedByID_FK.ShouldBe(Control.UserId);
+        res.First().IntegrationSource.ShouldBe(IntegrationApiRequestLogFaker.CreateControl.IntegrationSource);
+        res.First().FacilityId.ShouldBe(IntegrationApiRequestLogFaker.CreateControl.FacilityId);
+        res.First().ResidentId.ShouldBe(IntegrationApiRequestLogFaker.CreateControl.ResidentId);
+        res.First().Url.ShouldBe(IntegrationApiRequestLogFaker.CreateControl.Url);
+        res.First().Content.ShouldBe(IntegrationApiRequestLogFaker.CreateControl.Content);
+        res.First().Status.ShouldBe(IntegrationApiRequestLogFaker.CreateControl.Status);
+        res.First().CreatedByID_FK.ShouldBe(IntegrationApiRequestLogFaker.CreateControl.UserId);
 
         await CleanupAsync();
     }
@@ -103,7 +92,7 @@ public class IntegrationApiRequestLogTests(C4WX1App app, C4WX1State state) : Tes
     {
         var createCount = state.CreateCount;
         await SetupDummiesAsync(createCount);
-        await SetupAsync(Control);
+        await SetupAsync(IntegrationApiRequestLogFaker.CreateControl);
         createCount++;
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetIntegrationApiRequestLogListDto, IEnumerable<IntegrationApiRequestLogDto>>(
@@ -130,7 +119,7 @@ public class IntegrationApiRequestLogTests(C4WX1App app, C4WX1State state) : Tes
     {
         var createCount = state.CreateCount;
         await SetupDummiesAsync(createCount);
-        await SetupAsync(Control);
+        await SetupAsync(IntegrationApiRequestLogFaker.CreateControl);
         createCount++;
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetIntegrationApiRequestLogListDto, IEnumerable<IntegrationApiRequestLogDto>>(
@@ -157,7 +146,7 @@ public class IntegrationApiRequestLogTests(C4WX1App app, C4WX1State state) : Tes
     {
         var createCount = state.CreateCount;
         await SetupDummiesAsync(createCount);
-        await SetupAsync(Control);
+        await SetupAsync(IntegrationApiRequestLogFaker.CreateControl);
         createCount++;
 
         var (resp, res) = await app.Client.GETAsync<GetList, GetIntegrationApiRequestLogListDto, IEnumerable<IntegrationApiRequestLogDto>>(
@@ -184,7 +173,7 @@ public class IntegrationApiRequestLogTests(C4WX1App app, C4WX1State state) : Tes
     [Fact]
     public async Task Update_WithExistingId()
     {
-        var id = await SetupAsync(Control);
+        var id = await SetupAsync(IntegrationApiRequestLogFaker.CreateControl);
 
         var resp = await app.Client.PUTAsync<Update, UpdateIntegrationApiRequestLogDto>(
             new()

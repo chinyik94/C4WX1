@@ -1,16 +1,13 @@
 ﻿using C4WX1.API.Features.ExternalDoctor.Dtos;
 using C4WX1.API.Features.ExternalDoctor.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.ExternalDoctor.Endpoints;
 
-public class CreateExternalDoctorSummary : EndpointSummary
+public class CreateExternalDoctorSummary 
+    : C4WX1CreateSummary<Database.Models.ExternalDoctor>
 {
-    public CreateExternalDoctorSummary()
+    public CreateExternalDoctorSummary() : base()
     {
-        Summary = "Create External Doctor";
-        Description = "Create a new External Doctor";
         ExampleRequest = new CreateExternalDoctorDto
         {
             Name = "Name",
@@ -18,8 +15,6 @@ public class CreateExternalDoctorSummary : EndpointSummary
             Contact = "Contact",
             ClinicianTypeID_FK = 1
         };
-        Responses[200] = "External Doctor created successfully";
-        Responses[400] = "Invalid request";
     }
 }
 

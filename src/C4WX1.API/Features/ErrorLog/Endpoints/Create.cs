@@ -1,19 +1,16 @@
 ﻿using C4WX1.API.Features.ErrorLog.Dtos;
-using C4WX1.Database.Models;
 
 namespace C4WX1.API.Features.ErrorLog.Endpoints;
 
-public class CreateErrorLogSummary : EndpointSummary
+public class CreateErrorLogSummary 
+    : C4WX1CreateSummary<Database.Models.ErrorLog>
 {
-    public CreateErrorLogSummary()
+    public CreateErrorLogSummary() : base()
     {
-        Summary = "Create Error Log";
-        Description = "Create a new Error Log";
         ExampleRequest = new CreateErrorLogDto
         {
             ErrorDetails = "ErrorDetails"
         };
-        Responses[200] = "Error Log created successfully";
     }
 }
 

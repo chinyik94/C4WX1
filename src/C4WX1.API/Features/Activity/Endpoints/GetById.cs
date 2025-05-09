@@ -2,20 +2,13 @@
 using C4WX1.API.Features.Activity.Mappers;
 using C4WX1.API.Features.Activity.Repository;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Activity.Endpoints;
 
-public class GetActivityByIdSummary : EndpointSummary
+public class GetActivityByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.Activity>
 {
-    public GetActivityByIdSummary()
-    {
-        Summary = "Get Activity";
-        Description = "Get an Activity by its ID";
-        Responses[200] = "Activity retrieved successfully";
-        Responses[404] = "Activity not found";
-    }
+    public GetActivityByIdSummary() { }
 }
 
 public class GetById(

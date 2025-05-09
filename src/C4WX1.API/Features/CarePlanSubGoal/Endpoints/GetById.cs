@@ -2,20 +2,13 @@
 using C4WX1.API.Features.CarePlanSubGoal.Mappers;
 using C4WX1.API.Features.CarePlanSubGoal.Repository;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.CarePlanSubGoal.Endpoints;
 
-public class GetCarePlanSubGoalByIdSummary : EndpointSummary
+public class GetCarePlanSubGoalByIdSummary 
+    : C4WX1GetByIdSummary<Database.Models.CarePlanSubGoal>
 {
-    public GetCarePlanSubGoalByIdSummary()
-    {
-        Summary = "Get Care Plan Sub Goal";
-        Description = "Get a Care Plan Sub Goal by its ID";
-        Responses[200] = "Care Plan Sub Goal retrieved successfully";
-        Responses[404] = "Care Plan Sub Goal not found";
-    }
+    public GetCarePlanSubGoalByIdSummary() { }
 }
 
 public class GetById(

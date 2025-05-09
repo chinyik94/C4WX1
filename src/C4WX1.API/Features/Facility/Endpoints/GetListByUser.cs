@@ -1,7 +1,5 @@
 ﻿using C4WX1.API.Features.Facility.Dtos;
 using C4WX1.API.Features.Facility.Mappers;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace C4WX1.API.Features.Facility.Endpoints;
 

@@ -1,16 +1,9 @@
-﻿using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿namespace C4WX1.API.Features.CPGoals.Endpoints;
 
-namespace C4WX1.API.Features.CPGoals.Endpoints;
-
-public class GetCPGoalsCountSummary : EndpointSummary
+public class GetCPGoalsCountSummary 
+    : C4WX1GetCountSummary<Database.Models.CPGoals>
 {
-    public GetCPGoalsCountSummary()
-    {
-        Summary = "Get CP Goals Count";
-        Description = "Get the count of CP Goals";
-        Responses[200] = "CP Goals Count retrieved successfully";
-    }
+    public GetCPGoalsCountSummary() { }
 }
 
 public class GetCount(THCC_C4WDEVContext dbContext)

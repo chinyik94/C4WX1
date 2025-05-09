@@ -1,21 +1,16 @@
 ﻿using C4WX1.API.Features.Activity.Dtos;
+using C4WX1.API.Features.Activity.Extensions;
 using C4WX1.API.Features.Activity.Mappers;
 using C4WX1.API.Features.Activity.Repository;
-using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.Database.Models;
-using Microsoft.EntityFrameworkCore;
+using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.Activity.Endpoints;
 
-public class GetActivityListSummary : EndpointSummary
+public class GetActivityListSummary 
+    : C4WX1GetListSummary<Database.Models.Activity>
 {
-    public GetActivityListSummary()
-    {
-        Summary = "Get Activity List";
-        Description = "Get a list of activities";
-        Responses[200] = "Activity list retrieved successfully";
-    }
+    public GetActivityListSummary() { }
 }
 
 public class GetList(
@@ -31,31 +26,11 @@ public class GetList(
 
     public override async Task HandleAsync(GetListDto req, CancellationToken ct)
     {
-        var pageIndex = req.PageIndex ?? PaginationDefaults.Index;
-        var pageSize = req.PageSize ?? PaginationDefaults.Size;
-        var startRowIndex = Math.Max(0, (pageIndex - 1) * pageSize);
-
-        var orderBy = string.IsNullOrWhiteSpace(req.OrderBy)
-            ? SortDirections.Default
-            : req.OrderBy;
-        var order = orderBy.Split(' ');
-        var sortColumn = order[0];
-        var isDescending = order[1].Equals(SortDirections.Default, StringComparison.OrdinalIgnoreCase);
-
-        var query = dbContext.Activity
+        var (startRowIndex, pageSize) = req.GetPaginationDetails();
+        var dtos = await dbContext.Activity
             .Include(x => x.ProblemListID_FKNavigation)
-            .Where(x => !x.IsDeleted);
-        query = sortColumn switch
-        {
-            "ProblemInfo" => isDescending
-                ? query.OrderByDescending(x => x.ProblemListID_FKNavigation.ProblemInfo)
-                : query.OrderBy(x => x.ProblemListID_FKNavigation.ProblemInfo),
-            _ => isDescending
-                ? query.OrderByDescending(x => x.ActivityDetail)
-                : query.OrderBy(x => x.ActivityDetail)
-        };
-
-        var dtos = await query
+            .Where(x => !x.IsDeleted)
+            .Sort(req.OrderBy)
             .Skip(startRowIndex)
             .Take(pageSize)
             .Select(x => Map.FromEntity(x))
