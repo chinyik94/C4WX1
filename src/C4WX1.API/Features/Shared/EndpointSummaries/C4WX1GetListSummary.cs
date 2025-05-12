@@ -2,11 +2,14 @@
 
 public abstract class C4WX1GetListSummary<TTableName> : EndpointSummary
 {
-    public C4WX1GetListSummary()
+    public C4WX1GetListSummary(string? filterName = null)
     {
-        string tableName = typeof(TTableName).Name;
+        var tableName = typeof(TTableName).Name;
+        var baseDescription = $"Get a {tableName} List";
         Summary = $"Get {tableName} List";
-        Description = $"Get a filtered, sorted and paged {tableName} List";
+        Description = string.IsNullOrWhiteSpace(filterName)
+            ? baseDescription
+            : $"{baseDescription} filtered by {filterName}";
         Responses[200] = $"{tableName} List retrieved successfully";
     }
 }

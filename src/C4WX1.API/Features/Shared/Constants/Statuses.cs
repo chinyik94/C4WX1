@@ -13,4 +13,6 @@ public class Statuses
     public const string DischargeRIP = "Discharge RIP";
     public const string Active = nameof(Active);
     public const string Locked = nameof(Locked);
+    public const string Pending = nameof(Pending);
+    public const string ForcedUpdate = "Forced Update";
 }

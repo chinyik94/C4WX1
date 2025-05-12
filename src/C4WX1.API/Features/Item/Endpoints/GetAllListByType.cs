@@ -3,13 +3,13 @@ using C4WX1.API.Features.Item.Mappers;
 
 namespace C4WX1.API.Features.Item.Endpoints;
 
-public class GetAllItemListByTypeSummary : EndpointSummary
+public class GetAllItemListByTypeSummary 
+    : C4WX1GetListSummary<Database.Models.Item>
 {
     public GetAllItemListByTypeSummary()
+        : base("Category Type and optionally Available In Billing")
     {
-        Summary = "Get Item List";
-        Description = "Get Item List by Category Type and optionally Available In Billing";
-        Responses[200] = "Item List retrieved successfully";
+
     }
 }
 

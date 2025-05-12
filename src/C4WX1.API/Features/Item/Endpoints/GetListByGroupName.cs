@@ -3,13 +3,12 @@ using C4WX1.API.Features.Item.Mappers;
 
 namespace C4WX1.API.Features.Item.Endpoints;
 
-public class GetItemListByGroupNameSummary : EndpointSummary
+public class GetItemListByGroupNameSummary 
+    : C4WX1GetListSummary<Database.Models.Item>
 {
-    public GetItemListByGroupNameSummary()
+    public GetItemListByGroupNameSummary() : base("Group Name")
     {
-        Summary = "Get Item List";
-        Description = "Get Item List by Group Name";
-        Responses[200] = "Item List retrieved successfully";
+
     }
 }
 

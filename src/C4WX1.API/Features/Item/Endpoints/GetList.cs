@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.Item.Dtos;
 using C4WX1.API.Features.Item.Extensions;
 using C4WX1.API.Features.Item.Mappers;
-using C4WX1.API.Features.Shared.Dtos;
 using C4WX1.API.Features.Shared.Extensions;
 
 namespace C4WX1.API.Features.Item.Endpoints;

@@ -23,4 +23,5 @@ public class SysConfigNames
     public const string EnterpriseStartContract = nameof(EnterpriseStartContract);
     public const string EnterpriseEndContract = nameof(EnterpriseEndContract);
     public const string EnterpriseStatus = nameof(EnterpriseStatus);
+    public const string EnableMobileAppVersionChecking = nameof(EnableMobileAppVersionChecking);
 }
