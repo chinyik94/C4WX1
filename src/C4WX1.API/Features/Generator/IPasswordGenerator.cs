@@ -3,4 +3,9 @@
 public interface IPasswordGenerator
 {
     Task<string> GenerateAsync();
+    string Generate(
+        bool useAlpha,
+        bool useNumeric,
+        int minLength,
+        int maxLength);
 }

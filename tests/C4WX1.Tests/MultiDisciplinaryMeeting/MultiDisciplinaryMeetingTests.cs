@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.MultiDisciplinaryMeeting.Dtos;
 using C4WX1.API.Features.MultiDisciplinaryMeeting.Endpoints;
 using C4WX1.API.Features.Shared.Dtos;
-using Shouldly;
 
 namespace C4WX1.Tests.MultiDisciplinaryMeeting;
 

@@ -108,4 +108,35 @@ public class PasswordGenerator(
 
         return password.ToString();
     }
+
+    public string Generate(
+        bool useAlpha,
+        bool useNumeric,
+        int minLength,
+        int maxLength)
+    {
+        if (minLength < 0 || maxLength < minLength)
+            throw new ArgumentException("Invalid length bounds.");
+
+        var now = DateTime.Now;
+        var seed = now.Year + now.Month + now.Day + now.Hour + now.Second + now.Millisecond;
+        var rnd = new Random(seed);
+
+        int length = rnd.Next(minLength, maxLength + 1);
+        bool useAlphaNumeric = !useAlpha && !useNumeric;
+
+        var sb = new StringBuilder(length);
+        while (sb.Length < length)
+        {
+            char c = (char)rnd.Next(48, 123); // covers digits and letters
+
+            if ((useAlpha || useAlphaNumeric) && char.IsLetter(c) ||
+                (useNumeric || useAlphaNumeric) && char.IsDigit(c))
+            {
+                sb.Append(c);
+            }
+        }
+
+        return sb.ToString();
+    }
 }

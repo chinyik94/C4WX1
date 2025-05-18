@@ -3,12 +3,6 @@ using C4WX1.API.Features.NutritionTaskReference.Dtos;
 using C4WX1.API.Features.NutritionTaskReference.Endpoints;
 using C4WX1.API.Features.Shared.Constants;
 using C4WX1.API.Features.Shared.Dtos;
-using Org.BouncyCastle.Ocsp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C4WX1.Tests.NutritionTaskReference;
 
