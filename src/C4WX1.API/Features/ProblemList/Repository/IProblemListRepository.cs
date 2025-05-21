@@ -1,5 +1,7 @@
-﻿namespace C4WX1.API.Features.ProblemList.Repository;
+﻿using C4WX1.API.Features.Shared.Repository;
 
-public interface IProblemListRepository
+namespace C4WX1.API.Features.ProblemList.Repository;
+
+public interface IProblemListRepository : IDeletableRepository
 {
 }

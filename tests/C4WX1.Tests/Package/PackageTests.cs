@@ -1,7 +1,6 @@
 ﻿using C4WX1.API.Features.Package.Dtos;
 using C4WX1.API.Features.Package.Endpoints;
 using C4WX1.API.Features.Shared.Dtos;
-using System.Runtime.Intrinsics.Wasm;
 
 namespace C4WX1.Tests.Package;
 

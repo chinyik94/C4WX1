@@ -29,7 +29,7 @@ public class GetList(
         var (startRowIndex, pageSize) = req.GetPaginationDetails();
         var dtos = await dbContext.ProblemList
             .Include(x => x.ProblemListGoal)
-            .Include(x => x.DiseaseID_FK)
+            .Include(x => x.DiseaseID_FKNavigation)
             .Where(x => !x.IsDeleted)
             .Sort(req.OrderBy)
             .Skip(startRowIndex)
@@ -37,11 +37,11 @@ public class GetList(
             .Select(x => Map.FromEntity(x))
             .ToListAsync(ct);
 
-        var problemListIds = dtos.Select(x => x.InterventionID).ToArray();
+        var problemListIds = dtos.Select(x => x.ProblemListID).ToArray();
         var canDeleteDict = await repository.BatchCanDeleteAsync(problemListIds);
         foreach (var dto in dtos)
         {
-            dto.CanDelete = canDeleteDict.TryGetValue(dto.InterventionID, out var canDelete)
+            dto.CanDelete = canDeleteDict.TryGetValue(dto.ProblemListID, out var canDelete)
                 && canDelete;
         }
         await SendOkAsync(dtos, ct);

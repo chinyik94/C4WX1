@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C4WX1.Tests.PatientAccessLine;
+﻿namespace C4WX1.Tests.PatientAccessLine;
 internal class PatientAccessLineTests
 {
 }

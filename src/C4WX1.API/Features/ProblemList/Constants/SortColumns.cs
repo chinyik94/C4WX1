@@ -2,4 +2,5 @@
 
 public class SortColumns
 {
+    public const string DiseaseName = "DiseaseName";
 }

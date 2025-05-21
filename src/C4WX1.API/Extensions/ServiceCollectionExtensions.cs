@@ -7,6 +7,7 @@ using C4WX1.API.Features.ExternalDoctor.Repositories;
 using C4WX1.API.Features.Generator;
 using C4WX1.API.Features.Intervention.Repository;
 using C4WX1.API.Features.NutritionTaskReference.Repository;
+using C4WX1.API.Features.ProblemList.Repository;
 using C4WX1.API.Features.Security;
 using C4WX1.API.Features.SysConfig.Repository;
 
@@ -28,7 +29,8 @@ public static class ServiceCollectionExtensions
             .AddTransient<ICPGoalsRepository, CPGoalsRepository>()
             .AddTransient<IExternalDoctorRepository, ExternalDoctorRepository>()
             .AddTransient<IInterventionRepository, InterventionRepository>()
-            .AddTransient<INutritionTaskReferenceRepository, NutritionTaskReferenceRepository>();
+            .AddTransient<INutritionTaskReferenceRepository, NutritionTaskReferenceRepository>()
+            .AddTransient<IProblemListRepository, ProblemListRepository>();
 
         return services;
     }
