@@ -25,4 +25,6 @@ public class SysConfigNames
     public const string EnterpriseStatus = nameof(EnterpriseStatus);
     public const string EnableMobileAppVersionChecking = nameof(EnableMobileAppVersionChecking);
     public const string SiteUrl = nameof(SiteUrl);
+    public const string EnableRegisteredDeviceV2_Quota = nameof(EnableRegisteredDeviceV2_Quota);
+    public const string RegisteredDeviceV2_QuotaNumber = nameof(RegisteredDeviceV2_QuotaNumber);
 }

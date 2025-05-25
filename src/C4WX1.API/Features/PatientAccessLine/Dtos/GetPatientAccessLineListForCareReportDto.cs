@@ -1,5 +1,6 @@
 ﻿namespace C4WX1.API.Features.PatientAccessLine.Dtos;
 
-public class GetPatientAccessLineListForCareReportDto
+public sealed class GetPatientAccessLineListForCareReportDto
 {
+    public int CareReportID { get; set; }
 }

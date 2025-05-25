@@ -9,8 +9,8 @@ public class BranchRepository(IConfiguration configuration)
     private const string CanDeleteFuncName = "fn_CanDeleteBranch";
 
     protected override string CanDeleteSql
-        => C4WX1CanDeleteSqls.CanDelete(CanDeleteFuncName);
+        => C4WX1Sqls.CanDelete(CanDeleteFuncName);
 
     protected override string BatchCanDeleteSql
-        => C4WX1CanDeleteSqls.BatchCanDelete(CanDeleteFuncName);
+        => C4WX1Sqls.BatchCanDelete(CanDeleteFuncName);
 }
