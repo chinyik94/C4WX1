@@ -1,4 +1,4 @@
-﻿using C4WX1.API.WoundConsolidatedEmail.Dtos;
+﻿using C4WX1.API.Features.WoundConsolidatedEmail.Dtos;
 
 namespace C4WX1.Tests.WoundConsolidatedEmail;
 

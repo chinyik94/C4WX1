@@ -1,11 +1,12 @@
 ﻿using C4WX1.API.Features.Shared.Constants;
+using C4WX1.API.Features.Shared.Dtos;
 using Dapper;
 using Npgsql;
 
 namespace C4WX1.API.Features.Shared.Repository;
 
 public abstract class C4WX1Repository(IConfiguration configuration) 
-    : IDeletableRepository, IAccessibleRepository
+    : IDeletableRepository, IAccessibleRepository, IWoundStatusRepository
 {
     protected readonly string connectionString = configuration.GetConnectionString("Default")
             ?? throw new Exception("Invalid connection string");
@@ -51,6 +52,38 @@ public abstract class C4WX1Repository(IConfiguration configuration)
             new
             {
                 Id = id
+            });
+    }
+
+    public async Task<bool> GetWoundInfectionStatusAsync(
+        int userId, 
+        int patientId, 
+        int patientWoundVisitId)
+    {
+        using var connection = new NpgsqlConnection(connectionString);
+        return await connection.QuerySingleAsync<bool>(
+            C4WX1Sqls.GetWoundInfectionStatus,
+            new
+            {
+                UserId = userId,
+                PatientId = patientId,
+                PatientWoundVisitId = patientWoundVisitId
+            });
+    }
+
+    public async Task<WoundInfectionStatusDetailsDto> GetWoundInfectionStatusDetailsAsync(
+        int userId, 
+        int patientId, 
+        int patientWoundVisitId)
+    {
+        using var connection = new NpgsqlConnection(connectionString);
+        return await connection.QueryFirstAsync<WoundInfectionStatusDetailsDto>(
+            C4WX1Sqls.GetWoundInfectionStatusDetails,
+            new
+            {
+                UserId = userId,
+                PatientId = patientId,
+                PatientWoundVisitId = patientWoundVisitId
             });
     }
 }

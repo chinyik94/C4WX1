@@ -1,6 +1,6 @@
 ﻿using C4WX1.API.Features.Shared.Dtos;
-using C4WX1.API.WoundConsolidatedEmail.Dtos;
-using C4WX1.API.WoundConsolidatedEmail.Endpoints;
+using C4WX1.API.Features.WoundConsolidatedEmail.Dtos;
+using C4WX1.API.Features.WoundConsolidatedEmail.Endpoints;
 
 namespace C4WX1.Tests.WoundConsolidatedEmail;
 

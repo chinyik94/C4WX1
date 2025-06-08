@@ -12,6 +12,8 @@ using C4WX1.API.Features.RecentView.Repository;
 using C4WX1.API.Features.Security;
 using C4WX1.API.Features.Skillset.Repository;
 using C4WX1.API.Features.SysConfig.Repository;
+using C4WX1.API.Features.VisitAndBillingReport.Repository;
+using C4WX1.API.Features.WoundReport.Repository;
 
 namespace C4WX1.API.Extensions;
 
@@ -34,7 +36,9 @@ public static class ServiceCollectionExtensions
             .AddTransient<INutritionTaskReferenceRepository, NutritionTaskReferenceRepository>()
             .AddTransient<IProblemListRepository, ProblemListRepository>()
             .AddTransient<IRecentViewRepository, RecentViewRepository>()
-            .AddTransient<ISkillsetRepository, SkillsetRepository>();
+            .AddTransient<ISkillsetRepository, SkillsetRepository>()
+            .AddTransient<IWoundReportRepository, WoundReportRepository>()
+            .AddTransient<IVisitRepository, VisitRepository>();
 
         return services;
     }
