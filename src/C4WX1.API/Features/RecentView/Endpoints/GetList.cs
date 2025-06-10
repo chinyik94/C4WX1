@@ -38,7 +38,7 @@ public class GetList(
             .Sort(req.OrderBy)
             .Skip(startRowIndex)
             .Take(pageSize)
-            .Select(x => Map.FromEntity(x))
+            .Select(Map.FromEntity)
             .ToList();
         await SendOkAsync(dtos, ct);
     }

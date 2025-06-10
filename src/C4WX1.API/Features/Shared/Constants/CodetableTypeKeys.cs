@@ -8,4 +8,5 @@ public class CodetableTypeKeys
     public const int StoolOutputType = 75;
     public const int LiquidOutputAmount = 76;
     public const int LiquidOutputColor = 77;
+    public const int TreatmentListType = 302;
 }

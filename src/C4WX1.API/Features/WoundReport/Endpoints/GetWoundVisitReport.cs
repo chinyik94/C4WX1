@@ -62,7 +62,7 @@ public class GetWoundVisitReport(THCC_C4WDEVContext dbContext)
 
         var visitCounts = Enumerable
             .Range(0, totalMonths)
-            .Select(i => req.StartDate.AddMonths(i))
+            .Select(req.StartDate.AddMonths)
             .Select(month => new WoundCountDto
             {
                 MonthInterval = month.ToString("MMM-yy"),
