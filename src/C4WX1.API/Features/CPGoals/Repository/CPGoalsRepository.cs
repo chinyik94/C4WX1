@@ -4,7 +4,7 @@ using C4WX1.API.Features.Shared.Repository;
 namespace C4WX1.API.Features.CPGoals.Repository;
 
 public class CPGoalsRepository(IConfiguration configuration) 
-    : C4WX1Repository(configuration), ICPGoalsRepository
+    : DeletableRepository(configuration), ICPGoalsRepository
 {
     private const string CanDeleteFuncName = "fn_CanDeleteCPGoals";
 

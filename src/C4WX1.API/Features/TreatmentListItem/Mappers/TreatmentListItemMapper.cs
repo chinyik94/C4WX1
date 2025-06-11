@@ -28,7 +28,7 @@ public class TreatmentListItemMapper
                 .Any(y => !y.IsDeleted
                     && y.TListItemID_FK == e.TListItemID),
             Cost = e.Cost,
-            StartDate = e.StartDate,
-            EndDate = e.EndDate,
+            StartDate = e.StartDate?.ToLocalTime(),
+            EndDate = e.EndDate?.ToLocalTime(),
         };
 }

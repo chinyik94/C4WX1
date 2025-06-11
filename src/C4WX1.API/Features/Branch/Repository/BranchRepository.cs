@@ -4,7 +4,7 @@ using C4WX1.API.Features.Shared.Repository;
 namespace C4WX1.API.Features.Branch.Repository;
 
 public class BranchRepository(IConfiguration configuration)
-    : C4WX1Repository(configuration), IBranchRepository
+    : DeletableRepository(configuration), IBranchRepository
 {
     private const string CanDeleteFuncName = "fn_CanDeleteBranch";
 

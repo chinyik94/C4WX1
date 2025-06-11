@@ -20,6 +20,7 @@ public class Delete(THCC_C4WDEVContext dbContext)
     public override async Task HandleAsync(DeleteByIdDto req, CancellationToken ct)
     {
         var entity = await dbContext.TreatmentListItem
+            .Include(x => x.PatientWoundVisitTreatmentList)
             .Where(x => !x.IsDeleted
                 && x.TListItemID == req.Id)
             .FirstOrDefaultAsync(ct);

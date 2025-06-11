@@ -20,7 +20,7 @@ public class Activate(THCC_C4WDEVContext dbContext)
 {
     public override void Configure()
     {
-        Post("treatment-list-item/deactivate/{id}");
+        Post("treatment-list-item/activate/{id}");
         Summary(new ActivateTreatmentListItemSummary());
     }
 
@@ -39,7 +39,7 @@ public class Activate(THCC_C4WDEVContext dbContext)
 
         if (!(entity.IsSystemUsed ?? false))
         {
-            ThrowError("UNABLE_DEACTIVATE");
+            ThrowError("UNABLE_ACTIVATE");
             return;
         }
 

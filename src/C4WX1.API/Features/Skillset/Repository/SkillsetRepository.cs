@@ -4,7 +4,7 @@ using C4WX1.API.Features.Shared.Repository;
 namespace C4WX1.API.Features.Skillset.Repository;
 
 public class SkillsetRepository(IConfiguration configuration)
-    : C4WX1Repository(configuration), ISkillsetRepository
+    : DeletableRepository(configuration), ISkillsetRepository
 {
     private const string CanDeleteFuncName = "fn_CanDeleteCodetable";
 

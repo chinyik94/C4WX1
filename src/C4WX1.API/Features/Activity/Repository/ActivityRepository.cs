@@ -4,7 +4,7 @@ using C4WX1.API.Features.Shared.Repository;
 namespace C4WX1.API.Features.Activity.Repository;
 
 public class ActivityRepository(IConfiguration configuration)
-    : C4WX1Repository(configuration), IActivityRepository
+    : DeletableRepository(configuration), IActivityRepository
 {
     private const string CanDeleteFuncName = "fn_CanDeleteActivity";
 

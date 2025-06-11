@@ -14,8 +14,8 @@ public class UpdateTreatmentListItemMapper
         e.ItemName = r.ItemName;
         e.TListTypeID_FK = r.TListTypeID_FK;
         e.Cost = r.Cost;
-        e.StartDate = r.StartDate;
-        e.EndDate = r.EndDate;
+        e.StartDate = r.StartDate?.ToUniversalTime();
+        e.EndDate = r.EndDate?.ToUniversalTime();
         e.ModifiedDate = DateTime.Now;
         e.ModifiedBy_FK = r.UserId;
 

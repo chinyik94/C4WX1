@@ -20,6 +20,18 @@ public class Create(THCC_C4WDEVContext dbContext)
 
     public override async Task HandleAsync(CreateTreatmentListItemDto req, CancellationToken ct)
     {
+        var isDuplicate = await dbContext.TreatmentListItem
+            .Where(x => x.TListTypeID_FK == req.TListTypeID_FK
+                && x.ItemName == req.ItemName
+                && !x.IsDeleted
+                && (string.IsNullOrWhiteSpace(req.ItemBrand) || x.ItemBrand == req.ItemBrand))
+            .AnyAsync(ct);
+        if (isDuplicate)
+        {
+            ThrowError("DUPLICATE_NAME");
+            return;
+        }
+
         var entity = Map.ToEntity(req);
         await dbContext.TreatmentListItem.AddAsync(entity, ct);
         await dbContext.SaveChangesAsync(ct);

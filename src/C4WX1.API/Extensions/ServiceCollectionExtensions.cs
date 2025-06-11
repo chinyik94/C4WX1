@@ -22,14 +22,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
         services
-            .AddTransient<IChatRepository, ChatRepository>()
-            .AddTransient<ISecurityService, SecurityService>()
-            .AddTransient<IPasswordGenerator, PasswordGenerator>()
-            .AddTransient<ISysConfigRepository, SysConfigRepository>()
             .AddTransient<IActivityRepository, ActivityRepository>()
-            .AddTransient<IChatRepository, ChatRepository>()
             .AddTransient<IBranchRepository, BranchRepository>()
             .AddTransient<ICarePlanSubGoalRepository, CarePlanSubGoalRepository>()
+            .AddTransient<IChatRepository, ChatRepository>()
             .AddTransient<ICPGoalsRepository, CPGoalsRepository>()
             .AddTransient<IExternalDoctorRepository, ExternalDoctorRepository>()
             .AddTransient<IInterventionRepository, InterventionRepository>()
@@ -37,8 +33,11 @@ public static class ServiceCollectionExtensions
             .AddTransient<IProblemListRepository, ProblemListRepository>()
             .AddTransient<IRecentViewRepository, RecentViewRepository>()
             .AddTransient<ISkillsetRepository, SkillsetRepository>()
+            .AddTransient<ISysConfigRepository, SysConfigRepository>()
             .AddTransient<IWoundReportRepository, WoundReportRepository>()
-            .AddTransient<IVisitRepository, VisitRepository>();
+            .AddTransient<IVisitRepository, VisitRepository>()
+            .AddTransient<ISecurityService, SecurityService>()
+            .AddTransient<IPasswordGenerator, PasswordGenerator>();
 
         return services;
     }
